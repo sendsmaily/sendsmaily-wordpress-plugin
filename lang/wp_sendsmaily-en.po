@@ -1,0 +1,110 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Sendsmaily Wordpress plugin\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Sendsmaily <info@sendsmaily.com>\n"
+"Language-Team: Sendsmaily <info@sendsmaily.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Check"
+msgstr "Check"
+
+msgid "Please, insert API key here"
+msgstr "Please, insert API key here"
+
+msgid "Sendsmaily Wordpress plugin"
+msgstr "Sendsmaily Wordpress plugin"
+
+msgid "Your current API key is"
+msgstr "Your current API key is"
+
+msgid "Basic"
+msgstr "Basic"
+
+msgid "Advanced"
+msgstr "Advanced"
+
+msgid "Autoresponders"
+msgstr "Autoresponders"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Address where subscribers will be directed after failure"
+msgstr "Address where subscribers will be directed after failure"
+
+msgid "Address where subscribers will be directed after successful subscription"
+msgstr "Address where subscribers will be directed after successful subscription"
+
+msgid "Failure URL"
+msgstr "Failure URL"
+
+msgid "HTML of subscription form"
+msgstr "HTML of subscription form"
+
+msgid "Newsletter subscription form"
+msgstr "Newsletter subscription form"
+
+msgid "No autoresponders. Please click on refresh link to update."
+msgstr "No autoresponders. Please click on refresh link to update."
+
+msgid "Please select your opt-in autoresponder"
+msgstr "Please select your opt-in autoresponder"
+
+msgid "Regenerate"
+msgstr "Regenerate"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Restore original subscription form"
+msgstr "Restore original subscription form"
+
+msgid "Save changes"
+msgstr "Save changes"
+
+msgid "Success URL"
+msgstr "Success URL"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Subscribe"
+msgstr "Subscribe"
+
+msgid "Could not find any autoresponders!"
+msgstr "Could not find any autoresponders!"
+
+msgid "API key passed validation."
+msgstr "API key passed validation."
+
+msgid "API key removed."
+msgstr "API key removed."
+
+msgid "Newsletter subscription form reset to default."
+msgstr "Newsletter subscription form reset to default."
+
+msgid "Autoresponders refreshed."
+msgstr "Autoresponders refreshed."
+
+msgid "Changes saved."
+msgstr "Changes saved."
+
+msgid "Newsletter subscription"
+msgstr "Newsletter subscription"
+
+msgid "Sendsmaily newsletter subscription form"
+msgstr "Sendsmaily newsletter subscription form"
+
+msgid "Please wait, working..."
+msgstr "Please wait, working..."
+
+msgid "Note: When you save under Basic tab, default form will be used."
+msgstr "Note: When you save under Basic tab, default form will be used."
+
