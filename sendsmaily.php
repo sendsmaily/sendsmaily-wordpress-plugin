@@ -1,8 +1,8 @@
 <?php
 /*
-	Plugin Name: Sendsmaily Wordpress plugin
+	Plugin Name: Sendsmaily
 	Plugin URI: http://sendsmaily.com/
-	Description: Newsletter subscription form
+	Description: Sendsmaily newsletter subscription form.
 	Version: 0.9.1
 	Author: Sendsmaily
 	Author URI: http://sendsmaily.com/
@@ -25,18 +25,18 @@
  * along with Sendsmaily Wordpress plugin.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// global params
+// Global parameters.
 define('BP', dirname(__FILE__));
 define('DS', DIRECTORY_SEPARATOR);
 
-// get plugin path
+// Get plugin path.
 $exp = explode(DS, BP);
 $directory = array_pop($exp);
 define('SS_PLUGIN_NAME', $directory);
 define('SS_PLUGIN_URL', WP_PLUGIN_URL . '/' . SS_PLUGIN_NAME . '/');
 
 /**
- * initialize
+ * Initialize.
  * @return void
  */
 function wp_sendsmaily_init(){
@@ -45,7 +45,7 @@ function wp_sendsmaily_init(){
 add_action('init', 'wp_sendsmaily_init');
 
 /**
- * install database structure (on activation)
+ * Install database structure (on activation).
  * @return void
  */
 register_activation_hook(__FILE__, 'wp_sendsmaily_install');
@@ -55,7 +55,7 @@ function wp_sendsmaily_install(){
 
 	// create database table - settings
 	$tableName = $wpdb->prefix . 'sendsmaily_config';
-	if($wpdb->get_var('show tables like "'.$tableName.'"') != $tableName){
+	if($wpdb->get_var('SHOW TABLES LIKE "'.$tableName.'"') != $tableName){
 		$sql = "CREATE TABLE `$tableName` (`key` VARCHAR(255) NOT NULL, `domain` VARCHAR(255) NOT NULL, `autoresponder` INT(16) NOT NULL, `success_url` TEXT NOT NULL, `failure_url` TEXT NOT NULL, `form` TEXT NOT NULL, `is_advanced` TINYINT(1) NOT NULL, PRIMARY KEY(`key`,`domain`)) ENGINE=MYISAM;";
 		dbDelta($sql);
 	}
@@ -69,7 +69,7 @@ function wp_sendsmaily_install(){
 }
 
 /**
- * add sidebar widget
+ * Add sidebar widget.
  * @param array $args
  * @return void
  */
@@ -81,7 +81,7 @@ function wp_sendsmaily_widget($args){
 add_action('plugins_loaded', 'wp_sendsmaily_widget');
 
 /**
- * return subscription form
+ * Return subscription form.
  * @return string
  */
 function get_wp_sendsmaily_form(){
