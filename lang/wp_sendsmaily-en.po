@@ -12,8 +12,8 @@ msgstr ""
 msgid "Check"
 msgstr "Check"
 
-msgid "Please, insert API key here"
-msgstr "Please, insert API key here"
+msgid "API key"
+msgstr "API key"
 
 msgid "Sendsmaily Wordpress plugin"
 msgstr "Sendsmaily Wordpress plugin"

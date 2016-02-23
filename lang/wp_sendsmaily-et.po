@@ -12,8 +12,8 @@ msgstr ""
 msgid "Check"
 msgstr "Kontrolli"
 
-msgid "Please, insert API key here"
-msgstr "Sisesta Arendusliidese võti"
+msgid "API key"
+msgstr "Arendusliidese võti"
 
 msgid "Sendsmaily Wordpress plugin"
 msgstr "Sendsmaily Wordpressi pistikmoodul"

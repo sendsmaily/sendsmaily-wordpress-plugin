@@ -1,17 +1,17 @@
 <?php
 /**
  * This file is part of Sendsmaily Wordpress plugin.
- * 
+ *
  * Sendsmaily Wordpress plugin is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Sendsmaily Wordpress plugin is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Sendsmaily Wordpress plugin.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -42,18 +42,18 @@
 <script type="text/javascript">//<![CDATA[
   var SS_PLUGIN_URL = '<?php echo SS_PLUGIN_URL; ?>';
 //]]></script>
-<script type="text/javascript" src="<?php echo SS_PLUGIN_URL; ?>js/default.js"></script>
+<script type="text/javascript" src="<?php echo SS_PLUGIN_URL; ?>/js/default.js"></script>
 
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"></div>
 	<h2>
-		<?php echo __('Sendsmaily Wordpress plugin', 'wp_sendsmaily'); ?>
-		<sup id="h2-loader" style="display:none">(<?php echo __('Please wait, working...', 'wp_sendsmaily'); ?>)</sup>
+		<?php echo __( 'Sendsmaily Wordpress plugin', 'wp_sendsmaily' ); ?>
+		<sup id="h2-loader" style="display:none">(<?php echo __( 'Please wait, working...', 'wp_sendsmaily' ); ?>)</sup>
 	</h2>
 	
 	<!-- @todo: display welcome/getting started message -->
 	
-	<form id="form-container" action="<?php echo SS_PLUGIN_URL; ?>action.php" method="post">
-		<?php echo $this->partial('html/admin/html/form.phtml', $this->getVars()); ?>
+	<form id="form-container" action="<?php echo SS_PLUGIN_URL; ?>/action.php" method="post">
+		<?php echo $this->partial( 'html/admin/html/form.phtml', $this->getVars() ); ?>
 	</form>
 </div>

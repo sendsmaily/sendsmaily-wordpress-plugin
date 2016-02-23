@@ -17,7 +17,7 @@
 
 var Default = (function(){
 	var _form = null;
-	
+
 	/**
 	 * display response message
 	 * @param String text
@@ -31,14 +31,14 @@ var Default = (function(){
 		}).append(
 			jQuery('<p></p>').text(text)
 		);
-		
-		jQuery('#wpbody-content .wrap h2').after(message);
+
+		jQuery('.wrap h2', '#wpbody-content').after(message);
 	}
 	
 	/**
 	 * handle response
 	 * @param Object response
-	 * @return void
+	 * @return void|bool
 	 */
 	function _handleResponse(response){
 		if(!response){ return false; }
@@ -79,7 +79,7 @@ var Default = (function(){
 		jQuery('#h2-loader').show();
 		
 		// make the request
-		jQuery.post(SS_PLUGIN_URL + 'action.php', data, function(response){
+		jQuery.post(SS_PLUGIN_URL + '/action.php', data, function(response){
 			// handle response
 			_handleResponse(response);
 			

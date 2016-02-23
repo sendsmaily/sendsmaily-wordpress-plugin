@@ -1,17 +1,17 @@
 <?php
 /**
  * This file is part of Sendsmaily Wordpress plugin.
- * 
+ *
  * Sendsmaily Wordpress plugin is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Sendsmaily Wordpress plugin is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Sendsmaily Wordpress plugin.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,26 +22,26 @@ $success_url = $this->success_url;
 $failure_url = $this->failure_url;
 ?>
 <form class="container" action="<?php echo SS_PLUGIN_URL; ?>subscribe.php" method="post">
-	<?php if(!empty($success_url) or !empty($failure_url)): ?>
+	<?php if ( ! empty( $success_url ) or ! empty( $failure_url ) ) : ?>
 	<div>
-		<?php if(!empty($success_url)): ?>
+		<?php if ( ! empty( $success_url ) ) : ?>
 		<input type="hidden" name="success_url" value="<?php echo $success_url; ?>" />
 		<?php endif;?>
-		<?php if(!empty($failure_url)): ?>
+		<?php if ( ! empty( $failure_url ) ) : ?>
 		<input type="hidden" name="failure_url" value="<?php echo $failure_url; ?>" />
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
 	<p>
-		<label><?php echo __('Email', 'wp_sendsmaily'); ?></label>
+		<label><?php echo __( 'Email', 'wp_sendsmaily' ); ?></label>
 		<input type="text" name="email" value="" />
 	</p>
 	<p>
-		<label><?php echo __('Name', 'wp_sendsmaily'); ?></label>
+		<label><?php echo __( 'Name', 'wp_sendsmaily' ); ?></label>
 		<input type="text" name="name" value="" />
 	</p>
 	
 	<p>
-		<button type="submit"><?php echo __('Subscribe', 'wp_sendsmaily'); ?></button>
+		<button type="submit"><?php echo __( 'Subscribe', 'wp_sendsmaily' ); ?></button>
 	</p>
 </form>
