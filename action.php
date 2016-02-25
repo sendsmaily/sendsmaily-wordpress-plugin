@@ -16,16 +16,16 @@
  * along with Sendsmaily Wordpress plugin.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// define params
+// Define params.
 define( 'BP', dirname( __FILE__ ) );
 define( 'DS', DIRECTORY_SEPARATOR );
 
-// disable cache
+// Disable cache.
 header( 'Cache-Control: no-cache, must-revalidate' );
 header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
 header( 'Pragma: No-Cache' );
 
-// allow only posted data
+// Allow only posted data.
 if ( empty( $_POST ) ) { die( 'Must be post method.' ); }
 
 // @todo: clean up posted data
@@ -136,20 +136,20 @@ switch ( $_POST['op'] ) {
 	case 'resetForm':
 		global $wpdb;
 
-		// generate form contents
+		// Generate form contents.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$template = new Wp_Sendsmaily_Template('html' . DS . 'form' . DS . 'advanced.phtml');
+		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.phtml' );
 
-		// load configuration data
+		// Load configuration data.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$data = $wpdb->get_row($wpdb->prepare('select * from `' . $table_name . '` limit 1'));
+		$data = $wpdb->get_row( $wpdb->prepare( 'select * from `' . $table_name . '` limit 1' ) );
 		$data->form = '';
 		$template->assign( (array) $data );
 
-		// render template
+		// Render template.
 		$result = array(
 			'error' => false,
-			'message' => __('Newsletter subscription form reset to default.', 'wp_sendsmaily'),
+			'message' => __( 'Newsletter subscription form reset to default.', 'wp_sendsmaily' ),
 			'content' => $template->render(),
 		);
 		break;
@@ -157,9 +157,9 @@ switch ( $_POST['op'] ) {
 	case 'refreshAutoresp':
 		global $wpdb;
 
-		// load configuration data
+		// Load configuration data.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$data = $wpdb->get_row($wpdb->prepare('select * from `' . $table_name . '` limit 1'));
+		$data = $wpdb->get_row($wpdb->prepare( 'SELECT * from `' . $table_name . '` limit 1'));
 
 		// get autoresponders
 		$request = new Wp_Sendsmaily_Request('https://' . $data->domain . '.sendsmaily.net/api/get-autoresponders/', array(
@@ -219,7 +219,7 @@ switch ( $_POST['op'] ) {
 
 		// generate new form (if empty)
 		if(empty($advanced['form'])){
-			require_once(BP . DS . 'code' . DS . 'Template.php');
+			require_once( BP . DS . 'code' . DS . 'Template.php' );
 			$template = new Wp_Sendsmaily_Template('html' . DS . 'form' . DS . 'advanced.phtml');
 
 			// load configuration data
