@@ -21,7 +21,7 @@
 $success_url = $this->success_url;
 $failure_url = $this->failure_url;
 ?>
-<form class="container" action="<?php echo SS_PLUGIN_URL; ?>subscribe.php" method="post">
+<form class="container" action="<?php echo SS_PLUGIN_URL; ?>/subscribe.php" method="post">
 	<?php if ( ! empty( $success_url ) or ! empty( $failure_url ) ) : ?>
 	<div>
 		<?php if ( ! empty( $success_url ) ) : ?>
