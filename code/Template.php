@@ -1,44 +1,29 @@
 <?php
-/**
- * This file is part of Sendsmaily Wordpress plugin.
- *
- * Sendsmaily Wordpress plugin is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Sendsmaily Wordpress plugin is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Sendsmaily Wordpress plugin.  If not, see <http://www.gnu.org/licenses/>.
- */
 
 class Wp_Sendsmaily_Template
 {
 	/**
-	 * @var template name
+	 * Template name.
+	 * @var string
 	 */
 	protected $_template = '';
 
 	/**
-	 * @var template variables
+	 * Template variables.
+	 * @var string
 	 */
 	protected $_vars = '';
 
 	/**
-	 * constructor
-	 * @param string $file [optional]
-	 * @return string
+	 * Constructor.
+	 * @param string $file
 	 */
 	public function __construct( $file = null ) {
 		$this->_template = $file;
 	}
 
 	/**
-	 * render partial html
+	 * Render partial html.
 	 * @param string $template
 	 * @param array $params
 	 * @return string
@@ -50,20 +35,20 @@ class Wp_Sendsmaily_Template
 	}
 
 	/**
-	 * render template
+	 * Render template.
 	 * @return string|bool
 	 * @throws Exception
 	 */
 	public function render() {
 		$file_name = BP . DS . $this->_template;
 
-		// check for template file
+		// Check for template file.
 		if ( empty( $this->_template ) or ! file_exists( $file_name ) or ! is_readable( $file_name ) ) {
-			throw new Exception( 'Could not find template "' . $file_name . '"! Please check for file existance.' );
+			throw new Exception( 'Could not find template "' . $file_name . '"! Please check for file existence.' );
 			return false;
 		}
 
-		// output template
+		// Output template.
 		ob_start();
 		include( $file_name );
 		$output = ob_get_contents();
@@ -73,7 +58,7 @@ class Wp_Sendsmaily_Template
 	}
 
 	/**
-	 * dispatch template
+	 * Dispatch template.
 	 * @return void
 	 */
 	public function dispatch() {
@@ -81,7 +66,7 @@ class Wp_Sendsmaily_Template
 	}
 
 	/**
-	 * assign template variables
+	 * Assign template variables.
 	 * @param string|array $name
 	 * @param object $value [optional]
 	 * @return Sendsmaily_Subscribe_Abstract
@@ -99,7 +84,7 @@ class Wp_Sendsmaily_Template
 	}
 
 	/**
-	 * get all assigned variables
+	 * Get all assigned variables.
 	 * @return array
 	 */
 	public function getVars() {
@@ -107,7 +92,7 @@ class Wp_Sendsmaily_Template
 	}
 
 	/**
-	 * return assigned var value
+	 * Return assigned var value.
 	 * @param string $name
 	 * @return string|object|void
 	 */
@@ -120,7 +105,7 @@ class Wp_Sendsmaily_Template
 	}
 
 	/**
-	 * assign single param
+	 * Assign single param.
 	 * @param string $name
 	 * @param object $value
 	 * @return void

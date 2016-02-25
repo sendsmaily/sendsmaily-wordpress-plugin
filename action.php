@@ -1,20 +1,4 @@
 <?php
-/**
- * This file is part of Sendsmaily Wordpress plugin.
- * 
- * Sendsmaily Wordpress plugin is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * Sendsmaily Wordpress plugin is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with Sendsmaily Wordpress plugin.  If not, see <http://www.gnu.org/licenses/>.
- */
 
 // Define params.
 define( 'BP', dirname( __FILE__ ) );
@@ -32,22 +16,22 @@ if ( empty( $_POST ) ) { die( 'Must be post method.' ); }
 if ( ! isset( $_POST['op'] ) ) { die( 'No action or API key set.' ); }
 $_POST['op'] = trim( $_POST['op'] );
 
-// require request class
+// Require request class.
 require_once( BP . DS . 'code' . DS . 'Request.php' );
 
-// get wpdb configuration
+// Get wpdb configuration.
 if ( ! function_exists( 'add_action' ) ) {
 	$path = dirname( dirname( dirname( BP ) ) );
 	require_once( $path . DS . 'wp-config.php' );
 }
 
-// switch to action
+// Switch to action.
 switch ( $_POST['op'] ) {
 	case 'validateApiKey':
-		// get request params
+		// Get request params.
 		$key = isset( $_POST['key'] ) ? trim( $_POST['key'] ) : '';
 
-		// validate api key with remote request
+		// Validate api key with remote request.
 		$request = new Wp_Sendsmaily_Request(
 			'https://www.sendsmaily.net/validate_key.php',
 			array( 'key' => $key )
@@ -55,13 +39,13 @@ switch ( $_POST['op'] ) {
 		$result = $request->exec();
 		$data = $result['data'];
 
-		// handle errors
+		// Handle errors.
 		if ( isset( $result['code'] ) and $result['code'] >= 200 ) {
 			$result['error'] = true;
 			break;
 		}
 
-		// insert item to database
+		// Insert item to database.
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
 		$wpdb->insert($table_name, array(
@@ -69,7 +53,7 @@ switch ( $_POST['op'] ) {
 		    'domain' => $data['domain'],
 		));
 
-		// get autoresponders
+		// Get autoresponders.
 		$request = new Wp_Sendsmaily_Request(
 			'https://' . $data['domain'] . '.sendsmaily.net/api/get-autoresponders/',
 			array( 'key' => $key )
@@ -77,7 +61,7 @@ switch ( $_POST['op'] ) {
 		$result = $request->exec();
 		$data = $result['data'];
 
-		// handle errors
+		// Handle errors.
 		if ( isset( $result['code'] ) and $result['code'] >= 200 ) {
 			$result['error'] = true;
 			break;
@@ -89,22 +73,22 @@ switch ( $_POST['op'] ) {
 			break;
 		}
 
-		// get autoresponders
+		// Get autoresponders.
 		$insertQuery = array();
 		foreach ( $data['autoresponders'] as $item ) {
-			$insertQuery[] = sprintf('(%s,"%s")', $item['id'], $item['title']);
+			$insertQuery[] = sprintf( '(%s,"%s")', $item['id'], $item['title'] );
 		}
 
-		// replace autoresponders
+		// Replace autoresponders.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
 		$wpdb->query(
-			sprintf('delete from `%s`', $table_name)
+			sprintf( 'DELETE FROM `%s`', $table_name )
 		);
 		$wpdb->query(
-			sprintf('insert into `%s`(`id`,`title`) values%s', $table_name, implode(',', $insertQuery))
+			sprintf('INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode(',', $insertQuery))
 		);
 
-		// return result
+		// Return result.
 		$result = array(
 			'error' => false,
 			'message' => __( 'API key passed validation.', 'wp_sendsmaily' ),
@@ -114,22 +98,22 @@ switch ( $_POST['op'] ) {
 	case 'removeApiKey':
 		global $wpdb;
 
-		// delete contents of config
+		// Delete contents of config.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
 		$wpdb->query(
-			sprintf('delete from `%s`', $table_name)
+			sprintf('DELETE FROM `%s`', $table_name)
 		);
 
-		// delete contents of autoresponders
+		// Delete contents of autoresponders.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
 		$wpdb->query(
-			sprintf('delete from `%s`', $table_name)
+			sprintf('DELETE FROM `%s`', $table_name)
 		);
 
-		// set result
+		// Set result.
 		$result = array(
 			'error' => false,
-			'message' => __('API key removed.', 'wp_sendsmaily')
+			'message' => __( 'API key removed.', 'wp_sendsmaily' ),
 		);
 		break;
 
@@ -142,7 +126,7 @@ switch ( $_POST['op'] ) {
 
 		// Load configuration data.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$data = $wpdb->get_row( $wpdb->prepare( 'select * from `' . $table_name . '` limit 1' ) );
+		$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $table_name . '` LIMIT 1' ) );
 		$data->form = '';
 		$template->assign( (array) $data );
 
@@ -159,16 +143,16 @@ switch ( $_POST['op'] ) {
 
 		// Load configuration data.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$data = $wpdb->get_row($wpdb->prepare( 'SELECT * from `' . $table_name . '` limit 1'));
+		$data = $wpdb->get_row($wpdb->prepare( 'SELECT * FROM `' . $table_name . '` LIMIT 1'));
 
-		// get autoresponders
+		// Get autoresponders.
 		$request = new Wp_Sendsmaily_Request('https://' . $data->domain . '.sendsmaily.net/api/get-autoresponders/', array(
 			'key' => $data->key,
 		));
 		$result = $request->exec();
 		$data = $result['data'];
 
-		// handle errors
+		// Handle errors.
 		if ( isset( $result['code'] ) and $result['code'] >= 200 ) {
 			$result['error'] = true;
 			break;
@@ -180,22 +164,22 @@ switch ( $_POST['op'] ) {
 			break;
 		}
 
-		// get autoresponders
+		// Get autoresponders.
 		$insertQuery = array();
 		foreach ( $data['autoresponders'] as $item ) {
-			$insertQuery[] = sprintf('(%s,"%s")', $item['id'], $item['title']);
+			$insertQuery[] = sprintf( '(%s,"%s")', $item['id'], $item['title'] );
 		}
 
-		// replace autoresponders
+		// Replace autoresponders.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
 		$wpdb->query(
-			sprintf( 'delete from `%s`', $table_name )
+			sprintf( 'DELETE FROM `%s`', $table_name )
 		);
 		$wpdb->query(
-			sprintf('insert into `%s`(`id`,`title`) values%s', $table_name, implode(',', $insertQuery))
+			sprintf('INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode(',', $insertQuery))
 		);
 
-		// return result
+		// Return result.
 		$result = array(
 			'error' => false,
 			'message' => __( 'Autoresponders refreshed.', 'wp_sendsmaily' ),
@@ -206,40 +190,45 @@ switch ( $_POST['op'] ) {
 	case 'save':
 		global $wpdb;
 
-		// get params
-		$isAdvanced = (isset($_POST['is_advanced']) and !empty($_POST['is_advanced'])) ? '1' : '0';
+		// Get params.
+		$isAdvanced = ( isset( $_POST['is_advanced'] ) and ! empty( $_POST['is_advanced'] ) ) ? '1' : '0';
 
-		// get basic and advanced parameters
-		$basic = (isset($_POST['basic']) and is_array($_POST['basic'])) ? $_POST['basic'] : array();
-		$advanced = (isset($_POST['advanced']) and is_array($_POST['advanced'])) ? $_POST['advanced'] : array();
-		if(empty($basic) or empty($advanced)){
-			$result = array('error' => true, 'message' => '');
+		// Get basic and advanced parameters.
+		$basic = ( isset( $_POST['basic'] ) and is_array( $_POST['basic'] ) ) ? $_POST['basic'] : array();
+		$advanced = ( isset( $_POST['advanced'] ) and is_array( $_POST['advanced'] ) ) ? $_POST['advanced'] : array();
+		if ( empty( $basic ) or empty( $advanced ) ) {
+			$result = array( 'error' => true, 'message' => '' );
 			break;
 		}
 
-		// generate new form (if empty)
-		if(empty($advanced['form'])){
+		// Generate new form (if empty).
+		if ( empty( $advanced['form'] ) ) {
 			require_once( BP . DS . 'code' . DS . 'Template.php' );
-			$template = new Wp_Sendsmaily_Template('html' . DS . 'form' . DS . 'advanced.phtml');
+			$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.phtml' );
 
-			// load configuration data
+			// Load configuration data.
 			$table_name = $wpdb->prefix . 'sendsmaily_config';
-			$data = $wpdb->get_row($wpdb->prepare('select * from `' . $table_name . '` limit 1'));
+			$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $table_name . '` LIMIT 1' ) );
 			$template->assign( (array) $data );
 
-			// render template
+			// Render template.
 			$advanced['form'] = $template->render();
 		}
 
-		// update configuration
+		// Update configuration.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
 		$wpdb->query(
 			sprintf('update `%s` set autoresponder="%s", success_url="%s", failure_url="%s", form="%s", is_advanced="%s"',
-				$table_name, $basic['autoresponder'], $basic['success_url'], $basic['failure_url'], addslashes($advanced['form']), $isAdvanced
+				$table_name,
+				$basic[ 'autoresponder' ],
+				$basic[ 'success_url' ],
+				$basic[ 'failure_url' ],
+				addslashes( $advanced[ 'form' ] ),
+				$isAdvanced
 			)
 		);
 
-		// return response
+		// Return response.
 		$result = array(
 			'error' => false,
 			'message' => __( 'Changes saved.', 'wp_sendsmaily' ),
@@ -247,28 +236,28 @@ switch ( $_POST['op'] ) {
 		break;
 }
 
-// send refresh form content (if requested)
-$refresh = (isset($_POST['refresh']) and $_POST['refresh'] == 1);
+// Send refresh form content (if requested).
+$refresh = ( isset( $_POST[ 'refresh' ] ) and $_POST['refresh'] == 1 );
 if ( $refresh ) {
 	global $wpdb;
 
-	// generate form contents
-	require_once(BP . DS . 'code' . DS . 'Template.php');
-	$template = new Wp_Sendsmaily_Template('html' . DS . 'admin' . DS . 'html' . DS . 'form.phtml');
+	// Generate form contents.
+	require_once( BP . DS . 'code' . DS . 'Template.php' );
+	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.phtml' );
 
-	// load configuration data
+	// Load configuration data.
 	$table_name = $wpdb->prefix . 'sendsmaily_config';
-	$data = $wpdb->get_row($wpdb->prepare('select * from `' . $table_name . '` limit 1'));
-	$template->assign((array)$data);
+	$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $table_name . '` LIMIT 1' ) );
+	$template->assign( (array) $data );
 
-	// load autoresponders
+	// Load autoresponders.
 	$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-	$data = $wpdb->get_results($wpdb->prepare('select * from `' . $table_name . '`'));
-	$template->assign('autoresponders', $data);
+	$data = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM `' . $table_name . '`'));
+	$template->assign( 'autoresponders', $data );
 
-	// render template
+	// Render template.
 	$result['content'] = $template->render();
 }
 
-// display result messages as JSON
+// Display result messages as JSON.
 echo json_encode( $result );

@@ -1,94 +1,81 @@
 <?php
-/**
- * This file is part of Sendsmaily Wordpress plugin.
- *
- * Sendsmaily Wordpress plugin is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Sendsmaily Wordpress plugin is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Sendsmaily Wordpress plugin.  If not, see <http://www.gnu.org/licenses/>.
- */
 
 class Wp_Sendsmaily_Request
 {
 	/**
-	 * remote request url
+	 * Remote request url.
 	 * @var string
 	 */
 	protected $_url = '';
 
 	/**
-	 * remote request data
+	 * Remote request data.
 	 * @var array
 	 */
 	protected $_data = array();
 
 	/**
-	 * constructor (set request variables)
+	 * Constructor (set request variables).
 	 * @param string $url
-	 * @param array|null $data [optional]
-	 * @param string|null $method [optional]
+	 * @param array $data
 	 * @return void|bool
 	 */
-	public function __construct($url, $data=null){
-		if(!is_string($url) or empty($url)){ return false; }
+	public function __construct( $url, $data = null ) {
+		if ( ! is_string( $url ) or empty( $url ) ) {
+			return false;
+		}
 		$this->_url = $url;
 
-		// set request data
-		if(is_array($data) and !empty($data)){ $this->_data = $data; }
+		// Set request data.
+		if ( is_array( $data ) and ! empty( $data ) ) {
+			$this->_data = $data;
+		}
 	}
 
 	/**
-	 * execute remote request
-	 * @return void
+	 * Execute remote request.
+	 * @return array
 	 */
 	public function exec() {
-		// set always as remote request
+		// Set always as remote request.
 		$this->_data['remote'] = 1;
 
-		// fetch with curl
+		// Fetch with curl.
 		if ( function_exists( 'curl_init' ) ) {
 			return $this->_asCurl();
 		}
 
-		// fallback to socket
+		// Fallback to socket.
 		return $this->_asSocket();
 	}
 
 	/**
-	 * execute remote request (with CURL)
+	 * Execute remote request (with CURL).
 	 * @return array|bool
 	 */
 	protected function _asCurl() {
 		$curl = curl_init();
 
-		// set curl params
+		// Set curl parameters.
 		curl_setopt( $curl, CURLOPT_URL, $this->_url );
 		curl_setopt( $curl, CURLOPT_HEADER, false );
 		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
 
-		// set request query
+		// Set request query.
 		curl_setopt( $curl, CURLOPT_POST, true );
 		curl_setopt( $curl, CURLOPT_POSTFIELDS, http_build_query( $this->_data ) );
 
-		// execute curl
+		// Execute curl.
 		$result = curl_exec( $curl );
 		curl_close( $curl );
 
-		// parse result
+		// Parse result.
 		$result = json_decode( $result, true );
 		return $result;
 	}
 
 	/**
-	 * execute remote request (with fSockOpen)
+	 * Execute remote request (with fSockOpen).
 	 * @return array
 	 */
 	protected function _asSocket() {

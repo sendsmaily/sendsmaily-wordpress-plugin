@@ -1,42 +1,26 @@
 <?php
-/**
- * This file is part of Sendsmaily Wordpress plugin.
- *
- * Sendsmaily Wordpress plugin is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Sendsmaily Wordpress plugin is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Sendsmaily Wordpress plugin.  If not, see <http://www.gnu.org/licenses/>.
- */
 
-// define parameters
+// Define parameters.
 define( 'BP', dirname( __FILE__ ) );
 define( 'DS', DIRECTORY_SEPARATOR );
 
 require_once( BP . DS . 'code' . DS . 'Request.php' );
 
-// get wpdb configuration
+// Get wpdb configuration.
 if ( ! function_exists( 'add_action' ) ) {
 	$path = dirname( dirname( dirname( BP ) ) );
 	require_once( $path . DS . 'wp-config.php' );
 }
 
-// get data from database
+// Get data from database.
 global $wpdb;
 $table_name = $wpdb->prefix.'sendsmaily_config';
-$config = $wpdb->get_row($wpdb->prepare('select * from `'.$table_name.'`'));
+$config = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `'.$table_name.'`' ) );
 
-// get posted data
-$posted = array_diff_key($_POST, array('key' => '', 'autoresponder' => '', 'remote' => ''));
+// Get posted data.
+$posted = array_diff_key( $_POST, array( 'key' => '', 'autoresponder' => '', 'remote' => '' ) );
 
-// make a opt-in request to server
+// Make a opt-in request to server.
 $server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
 $array = array_merge(array(
 	'key' => $config->key,
@@ -46,34 +30,34 @@ $array = array_merge(array(
 $request = new Wp_Sendsmaily_Request( $server, $array );
 $result = $request->exec();
 
-// get default url
-$refererUrl = $_SERVER['HTTP_REFERER'];
-if ( empty( $refererUrl ) ) {
-	$refererUrl = site_url() . '/';
+// Get default url.
+$referrer_url = $_SERVER['HTTP_REFERER'];
+if ( empty( $referrer_url ) ) {
+	$referrer_url = site_url() . '/';
 }
 
-// get redirect urls
-$successUrl = $config->success_url;
-if(empty($successUrl)){
-	$successUrl = $refererUrl;
+// Get redirect urls.
+$success_url = $config->success_url;
+if ( empty( $success_url ) ) {
+	$success_url = $referrer_url;
 }
-$successUrl .= (stripos($successUrl, '?') === false ? '?' : '&') . http_build_query(array(
+$success_url .= ( stripos( $success_url, '?' ) === false ? '?' : '&' ) . http_build_query( array(
 	'message' => $result['message'],
 ));
 
-$failureUrl = $config->failure_url;
-if ( empty( $failureUrl ) ) {
-	$failureUrl = $refererUrl;
+$failure_url = $config->failure_url;
+if ( empty( $failure_url ) ) {
+	$failure_url = $referrer_url;
 }
-$failureUrl .= (stripos($failureUrl, '?') === false ? '?' : '&') . http_build_query(array(
-	'message' => $result['message']
+$failure_url .= ( stripos( $failure_url, '?' ) === false ? '?' : '&' ) . http_build_query( array(
+	'message' => $result['message'],
 ));
 
-// redirect to failure
+// Redirect to failure.
 if ( isset( $result['code'] ) and $result['code'] > 200 ) {
-	header( 'Location: ' . $failureUrl );
+	header( 'Location: ' . $failure_url );
 	exit;
 }
 
-// redirect to success address
-header( 'Location: ' . $successUrl );
+// Redirect to success address.
+header( 'Location: ' . $success_url );

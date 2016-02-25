@@ -8,6 +8,24 @@ Author: Sendsmaily
 Author URI: http://sendsmaily.com
 */
 
+/*
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+Copyright 2005-2015 Automattic, Inc.
+*/
+
 define( 'SS_PLUGIN_VERSION', '0.9.1' );
 
 define( 'BP', dirname( __FILE__ ) );
@@ -53,7 +71,7 @@ function sendsmaily_install() {
 			`failure_url` TEXT NOT NULL,
 			`form` TEXT NOT NULL,
 			`is_advanced` TINYINT(1) NOT NULL,
-			PRIMARY KEY(`key`)
+			PRIMARY KEY(`key`, `domain`)
 		) $charset_collate;";
 		$wpdb->query( $sql );
 	}
@@ -62,11 +80,11 @@ function sendsmaily_install() {
 	$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
 	$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_name ) );
 	if ( ! $wpdb->get_var( $query ) ) {
-		$sql = "CREATE TABLE `$table_name` (
+		$sql = trim( preg_replace( '/\s\s+/', ' ', "CREATE TABLE `$table_name` (
 			`id` INT(16) NOT NULL,
 			`title` VARCHAR(255) NOT NULL,
 			PRIMARY KEY (`id`)
-		) $charset_collate;";
+		) $charset_collate;" ) );
 		$wpdb->query( $sql );
 	}
 }
