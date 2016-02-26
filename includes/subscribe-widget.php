@@ -2,8 +2,6 @@
 /**
  * Widget that can be used to subscribe to newsletters
  *
- * @since      1.0.0
- *
  * @package    Sendsmaily
  * @subpackage Sendsmaily/includes
  */
@@ -12,19 +10,15 @@
  * Create a widget class.
  */
 class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
+
 	/**
-	 * Basic settings of widget.
+	 * Sets up a new instance of the widget.
 	 */
-	function Sendsmaily_Newsletter_Subscription_Widget() {
-		$widget_attributes = array(
-			'description' => __( 'Sendsmaily newsletter subscription form', 'wp_sendsmaily' ),
-		);
-		$this->WP_Widget(
-			'sendsmaily_subscription_widget',
-			'Sendsmaily Newsletter Subscription',
-			$widget_attributes
-		);
+	public function __construct() {
+		$widget_ops = array( 'description' => __( 'Sendsmaily newsletter subscription form', 'wp_sendsmaily' ) );
+		parent::__construct( 'sendsmaily_subscription_widget', __( 'Sendsmaily Newsletter Subscription', 'wp_sendsmaily' ), $widget_ops );
 	}
+
 	/**
 	 * Outputs the content for the current widget instance.
 	 * @param array $args     Display arguments including 'before_title', 'after_title',
