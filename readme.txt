@@ -22,6 +22,10 @@ Sendsmaily newsletter subscription plugin for WordPress.
 
 == Changelog ==
 
+= 1.0.0 =
+* Coding standard fixes.
+* Update to work with latest version of WP(4.4.2).
+
 = 0.9.1 =
 * Fixed bug with URLs not working on Windows servers
 
