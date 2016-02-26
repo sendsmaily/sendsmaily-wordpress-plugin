@@ -1,6 +1,6 @@
 <?php
 /**
- * The plugin bootstrap file
+ * Bootstrap file for the plugin.
  *
  * @package           Sendsmaily
  *
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'SS_PLUGIN_VERSION', '0.9.1' );
+define( 'SS_PLUGIN_VERSION', '1.0.0' );
 
 define( 'BP', dirname( __FILE__ ) );
 
