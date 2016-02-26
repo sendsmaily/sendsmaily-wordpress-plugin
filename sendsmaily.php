@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Sendsmaily
-Plugin URI: http://sendsmaily.com
+Plugin URI: https://github.com/sendsmaily/sendsmaily-wordpress-plugin
 Description: Sendsmaily newsletter subscription form.
 Version: 0.9.1
 Author: Sendsmaily
