@@ -80,7 +80,7 @@ function sendsmaily_admin_render() {
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
-	add_menu_page( 'sendsmaily', 'Sendsmaily', 8, __FILE__, '' );
+	add_menu_page( 'sendsmaily', 'Sendsmaily', 8, __FILE__, '', SS_PLUGIN_URL . '/gfx/icon.png' );
 	add_submenu_page( 'sendsmaily', 'Newsletter subscription form', 'Form', 1, __FILE__, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'sendsmaily_admin_render' );
