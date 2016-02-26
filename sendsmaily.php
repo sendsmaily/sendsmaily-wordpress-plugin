@@ -50,49 +50,13 @@ function sendsmaily_init() {
 add_action( 'init', 'sendsmaily_init' );
 
 /**
- * Add sidebar widget.
- * @param array $args
- * @return void
+ * Load subscribe widget.
  */
-function sendsmaily_widget( $args ) {
-	wp_register_sidebar_widget(
-		'wp_sendsmaily',
-		__( 'Newsletter subscription', 'wp_sendsmaily' ),
-		'the_wp_sendsmaily_form',
-		array(
-			'description' => __( 'Sendsmaily newsletter subscription form', 'wp_sendsmaily' ),
-		)
-	);
+function sendsmaily_subscription_widget_init() {
+	require_once( SS_PLUGIN_PATH . 'includes/subscribe-widget.php' );
+	register_widget( 'Sendsmaily_Newsletter_Subscription_Widget' );
 }
-add_action( 'plugins_loaded', 'sendsmaily_widget' );
-
-/**
- * Return subscription form.
- * @return string
- */
-function get_wp_sendsmaily_form() {
-	global $wpdb;
-
-	// Load configuration data.
-	$table_name = $wpdb->prefix . 'sendsmaily_config';
-	$config = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM `$table_name` LIMIT 1" ) );
-	// Create admin template.
-	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$file = '1' === $config->is_advanced ? 'advanced.phtml' : 'basic.phtml';
-	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . $file );
-	$template->assign( (array) $config );
-
-	// Render template.
-	return $template->render();
-}
-
-/**
- * Output subscription form.
- * @return void
- */
-function the_wp_sendsmaily_form() {
-	echo get_wp_sendsmaily_form();
-}
+add_action( 'widgets_init', 'sendsmaily_subscription_widget_init' );
 
 /**
  * Render admin page.
