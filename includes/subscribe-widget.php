@@ -26,17 +26,19 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		);
 	}
 	/**
-	 * Subclasses should over-ride this function to generate their widget code.
-	 * @param array $args Display arguments including before_title, after_title, before_widget and after_widget.
-	 * @param array $instance The settings for the particular instance of the widget.
+	 * Outputs the content for the current widget instance.
+	 * @param array $args     Display arguments including 'before_title', 'after_title',
+	 *                        'before_widget', and 'after_widget'.
+	 * @param array $instance Settings for the current Search widget instance.
 	 */
 	function widget( $args, $instance ) {
 		global $wpdb;
 
-		extract( $args, EXTR_SKIP );
-		$text = empty( $instance['text'] ) ? ' ' : apply_filters( 'widget_title', $instance['text'] );
-		if ( ! empty( $text ) ) {
-			echo $text;
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+
+		echo $args['before_widget'];
+		if ( $title ) {
+			echo $args['before_title'] . $title . $args['after_title'];
 		}
 
 		// Load configuration data.
@@ -47,9 +49,10 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$file = '1' === $config->is_advanced ? 'advanced.phtml' : 'basic.phtml';
 		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . $file );
 		$template->assign( (array) $config );
-
 		// Render template.
 		echo $template->render();
+
+		echo $args['after_widget'];
 	}
 	/**
 	 * This function should check that $new_instance is set correctly. The newly
@@ -57,23 +60,28 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 	 * the instance won't be saved/updated.
 	 * @param array $new_instance
 	 * @param array $old_instance
+	 * @return array
 	 */
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		$instance[ 'text' ] = strip_tags( $new_instance['text'] );
+		$instance['title'] = strip_tags( $new_instance['title'] );
 		return $instance;
 	}
 	/**
 	 * Widget form on widgets page in admin panel.
-	 * @param array $instance
+	 * @param array $instance Widget fields array.
+	 * @return void
 	 */
 	function form( $instance ) {
-		$instance = wp_parse_args( (array) $instance, array( 'text' => '' ) );
-		$text = strip_tags( $instance['text'] );
-		echo '
-		<p><label for="' . $this->get_field_id( 'text' ) . '">
-			Title:
-			<input class="widefat" id="' . $this->get_field_id( 'text' ) . '" name="' . $this->get_field_name( 'text' ) . '" type="text" value="' . attribute_escape( $text ) . '" />
-		</label></p>';
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '' ) );
+		$title_id = esc_attr( $this->get_field_id( 'title' ) );
+		$title_name = esc_attr( $this->get_field_name( 'title' ) );
+		$instance['title'] = esc_attr( $instance['title'] );
+		echo '<p>
+			<label for="' . $title_id . '">
+				Title:
+				<input class="widefat" id="' . $title_id . '" name="' . $title_name . '" type="text" value="' . $instance['title'] . '" />
+			</label>' .
+		'</p>';
 	}
 }
