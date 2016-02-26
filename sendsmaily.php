@@ -66,7 +66,7 @@ function sendsmaily_admin_render() {
 	global $wpdb;
 
 	// Create admin template.
-	require_once(BP . DS . 'code' . DS . 'Template.php');
+	require_once( BP . DS . 'code' . DS . 'Template.php' );
 	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'page.phtml' );
 
 	// Load configuration data.

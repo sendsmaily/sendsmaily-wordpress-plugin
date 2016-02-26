@@ -74,9 +74,9 @@ switch ( $_POST['op'] ) {
 		}
 
 		// Get autoresponders.
-		$insertQuery = array();
+		$insert_query = array();
 		foreach ( $data['autoresponders'] as $item ) {
-			$insertQuery[] = sprintf( '(%s,"%s")', $item['id'], $item['title'] );
+			$insert_query[] = sprintf( '(%s,"%s")', $item['id'], $item['title'] );
 		}
 
 		// Replace autoresponders.
@@ -85,7 +85,7 @@ switch ( $_POST['op'] ) {
 			sprintf( 'DELETE FROM `%s`', $table_name )
 		);
 		$wpdb->query(
-			sprintf('INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode(',', $insertQuery))
+			sprintf('INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode(',', $insert_query))
 		);
 
 		// Return result.
@@ -165,9 +165,9 @@ switch ( $_POST['op'] ) {
 		}
 
 		// Get autoresponders.
-		$insertQuery = array();
+		$insert_query = array();
 		foreach ( $data['autoresponders'] as $item ) {
-			$insertQuery[] = sprintf( '(%s,"%s")', $item['id'], $item['title'] );
+			$insert_query[] = sprintf( '(%s,"%s")', $item['id'], $item['title'] );
 		}
 
 		// Replace autoresponders.
@@ -176,7 +176,7 @@ switch ( $_POST['op'] ) {
 			sprintf( 'DELETE FROM `%s`', $table_name )
 		);
 		$wpdb->query(
-			sprintf('INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode(',', $insertQuery))
+			sprintf('INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode(',', $insert_query))
 		);
 
 		// Return result.

@@ -2,8 +2,6 @@
 /**
  * Fired during plugin activation
  *
- * @since      1.0.0
- *
  * @package    Sendsmaily
  * @subpackage Sendsmaily/includes
  */
