@@ -70,13 +70,13 @@ function sendsmaily_admin_render() {
 	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'page.phtml' );
 
 	// Load configuration data.
-	$table_name = $wpdb->prefix . 'sendsmaily_config';
-	$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %s LIMIT 1', $table_name ) );
+	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+	$data = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 	$template->assign( (array) $data );
 
 	// Load autoresponders.
-	$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-	$data = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %s', $table_name ) );
+	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_autoresp' );
+	$data = $wpdb->get_results( "SELECT * FROM `$table_name`" );
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.

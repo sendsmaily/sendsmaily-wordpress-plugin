@@ -16,8 +16,8 @@ function sendsmaily_install() {
 	$charset_collate = $wpdb->get_charset_collate();
 
 	// Create database table - settings.
-	$table_name = $wpdb->prefix . 'sendsmaily_config';
-	$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name );
+	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+	$query = "SHOW TABLES LIKE `$table_name`";
 	if ( ! $wpdb->get_var( $query ) ) {
 		$sql = "CREATE TABLE `$table_name` (
 			`key` VARCHAR(128) NOT NULL,
@@ -33,8 +33,8 @@ function sendsmaily_install() {
 	}
 
 	// Create database table - autoresponders.
-	$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-	$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $table_name );
+	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_autoresp' );
+	$query = "SHOW TABLES LIKE `$table_name`";
 	if ( ! $wpdb->get_var( $query ) ) {
 		$sql = trim( preg_replace( '/\s\s+/', ' ', "CREATE TABLE `$table_name` (
 			`id` INT(16) NOT NULL,

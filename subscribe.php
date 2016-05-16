@@ -14,8 +14,8 @@ if ( ! function_exists( 'add_action' ) ) {
 
 // Get data from database.
 global $wpdb;
-$table_name = $wpdb->prefix.'sendsmaily_config';
-$config = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %s', $table_name ) );
+$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+$config = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
 // Get posted data.
 $posted = array_diff_key( $_POST, array( 'key' => '', 'autoresponder' => '', 'remote' => '' ) );
