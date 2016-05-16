@@ -126,7 +126,7 @@ switch ( $_POST['op'] ) {
 
 		// Load configuration data.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $table_name . '` LIMIT 1' ) );
+		$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %s LIMIT 1', $table_name ) );
 		$data->form = '';
 		$template->assign( (array) $data );
 
@@ -143,7 +143,7 @@ switch ( $_POST['op'] ) {
 
 		// Load configuration data.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$data = $wpdb->get_row($wpdb->prepare( 'SELECT * FROM `' . $table_name . '` LIMIT 1'));
+		$data = $wpdb->get_row($wpdb->prepare( 'SELECT * FROM %s LIMIT 1', $table_name ) );
 
 		// Get autoresponders.
 		$request = new Wp_Sendsmaily_Request('https://' . $data->domain . '.sendsmaily.net/api/get-autoresponders/', array(
@@ -208,7 +208,7 @@ switch ( $_POST['op'] ) {
 
 			// Load configuration data.
 			$table_name = $wpdb->prefix . 'sendsmaily_config';
-			$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $table_name . '` LIMIT 1' ) );
+			$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %s LIMIT 1', $table_name ) );
 			$template->assign( (array) $data );
 
 			// Render template.
@@ -247,12 +247,12 @@ if ( $refresh ) {
 
 	// Load configuration data.
 	$table_name = $wpdb->prefix . 'sendsmaily_config';
-	$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM `' . $table_name . '` LIMIT 1' ) );
+	$data = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM %s LIMIT 1', $table_name ) );
 	$template->assign( (array) $data );
 
 	// Load autoresponders.
 	$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-	$data = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM `' . $table_name . '`'));
+	$data = $wpdb->get_results( $wpdb->prepare( 'SELECT * FROM %s', $table_name ) );
 	$template->assign( 'autoresponders', $data );
 
 	// Render template.
