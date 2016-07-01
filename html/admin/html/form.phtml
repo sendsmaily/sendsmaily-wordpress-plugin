@@ -41,18 +41,6 @@ $autoresponders = $this->autoresponders;
 		<span><?php echo esc_html__( 'No autoresponders. Please click on refresh link to update.', 'wp_sendsmaily' ); ?></span>
 		<?php endif; ?>
 	</div>
-
-	<div class="wrap">
-		<label><?php echo esc_html__( 'Success URL', 'wp_sendsmaily' ); ?></label>
-		<em><?php echo esc_html__( 'Address where subscribers will be directed after successful subscription', 'wp_sendsmaily' ); ?></em>
-		<input type="text" class="input-text" name="basic[success_url]" value="<?php echo $this->success_url; ?>" />
-	</div>
-
-	<div class="wrap">
-		<label><?php echo esc_html__( 'Failure URL', 'wp_sendsmaily' ); ?></label>
-		<em><?php echo esc_html__( 'Address where subscribers will be directed after failure', 'wp_sendsmaily' ); ?></em>
-		<input type="text" class="input-text" name="basic[failure_url]" value="<?php echo $this->failure_url; ?>" />
-	</div>
 </div>
 
 <div id="content-advanced" class="tab-content hidden">

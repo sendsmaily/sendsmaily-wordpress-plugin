@@ -218,11 +218,9 @@ switch ( $_POST['op'] ) {
 		// Update configuration.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
 		$wpdb->query(
-			sprintf('update `%s` set autoresponder="%s", success_url="%s", failure_url="%s", form="%s", is_advanced="%s"',
+			sprintf('update `%s` set autoresponder="%s", form="%s", is_advanced="%s"',
 				$table_name,
 				$basic[ 'autoresponder' ],
-				$basic[ 'success_url' ],
-				$basic[ 'failure_url' ],
 				addslashes( $advanced[ 'form' ] ),
 				$isAdvanced
 			)

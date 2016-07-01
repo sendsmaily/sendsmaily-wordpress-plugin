@@ -23,8 +23,6 @@ function sendsmaily_install() {
 			`key` VARCHAR(128) NOT NULL,
 			`domain` VARCHAR(255) NOT NULL,
 			`autoresponder` INT(16) NOT NULL,
-			`success_url` TEXT NOT NULL,
-			`failure_url` TEXT NOT NULL,
 			`form` TEXT NOT NULL,
 			`is_advanced` TINYINT(1) NOT NULL,
 			PRIMARY KEY(`key`)
