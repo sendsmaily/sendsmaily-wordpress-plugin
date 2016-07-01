@@ -40,13 +40,7 @@ class Wp_Sendsmaily_Request
 		// Set always as remote request.
 		$this->_data['remote'] = 1;
 
-		// Fetch with curl.
-		if ( function_exists( 'curl_init' ) ) {
-			return $this->_asCurl();
-		}
-
-		// Fallback to socket.
-		return $this->_asSocket();
+		return $this->_asCurl();
 	}
 
 	/**
@@ -74,42 +68,4 @@ class Wp_Sendsmaily_Request
 		return $result;
 	}
 
-	/**
-	 * Execute remote request (with fSockOpen).
-	 * @return array
-	 */
-	protected function _asSocket() {
-		/*$fp = fsockopen('ssl://frukt.sendsmaily.net', 443, $errno, $errstr, 15);
-		if(!$fp){
-	    $result = array(
-	    	'code' => 200,
-	    	'message' => 'Could not connect to host.'
-	    );
-		}else{
-			// build query
-			$query = http_build_query($this->_data);
-
-	    $http  = "POST /index.php/api/get-autoresponders HTTP/1.1\r\n";
-	    $http .= "Host: " . $_SERVER['HTTP_HOST'] . "\r\n";
-	    $http .= "User-Agent: " . $_SERVER['HTTP_USER_AGENT'] . "\r\n";
-	    $http .= "Content-Type: application/x-www-form-urlencoded\r\n";
-	    $http .= "Content-length: " . strlen($query) . "\r\n";
-	    $http .= "Connection: close\r\n\r\n";
-	    $http .= $query . "\r\n\r\n";
-	    fwrite($fp, $http);
-
-	    while(!feof($fp)){
-	    	$result .= fgets($fp, 4096);
-    	}
-    	fclose($fp);
-		}
-
-		var_dump($result);
-
-		return $result;*/
-		return array(
-			'code' => 200,
-			'message' => 'Could not connect to remote host.',
-		);
-	}
 }
