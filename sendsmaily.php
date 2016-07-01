@@ -45,7 +45,7 @@ register_activation_hook( __FILE__, 'sendsmaily_install' );
  */
 function sendsmaily_init() {
 	load_plugin_textdomain( 'wp_sendsmaily', $path = 'wp-content' . DS . 'plugins' . DS . SS_PLUGIN_NAME . DS . 'lang' );
-	wp_enqueue_script( 'sendsmaily', SS_PLUGIN_URL . '/js/default.js', false, SS_PLUGIN_VERSION, true );
+	wp_enqueue_script( 'sendsmaily', SS_PLUGIN_URL . '/js/default.js', array('jquery'), SS_PLUGIN_VERSION, true );
 }
 add_action( 'init', 'sendsmaily_init' );
 
