@@ -5,31 +5,23 @@ $form = $this->form;
 	<?php echo stripslashes( $form ); ?>
 <?php else : ?>
 <form class="container" action="https://<?php echo $this->domain; ?>.sendsmaily.net/api/opt-in/" method="post">
-	<div>
-		<input type="hidden" name="key" value="<?php echo $this->key; ?>" />
-		<input type="hidden" name="autoresponder" value="<?php echo $this->autoresponder; ?>" />
-		<?php if ( ! empty( $success_url ) ) : ?>
-			<input type="hidden" name="success_url" value="<?php echo $success_url; ?>" />
-		<?php endif;?>
-		<?php if ( ! empty( $failure_url ) ) : ?>
-			<input type="hidden" name="failure_url" value="<?php echo $failure_url; ?>" />
-		<?php endif; ?>
-	</div>
+	<input type="hidden" name="key" value="<?php echo $this->key; ?>" />
+	<input type="hidden" name="autoresponder" value="<?php echo $this->autoresponder; ?>" />
+	<?php if ( ! empty( $success_url ) ) : ?>
+		<input type="hidden" name="success_url" value="<?php echo $success_url; ?>" />
+	<?php endif;?>
+	<?php if ( ! empty( $failure_url ) ) : ?>
+		<input type="hidden" name="failure_url" value="<?php echo $failure_url; ?>" />
+	<?php endif; ?>
 
 	<p>
 		<label><?php echo esc_html__( 'Email', 'wp_sendsmaily' ); ?></label>
 		<input type="text" name="email" value="" />
 	</p>
-
-	<?php if ( $show_name ) : ?>
-		<p>
-			<label><?php echo esc_html__( 'Name', 'wp_sendsmaily' ); ?></label>
-			<input type="text" name="name" value="" />
-		</p>
-	<?php endif; ?>
-
-	<p>
-		<button type="submit"><?php echo esc_html__( 'Subscribe', 'wp_sendsmaily' ); ?></button>
-	</p>
+	<?php if ( $show_name ) : ?><p>
+		<label><?php echo esc_html__( 'Name', 'wp_sendsmaily' ); ?></label>
+		<input type="text" name="name" value="" />
+	</p><?php endif; ?>
+	<p><button type="submit"><?php echo esc_html__( 'Subscribe', 'wp_sendsmaily' ); ?></button></p>
 </form>
 <?php endif; ?>
