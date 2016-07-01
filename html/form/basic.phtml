@@ -1,35 +1,15 @@
-<?php
-$success_url = $this->success_url;
-$failure_url = $this->failure_url;
-$show_name = $this->show_name;
-?>
-<form class="container" action="<?php echo SS_PLUGIN_URL; ?>/subscribe.php" method="post">
-	<?php if ( ! empty( $success_url ) or ! empty( $failure_url ) ) : ?>
-	<div>
-		<?php if ( ! empty( $success_url ) ) : ?>
-		<input type="hidden" name="success_url" value="<?php echo $success_url; ?>" />
-		<?php endif;?>
-		<?php if ( ! empty( $failure_url ) ) : ?>
-		<input type="hidden" name="failure_url" value="<?php echo $failure_url; ?>" />
-		<?php endif; ?>
-	</div>
-	<?php endif; ?>
+<form id="smly" class="container" action="<?php echo SS_PLUGIN_URL; ?>/subscribe.php" method="post">
+	<p class="error" style="padding:15px;background-color:#f2dede;margin:0 0 10px;display:none"></p>
+	<p class="success" style="padding:15px;background-color:#dff0d8;margin:0 0 10px;display:none">Thank you for subscribing to our newsletter.</p>
 
-	<p>
-		<label>
-			<!--<span class="screen-reader-text"><?php echo esc_html__( 'Subscribe to newsletter:', 'wp_sendsmaily' ); ?></span>-->
-			<input type="text" name="email" value="" placeholder="<?php echo esc_html__( 'Email', 'wp_sendsmaily' ); ?>" />
-		</label>
-	</p>
+	<p><input type="text" name="email" value="" placeholder="<?php echo esc_html__( 'Email', 'wp_sendsmaily' ); ?>" /></p>
 
-	<?php if ( $show_name ) : ?>
+	<?php if ( $this->show_name ) : ?>
 		<p>
 			<label><?php echo esc_html__( 'Name', 'wp_sendsmaily' ); ?></label>
 			<input type="text" name="name" value="" />
 		</p>
 	<?php endif; ?>
 	
-	<p>
-		<button type="submit"><?php echo esc_html__( 'Subscribe', 'wp_sendsmaily' ); ?></button>
-	</p>
+	<p><button type="submit"><?php echo esc_html__( 'Subscribe', 'wp_sendsmaily' ); ?></button></p>
 </form>

@@ -1,3 +1,19 @@
+(function($){$().ready(function(){
+  $('#smly').submit(function(e) {
+    var $smly = $(this);
+    e.preventDefault();
+    $.post($smly.attr('action'), $smly.serialize(), function(data) {
+      if (data.length) {
+        $smly.find('p.error').text(data).show();
+      }
+      else {
+        $smly.find(':not(p.success)').hide();
+        $smly.find('p.success').show();
+      }
+    });
+  });
+});})(jQuery);
+
 var Default = (function(){
 	var _form = null;
 
@@ -175,10 +191,10 @@ var Tabs = (function(args){
 		'target': '',
 		'ajax': false
 	}
-	
+
 	// extend options
 	_options = jQuery.extend(_options, args);
-	
+
 	// check required target
 	if(!_options.target || _options.target.length < 1){ return false; }
 	

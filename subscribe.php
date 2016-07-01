@@ -1,8 +1,21 @@
 <?php
+// Accept ajax requests only.
+if ( ! (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') ) {
+	echo 'Something went wrong!';
+	exit;
+}
+// E-mail required.
+if ( ! (isset($_POST['email']) && !empty($_POST['email'])) ) {
+	echo 'E-mail is required!';
+	exit;
+}
 
 // Define parameters.
 define( 'BP', dirname( __FILE__ ) );
 define( 'DS', DIRECTORY_SEPARATOR );
+
+// Get current url.
+$current_url = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 require_once( BP . DS . 'code' . DS . 'Request.php' );
 
@@ -17,47 +30,26 @@ global $wpdb;
 $table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
 $config = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
-// Get posted data.
-$posted = array_diff_key( $_POST, array( 'key' => '', 'autoresponder' => '', 'remote' => '' ) );
-
 // Make a opt-in request to server.
 $server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
-$array = array_merge(array(
+$array = array(
+	'email' => $_POST['email'],
 	'key' => $config->key,
 	'autoresponder' => $config->autoresponder,
 	'remote' => 1,
-), $posted);
+	'success_url' => $current_url,
+	'failure_url' => $current_url,
+);
+
 $request = new Wp_Sendsmaily_Request( $server, $array );
 $result = $request->exec();
 
-// Get default url.
-$referrer_url = $_SERVER['HTTP_REFERER'];
-if ( empty( $referrer_url ) ) {
-	$referrer_url = site_url() . '/';
+if (empty($result)) {
+	echo 'Something went wrong';
 }
-
-// Get redirect urls.
-$success_url = $config->success_url;
-if ( empty( $success_url ) ) {
-	$success_url = $referrer_url;
-}
-$success_url .= ( stripos( $success_url, '?' ) === false ? '?' : '&' ) . http_build_query( array(
-	'message' => $result['message'],
-));
-
-$failure_url = $config->failure_url;
-if ( empty( $failure_url ) ) {
-	$failure_url = $referrer_url;
-}
-$failure_url .= ( stripos( $failure_url, '?' ) === false ? '?' : '&' ) . http_build_query( array(
-	'message' => $result['message'],
-));
-
-// Redirect to failure.
-if ( isset( $result['code'] ) and $result['code'] > 200 ) {
-	header( 'Location: ' . $failure_url );
+elseif ((int) $result['code'] === 101) {
 	exit;
 }
-
-// Redirect to success address.
-header( 'Location: ' . $success_url );
+else {
+	echo $result['message'];
+}
