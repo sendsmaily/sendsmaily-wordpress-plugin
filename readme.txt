@@ -15,11 +15,12 @@ Sendsmaily newsletter subscription plugin for WordPress.
 * Install as regular plugin.
 * Go to "/wp-admin/admin.php?page=sendsmaily%2Fsendsmaily.php".
 * Validate your API key.
-* Insert success and failure urls(Simplest is to just create 2 posts in WordPress).
-* Go to Appearance -> Customize(Your active theme).
+* Go to Appearance -> Customize(Your active theme) or use advanced tab for html that can be used anywhere.
 * Place sendsmaily widget where you wish.
 
 == Changelog ==
+
+* Use ajax for form submit.
 
 = 1.0.0 =
 * Coding standard fixes.
