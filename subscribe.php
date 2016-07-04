@@ -32,6 +32,7 @@ $config = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
 // Make a opt-in request to server.
 $server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
+$lang = explode('-', get_bloginfo('language'));
 $array = array(
 	'email' => $_POST['email'],
 	'key' => $config->key,
@@ -39,6 +40,7 @@ $array = array(
 	'remote' => 1,
 	'success_url' => $current_url,
 	'failure_url' => $current_url,
+	'language' => $lang[0],
 );
 
 $request = new Wp_Sendsmaily_Request( $server, $array );
