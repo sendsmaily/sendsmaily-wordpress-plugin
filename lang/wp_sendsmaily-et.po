@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sendsmaily\n"
 "POT-Creation-Date: 2016-07-04 12:26+0300\n"
-"PO-Revision-Date: 2016-07-04 12:33+0300\n"
+"PO-Revision-Date: 2016-07-04 13:55+0300\n"
 "Last-Translator: Sendsmaily OÜ <info@smaily.com>\n"
 "Language-Team: Sendsmaily OÜ <info@smaily.com>\n"
 "Language: et\n"
@@ -133,7 +133,7 @@ msgstr "Salvesta muudatused"
 
 #: html/admin/page.phtml:31
 msgid "Sendsmaily Wordpress plugin"
-msgstr "Sendsmaily Wordpressi pistik moodul"
+msgstr "Sendsmaily Wordpressi pistikmoodul"
 
 #: html/admin/page.phtml:32
 msgid "Please wait, working..."
