@@ -1,12 +1,12 @@
 <?php
 // Accept ajax requests only.
 if ( ! (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') ) {
-	echo 'Something went wrong!';
+	echo __('Something went wrong!', 'wp_sendsmaily');
 	exit;
 }
 // E-mail required.
 if ( ! (isset($_POST['email']) && !empty($_POST['email'])) ) {
-	echo 'E-mail is required!';
+	echo __('E-mail is required!', 'wp_sendsmaily');
 	exit;
 }
 
@@ -45,11 +45,15 @@ $request = new Wp_Sendsmaily_Request( $server, $array );
 $result = $request->exec();
 
 if (empty($result)) {
-	echo 'Something went wrong';
+	echo __('Something went wrong', 'wp_sendsmaily');
 }
 elseif ((int) $result['code'] === 101) {
 	exit;
 }
 else {
-	echo $result['message'];
+	// Possible errors, for translation.
+	__('Posted fields do not contain a valid email address.', 'wp_sendsmaily');
+	__('No autoresponder data set.', 'wp_sendsmaily');
+
+	echo __($result['message'], 'wp_sendsmaily');
 }

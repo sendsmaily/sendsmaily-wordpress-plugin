@@ -7,10 +7,11 @@
  * @wordpress-plugin
  * Plugin Name:       Sendsmaily
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
+ * Text Domain:       wp_sendsmaily
  * Description:       Sendsmaily newsletter subscription form.
  * Version:           1.0.0
- * Author:            Sendsmaily
- * Author URI:        http://sendsmaily.com
+ * Author:            Sendsmaily OÜ
+ * Author URI:        https://smaily.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
@@ -44,10 +45,19 @@ register_activation_hook( __FILE__, 'sendsmaily_install' );
  * @return void
  */
 function sendsmaily_init() {
-	load_plugin_textdomain( 'wp_sendsmaily', $path = 'wp-content' . DS . 'plugins' . DS . SS_PLUGIN_NAME . DS . 'lang' );
 	wp_enqueue_script( 'sendsmaily', SS_PLUGIN_URL . '/js/default.js', array('jquery'), SS_PLUGIN_VERSION, true );
 }
 add_action( 'init', 'sendsmaily_init' );
+
+/**
+ * Load plugin textdomain.
+ *
+ * @since 1.0.0
+ */
+function sendsmaily_load_textdomain() {
+	load_plugin_textdomain( 'wp_sendsmaily', false, plugin_basename( BP ) . DS . 'lang' );
+}
+add_action( 'plugins_loaded', 'sendsmaily_load_textdomain' );
 
 /**
  * Load subscribe widget.

@@ -1,110 +1,156 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sendsmaily Wordpress plugin\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Sendsmaily <info@sendsmaily.com>\n"
-"Language-Team: Sendsmaily <info@sendsmaily.com>\n"
+"Project-Id-Version: sendsmaily\n"
+"POT-Creation-Date: 2016-07-04 12:25+0300\n"
+"PO-Revision-Date: 2016-07-04 12:33+0300\n"
+"Last-Translator: Sendsmaily OÜ <info@smaily.com>\n"
+"Language-Team: Sendsmaily OÜ <info@smaily.com>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_attr__;esc_attr_e;esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
 
-msgid "Check"
-msgstr "Check"
-
-msgid "Please, insert API key here"
-msgstr "Please, insert API key here"
-
-msgid "Sendsmaily Wordpress plugin"
-msgstr "Sendsmaily Wordpress plugin"
-
-msgid "Your current API key is"
-msgstr "Your current API key is"
-
-msgid "Basic"
-msgstr "Basic"
-
-msgid "Advanced"
-msgstr "Advanced"
-
-msgid "Autoresponders"
-msgstr "Autoresponders"
-
-msgid "Refresh"
-msgstr "Refresh"
-
-msgid "Address where subscribers will be directed after failure"
-msgstr "Address where subscribers will be directed after failure"
-
-msgid "Address where subscribers will be directed after successful subscription"
-msgstr "Address where subscribers will be directed after successful subscription"
-
-msgid "Failure URL"
-msgstr "Failure URL"
-
-msgid "HTML of subscription form"
-msgstr "HTML of subscription form"
-
-msgid "Newsletter subscription form"
-msgstr "Newsletter subscription form"
-
-msgid "No autoresponders. Please click on refresh link to update."
-msgstr "No autoresponders. Please click on refresh link to update."
-
-msgid "Please select your opt-in autoresponder"
-msgstr "Please select your opt-in autoresponder"
-
-msgid "Regenerate"
-msgstr "Regenerate"
-
-msgid "Remove"
-msgstr "Remove"
-
-msgid "Restore original subscription form"
-msgstr "Restore original subscription form"
-
-msgid "Save changes"
-msgstr "Save changes"
-
-msgid "Success URL"
-msgstr "Success URL"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "Name"
-msgstr "Name"
-
-msgid "Subscribe"
-msgstr "Subscribe"
-
+#: action.php:70 action.php:161
 msgid "Could not find any autoresponders!"
 msgstr "Could not find any autoresponders!"
 
+#: action.php:94
 msgid "API key passed validation."
 msgstr "API key passed validation."
 
+#: action.php:116
 msgid "API key removed."
 msgstr "API key removed."
 
+#: action.php:136
 msgid "Newsletter subscription form reset to default."
 msgstr "Newsletter subscription form reset to default."
 
+#: action.php:185
 msgid "Autoresponders refreshed."
 msgstr "Autoresponders refreshed."
 
+#: action.php:232
 msgid "Changes saved."
 msgstr "Changes saved."
 
-msgid "Newsletter subscription"
-msgstr "Newsletter subscription"
-
+#: includes/subscribe-widget.php:18
 msgid "Sendsmaily newsletter subscription form"
 msgstr "Sendsmaily newsletter subscription form"
 
-msgid "Please wait, working..."
-msgstr "Please wait, working..."
+#: includes/subscribe-widget.php:19
+msgid "Sendsmaily Newsletter Subscription"
+msgstr "Sendsmaily Newsletter Subscription"
 
+#: subscribe.php:4
+msgid "Something went wrong!"
+msgstr "Something went wrong!"
+
+#: subscribe.php:9
+msgid "E-mail is required!"
+msgstr "E-mail is required!"
+
+#: subscribe.php:48
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
+#: subscribe.php:55
+msgid "Posted fields do not contain a valid email address."
+msgstr "Posted fields do not contain a valid email address."
+
+#: subscribe.php:56
+msgid "No autoresponder data set."
+msgstr "No autoresponder data set."
+
+#: html/admin/html/form.phtml:13
+msgid "Your current API key is"
+msgstr "Your current API key is"
+
+#: html/admin/html/form.phtml:14
+msgid "Remove"
+msgstr "Remove"
+
+#: html/admin/html/form.phtml:18
+msgid "API key"
+msgstr "API key"
+
+#: html/admin/html/form.phtml:19
+msgid "Check"
+msgstr "Check"
+
+#: html/admin/html/form.phtml:25
+msgid "Basic"
+msgstr "Basic"
+
+#: html/admin/html/form.phtml:26
+msgid "Advanced"
+msgstr "Advanced"
+
+#: html/admin/html/form.phtml:32
+msgid "Autoresponders"
+msgstr "Autoresponders"
+
+#: html/admin/html/form.phtml:32
+msgid "Refresh"
+msgstr "Refresh"
+
+#: html/admin/html/form.phtml:33
+msgid "Please select your opt-in autoresponder"
+msgstr "Please select your opt-in autoresponder"
+
+#: html/admin/html/form.phtml:41
+msgid "No autoresponders. Please click on refresh link to update."
+msgstr "No autoresponders. Please click on refresh link to update."
+
+#: html/admin/html/form.phtml:48
+msgid "Newsletter subscription form"
+msgstr "Newsletter subscription form"
+
+#: html/admin/html/form.phtml:48
+msgid "Restore original subscription form"
+msgstr "Restore original subscription form"
+
+#: html/admin/html/form.phtml:48
+msgid "Regenerate"
+msgstr "Regenerate"
+
+#: html/admin/html/form.phtml:49
+msgid "HTML of subscription form"
+msgstr "HTML of subscription form"
+
+#: html/admin/html/form.phtml:54
 msgid "Note: When you save under Basic tab, default form will be used."
 msgstr "Note: When you save under Basic tab, default form will be used."
 
+#: html/admin/html/form.phtml:57
+msgid "Save changes"
+msgstr "Save changes"
+
+#: html/admin/page.phtml:31
+msgid "Sendsmaily Wordpress plugin"
+msgstr "Sendsmaily Wordpress plugin"
+
+#: html/admin/page.phtml:32
+msgid "Please wait, working..."
+msgstr "Please wait, working..."
+
+#: html/form/advanced.phtml:3 html/form/basic.phtml:3
+msgid "Thank you for subscribing to our newsletter."
+msgstr "Thank you for subscribing to our newsletter."
+
+#: html/form/advanced.phtml:5 html/form/basic.phtml:5
+msgid "Email"
+msgstr "Email"
+
+#: html/form/advanced.phtml:9 html/form/basic.phtml:9
+msgid "Name"
+msgstr "Name"
+
+#: html/form/advanced.phtml:14 html/form/basic.phtml:14
+msgid "Subscribe"
+msgstr "Subscribe"

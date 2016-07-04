@@ -1,110 +1,156 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Sendsmaily Wordpress plugin\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Sendsmaily <info@sendsmaily.com>\n"
-"Language-Team: Sendsmaily <info@sendsmaily.com>\n"
+"Project-Id-Version: sendsmaily\n"
+"POT-Creation-Date: 2016-07-04 12:26+0300\n"
+"PO-Revision-Date: 2016-07-04 12:33+0300\n"
+"Last-Translator: Sendsmaily OÜ <info@smaily.com>\n"
+"Language-Team: Sendsmaily OÜ <info@smaily.com>\n"
+"Language: et_EE\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_attr__;esc_attr_e;esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
 
-msgid "Check"
-msgstr "Kontrolli"
-
-msgid "Please, insert API key here"
-msgstr "Sisesta Arendusliidese võti"
-
-msgid "Sendsmaily Wordpress plugin"
-msgstr "Sendsmaily Wordpressi pistikmoodul"
-
-msgid "Your current API key is"
-msgstr "Praegune Arendusliidese võti"
-
-msgid "Basic"
-msgstr "Tavaseaded"
-
-msgid "Advanced"
-msgstr "Spetsialisti seaded"
-
-msgid "Autoresponders"
-msgstr "Automaatvastajad"
-
-msgid "Refresh"
-msgstr "Värskenda"
-
-msgid "Address where subscribers will be directed after failure"
-msgstr "Aadress, kuhu liitujad vea korral suunatakse"
-
-msgid "Address where subscribers will be directed after successful subscription"
-msgstr "Aadress, kuhu suunatakse õnnestunud registreerumised"
-
-msgid "Failure URL"
-msgstr "Veateate aadress"
-
-msgid "HTML of subscription form"
-msgstr "Liitumisvormi HTML-kood"
-
-msgid "Newsletter subscription form"
-msgstr "Uudiskirjaga liitumise vorm"
-
-msgid "No autoresponders. Please click on refresh link to update."
-msgstr "Automaatvastajad puuduvad. Uuendamiseks klõpsa Värskenda."
-
-msgid "Please select your opt-in autoresponder"
-msgstr "Palun vali Automaatvastaja"
-
-msgid "Regenerate"
-msgstr "Loo uuesti"
-
-msgid "Remove"
-msgstr "Eemalda"
-
-msgid "Restore original subscription form"
-msgstr "Taasta esialgne liitumisvormi kood"
-
-msgid "Save changes"
-msgstr "Salvesta"
-
-msgid "Success URL"
-msgstr "Õnnestumise aadress"
-
-msgid "Email"
-msgstr "e-post"
-
-msgid "Name"
-msgstr "Nimi"
-
-msgid "Subscribe"
-msgstr "Liitu"
-
+#: action.php:70 action.php:161
 msgid "Could not find any autoresponders!"
 msgstr "Ei leidnud Automaatvastajaid!"
 
+#: action.php:94
 msgid "API key passed validation."
 msgstr "Arendusliidese võti sobib."
 
+#: action.php:116
 msgid "API key removed."
 msgstr "Arendusliidese võti eemaldatud."
 
+#: action.php:136
 msgid "Newsletter subscription form reset to default."
-msgstr "Liigumisvormi kood taasloodud."
+msgstr "Liitumisvormi kood taasloodud."
 
+#: action.php:185
 msgid "Autoresponders refreshed."
 msgstr "Automaatvastajad uuendatud."
 
+#: action.php:232
 msgid "Changes saved."
 msgstr "Salvestatud."
 
-msgid "Newsletter subscription"
-msgstr "Uudiskirjaga liitumine"
-
+#: includes/subscribe-widget.php:18
 msgid "Sendsmaily newsletter subscription form"
 msgstr "Sendsmaily uudiskirjaga liitumise vorm"
 
-msgid "Please wait, working..."
-msgstr "Palun oota..."
+#: includes/subscribe-widget.php:19
+msgid "Sendsmaily Newsletter Subscription"
+msgstr "Sendsmaily uudiskirjaga liitumine"
 
+#: subscribe.php:4
+msgid "Something went wrong!"
+msgstr "Päringu viga!"
+
+#: subscribe.php:9
+msgid "E-mail is required!"
+msgstr "E-post on nõutud!"
+
+#: subscribe.php:48
+msgid "Something went wrong"
+msgstr "Päringu viga"
+
+#: subscribe.php:55
+msgid "Posted fields do not contain a valid email address."
+msgstr "Sisestatud väärtus pole kehtiv e-posti aadress."
+
+#: subscribe.php:56
+msgid "No autoresponder data set."
+msgstr "Automaatvastaja ei ole seadistatud."
+
+#: html/admin/html/form.phtml:13
+msgid "Your current API key is"
+msgstr "Teie arendusliidese võti on"
+
+#: html/admin/html/form.phtml:14
+msgid "Remove"
+msgstr "Eemalda"
+
+#: html/admin/html/form.phtml:18
+msgid "API key"
+msgstr "Arendusliidese võti"
+
+#: html/admin/html/form.phtml:19
+msgid "Check"
+msgstr "Kontrolli"
+
+#: html/admin/html/form.phtml:25
+msgid "Basic"
+msgstr "Tavaseaded"
+
+#: html/admin/html/form.phtml:26
+msgid "Advanced"
+msgstr "Spetsialisti seaded"
+
+#: html/admin/html/form.phtml:32
+msgid "Autoresponders"
+msgstr "Automaatvastajad"
+
+#: html/admin/html/form.phtml:32
+msgid "Refresh"
+msgstr "Värskenda"
+
+#: html/admin/html/form.phtml:33
+msgid "Please select your opt-in autoresponder"
+msgstr "Valige liitumisele vastav automaatvajastaja"
+
+#: html/admin/html/form.phtml:41
+msgid "No autoresponders. Please click on refresh link to update."
+msgstr "Automaatvastajad puuduvad. Uuendamiseks vajutage värskenda viidet."
+
+#: html/admin/html/form.phtml:48
+msgid "Newsletter subscription form"
+msgstr "Uudiskirjaga liitumisvorm"
+
+#: html/admin/html/form.phtml:48
+msgid "Restore original subscription form"
+msgstr "Taasta algne liitumisvorm"
+
+#: html/admin/html/form.phtml:48
+msgid "Regenerate"
+msgstr "Taastekita"
+
+#: html/admin/html/form.phtml:49
+msgid "HTML of subscription form"
+msgstr "Liitumisvormi HTML"
+
+#: html/admin/html/form.phtml:54
 msgid "Note: When you save under Basic tab, default form will be used."
 msgstr "Hoiatus: Kui salvestad Tavaseadete vaates, kasutatakse lehel vaikimisi vormi."
 
+#: html/admin/html/form.phtml:57
+msgid "Save changes"
+msgstr "Salvesta muudatused"
+
+#: html/admin/page.phtml:31
+msgid "Sendsmaily Wordpress plugin"
+msgstr "Sendsmaily Wordpressi pistik moodul"
+
+#: html/admin/page.phtml:32
+msgid "Please wait, working..."
+msgstr "Palun oota..."
+
+#: html/form/advanced.phtml:3 html/form/basic.phtml:3
+msgid "Thank you for subscribing to our newsletter."
+msgstr "Täname, et liitusite meie uudiskirjaga."
+
+#: html/form/advanced.phtml:5 html/form/basic.phtml:5
+msgid "Email"
+msgstr "E-post"
+
+#: html/form/advanced.phtml:9 html/form/basic.phtml:9
+msgid "Name"
+msgstr "Nimi"
+
+#: html/form/advanced.phtml:14 html/form/basic.phtml:14
+msgid "Subscribe"
+msgstr "Liitu"
