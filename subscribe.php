@@ -1,4 +1,6 @@
 <?php
+// @todo Use the right method for ajax requests.
+
 // Define parameters.
 define( 'BP', dirname( __FILE__ ) );
 define( 'DS', DIRECTORY_SEPARATOR );
