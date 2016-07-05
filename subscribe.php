@@ -1,4 +1,8 @@
 <?php
+// Define parameters.
+define( 'BP', dirname( __FILE__ ) );
+define( 'DS', DIRECTORY_SEPARATOR );
+
 // Get wpdb configuration.
 if ( ! function_exists( 'esc_html__' ) ) {
 	$path = dirname( dirname( dirname( BP ) ) );
@@ -15,10 +19,6 @@ if ( ! (isset($_POST['email']) && !empty($_POST['email'])) ) {
 	echo esc_html__('E-mail is required!', 'wp_sendsmaily');
 	exit;
 }
-
-// Define parameters.
-define( 'BP', dirname( __FILE__ ) );
-define( 'DS', DIRECTORY_SEPARATOR );
 
 // Get current url.
 $current_url = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
