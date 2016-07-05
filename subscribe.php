@@ -4,10 +4,8 @@ define( 'BP', dirname( __FILE__ ) );
 define( 'DS', DIRECTORY_SEPARATOR );
 
 // Get wpdb configuration.
-if ( ! function_exists( 'esc_html__' ) ) {
-	$path = dirname( dirname( dirname( BP ) ) );
-	require_once( $path . DS . 'wp-config.php' );
-}
+$path = dirname( dirname( dirname( BP ) ) );
+require_once( $path . DS . 'wp-config.php' );
 
 // Accept ajax requests only.
 if ( ! (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') ) {
@@ -32,7 +30,7 @@ $config = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
 // Make a opt-in request to server.
 $server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
-$lang = explode('-', get_bloginfo('language'));
+$lang = explode('-', $_POST['lang']);
 $array = array(
 	'email' => $_POST['email'],
 	'key' => $config->key,
