@@ -2,24 +2,22 @@
 /**
  * Bootstrap file for the plugin.
  *
- * @package           Sendsmaily
+ * @package           Smaily
  *
  * @wordpress-plugin
- * Plugin Name:       Sendsmaily
+ * Plugin Name:       Smaily
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
  * Text Domain:       wp_sendsmaily
- * Description:       Sendsmaily newsletter subscription form.
+ * Description:       Smaily newsletter subscription form.
  * Version:           1.0.0
- * Author:            Sendsmaily OÜ
+ * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 define( 'SS_PLUGIN_VERSION', '1.0.0' );
 
@@ -44,10 +42,12 @@ register_activation_hook( __FILE__, 'sendsmaily_install' );
  * Initialize.
  * @return void
  */
-function sendsmaily_init() {
-	wp_enqueue_script( 'sendsmaily', SS_PLUGIN_URL . '/js/default.js', array('jquery'), SS_PLUGIN_VERSION, true );
+function smaily_enqueue($hook) {
+	wp_enqueue_script( 'smaily', plugins_url( '/js/default.js', __FILE__ ), array('jquery') );
+	wp_localize_script( 'smaily', 'smaily', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+
 }
-add_action( 'init', 'sendsmaily_init' );
+add_action( 'wp_enqueue_scripts', 'smaily_enqueue' );
 
 /**
  * Load plugin textdomain.
@@ -94,3 +94,62 @@ function sendsmaily_admin_render() {
 	add_submenu_page( 'sendsmaily', 'Newsletter subscription form', 'Form', 1, __FILE__, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'sendsmaily_admin_render' );
+
+function smaily_subscribe_callback() {
+	global $wpdb;
+
+	// Form data required.
+	if ( ! (isset($_POST['form_data']) && !empty($_POST['form_data'])) ) {
+		echo esc_html__('E-mail is required!', 'wp_sendsmaily');
+		exit;
+	}
+
+	// Parse form data out of the serialization.
+	$params = array();
+	parse_str($_POST['form_data'], $params);
+
+	// E-mail required.
+	if ( ! (isset($params['email']) && !empty($params['email'])) ) {
+		echo esc_html__('E-mail is required!', 'wp_sendsmaily');
+		exit;
+	}
+
+	// Get current url.
+	$current_url = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+	// Get data from database.
+	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+	$config = $wpdb->get_row( "SELECT * FROM `$table_name`" );
+
+	// Make a opt-in request to server.
+	$server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
+	$lang = explode('-', $params['lang']);
+	$array = array(
+		'email' => $params['email'],
+		'key' => $config->key,
+		'autoresponder' => $config->autoresponder,
+		'remote' => 1,
+		'success_url' => $current_url,
+		'failure_url' => $current_url,
+		'language' => $lang[0],
+	);
+
+	require_once( BP . DS . 'code' . DS . 'Request.php' );
+	$request = new Wp_Sendsmaily_Request( $server, $array );
+	$result = $request->exec();
+
+	if (empty($result)) {
+		echo esc_html__('Something went wrong', 'wp_sendsmaily');
+	}
+	elseif ((int) $result['code'] !== 101) {
+		// Possible errors, for translation.
+		//esc_html__('Posted fields do not contain a valid email address.', 'wp_sendsmaily');
+		//esc_html__('No autoresponder data set.', 'wp_sendsmaily');
+
+		echo esc_html__($result['message'], 'wp_sendsmaily');
+	}
+
+	exit;
+}
+add_action( 'wp_ajax_smaily_subscribe_callback', 'smaily_subscribe_callback' );
+add_action( 'wp_ajax_nopriv_smaily_subscribe_callback', 'smaily_subscribe_callback' );
