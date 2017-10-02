@@ -10,9 +10,9 @@ class Wp_Sendsmaily_Template
 
 	/**
 	 * Template variables.
-	 * @var string
+	 * @var array
 	 */
-	protected $_vars = '';
+	protected $_vars = array();
 
 	/**
 	 * Constructor.
