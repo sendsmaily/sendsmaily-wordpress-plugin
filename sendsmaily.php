@@ -9,7 +9,7 @@
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
  * Text Domain:       wp_sendsmaily
  * Description:       Smaily newsletter subscription form.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SS_PLUGIN_VERSION', '1.1.0' );
+define( 'SS_PLUGIN_VERSION', '1.1.1' );
 
 define( 'BP', dirname( __FILE__ ) );
 
