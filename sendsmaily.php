@@ -9,7 +9,7 @@
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
  * Text Domain:       wp_sendsmaily
  * Description:       Smaily newsletter subscription form.
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SS_PLUGIN_VERSION', '1.1.1' );
+define( 'SS_PLUGIN_VERSION', '1.1.2' );
 
 define( 'BP', dirname( __FILE__ ) );
 
@@ -90,7 +90,7 @@ function sendsmaily_admin_render() {
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
-	add_menu_page( 'sendsmaily', 'Sendsmaily', 8, __FILE__, '', SS_PLUGIN_URL . '/gfx/icon.png' );
+	add_menu_page( 'sendsmaily', 'Smaily', 8, __FILE__, '', SS_PLUGIN_URL . '/gfx/icon.png' );
 	add_submenu_page( 'sendsmaily', 'Newsletter subscription form', 'Form', 1, __FILE__, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'sendsmaily_admin_render' );

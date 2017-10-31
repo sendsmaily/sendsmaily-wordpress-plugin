@@ -1,7 +1,7 @@
 === Sendsmaily ===
 Tags: widget, plugin, sidebar, api, mail, email, marketing, sendsmaily
 Tested up to: 4.8.2
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 
 Sendsmaily newsletter subscription plugin for WordPress
@@ -19,6 +19,9 @@ Sendsmaily newsletter subscription plugin for WordPress.
 * Place sendsmaily widget where you wish.
 
 == Changelog ==
+
+= 1.1.2 =
+* Renamed admin page to Smaily
 
 = 1.1.1 =
 * Fixed missing admin page icon.
