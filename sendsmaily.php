@@ -9,7 +9,7 @@
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
  * Text Domain:       wp_sendsmaily
  * Description:       Smaily newsletter subscription form.
- * Version:           1.1.2
+ * Version:           1.1.3
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -19,11 +19,11 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SS_PLUGIN_VERSION', '1.1.2' );
+define( 'SS_PLUGIN_VERSION', '1.1.3' );
 
-define( 'BP', dirname( __FILE__ ) );
+if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
 
-define( 'DS', DIRECTORY_SEPARATOR );
+if (!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
 
 // Get plugin path.
 $exp = explode( DS, BP );
@@ -90,8 +90,8 @@ function sendsmaily_admin_render() {
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
-	add_menu_page( 'sendsmaily', 'Smaily', 8, __FILE__, '', SS_PLUGIN_URL . '/gfx/icon.png' );
-	add_submenu_page( 'sendsmaily', 'Newsletter subscription form', 'Form', 1, __FILE__, array( $template, 'dispatch' ) );
+	add_menu_page( 'sendsmaily', 'Smaily', 'manage_options', __FILE__, '', SS_PLUGIN_URL . '/gfx/icon.png' );
+	add_submenu_page( 'sendsmaily', 'Newsletter subscription form', 'Form', 'manage_options', __FILE__, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'sendsmaily_admin_render' );
 
@@ -121,11 +121,16 @@ function smaily_subscribe_callback() {
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
 	$config = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
+	$form_values = [];
+	// Add custom form values to Api request if available
+	foreach($params as $key => $value){
+		$form_values[$key] = $value;
+	}
+
 	// Make a opt-in request to server.
 	$server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
 	$lang = explode('-', $params['lang']);
 	$array = array(
-		'email' => $params['email'],
 		'key' => $config->key,
 		'autoresponder' => $config->autoresponder,
 		'remote' => 1,
@@ -133,7 +138,7 @@ function smaily_subscribe_callback() {
 		'failure_url' => $current_url,
 		'language' => $lang[0],
 	);
-
+	$array = array_merge($array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
 	$request = new Wp_Sendsmaily_Request( $server, $array );
 	$result = $request->exec();

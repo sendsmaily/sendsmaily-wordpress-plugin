@@ -43,11 +43,12 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$config['show_name'] = $show_name;
 		// Create admin template.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$file = '1' === $config->is_advanced ? 'advanced.phtml' : 'basic.phtml';
+		$file = '1' === $config['is_advanced'] ? 'advanced.phtml' : 'basic.phtml';
+		$isAdvanced = '1' === $config['is_advanced'] ? true : false;
 		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . $file );
 		$template->assign( $config );
 		// Render template.
-		echo $template->render();
+		echo $template->render($isAdvanced);
 
 		echo $args['after_widget'];
 	}
