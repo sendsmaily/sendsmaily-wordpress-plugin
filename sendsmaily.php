@@ -121,12 +121,6 @@ function smaily_subscribe_callback() {
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
 	$config = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
-	$form_values = [];
-	// Add custom form values to Api request if available
-	foreach($params as $key => $value){
-		$form_values[$key] = $value;
-	}
-
 	// Make a opt-in request to server.
 	$server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
 	$lang = explode('-', $params['lang']);
@@ -138,6 +132,17 @@ function smaily_subscribe_callback() {
 		'failure_url' => $current_url,
 		'language' => $lang[0],
 	);
+
+	$form_values = [];
+	// Add custom form values to Api request if available
+	foreach($params as $key => $value){
+		if (array_key_exists($key, $array)){
+			continue;
+		}else {
+			$form_values[$key] = $value;
+		}
+	}
+
 	$array = array_merge($array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
 	$request = new Wp_Sendsmaily_Request( $server, $array );

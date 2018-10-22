@@ -39,25 +39,19 @@ class Wp_Sendsmaily_Template
 	 * @return string|bool
 	 * @throws Exception
 	 */
-	public function render(bool $showAdvanced = false) {
+	public function render() {
 		$file_name = BP . DS . $this->_template;
 		// Check for template file.
 		if ( empty( $this->_template ) or ! file_exists( $file_name ) or ! is_readable( $file_name ) ) {
 			throw new Exception( 'Could not find template "' . $file_name . '"! Please check for file existence.' );
 			return false;
 		}
-		
+
 		// Output template.
 		ob_start();
 		include( $file_name );
-		// Show advanced form when requested
-		if( isset($this->_vars['form']) && ! empty($this->_vars['form'])  && $showAdvanced){
-			$output = stripslashes($this->_vars['form']) ;
-		}else{
-			$output = ob_get_contents();
-		}
+		$output = ob_get_contents();
 		ob_end_clean();
-
 		return $output;
 	}
 
