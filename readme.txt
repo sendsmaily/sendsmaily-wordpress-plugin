@@ -20,6 +20,10 @@ Sendsmaily newsletter subscription plugin for WordPress.
 
 == Changelog ==
 
+= 1.1.3 =
+* Fixed advanced form display errors
+
+
 = 1.1.2 =
 * Renamed admin page to Smaily
 

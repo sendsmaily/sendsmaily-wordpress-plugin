@@ -8,6 +8,7 @@
 
 /**
  * Install database structure (on activation).
+ *
  * @return void
  */
 function sendsmaily_install() {
@@ -34,11 +35,17 @@ function sendsmaily_install() {
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_autoresp' );
 	$query = "SHOW TABLES LIKE `$table_name`";
 	if ( ! $wpdb->get_var( $query ) ) {
-		$sql = trim( preg_replace( '/\s\s+/', ' ', "CREATE TABLE `$table_name` (
-			`id` INT(16) NOT NULL,
-			`title` VARCHAR(255) NOT NULL,
-			PRIMARY KEY (`id`)
-		) $charset_collate;" ) );
+		$sql = trim(
+			preg_replace(
+				'/\s\s+/',
+				' ',
+				"CREATE TABLE `$table_name` (
+				`id` INT(16) NOT NULL,
+				`title` VARCHAR(255) NOT NULL,
+				PRIMARY KEY (`id`)
+				) $charset_collate;"
+			)
+		);
 		$wpdb->query( $sql );
 	}
 }
