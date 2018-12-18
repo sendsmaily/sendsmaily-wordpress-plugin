@@ -16,7 +16,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 define( 'SS_PLUGIN_VERSION', '1.1.3' );
@@ -40,10 +40,12 @@ register_activation_hook( __FILE__, 'sendsmaily_install' );
 
 /**
  * Initialize.
+ *
+ * @param mixed $hook Hook.
  * @return void
  */
-function smaily_enqueue($hook) {
-	wp_enqueue_script( 'smaily', plugins_url( '/js/default.js', __FILE__ ), array('jquery') );
+function smaily_enqueue( $hook ) {
+	wp_enqueue_script( 'smaily', plugins_url( '/js/default.js', __FILE__ ), array( 'jquery' ) );
 	wp_localize_script( 'smaily', 'smaily', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
 }
@@ -70,6 +72,7 @@ add_action( 'widgets_init', 'sendsmaily_subscription_widget_init' );
 
 /**
  * Render admin page.
+ *
  * @return void
  */
 function sendsmaily_admin_render() {
@@ -81,12 +84,12 @@ function sendsmaily_admin_render() {
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
-	$data = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+	$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 	$template->assign( (array) $data );
 
 	// Load autoresponders.
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_autoresp' );
-	$data = $wpdb->get_results( "SELECT * FROM `$table_name`" );
+	$data       = $wpdb->get_results( "SELECT * FROM `$table_name`" );
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
@@ -99,64 +102,62 @@ function smaily_subscribe_callback() {
 	global $wpdb;
 
 	// Form data required.
-	if ( ! (isset($_POST['form_data']) && !empty($_POST['form_data'])) ) {
-		echo esc_html__('E-mail is required!', 'wp_sendsmaily');
+	if ( ! ( isset( $_POST['form_data'] ) && ! empty( $_POST['form_data'] ) ) ) {
+		echo esc_html__( 'E-mail is required!', 'wp_sendsmaily' );
 		exit;
 	}
 
 	// Parse form data out of the serialization.
 	$params = array();
-	parse_str($_POST['form_data'], $params);
+	parse_str( $_POST['form_data'], $params );
 
 	// E-mail required.
-	if ( ! (isset($params['email']) && !empty($params['email'])) ) {
-		echo esc_html__('E-mail is required!', 'wp_sendsmaily');
+	if ( ! ( isset( $params['email'] ) && ! empty( $params['email'] ) ) ) {
+		echo esc_html__( 'E-mail is required!', 'wp_sendsmaily' );
 		exit;
 	}
 
 	// Get current url.
-	$current_url = (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$current_url = ( isset( $_SERVER['HTTPS'] ) ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 	// Get data from database.
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
-	$config = $wpdb->get_row( "SELECT * FROM `$table_name`" );
+	$config     = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
 	// Make a opt-in request to server.
 	$server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
-	$lang = explode('-', $params['lang']);
-	$array = array(
-		'key' => $config->key,
+	$lang   = explode( '-', $params['lang'] );
+	$array  = array(
+		'key'           => $config->key,
 		'autoresponder' => $config->autoresponder,
-		'remote' => 1,
-		'success_url' => $current_url,
-		'failure_url' => $current_url,
-		'language' => $lang[0],
+		'remote'        => 1,
+		'success_url'   => $current_url,
+		'failure_url'   => $current_url,
+		'language'      => $lang[0],
 	);
 
 	$form_values = [];
-	// Add custom form values to Api request if available
-	foreach($params as $key => $value){
-		if (array_key_exists($key, $array)){
+	// Add custom form values to Api request if available.
+	foreach ( $params as $key => $value ) {
+		if ( array_key_exists( $key, $array ) ) {
 			continue;
-		}else {
-			$form_values[$key] = $value;
+		} else {
+			$form_values[ $key ] = $value;
 		}
 	}
 
-	$array = array_merge($array, $form_values );
+	$array = array_merge( $array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
 	$request = new Wp_Sendsmaily_Request( $server, $array );
-	$result = $request->exec();
+	$result  = $request->exec();
 
-	if (empty($result)) {
-		echo esc_html__('Something went wrong', 'wp_sendsmaily');
-	}
-	elseif ((int) $result['code'] !== 101) {
+	if ( empty( $result ) ) {
+		echo esc_html__( 'Something went wrong', 'wp_sendsmaily' );
+	} elseif ( (int) $result['code'] !== 101 ) {
 		// Possible errors, for translation.
-		//esc_html__('Posted fields do not contain a valid email address.', 'wp_sendsmaily');
-		//esc_html__('No autoresponder data set.', 'wp_sendsmaily');
-
-		echo esc_html__($result['message'], 'wp_sendsmaily');
+		// esc_html__('Posted fields do not contain a valid email address.', 'wp_sendsmaily');.
+		// esc_html__('No autoresponder data set.', 'wp_sendsmaily');.
+		echo esc_html__( $result['message'], 'wp_sendsmaily' );
 	}
 
 	exit;

@@ -36,11 +36,11 @@ switch ( $_POST['op'] ) {
 			'https://www.sendsmaily.net/validate_key.php',
 			array( 'key' => $key )
 		);
-		$result = $request->exec();
-		$data = $result['data'];
+		$result  = $request->exec();
+		$data    = $result['data'];
 
 		// Handle errors.
-		if ( isset( $result['code'] ) and $result['code'] >= 200 ) {
+		if ( isset( $result['code'] ) && $result['code'] >= 200 ) {
 			$result['error'] = true;
 			break;
 		}
@@ -48,27 +48,30 @@ switch ( $_POST['op'] ) {
 		// Insert item to database.
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$wpdb->insert($table_name, array(
-			'key' => $key,
-		    'domain' => $data['domain'],
-		));
+		$wpdb->insert(
+			$table_name,
+			array(
+				'key'    => $key,
+				'domain' => $data['domain'],
+			)
+		);
 
 		// Get autoresponders.
 		$request = new Wp_Sendsmaily_Request(
 			'https://' . $data['domain'] . '.sendsmaily.net/api/get-autoresponders/',
 			array( 'key' => $key )
 		);
-		$result = $request->exec();
-		$data = $result['data'];
+		$result  = $request->exec();
+		$data    = $result['data'];
 
 		// Handle errors.
-		if ( isset( $result['code'] ) and $result['code'] >= 200 ) {
+		if ( isset( $result['code'] ) && $result['code'] >= 200 ) {
 			$result['error'] = true;
 			break;
 		} elseif ( empty( $data['autoresponders'] ) ) {
 			$result = array(
 				'message' => __( 'Could not find any autoresponders!', 'wp_sendsmaily' ),
-				'error' => true,
+				'error'   => true,
 			);
 			break;
 		}
@@ -85,7 +88,7 @@ switch ( $_POST['op'] ) {
 			sprintf( 'DELETE FROM `%s`', $table_name )
 		);
 		$wpdb->query(
-			sprintf('INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode(',', $insert_query))
+			sprintf( 'INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode( ',', $insert_query ) )
 		);
 
 		// Return result.
@@ -101,13 +104,13 @@ switch ( $_POST['op'] ) {
 		// Delete contents of config.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
 		$wpdb->query(
-			sprintf('DELETE FROM `%s`', $table_name)
+			sprintf( 'DELETE FROM `%s`', $table_name )
 		);
 
 		// Delete contents of autoresponders.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
 		$wpdb->query(
-			sprintf('DELETE FROM `%s`', $table_name)
+			sprintf( 'DELETE FROM `%s`', $table_name )
 		);
 
 		// Set result.
@@ -126,7 +129,7 @@ switch ( $_POST['op'] ) {
 
 		// Load configuration data.
 		$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
-		$data = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 		$data->form = '';
 		$template->assign( (array) $data );
 
@@ -143,23 +146,26 @@ switch ( $_POST['op'] ) {
 
 		// Load configuration data.
 		$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
-		$data = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 
 		// Get autoresponders.
-		$request = new Wp_Sendsmaily_Request('https://' . $data->domain . '.sendsmaily.net/api/get-autoresponders/', array(
-			'key' => $data->key,
-		));
-		$result = $request->exec();
-		$data = $result['data'];
+		$request = new Wp_Sendsmaily_Request(
+			'https://' . $data->domain . '.sendsmaily.net/api/get-autoresponders/',
+			array(
+				'key' => $data->key,
+			)
+		);
+		$result  = $request->exec();
+		$data    = $result['data'];
 
 		// Handle errors.
-		if ( isset( $result['code'] ) and $result['code'] >= 200 ) {
+		if ( isset( $result['code'] ) && $result['code'] >= 200 ) {
 			$result['error'] = true;
 			break;
 		} elseif ( empty( $data['autoresponders'] ) ) {
 			$result = array(
 				'message' => __( 'Could not find any autoresponders!', 'wp_sendsmaily' ),
-				'error' => true,
+				'error'   => true,
 			);
 			break;
 		}
@@ -176,7 +182,7 @@ switch ( $_POST['op'] ) {
 			sprintf( 'DELETE FROM `%s`', $table_name )
 		);
 		$wpdb->query(
-			sprintf('INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode(',', $insert_query))
+			sprintf( 'INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode( ',', $insert_query ) )
 		);
 
 		// Return result.
@@ -191,12 +197,12 @@ switch ( $_POST['op'] ) {
 		global $wpdb;
 
 		// Get params.
-		$isAdvanced = ( isset( $_POST['is_advanced'] ) and ! empty( $_POST['is_advanced'] ) ) ? '1' : '0';
+		$isAdvanced = ( isset( $_POST['is_advanced'] ) && ! empty( $_POST['is_advanced'] ) ) ? '1' : '0';
 
 		// Get basic and advanced parameters.
-		$basic = ( isset( $_POST['basic'] ) and is_array( $_POST['basic'] ) ) ? $_POST['basic'] : array();
-		$advanced = ( isset( $_POST['advanced'] ) and is_array( $_POST['advanced'] ) ) ? $_POST['advanced'] : array();
-		if ( empty( $basic ) or empty( $advanced ) ) {
+		$basic    = ( isset( $_POST['basic'] ) && is_array( $_POST['basic'] ) ) ? $_POST['basic'] : array();
+		$advanced = ( isset( $_POST['advanced'] ) && is_array( $_POST['advanced'] ) ) ? $_POST['advanced'] : array();
+		if ( empty( $basic ) || empty( $advanced ) ) {
 			$result = array( 'error' => true, 'message' => '' );
 			break;
 		}
@@ -218,10 +224,11 @@ switch ( $_POST['op'] ) {
 		// Update configuration.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
 		$wpdb->query(
-			sprintf('update `%s` set autoresponder="%s", form="%s", is_advanced="%s"',
+			sprintf(
+				'update `%s` set autoresponder="%s", form="%s", is_advanced="%s"',
 				$table_name,
-				$basic[ 'autoresponder' ],
-				addslashes( $advanced[ 'form' ] ),
+				$basic['autoresponder'],
+				addslashes( $advanced['form'] ),
 				$isAdvanced
 			)
 		);
@@ -235,7 +242,7 @@ switch ( $_POST['op'] ) {
 }
 
 // Send refresh form content (if requested).
-$refresh = ( isset( $_POST[ 'refresh' ] ) and $_POST['refresh'] == 1 );
+$refresh = ( isset( $_POST[ 'refresh' ] ) && $_POST['refresh'] == 1 );
 if ( $refresh ) {
 	global $wpdb;
 

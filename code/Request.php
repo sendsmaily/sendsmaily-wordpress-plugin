@@ -1,39 +1,42 @@
 <?php
 
-class Wp_Sendsmaily_Request
-{
+class Wp_Sendsmaily_Request {
 	/**
 	 * Remote request url.
+	 *
 	 * @var string
 	 */
 	protected $_url = '';
 
 	/**
 	 * Remote request data.
+	 *
 	 * @var array
 	 */
 	protected $_data = array();
 
 	/**
 	 * Constructor (set request variables).
-	 * @param string $url
-	 * @param array $data
+	 *
+	 * @param string $url Url.
+	 * @param array  $data Data.
 	 * @return void|bool
 	 */
 	public function __construct( $url, $data = null ) {
-		if ( ! is_string( $url ) or empty( $url ) ) {
+		if ( ! is_string( $url ) || empty( $url ) ) {
 			return false;
 		}
 		$this->_url = $url;
 
 		// Set request data.
-		if ( is_array( $data ) and ! empty( $data ) ) {
+		if ( is_array( $data ) && ! empty( $data ) ) {
 			$this->_data = $data;
 		}
 	}
 
 	/**
 	 * Execute remote request.
+	 *
 	 * @return array
 	 */
 	public function exec() {
@@ -45,6 +48,7 @@ class Wp_Sendsmaily_Request
 
 	/**
 	 * Execute remote request (with CURL).
+	 *
 	 * @return array|bool
 	 */
 	protected function _asCurl() {
