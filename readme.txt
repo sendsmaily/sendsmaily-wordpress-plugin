@@ -1,6 +1,6 @@
 === Sendsmaily ===
 Tags: widget, plugin, sidebar, api, mail, email, marketing, sendsmaily
-Tested up to: 4.8.2
+Tested up to: 5.1
 Stable tag: 1.1.3
 License: GPLv2 or later
 
