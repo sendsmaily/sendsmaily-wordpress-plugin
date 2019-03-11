@@ -76,20 +76,15 @@ switch ( $_POST['op'] ) {
 			break;
 		}
 
-		// Get autoresponders.
+		// Replace autoresponders.
 		$insert_query = array();
 		foreach ( $data['autoresponders'] as $item ) {
-			$insert_query[] = sprintf( '(%s,"%s")', $item['id'], $item['title'] );
+			$insert_query[] = $wpdb->prepare( '(%d, %s)', $item['id'], $item['title'] );
 		}
 
-		// Replace autoresponders.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-		$wpdb->query(
-			sprintf( 'DELETE FROM `%s`', $table_name )
-		);
-		$wpdb->query(
-			sprintf( 'INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode( ',', $insert_query ) )
-		);
+		$wpdb->query( "DELETE FROM `$table_name`" );
+		$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
 
 		// Return result.
 		$result = array(
@@ -103,15 +98,11 @@ switch ( $_POST['op'] ) {
 
 		// Delete contents of config.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$wpdb->query(
-			sprintf( 'DELETE FROM `%s`', $table_name )
-		);
+		$wpdb->query( "DELETE FROM `$table_name`" );
 
 		// Delete contents of autoresponders.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-		$wpdb->query(
-			sprintf( 'DELETE FROM `%s`', $table_name )
-		);
+		$wpdb->query( "DELETE FROM `$table_name`" );
 
 		// Set result.
 		$result = array(
@@ -170,20 +161,15 @@ switch ( $_POST['op'] ) {
 			break;
 		}
 
-		// Get autoresponders.
+		// Replace autoresponders.
 		$insert_query = array();
 		foreach ( $data['autoresponders'] as $item ) {
-			$insert_query[] = sprintf( '(%s,"%s")', $item['id'], $item['title'] );
+			$insert_query[] = $wpdb->prepare( '(%d, %s)', $item['id'], $item['title'] );
 		}
 
-		// Replace autoresponders.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-		$wpdb->query(
-			sprintf( 'DELETE FROM `%s`', $table_name )
-		);
-		$wpdb->query(
-			sprintf( 'INSERT INTO `%s`(`id`,`title`) values%s', $table_name, implode( ',', $insert_query ) )
-		);
+		$wpdb->query( "DELETE FROM `$table_name`" );
+		$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
 
 		// Return result.
 		$result = array(
@@ -223,15 +209,13 @@ switch ( $_POST['op'] ) {
 
 		// Update configuration.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$wpdb->query(
-			sprintf(
-				'update `%s` set autoresponder="%s", form="%s", is_advanced="%s"',
-				$table_name,
-				$basic['autoresponder'],
-				addslashes( $advanced['form'] ),
-				$isAdvanced
-			)
-		);
+		$wpdb->query( $wpdb->prepare( 
+			"
+			UPDATE `$table_name`
+			SET `autoresponder` = %s, `form` = %s, `is_advanced` = %s
+			",
+			$basic['autoresponder'], $advanced['form'], $isAdvanced
+		) );
 
 		// Return response.
 		$result = array(
