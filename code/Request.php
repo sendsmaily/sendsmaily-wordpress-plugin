@@ -35,6 +35,29 @@ class Wp_Sendsmaily_Request {
 	}
 
 	/**
+	 * Execute get request.
+	 */
+	public function get() {
+		$response = [];
+		$auth     = array(
+			'headers' => array(
+				'Authorization' => 'Basic ' . base64_encode( $this->_data['username'] . ':' . $this->_data['password'] ),
+			),
+		);
+		$api_call = wp_remote_get( $this->_url, $auth );
+
+		// Response code from Smaily API.
+		if ( is_wp_error( $api_call ) ) {
+			$response = array( 'error' => $api_call->get_error_message() );
+		}
+		$response['body'] = json_decode( wp_remote_retrieve_body( $api_call ), true );
+		$response['code'] = wp_remote_retrieve_response_code( $api_call );
+
+		return $response;
+
+	}
+
+	/**
 	 * Execute remote request.
 	 *
 	 * @return array

@@ -9,7 +9,7 @@
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
  * Text Domain:       wp_sendsmaily
  * Description:       Smaily newsletter subscription form.
- * Version:           1.1.5
+ * Version:           1.2.0
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SS_PLUGIN_VERSION', '1.1.5' );
+define( 'SS_PLUGIN_VERSION', '1.2.0' );
 
 if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
 
@@ -128,13 +128,16 @@ function smaily_subscribe_callback() {
 	$server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
 	$lang   = explode( '-', $params['lang'] );
 	$array  = array(
-		'key'           => $config->key,
-		'autoresponder' => $config->autoresponder,
 		'remote'        => 1,
 		'success_url'   => $current_url,
 		'failure_url'   => $current_url,
 		'language'      => $lang[0],
 	);
+
+	// Add autoresponder if selected.
+	if ( (int) $config->autoresponder !== 0 ) {
+		$array['autoresponder'] = $config->autoresponder;
+	}
 
 	$form_values = [];
 	// Add custom form values to Api request if available.
