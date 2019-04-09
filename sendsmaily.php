@@ -80,7 +80,7 @@ function sendsmaily_admin_render() {
 
 	// Create admin template.
 	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'page.phtml' );
+	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'page.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );

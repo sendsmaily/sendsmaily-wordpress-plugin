@@ -140,24 +140,18 @@ switch ( $_POST['op'] ) {
 			)
 		);
 
-		// Get autoresponders.
+		// Get autoresponders
 		if ( ! empty( $rqst['body'] ) ) {
-			// Replace autoresponders.
 			$insert_query = array();
+			// Replace autoresponders.
 			foreach ( $rqst['body'] as $autoresponder ) {
 				$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
 			}
-		} else {
-			$result = array(
-				'message' => __( 'Could not find any autoresponders!', 'wp_sendsmaily' ),
-				'error'   => true,
-			);
-			break;
+			// Insert to db.
+			$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
+			$wpdb->query( "DELETE FROM `$table_name`" );
+			$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
 		}
-
-		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-		$wpdb->query( "DELETE FROM `$table_name`" );
-		$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
 
 		// Return result.
 		$result = array(
@@ -189,7 +183,7 @@ switch ( $_POST['op'] ) {
 
 		// Generate form contents.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.phtml' );
+		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 		// Load configuration data.
 		$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
@@ -272,7 +266,7 @@ switch ( $_POST['op'] ) {
 		// Generate new form (if empty).
 		if ( empty( $advanced['form'] ) ) {
 			require_once( BP . DS . 'code' . DS . 'Template.php' );
-			$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.phtml' );
+			$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 			// Load configuration data.
 			$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
@@ -308,7 +302,7 @@ if ( $refresh ) {
 
 	// Generate form contents.
 	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.phtml' );
+	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );

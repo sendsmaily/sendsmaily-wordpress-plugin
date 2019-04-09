@@ -44,7 +44,7 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$config['show_name'] = $show_name;
 		// Create admin template.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$file     = '1' === $config['is_advanced'] ? 'advanced.phtml' : 'basic.phtml';
+		$file     = '1' === $config['is_advanced'] ? 'advanced.php' : 'basic.php';
 		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . $file );
 		$template->assign( $config );
 		// Render template.
@@ -87,7 +87,7 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$title_name        = esc_attr( $this->get_field_name( 'title' ) );
 		$instance['title'] = esc_attr( $instance['title'] );
 		echo '<p>
-			<label for="' . $title_id . '">Title:</label>
+			<label for="' . $title_id . '">' . __('Title', 'wp_sendsmaily') .':</label>
 			<input class="widefat" id="' . $title_id . '" name="' . $title_name . '" type="text" value="' . $instance['title'] . '" />
 		</p>';
 
@@ -97,7 +97,7 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$instance['show_name'] = esc_attr( $instance['show_name'] );
 		echo '<p>
 			<input class="checkbox" id="' . $show_name_id . '" name="' . $show_name_name . '" type="checkbox"' . ( $instance['show_name'] ? 'checked' : '' ) . ' />
-			<label for="' . $show_name_id . '">Display name field?</label>' .
+			<label for="' . $show_name_id . '">' . __('Display name field?', 'wp_sendsmaily') . '</label>' .
 		'</p>';
 
 	}
