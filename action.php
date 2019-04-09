@@ -140,7 +140,7 @@ switch ( $_POST['op'] ) {
 			)
 		);
 
-		// Get autoresponders
+		// Get autoresponders.
 		if ( ! empty( $rqst['body'] ) ) {
 			$insert_query = array();
 			// Replace autoresponders.
@@ -258,10 +258,6 @@ switch ( $_POST['op'] ) {
 		// Get basic and advanced parameters.
 		$basic    = ( isset( $_POST['basic'] ) && is_array( $_POST['basic'] ) ) ? $_POST['basic'] : array();
 		$advanced = ( isset( $_POST['advanced'] ) && is_array( $_POST['advanced'] ) ) ? $_POST['advanced'] : array();
-		if ( empty( $basic ) || empty( $advanced ) ) {
-			$result = array( 'error' => true, 'message' => '' );
-			break;
-		}
 
 		// Generate new form (if empty).
 		if ( empty( $advanced['form'] ) ) {
