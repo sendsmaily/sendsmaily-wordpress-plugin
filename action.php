@@ -25,6 +25,7 @@ if ( ! function_exists( 'add_action' ) ) {
 	require_once( $path . DS . 'wp-config.php' );
 }
 
+$refresh_blocked = false;
 // Switch to action.
 switch ( $_POST['op'] ) {
 	case 'validateApiKey':
@@ -56,10 +57,12 @@ switch ( $_POST['op'] ) {
 			$params['subdomain'] = $parts[0];
 		}
 
+		$params['subdomain'] = preg_replace( '/[^a-zA-Z0-9]+/', '', $params['subdomain'] );
+
 		// Show error messages to user if no data is entered to form.
 		if ( $params['subdomain'] === '' ) {
 			// Don't refresh the page.
-			$_POST['refresh'] = '';
+			$refresh_blocked = true;
 			$result = array(
 				'message' => __( 'Please enter subdomain!', 'wp_sendsmaily' ),
 				'error'   => true,
@@ -67,7 +70,7 @@ switch ( $_POST['op'] ) {
 			break;
 		} elseif ( $params['username'] === '' ) {
 			// Don't refresh the page.
-			$_POST['refresh'] = '';
+			$refresh_blocked = true;
 			$result = array(
 				'message' => __( 'Please enter username!', 'wp_sendsmaily' ),
 				'error'   => true,
@@ -75,7 +78,7 @@ switch ( $_POST['op'] ) {
 			break;
 		} elseif ( $params['password'] === '' ) {
 			// Don't refresh the page.
-			$_POST['refresh'] = '';
+			$refresh_blocked = true;
 			$result = array(
 				'message' => __( 'Please enter password!', 'wp_sendsmaily' ),
 				'error'   => true,
@@ -85,7 +88,7 @@ switch ( $_POST['op'] ) {
 
 		// Validate credentials with get request.
 		$rqst = new Wp_Sendsmaily_Request(
-			'https://' . $subdomain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
+			'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
 			array(
 				'username' => $params['username'],
 				'password' => $params['password'],
@@ -98,7 +101,7 @@ switch ( $_POST['op'] ) {
 		$code = isset( $rqst['code'] ) ? $rqst['code'] : '';
 		if ( $code !== 200 ) {
 			// Don't refresh the page.
-			$_POST['refresh'] = '';
+			$refresh_blocked = true;
 			if ( $code === 401) {
 				// If wrong credentials.
 				$result = array(
@@ -132,13 +135,32 @@ switch ( $_POST['op'] ) {
 		// Insert item to database.
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$wpdb->insert(
-			$table_name,
-			array(
-				'key'    => $params['username'] . ':' . $params['password'],
-				'domain' => $params['subdomain'],
-			)
-		);
+		// Check if table has values in case of upgradeing from 1.1.5 to 1.2.0.
+		$prev_data = $wpdb->get_var( "SELECT COUNT(*) FROM $table_name" );
+		if ( (int) $prev_data ) {
+			// Update configuration.
+			$wpdb->update(
+				$table_name,
+				array(
+					'key' => $params['username'] . ':' . $params['password'],
+				),
+				array(
+					'domain' => $params['subdomain'],
+				),
+				array(
+					'%s',
+				)
+			);
+		} else {
+			// Add config.
+			$wpdb->insert(
+				$table_name,
+				array(
+					'key'    => $params['username'] . ':' . $params['password'],
+					'domain' => $params['subdomain'],
+				)
+			);
+		}
 
 		// Get autoresponders.
 		if ( ! empty( $rqst['body'] ) ) {
@@ -292,7 +314,7 @@ switch ( $_POST['op'] ) {
 }
 
 // Send refresh form content (if requested).
-$refresh = ( isset( $_POST[ 'refresh' ] ) && $_POST['refresh'] == 1 );
+$refresh = ( ! $refresh_blocked && isset( $_POST[ 'refresh' ] ) && $_POST['refresh'] == 1 );
 if ( $refresh ) {
 	global $wpdb;
 
