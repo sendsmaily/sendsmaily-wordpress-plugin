@@ -84,7 +84,7 @@ switch ( $_POST['op'] ) {
 		}
 
 		// Validate credentials with get request.
-		$qrst = new Wp_Sendsmaily_Request(
+		$rqst = new Wp_Sendsmaily_Request(
 			'https://' . $subdomain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
 			array(
 				'username' => $params['username'],
@@ -92,10 +92,10 @@ switch ( $_POST['op'] ) {
 			)
 		);
 		// Response.
-		$qrst = $qrst->get();
+		$rqst = $rqst->get();
 
 		// Error handilng.
-		$code = isset( $qrst['code'] ) ? $qrst['code'] : '';
+		$code = isset( $rqst['code'] ) ? $rqst['code'] : '';
 		if ( $code !== 200 ) {
 			// Don't refresh the page.
 			$_POST['refresh'] = '';
@@ -113,10 +113,10 @@ switch ( $_POST['op'] ) {
 					'error'   => true,
 				);
 				break;
-			} elseif ( array_key_exists( 'error', $qrst ) ) {
+			} elseif ( array_key_exists( 'error', $rqst ) ) {
 				// If there is wordpress error message.
 				$result = array(
-					'message' => __( $qrst['error'], 'wp_sendsmaily' ),
+					'message' => __( $rqst['error'], 'wp_sendsmaily' ),
 					'error'   => true,
 				);
 				break;
@@ -141,10 +141,10 @@ switch ( $_POST['op'] ) {
 		);
 
 		// Get autoresponders.
-		if ( ! empty( $qrst['body'] ) ) {
+		if ( ! empty( $rqst['body'] ) ) {
 			// Replace autoresponders.
 			$insert_query = array();
-			foreach ( $qrst['body'] as $autoresponder ) {
+			foreach ( $rqst['body'] as $autoresponder ) {
 				$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
 			}
 		} else {
