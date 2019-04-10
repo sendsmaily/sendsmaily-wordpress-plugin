@@ -25,7 +25,7 @@ if ( ! function_exists( 'add_action' ) ) {
 	require_once( $path . DS . 'wp-config.php' );
 }
 
-$refresh_blocked = false;
+$refresh = ( isset( $_POST[ 'refresh' ] ) && $_POST['refresh'] == 1 );
 // Switch to action.
 switch ( $_POST['op'] ) {
 	case 'validateApiKey':
@@ -62,7 +62,7 @@ switch ( $_POST['op'] ) {
 		// Show error messages to user if no data is entered to form.
 		if ( $params['subdomain'] === '' ) {
 			// Don't refresh the page.
-			$refresh_blocked = true;
+			$refresh = false;
 			$result = array(
 				'message' => __( 'Please enter subdomain!', 'wp_sendsmaily' ),
 				'error'   => true,
@@ -70,7 +70,7 @@ switch ( $_POST['op'] ) {
 			break;
 		} elseif ( $params['username'] === '' ) {
 			// Don't refresh the page.
-			$refresh_blocked = true;
+			$refresh = false;
 			$result = array(
 				'message' => __( 'Please enter username!', 'wp_sendsmaily' ),
 				'error'   => true,
@@ -78,7 +78,7 @@ switch ( $_POST['op'] ) {
 			break;
 		} elseif ( $params['password'] === '' ) {
 			// Don't refresh the page.
-			$refresh_blocked = true;
+			$refresh = false;
 			$result = array(
 				'message' => __( 'Please enter password!', 'wp_sendsmaily' ),
 				'error'   => true,
@@ -101,7 +101,7 @@ switch ( $_POST['op'] ) {
 		$code = isset( $rqst['code'] ) ? $rqst['code'] : '';
 		if ( $code !== 200 ) {
 			// Don't refresh the page.
-			$refresh_blocked = true;
+			$refresh = false;
 			if ( $code === 401) {
 				// If wrong credentials.
 				$result = array(
@@ -163,16 +163,19 @@ switch ( $_POST['op'] ) {
 		}
 
 		// Get autoresponders.
-		if ( ! empty( $rqst['body'] ) ) {
-			$insert_query = array();
-			// Replace autoresponders.
-			foreach ( $rqst['body'] as $autoresponder ) {
-				$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
-			}
-			// Insert to db.
-			$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
+		$insert_query = array();
+		// Replace autoresponders.
+		foreach ( $rqst['body'] as $autoresponder ) {
+			$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
+		}
+		// Insert to db.
+		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
+		// If no autoresponders clear previous data.
+		if ( ! empty( $insert_query ) ) {
 			$wpdb->query( "DELETE FROM `$table_name`" );
 			$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
+		} else {
+			$wpdb->query( "DELETE FROM `$table_name`" );
 		}
 
 		// Return result.
@@ -314,7 +317,6 @@ switch ( $_POST['op'] ) {
 }
 
 // Send refresh form content (if requested).
-$refresh = ( ! $refresh_blocked && isset( $_POST[ 'refresh' ] ) && $_POST['refresh'] == 1 );
 if ( $refresh ) {
 	global $wpdb;
 
