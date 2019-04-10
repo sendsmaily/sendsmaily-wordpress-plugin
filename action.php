@@ -170,12 +170,11 @@ switch ( $_POST['op'] ) {
 		}
 		// Insert to db.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
-		// If no autoresponders clear previous data.
+		// Clear previous data.
+		$wpdb->query( "DELETE FROM `$table_name`" );
+		// Add new autoresponders if set.
 		if ( ! empty( $insert_query ) ) {
-			$wpdb->query( "DELETE FROM `$table_name`" );
 			$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
-		} else {
-			$wpdb->query( "DELETE FROM `$table_name`" );
 		}
 
 		// Return result.
