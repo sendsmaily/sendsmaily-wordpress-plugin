@@ -1,6 +1,8 @@
 <?php
-$key = $this->key;
+$key            = $this->key;
 $autoresponders = $this->autoresponders;
+// Check if old api key is in use for moving from 1.1.5 to 1.2.0.
+$old_key        = preg_match( '/^[^\:]+$/', $key );
 ?>
 
 <div>
@@ -8,19 +10,40 @@ $autoresponders = $this->autoresponders;
 	<input type="hidden" name="is_advanced" value="0" />
 </div>
 
-<?php if ( ! empty( $key ) ) : ?>
+<?php if ( ! empty( $key ) && ! $old_key ) : ?>
 <p>
-	<span><?php echo esc_html__( 'Your current API key is', 'wp_sendsmaily' ); ?> <strong><?php echo $this->key; ?></strong></span>
-	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><img src="<?php echo SS_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?>" title="<?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?>" /></a>
+	<span><?php echo esc_html__( 'Your current credentials are validated', 'wp_sendsmaily' ); ?></span>
+	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?></strong><img src="<?php echo SS_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?>" title="<?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?>" /></a>
 </p>
 <?php else : ?>
-<p>
-	<?php echo esc_html__( 'API key', 'wp_sendsmaily' ); ?> <input type="text" class="regular-text" name="key" style="width:300px" />
+<div>
+<table class="form-table">
+	<tbody>
+	<tr class="form-field">
+		<th><?php echo esc_html__( 'Subdomain', 'wp_sendsmaily' ); ?></th>
+		<td>
+			<input type="text" class="regular-text" name="subdomain" style="max-width:50%;"/>
+			<small class="form-text text-muted" style="display:block;">
+				For example <strong>"demo"</strong> from https://<strong>demo</strong>.sendsmaily.net/
+			</small>
+		</td>
+
+	</tr>
+	<tr class="form-field">
+		<th><?php echo esc_html__( 'Username', 'wp_sendsmaily' ); ?></th>
+		<td><input type="text" class="regular-text" name="username" style="max-width:50%;"/></td>
+	</tr>
+	<tr class="form-field">
+		<th><?php echo esc_html__( 'Password', 'wp_sendsmaily' ); ?></th>
+		<td><input type="password" class="regular-text" name="password" style="max-width:50%;"/></td>
+	</tr>
+	</tbody>
+</table>
 	<input type="button" value="<?php echo esc_html__( 'Check', 'wp_sendsmaily' ); ?>" name="Submit" class="button-primary" onclick="javascript:Default.validateApiKey();return false;" />
-</p>
+</div>
 <?php endif; ?>
 
-<?php if ( ! empty( $key ) ) : ?>
+<?php if ( ! empty( $key ) && ! $old_key ) : ?>
 <ul class="tabs">
 	<li><a id="link-basic" href="#basic" class="selected"><?php echo esc_html__( 'Basic', 'wp_sendsmaily' ); ?></a></li>
 	<li><a id="link-advanced" href="#advanced"><?php echo esc_html__( 'Advanced', 'wp_sendsmaily' ); ?></a></li>
@@ -30,9 +53,10 @@ $autoresponders = $this->autoresponders;
 <div id="content-basic" class="tab-content">
 	<div class="wrap">
 		<label><?php echo esc_html__( 'Autoresponders', 'wp_sendsmaily' ); ?> <a href="#" onclick="javascript:Default.refreshAutoresp();return false;">(<?php echo esc_html__( 'Refresh', 'wp_sendsmaily' ); ?>)</a></label>
-		<em><?php echo esc_html__( 'Please select your opt-in autoresponder', 'wp_sendsmaily' ); ?></em>
+		<em><?php echo esc_html__( 'Select autoresponder to change regular opt-in functionality', 'wp_sendsmaily' ); ?></em>
 		<?php if ( ! empty( $autoresponders ) ) : ?>
 		<select name="basic[autoresponder]">
+			<option value=""><?php echo esc_html__( 'No autoresponder', 'wp_sendsmaily' ); ?></option>
 			<?php foreach ( $this->autoresponders as $item ) : ?>
 			<option value="<?php echo $item->id; ?>"<?php if ( $this->autoresponder == $item->id ) : ?> selected="selected"<?php endif; ?>><?php echo $item->title; ?></option>
 			<?php endforeach; ?>

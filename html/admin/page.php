@@ -35,6 +35,6 @@
 	<!-- @todo: display welcome/getting started message -->
 	
 	<form id="form-container" action="<?php echo SS_PLUGIN_URL; ?>/action.php" method="post">
-		<?php echo $this->partial( 'html/admin/html/form.phtml', $this->getVars() ); ?>
+		<?php echo $this->partial( 'html/admin/html/form.php', $this->getVars() ); ?>
 	</form>
 </div>

@@ -25,71 +25,162 @@ if ( ! function_exists( 'add_action' ) ) {
 	require_once( $path . DS . 'wp-config.php' );
 }
 
+$refresh = ( isset( $_POST[ 'refresh' ] ) && $_POST['refresh'] == 1 );
 // Switch to action.
 switch ( $_POST['op'] ) {
 	case 'validateApiKey':
 		// Get request params.
-		$key = isset( $_POST['key'] ) ? trim( $_POST['key'] ) : '';
+		$subdomain = isset( $_POST['subdomain'] ) ? trim( $_POST['subdomain'] ) : '';
+		$username  = isset( $_POST['username'] ) ? trim( $_POST['username'] ) : '';
+		$password  = isset( $_POST['password'] ) ? trim( $_POST['password'] ) : '';
 
-		// Validate api key with remote request.
-		$request = new Wp_Sendsmaily_Request(
-			'https://www.sendsmaily.net/validate_key.php',
-			array( 'key' => $key )
+		$params = array(
+			'subdomain' => $subdomain,
+			'username'  => $username,
+			'password'  => $password,
 		);
-		$result  = $request->exec();
-		$data    = $result['data'];
 
-		// Handle errors.
-		if ( isset( $result['code'] ) && $result['code'] >= 200 ) {
-			$result['error'] = true;
+		// Sanitize fields.
+		foreach ( $params as $key => $value ) {
+			$params[ $key ] = wp_unslash( sanitize_text_field( $value ) );
+		}
+
+		// Normalize subdomain.
+		// First, try to parse as full URL. If that fails, try to parse as subdomain.sendsmaily.net, and
+		// if all else fails, then clean up subdomain and pass as is.
+		if ( filter_var( $params['subdomain'], FILTER_VALIDATE_URL ) ) {
+			$url                 = wp_parse_url( $params['subdomain'] );
+			$parts               = explode( '.', $url['host'] );
+			$params['subdomain'] = count( $parts ) >= 3 ? $parts[0] : '';
+		} elseif ( preg_match( '/^[^\.]+\.sendsmaily\.net$/', $params['subdomain'] ) ) {
+			$parts               = explode( '.', $params['subdomain'] );
+			$params['subdomain'] = $parts[0];
+		}
+
+		$params['subdomain'] = preg_replace( '/[^a-zA-Z0-9]+/', '', $params['subdomain'] );
+
+		// Show error messages to user if no data is entered to form.
+		if ( $params['subdomain'] === '' ) {
+			// Don't refresh the page.
+			$refresh = false;
+			$result = array(
+				'message' => __( 'Please enter subdomain!', 'wp_sendsmaily' ),
+				'error'   => true,
+			);
+			break;
+		} elseif ( $params['username'] === '' ) {
+			// Don't refresh the page.
+			$refresh = false;
+			$result = array(
+				'message' => __( 'Please enter username!', 'wp_sendsmaily' ),
+				'error'   => true,
+			);
+			break;
+		} elseif ( $params['password'] === '' ) {
+			// Don't refresh the page.
+			$refresh = false;
+			$result = array(
+				'message' => __( 'Please enter password!', 'wp_sendsmaily' ),
+				'error'   => true,
+			);
+			break;
+		}
+
+		// Validate credentials with get request.
+		$rqst = new Wp_Sendsmaily_Request(
+			'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
+			array(
+				'username' => $params['username'],
+				'password' => $params['password'],
+			)
+		);
+		// Response.
+		$rqst = $rqst->get();
+
+		// Error handilng.
+		$code = isset( $rqst['code'] ) ? $rqst['code'] : '';
+		if ( $code !== 200 ) {
+			// Don't refresh the page.
+			$refresh = false;
+			if ( $code === 401) {
+				// If wrong credentials.
+				$result = array(
+					'message' => __( 'Wrong credentials', 'wp_sendsmaily' ),
+					'error'   => true,
+				);
+				break;
+			} elseif ( $code === 404 ) {
+				// If wrong subdomain.
+				$result = array(
+					'message' => __( 'Error in subdomain', 'wp_sendsmaily' ),
+					'error'   => true,
+				);
+				break;
+			} elseif ( array_key_exists( 'error', $rqst ) ) {
+				// If there is wordpress error message.
+				$result = array(
+					'message' => __( $rqst['error'], 'wp_sendsmaily' ),
+					'error'   => true,
+				);
+				break;
+			}
+			// If not determined error.
+			$result = array(
+				'message' => __( 'Something went wrong with request to Smaily', 'wp_sendsmaily' ),
+				'error'   => true,
+			);
 			break;
 		}
 
 		// Insert item to database.
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$wpdb->insert(
-			$table_name,
-			array(
-				'key'    => $key,
-				'domain' => $data['domain'],
-			)
-		);
+		// Check if table has values in case of upgradeing from 1.1.5 to 1.2.0.
+		$prev_data = $wpdb->get_var( "SELECT COUNT(*) FROM $table_name" );
+		if ( (int) $prev_data ) {
+			// Update configuration.
+			$wpdb->update(
+				$table_name,
+				array(
+					'key' => $params['username'] . ':' . $params['password'],
+				),
+				array(
+					'domain' => $params['subdomain'],
+				),
+				array(
+					'%s',
+				)
+			);
+		} else {
+			// Add config.
+			$wpdb->insert(
+				$table_name,
+				array(
+					'key'    => $params['username'] . ':' . $params['password'],
+					'domain' => $params['subdomain'],
+				)
+			);
+		}
 
 		// Get autoresponders.
-		$request = new Wp_Sendsmaily_Request(
-			'https://' . $data['domain'] . '.sendsmaily.net/api/get-autoresponders/',
-			array( 'key' => $key )
-		);
-		$result  = $request->exec();
-		$data    = $result['data'];
-
-		// Handle errors.
-		if ( isset( $result['code'] ) && $result['code'] >= 200 ) {
-			$result['error'] = true;
-			break;
-		} elseif ( empty( $data['autoresponders'] ) ) {
-			$result = array(
-				'message' => __( 'Could not find any autoresponders!', 'wp_sendsmaily' ),
-				'error'   => true,
-			);
-			break;
-		}
-
-		// Replace autoresponders.
 		$insert_query = array();
-		foreach ( $data['autoresponders'] as $item ) {
-			$insert_query[] = $wpdb->prepare( '(%d, %s)', $item['id'], $item['title'] );
+		// Replace autoresponders.
+		foreach ( $rqst['body'] as $autoresponder ) {
+			$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
 		}
-
+		// Insert to db.
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
+		// Clear previous data.
 		$wpdb->query( "DELETE FROM `$table_name`" );
-		$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
+		// Add new autoresponders if set.
+		if ( ! empty( $insert_query ) ) {
+			$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
+		}
 
 		// Return result.
 		$result = array(
-			'error' => false,
-			'message' => __( 'API key passed validation.', 'wp_sendsmaily' ),
+			'error'   => false,
+			'message' => __( 'Credentials validated.', 'wp_sendsmaily' ),
 		);
 		break;
 
@@ -107,7 +198,7 @@ switch ( $_POST['op'] ) {
 		// Set result.
 		$result = array(
 			'error' => false,
-			'message' => __( 'API key removed.', 'wp_sendsmaily' ),
+			'message' => __( 'Credentials removed.', 'wp_sendsmaily' ),
 		);
 		break;
 
@@ -116,7 +207,7 @@ switch ( $_POST['op'] ) {
 
 		// Generate form contents.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.phtml' );
+		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 		// Load configuration data.
 		$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
@@ -139,21 +230,24 @@ switch ( $_POST['op'] ) {
 		$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
 		$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 
+		// Credentials.
+		$credentials = explode( ':', $data->key );
 		// Get autoresponders.
 		$request = new Wp_Sendsmaily_Request(
-			'https://' . $data->domain . '.sendsmaily.net/api/get-autoresponders/',
+			'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
 			array(
-				'key' => $data->key,
+				'username' => $credentials[0],
+				'password' => $credentials[1],
 			)
 		);
-		$result  = $request->exec();
-		$data    = $result['data'];
+		$result        = $request->get();
+		$autoreponders = $result['body'];
 
 		// Handle errors.
-		if ( isset( $result['code'] ) && $result['code'] >= 200 ) {
+		if ( isset( $result['code'] ) && $result['code'] !== 200 ) {
 			$result['error'] = true;
 			break;
-		} elseif ( empty( $data['autoresponders'] ) ) {
+		} elseif ( empty( $autoreponders ) ) {
 			$result = array(
 				'message' => __( 'Could not find any autoresponders!', 'wp_sendsmaily' ),
 				'error'   => true,
@@ -163,8 +257,8 @@ switch ( $_POST['op'] ) {
 
 		// Replace autoresponders.
 		$insert_query = array();
-		foreach ( $data['autoresponders'] as $item ) {
-			$insert_query[] = $wpdb->prepare( '(%d, %s)', $item['id'], $item['title'] );
+		foreach ( $autoreponders as $autoresponder ) {
+			$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
 		}
 
 		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
@@ -188,15 +282,11 @@ switch ( $_POST['op'] ) {
 		// Get basic and advanced parameters.
 		$basic    = ( isset( $_POST['basic'] ) && is_array( $_POST['basic'] ) ) ? $_POST['basic'] : array();
 		$advanced = ( isset( $_POST['advanced'] ) && is_array( $_POST['advanced'] ) ) ? $_POST['advanced'] : array();
-		if ( empty( $basic ) || empty( $advanced ) ) {
-			$result = array( 'error' => true, 'message' => '' );
-			break;
-		}
 
 		// Generate new form (if empty).
 		if ( empty( $advanced['form'] ) ) {
 			require_once( BP . DS . 'code' . DS . 'Template.php' );
-			$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.phtml' );
+			$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 			// Load configuration data.
 			$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
@@ -226,13 +316,12 @@ switch ( $_POST['op'] ) {
 }
 
 // Send refresh form content (if requested).
-$refresh = ( isset( $_POST[ 'refresh' ] ) && $_POST['refresh'] == 1 );
 if ( $refresh ) {
 	global $wpdb;
 
 	// Generate form contents.
 	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.phtml' );
+	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
