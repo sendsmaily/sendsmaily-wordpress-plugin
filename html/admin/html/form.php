@@ -2,7 +2,7 @@
 $key            = $this->key;
 $autoresponders = $this->autoresponders;
 // Check if old api key is in use for moving from 1.1.5 to 1.2.0.
-$old_key        = preg_match( '/.*[-].*[,]/', $key );
+$old_key        = preg_match( '/^[^\:]+$/', $key );
 ?>
 
 <div>
