@@ -1,7 +1,7 @@
 === Sendsmaily ===
 Tags: widget, plugin, sidebar, api, mail, email, marketing, sendsmaily
 Tested up to: 5.1
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 
 Sendsmaily newsletter subscription plugin for WordPress
@@ -19,6 +19,9 @@ Sendsmaily newsletter subscription plugin for WordPress.
 * Place sendsmaily widget where you wish.
 
 == Changelog ==
+
+= 1.2.1 =
+* Advanced form changed from ajax to php handling to support Icegram free version.
 
 = 1.2.0 =
 * Changes because of new Smaily automation workflow
