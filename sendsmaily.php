@@ -238,13 +238,11 @@ function smaily_nojs_subscribe_callback() {
 
 	if ( empty( $result ) ) {
 		echo esc_html__( 'Something went wrong', 'wp_sendsmaily' );
-		wp_safe_redirect( home_url() );
 	} elseif ( (int) $result['code'] !== 101 ) {
 		// Possible errors, for translation.
 		// esc_html__('Posted fields do not contain a valid email address.', 'wp_sendsmaily');.
 		// esc_html__('No autoresponder data set.', 'wp_sendsmaily');.
 		echo esc_html__( $result['message'], 'wp_sendsmaily' );
-		wp_safe_redirect( home_url() );
 	}
 
 	wp_safe_redirect( home_url() );
