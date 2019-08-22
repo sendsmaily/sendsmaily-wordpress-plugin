@@ -18,7 +18,7 @@ function sendsmaily_install() {
 
 	// Create database table - settings.
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
-	$query = "SHOW TABLES LIKE `$table_name`";
+	$query = "SHOW TABLES LIKE '$table_name'";
 	if ( ! $wpdb->get_var( $query ) ) {
 		$sql = trim(
 			preg_replace(
@@ -39,7 +39,7 @@ function sendsmaily_install() {
 
 	// Create database table - autoresponders.
 	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_autoresp' );
-	$query = "SHOW TABLES LIKE `$table_name`";
+	$query = "SHOW TABLES LIKE '$table_name'";
 	if ( ! $wpdb->get_var( $query ) ) {
 		$sql = trim(
 			preg_replace(
