@@ -9,7 +9,7 @@
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
  * Text Domain:       wp_sendsmaily
  * Description:       Smaily newsletter subscription form.
- * Version:           1.2.3
+ * Version:           1.2.4
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SS_PLUGIN_VERSION', '1.2.3' );
+define( 'SS_PLUGIN_VERSION', '1.2.4' );
 
 if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
 
@@ -250,3 +250,10 @@ function smaily_nojs_subscribe_callback() {
 }
 add_action( 'admin_post_nopriv_smly', 'smaily_nojs_subscribe_callback' );
 add_action( 'admin_post_smly', 'smaily_nojs_subscribe_callback' );
+
+function showUpgradeNotification($currentPluginMetadata, $newPluginMetadata){
+	echo '<p style="background-color: #d54e21; padding: 10px; color: #f9f9f9; margin-top: 10px">
+		<strong>This version is no longer being developed. Please update.</strong> ';
+}
+// add plugin upgrade notification
+add_action('in_plugin_update_message-sendsmaily-wordpress-plugin/sendsmaily.php', 'showUpgradeNotification', 10, 2);
