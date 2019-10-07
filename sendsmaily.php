@@ -251,11 +251,11 @@ function smaily_nojs_subscribe_callback() {
 add_action( 'admin_post_nopriv_smly', 'smaily_nojs_subscribe_callback' );
 add_action( 'admin_post_smly', 'smaily_nojs_subscribe_callback' );
 
-$path = plugin_basename( __FILE__ );
-// display plugin upgrade notification
-add_action("after_plugin_row_{$path}", function( $plugin_file, $plugin_data, $status ) {
-	echo '<tr class="active"><td colspan="3">
-        <p style="background-color: #d54e21; padding: 10px; color: #f9f9f9">
-		<strong>This version is no longer being developed. Please update.</strong>
-        </td></tr>';
-}, 10, 3 );
+// Place a deprecation notice into the plugin's metainfo row as the first element.
+function smaily_add_deprecation_notice($meta, $file) {
+	if ($file === plugin_basename( __FILE__ )) {
+		array_unshift($meta, '<b>This version is deprecated, please update</b>');
+	}
+	return $meta;
+}
+add_filter('plugin_row_meta', 'smaily_add_deprecation_notice', 10, 4);
