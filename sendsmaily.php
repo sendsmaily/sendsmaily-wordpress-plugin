@@ -254,8 +254,8 @@ add_action( 'admin_post_smly', 'smaily_nojs_subscribe_callback' );
 $path = plugin_basename( __FILE__ );
 // display plugin upgrade notification
 add_action("after_plugin_row_{$path}", function( $plugin_file, $plugin_data, $status ) {
-	echo '<tr class="active"><td>&nbsp;</td><td colspan="2">
-        <p style="background-color: #d54e21; padding: 5px; color: #f9f9f9">
+	echo '<tr class="active"><td colspan="3">
+        <p style="background-color: #d54e21; padding: 10px; color: #f9f9f9">
 		<strong>This version is no longer being developed. Please update.</strong>
         </td></tr>';
 }, 10, 3 );
