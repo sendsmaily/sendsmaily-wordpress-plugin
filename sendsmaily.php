@@ -251,9 +251,11 @@ function smaily_nojs_subscribe_callback() {
 add_action( 'admin_post_nopriv_smly', 'smaily_nojs_subscribe_callback' );
 add_action( 'admin_post_smly', 'smaily_nojs_subscribe_callback' );
 
-function showUpgradeNotification($currentPluginMetadata, $newPluginMetadata){
-	echo '<p style="background-color: #d54e21; padding: 10px; color: #f9f9f9; margin-top: 10px">
-		<strong>This version is no longer being developed. Please update.</strong> ';
-}
-// add plugin upgrade notification
-add_action('in_plugin_update_message-sendsmaily-wordpress-plugin/sendsmaily.php', 'showUpgradeNotification', 10, 2);
+$path = plugin_basename( __FILE__ );
+// display plugin upgrade notification
+add_action("after_plugin_row_{$path}", function( $plugin_file, $plugin_data, $status ) {
+	echo '<tr class="active"><td>&nbsp;</td><td colspan="2">
+        <p style="background-color: #d54e21; padding: 5px; color: #f9f9f9">
+		<strong>This version is no longer being developed. Please update.</strong>
+        </td></tr>';
+}, 10, 3 );
