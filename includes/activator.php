@@ -25,18 +25,15 @@ function sendsmaily_install() {
 		)
 	);
 	if ( ! $settings_table_exists ) {
-		$sql = "CREATE TABLE $table_name ( " .
-				'`key` VARCHAR(128) NOT NULL, ' .
-				'domain VARCHAR(255) NOT NULL, ' .
-				'autoresponder INT(16) NOT NULL, ' .
-				'form TEXT NOT NULL, ' .
-				'is_advanced TINYINT(1) NOT NULL, ' .
-				'PRIMARY KEY(`key`) ' .
-				") $charset_collate;";
-		$wpdb->query( $sql ); // Can't use prepare - makes quotes around values.
-		// TODO: Switch to dbDelta().
-		// There is a problem with reserved "key" column name and can't use backticks in dbDelta function.
-		// Should change column name to something else.
+		$sql = "CREATE TABLE $table_name (
+				credentials VARCHAR(128) NOT NULL,
+				domain VARCHAR(255) NOT NULL,
+				autoresponder INT(16) NOT NULL,
+				form TEXT NOT NULL,
+				is_advanced TINYINT(1) NOT NULL,
+				PRIMARY KEY  (credentials)
+			) $charset_collate;";
+		dbDelta( $sql );
 	}
 
 	// Create database table - autoresponders.

@@ -1,7 +1,7 @@
 === Sendsmaily ===
 Tags: widget, plugin, sidebar, api, mail, email, marketing, sendsmaily
 Tested up to: 5.2.2
-Stable tag: 1.2.4
+Stable tag: 2.0.0
 License: GPLv2 or later
 
 Sendsmaily newsletter subscription plugin for WordPress
@@ -20,6 +20,9 @@ Sendsmaily newsletter subscription plugin for WordPress.
 * Using advanced tab in smaily settings will render advanced form.
 
 == Changelog ==
+
+= 2.0.0 =
+* Changed DB schema and key column name to credentials. Implemented dbDelta functionality.
 
 = 1.2.4 =
 * Added support for an uninstall hook via uninstall.php, because two tables were being leftover after uninstall.
