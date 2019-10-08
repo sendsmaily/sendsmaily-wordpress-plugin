@@ -1,8 +1,6 @@
 <?php
-$key            = $this->key;
+$credentials            = $this->credentials;
 $autoresponders = $this->autoresponders;
-// Check if old api key is in use for moving from 1.1.5 to 1.2.0.
-$old_key        = preg_match( '/^[^\:]+$/', $key );
 ?>
 
 <div>
@@ -10,7 +8,7 @@ $old_key        = preg_match( '/^[^\:]+$/', $key );
 	<input type="hidden" name="is_advanced" value="0" />
 </div>
 
-<?php if ( ! empty( $key ) && ! $old_key ) : ?>
+<?php if ( ! empty( $credentials ) ) : ?>
 <p>
 	<span><?php echo esc_html__( 'Your current credentials are validated', 'wp_sendsmaily' ); ?></span>
 	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?></strong><img src="<?php echo SS_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?>" title="<?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?>" /></a>
@@ -43,7 +41,7 @@ $old_key        = preg_match( '/^[^\:]+$/', $key );
 </div>
 <?php endif; ?>
 
-<?php if ( ! empty( $key ) && ! $old_key ) : ?>
+<?php if ( ! empty( $credentials ) ) : ?>
 <ul class="tabs">
 	<li><a id="link-basic" href="#basic" class="selected"><?php echo esc_html__( 'Basic', 'wp_sendsmaily' ); ?></a></li>
 	<li><a id="link-advanced" href="#advanced"><?php echo esc_html__( 'Advanced', 'wp_sendsmaily' ); ?></a></li>

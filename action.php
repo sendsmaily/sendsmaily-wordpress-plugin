@@ -135,32 +135,14 @@ switch ( $_POST['op'] ) {
 		// Insert item to database.
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		// Check if table has values in case of upgradeing from 1.1.5 to 1.2.0.
-		$prev_data = $wpdb->get_var( "SELECT COUNT(*) FROM $table_name" );
-		if ( (int) $prev_data ) {
-			// Update configuration.
-			$wpdb->update(
-				$table_name,
-				array(
-					'key' => $params['username'] . ':' . $params['password'],
-				),
-				array(
-					'domain' => $params['subdomain'],
-				),
-				array(
-					'%s',
-				)
-			);
-		} else {
-			// Add config.
-			$wpdb->insert(
-				$table_name,
-				array(
-					'key'    => $params['username'] . ':' . $params['password'],
-					'domain' => $params['subdomain'],
-				)
-			);
-		}
+		// Add config.
+		$wpdb->insert(
+			$table_name,
+			array(
+				'credentials'    => $params['username'] . ':' . $params['password'],
+				'domain' => $params['subdomain'],
+			)
+		);
 
 		// Get autoresponders.
 		$insert_query = array();
@@ -231,7 +213,7 @@ switch ( $_POST['op'] ) {
 		$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 
 		// Credentials.
-		$credentials = explode( ':', $data->key );
+		$credentials = explode( ':', $data->credentials );
 		// Get autoresponders.
 		$request = new Wp_Sendsmaily_Request(
 			'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
@@ -299,7 +281,7 @@ switch ( $_POST['op'] ) {
 
 		// Update configuration.
 		$table_name = $wpdb->prefix . 'sendsmaily_config';
-		$wpdb->query( $wpdb->prepare( 
+		$wpdb->query( $wpdb->prepare(
 			"
 			UPDATE `$table_name`
 			SET `autoresponder` = %s, `form` = %s, `is_advanced` = %s
