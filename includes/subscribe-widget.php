@@ -39,7 +39,7 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		}
 
 		// Load configuration data.
-		$table_name          = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+		$table_name          = esc_sql( $wpdb->prefix . 'smaily_config' );
 		$config              = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 		$config['show_name'] = $show_name;
 		// Create admin template.

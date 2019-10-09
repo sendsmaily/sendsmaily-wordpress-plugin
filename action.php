@@ -134,12 +134,12 @@ switch ( $_POST['op'] ) {
 
 		// Insert item to database.
 		global $wpdb;
-		$table_name = $wpdb->prefix . 'sendsmaily_config';
+		$table_name = $wpdb->prefix . 'smaily_config';
 		// Add config.
 		$wpdb->insert(
 			$table_name,
 			array(
-				'credentials'    => $params['username'] . ':' . $params['password'],
+				'api_credentials' => $params['username'] . ':' . $params['password'],
 				'domain' => $params['subdomain'],
 			)
 		);
@@ -151,7 +151,7 @@ switch ( $_POST['op'] ) {
 			$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
 		}
 		// Insert to db.
-		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
+		$table_name = $wpdb->prefix . 'smaily_autoresponders';
 		// Clear previous data.
 		$wpdb->query( "DELETE FROM `$table_name`" );
 		// Add new autoresponders if set.
@@ -170,11 +170,11 @@ switch ( $_POST['op'] ) {
 		global $wpdb;
 
 		// Delete contents of config.
-		$table_name = $wpdb->prefix . 'sendsmaily_config';
+		$table_name = $wpdb->prefix . 'smaily_config';
 		$wpdb->query( "DELETE FROM `$table_name`" );
 
 		// Delete contents of autoresponders.
-		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
+		$table_name = $wpdb->prefix . 'smaily_autoresponders';
 		$wpdb->query( "DELETE FROM `$table_name`" );
 
 		// Set result.
@@ -192,7 +192,7 @@ switch ( $_POST['op'] ) {
 		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 		// Load configuration data.
-		$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 		$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 		$data->form = '';
 		$template->assign( (array) $data );
@@ -209,17 +209,17 @@ switch ( $_POST['op'] ) {
 		global $wpdb;
 
 		// Load configuration data.
-		$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 		$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 
 		// Credentials.
-		$credentials = explode( ':', $data->credentials );
+		$api_credentials = explode( ':', $data->api_credentials );
 		// Get autoresponders.
 		$request = new Wp_Sendsmaily_Request(
 			'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
 			array(
-				'username' => $credentials[0],
-				'password' => $credentials[1],
+				'username' => $api_credentials[0],
+				'password' => $api_credentials[1],
 			)
 		);
 		$result        = $request->get();
@@ -243,7 +243,7 @@ switch ( $_POST['op'] ) {
 			$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
 		}
 
-		$table_name = $wpdb->prefix . 'sendsmaily_autoresp';
+		$table_name = $wpdb->prefix . 'smaily_autoresponders';
 		$wpdb->query( "DELETE FROM `$table_name`" );
 		$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
 
@@ -271,7 +271,7 @@ switch ( $_POST['op'] ) {
 			$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 			// Load configuration data.
-			$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 			$data = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 			$template->assign( (array) $data );
 
@@ -280,7 +280,7 @@ switch ( $_POST['op'] ) {
 		}
 
 		// Update configuration.
-		$table_name = $wpdb->prefix . 'sendsmaily_config';
+		$table_name = $wpdb->prefix . 'smaily_config';
 		$wpdb->query( $wpdb->prepare(
 			"
 			UPDATE `$table_name`
@@ -306,12 +306,12 @@ if ( $refresh ) {
 	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.php' );
 
 	// Load configuration data.
-	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 	$data = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 	$template->assign( (array) $data );
 
 	// Load autoresponders.
-	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_autoresp' );
+	$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
 	$data = $wpdb->get_results( "SELECT * FROM `$table_name`" );
 	$template->assign( 'autoresponders', $data );
 
