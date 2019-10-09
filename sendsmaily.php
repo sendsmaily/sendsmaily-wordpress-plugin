@@ -83,12 +83,12 @@ function sendsmaily_admin_render() {
 	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'page.php' );
 
 	// Load configuration data.
-	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 	$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 	$template->assign( (array) $data );
 
 	// Load autoresponders.
-	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_autoresp' );
+	$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
 	$data       = $wpdb->get_results( "SELECT * FROM `$table_name`" );
 	$template->assign( 'autoresponders', $data );
 
@@ -121,7 +121,7 @@ function smaily_subscribe_callback() {
 	$current_url = ( isset( $_SERVER['HTTPS'] ) ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 	// Get data from database.
-	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 	$config     = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
 	// Make a opt-in request to server.
@@ -203,7 +203,7 @@ function smaily_nojs_subscribe_callback() {
 	$home_url = home_url();
 
 	// Get data from database.
-	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 	$config     = $wpdb->get_row( "SELECT * FROM `$table_name`" );
 
 	// Make a opt-in request to server.
@@ -250,12 +250,3 @@ function smaily_nojs_subscribe_callback() {
 }
 add_action( 'admin_post_nopriv_smly', 'smaily_nojs_subscribe_callback' );
 add_action( 'admin_post_smly', 'smaily_nojs_subscribe_callback' );
-
-// Place a deprecation notice into the plugin's metainfo row as the first element.
-function smaily_add_deprecation_notice($meta, $file) {
-	if ($file === plugin_basename( __FILE__ )) {
-		array_unshift($meta, '<b>This plugin is deprecated, please install <a href=https://wordpress.org/plugins/smaily-for-wp/>Smaily for Wordpress</a></b>');
-	}
-	return $meta;
-}
-add_filter('plugin_row_meta', 'smaily_add_deprecation_notice', 10, 4);

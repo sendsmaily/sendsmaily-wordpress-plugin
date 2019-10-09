@@ -1,5 +1,5 @@
 <?php
-$credentials            = $this->credentials;
+$api_credentials = $this->api_credentials;
 $autoresponders = $this->autoresponders;
 ?>
 
@@ -8,7 +8,7 @@ $autoresponders = $this->autoresponders;
 	<input type="hidden" name="is_advanced" value="0" />
 </div>
 
-<?php if ( ! empty( $credentials ) ) : ?>
+<?php if ( ! empty( $api_credentials ) ) : ?>
 <p>
 	<span><?php echo esc_html__( 'Your current credentials are validated', 'wp_sendsmaily' ); ?></span>
 	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?></strong><img src="<?php echo SS_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?>" title="<?php echo esc_html__( 'Remove', 'wp_sendsmaily' ); ?>" /></a>
@@ -41,7 +41,7 @@ $autoresponders = $this->autoresponders;
 </div>
 <?php endif; ?>
 
-<?php if ( ! empty( $credentials ) ) : ?>
+<?php if ( ! empty( $api_credentials ) ) : ?>
 <ul class="tabs">
 	<li><a id="link-basic" href="#basic" class="selected"><?php echo esc_html__( 'Basic', 'wp_sendsmaily' ); ?></a></li>
 	<li><a id="link-advanced" href="#advanced"><?php echo esc_html__( 'Advanced', 'wp_sendsmaily' ); ?></a></li>

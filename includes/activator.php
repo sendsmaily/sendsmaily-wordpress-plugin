@@ -17,7 +17,7 @@ function sendsmaily_install() {
 	$charset_collate = $wpdb->get_charset_collate();
 
 	// Create database table - settings.
-	$table_name            = esc_sql( $wpdb->prefix . 'sendsmaily_config' );
+	$table_name            = esc_sql( $wpdb->prefix . 'smaily_config' );
 	$settings_table_exists = $wpdb->get_var(
 		$wpdb->prepare(
 			'SHOW TABLES LIKE %s',
@@ -26,18 +26,18 @@ function sendsmaily_install() {
 	);
 	if ( ! $settings_table_exists ) {
 		$sql = "CREATE TABLE $table_name (
-				credentials VARCHAR(128) NOT NULL,
+				api_credentials VARCHAR(128) NOT NULL,
 				domain VARCHAR(255) NOT NULL,
 				autoresponder INT(16) NOT NULL,
 				form TEXT NOT NULL,
 				is_advanced TINYINT(1) NOT NULL,
-				PRIMARY KEY  (credentials)
+				PRIMARY KEY  (api_credentials)
 			) $charset_collate;";
 		dbDelta( $sql );
 	}
 
 	// Create database table - autoresponders.
-	$table_name = esc_sql( $wpdb->prefix . 'sendsmaily_autoresp' );
+	$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
 	$sql        = "CREATE TABLE $table_name (
 				id int(16) NOT NULL,
 				title varchar(255) NOT NULL,
