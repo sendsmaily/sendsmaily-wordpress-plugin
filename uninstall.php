@@ -9,4 +9,4 @@ global $wpdb;
 $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}smaily_autoresponders");
 $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}smaily_config");
 
-delete_option("widget_sendsmaily_subscription_widget");
+delete_option("widget_smaily_subscription_widget");

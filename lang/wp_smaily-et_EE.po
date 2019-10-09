@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: sendsmaily\n"
+"Project-Id-Version: smaily\n"
 "POT-Creation-Date: 2019-04-09 10:14+0000\n"
 "PO-Revision-Date: 2019-04-09 10:31+0000\n"
-"Last-Translator: Sendsmaily_OÜ <info@smaily.com>\n"
+"Last-Translator: Smaily_OÜ <info@smaily.com>\n"
 "Language-Team: Estonian (Estonia)\n"
 "Language: et_EE\n"
 "MIME-Version: 1.0\n"
@@ -65,21 +65,21 @@ msgstr "Automaatvastajad uuendatud."
 msgid "Changes saved."
 msgstr "Salvestatud."
 
-#: sendsmaily.php:106 sendsmaily.php:116
+#: smaily.php:106 smaily.php:116
 msgid "E-mail is required!"
 msgstr "E-post on nõutud!"
 
-#: sendsmaily.php:158
+#: smaily.php:158
 msgid "Something went wrong"
 msgstr "Päringu viga"
 
 #: includes/subscribe-widget.php:18
-msgid "Sendsmaily newsletter subscription form"
-msgstr "Sendsmaily uudiskirjaga liitumise vorm"
+msgid "Smaily newsletter subscription form"
+msgstr "Smaily uudiskirjaga liitumise vorm"
 
 #: includes/subscribe-widget.php:19
-msgid "Sendsmaily Newsletter Subscription"
-msgstr "Sendsmaily uudiskirjaga liitumine"
+msgid "Smaily Newsletter Subscription"
+msgstr "Smaily uudiskirjaga liitumine"
 
 #: includes/subscribe-widget.php:90
 msgid "Title"
@@ -90,8 +90,8 @@ msgid "Display name field?"
 msgstr "Näita nime välja?"
 
 #: html/admin/page.php:31
-msgid "Sendsmaily Wordpress plugin"
-msgstr "Sendsmaily Wordpressi pistikmoodul"
+msgid "Smaily Wordpress plugin"
+msgstr "Smaily Wordpressi pistikmoodul"
 
 #: html/admin/page.php:32
 msgid "Please wait, working..."
@@ -199,12 +199,12 @@ msgid "Smaily newsletter subscription form."
 msgstr "Smaily uudiskirjaga liitumise vorm."
 
 #. URI of the plugin
-msgid "https://github.com/sendsmaily/sendsmaily-wordpress-plugin"
-msgstr "https://github.com/sendsmaily/sendsmaily-wordpress-plugin"
+msgid "https://github.com/smaily/smaily-wordpress-plugin"
+msgstr "https://github.com/smaily/smaily-wordpress-plugin"
 
 #. Author of the plugin
-msgid "Sendsmaily LLC"
-msgstr "Sendsmaily LLC"
+msgid "Smaily LLC"
+msgstr "Smaily LLC"
 
 #. Author URI of the plugin
 msgid "https://smaily.com"

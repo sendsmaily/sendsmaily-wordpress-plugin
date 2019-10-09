@@ -64,7 +64,7 @@ switch ( $_POST['op'] ) {
 			// Don't refresh the page.
 			$refresh = false;
 			$result = array(
-				'message' => __( 'Please enter subdomain!', 'wp_sendsmaily' ),
+				'message' => __( 'Please enter subdomain!', 'wp_smaily' ),
 				'error'   => true,
 			);
 			break;
@@ -72,7 +72,7 @@ switch ( $_POST['op'] ) {
 			// Don't refresh the page.
 			$refresh = false;
 			$result = array(
-				'message' => __( 'Please enter username!', 'wp_sendsmaily' ),
+				'message' => __( 'Please enter username!', 'wp_smaily' ),
 				'error'   => true,
 			);
 			break;
@@ -80,14 +80,14 @@ switch ( $_POST['op'] ) {
 			// Don't refresh the page.
 			$refresh = false;
 			$result = array(
-				'message' => __( 'Please enter password!', 'wp_sendsmaily' ),
+				'message' => __( 'Please enter password!', 'wp_smaily' ),
 				'error'   => true,
 			);
 			break;
 		}
 
 		// Validate credentials with get request.
-		$rqst = new Wp_Sendsmaily_Request(
+		$rqst = new Wp_Smaily_Request(
 			'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
 			array(
 				'username' => $params['username'],
@@ -105,28 +105,28 @@ switch ( $_POST['op'] ) {
 			if ( $code === 401) {
 				// If wrong credentials.
 				$result = array(
-					'message' => __( 'Wrong credentials', 'wp_sendsmaily' ),
+					'message' => __( 'Wrong credentials', 'wp_smaily' ),
 					'error'   => true,
 				);
 				break;
 			} elseif ( $code === 404 ) {
 				// If wrong subdomain.
 				$result = array(
-					'message' => __( 'Error in subdomain', 'wp_sendsmaily' ),
+					'message' => __( 'Error in subdomain', 'wp_smaily' ),
 					'error'   => true,
 				);
 				break;
 			} elseif ( array_key_exists( 'error', $rqst ) ) {
 				// If there is wordpress error message.
 				$result = array(
-					'message' => __( $rqst['error'], 'wp_sendsmaily' ),
+					'message' => __( $rqst['error'], 'wp_smaily' ),
 					'error'   => true,
 				);
 				break;
 			}
 			// If not determined error.
 			$result = array(
-				'message' => __( 'Something went wrong with request to Smaily', 'wp_sendsmaily' ),
+				'message' => __( 'Something went wrong with request to Smaily', 'wp_smaily' ),
 				'error'   => true,
 			);
 			break;
@@ -162,7 +162,7 @@ switch ( $_POST['op'] ) {
 		// Return result.
 		$result = array(
 			'error'   => false,
-			'message' => __( 'Credentials validated.', 'wp_sendsmaily' ),
+			'message' => __( 'Credentials validated.', 'wp_smaily' ),
 		);
 		break;
 
@@ -180,7 +180,7 @@ switch ( $_POST['op'] ) {
 		// Set result.
 		$result = array(
 			'error' => false,
-			'message' => __( 'Credentials removed.', 'wp_sendsmaily' ),
+			'message' => __( 'Credentials removed.', 'wp_smaily' ),
 		);
 		break;
 
@@ -189,7 +189,7 @@ switch ( $_POST['op'] ) {
 
 		// Generate form contents.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
+		$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 		// Load configuration data.
 		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -200,7 +200,7 @@ switch ( $_POST['op'] ) {
 		// Render template.
 		$result = array(
 			'error' => false,
-			'message' => __( 'Newsletter subscription form reset to default.', 'wp_sendsmaily' ),
+			'message' => __( 'Newsletter subscription form reset to default.', 'wp_smaily' ),
 			'content' => $template->render(),
 		);
 		break;
@@ -215,7 +215,7 @@ switch ( $_POST['op'] ) {
 		// Credentials.
 		$api_credentials = explode( ':', $data->api_credentials );
 		// Get autoresponders.
-		$request = new Wp_Sendsmaily_Request(
+		$request = new Wp_Smaily_Request(
 			'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
 			array(
 				'username' => $api_credentials[0],
@@ -231,7 +231,7 @@ switch ( $_POST['op'] ) {
 			break;
 		} elseif ( empty( $autoreponders ) ) {
 			$result = array(
-				'message' => __( 'Could not find any autoresponders!', 'wp_sendsmaily' ),
+				'message' => __( 'Could not find any autoresponders!', 'wp_smaily' ),
 				'error'   => true,
 			);
 			break;
@@ -250,7 +250,7 @@ switch ( $_POST['op'] ) {
 		// Return result.
 		$result = array(
 			'error' => false,
-			'message' => __( 'Autoresponders refreshed.', 'wp_sendsmaily' ),
+			'message' => __( 'Autoresponders refreshed.', 'wp_smaily' ),
 		);
 
 		break;
@@ -268,7 +268,7 @@ switch ( $_POST['op'] ) {
 		// Generate new form (if empty).
 		if ( empty( $advanced['form'] ) ) {
 			require_once( BP . DS . 'code' . DS . 'Template.php' );
-			$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
+			$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 			// Load configuration data.
 			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -292,7 +292,7 @@ switch ( $_POST['op'] ) {
 		// Return response.
 		$result = array(
 			'error' => false,
-			'message' => __( 'Changes saved.', 'wp_sendsmaily' ),
+			'message' => __( 'Changes saved.', 'wp_smaily' ),
 		);
 		break;
 }
@@ -303,7 +303,7 @@ if ( $refresh ) {
 
 	// Generate form contents.
 	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.php' );
+	$template = new Wp_Smaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );

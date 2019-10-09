@@ -6,11 +6,11 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Smaily
- * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
- * Text Domain:       wp_sendsmaily
+ * Plugin URI:        https://github.com/smaily/smaily-wordpress-plugin
+ * Text Domain:       wp_smaily
  * Description:       Smaily newsletter subscription form.
  * Version:           2.0.0
- * Author:            Sendsmaily LLC
+ * Author:            Smaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -36,7 +36,7 @@ define( 'SS_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once( SS_PLUGIN_PATH . 'includes/activator.php' );
-register_activation_hook( __FILE__, 'sendsmaily_install' );
+register_activation_hook( __FILE__, 'smaily_install' );
 
 /**
  * Initialize.
@@ -56,31 +56,31 @@ add_action( 'wp_enqueue_scripts', 'smaily_enqueue' );
  *
  * @since 1.0.0
  */
-function sendsmaily_load_textdomain() {
-	load_plugin_textdomain( 'wp_sendsmaily', false, plugin_basename( BP ) . DS . 'lang' );
+function smaily_load_textdomain() {
+	load_plugin_textdomain( 'wp_smaily', false, plugin_basename( BP ) . DS . 'lang' );
 }
-add_action( 'plugins_loaded', 'sendsmaily_load_textdomain' );
+add_action( 'plugins_loaded', 'smaily_load_textdomain' );
 
 /**
  * Load subscribe widget.
  */
-function sendsmaily_subscription_widget_init() {
+function smaily_subscription_widget_init() {
 	require_once( SS_PLUGIN_PATH . 'includes/subscribe-widget.php' );
-	register_widget( 'Sendsmaily_Newsletter_Subscription_Widget' );
+	register_widget( 'Smaily_Newsletter_Subscription_Widget' );
 }
-add_action( 'widgets_init', 'sendsmaily_subscription_widget_init' );
+add_action( 'widgets_init', 'smaily_subscription_widget_init' );
 
 /**
  * Render admin page.
  *
  * @return void
  */
-function sendsmaily_admin_render() {
+function smaily_admin_render() {
 	global $wpdb;
 
 	// Create admin template.
 	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$template = new Wp_Sendsmaily_Template( 'html' . DS . 'admin' . DS . 'page.php' );
+	$template = new Wp_Smaily_Template( 'html' . DS . 'admin' . DS . 'page.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -93,17 +93,17 @@ function sendsmaily_admin_render() {
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
-	add_menu_page( 'sendsmaily', 'Smaily', 'manage_options', __FILE__, '', SS_PLUGIN_URL . '/gfx/icon.png' );
-	add_submenu_page( 'sendsmaily', 'Newsletter subscription form', 'Form', 'manage_options', __FILE__, array( $template, 'dispatch' ) );
+	add_menu_page( 'smaily', 'Smaily', 'manage_options', __FILE__, '', SS_PLUGIN_URL . '/gfx/icon.png' );
+	add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', __FILE__, array( $template, 'dispatch' ) );
 }
-add_action( 'admin_menu', 'sendsmaily_admin_render' );
+add_action( 'admin_menu', 'smaily_admin_render' );
 
 function smaily_subscribe_callback() {
 	global $wpdb;
 
 	// Form data required.
 	if ( ! ( isset( $_POST['form_data'] ) && ! empty( $_POST['form_data'] ) ) ) {
-		echo esc_html__( 'E-mail is required!', 'wp_sendsmaily' );
+		echo esc_html__( 'E-mail is required!', 'wp_smaily' );
 		exit;
 	}
 
@@ -113,7 +113,7 @@ function smaily_subscribe_callback() {
 
 	// E-mail required.
 	if ( ! ( isset( $params['email'] ) && ! empty( $params['email'] ) ) ) {
-		echo esc_html__( 'E-mail is required!', 'wp_sendsmaily' );
+		echo esc_html__( 'E-mail is required!', 'wp_smaily' );
 		exit;
 	}
 
@@ -151,16 +151,16 @@ function smaily_subscribe_callback() {
 
 	$array = array_merge( $array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
-	$request = new Wp_Sendsmaily_Request( $server, $array );
+	$request = new Wp_Smaily_Request( $server, $array );
 	$result  = $request->exec();
 
 	if ( empty( $result ) ) {
-		echo esc_html__( 'Something went wrong', 'wp_sendsmaily' );
+		echo esc_html__( 'Something went wrong', 'wp_smaily' );
 	} elseif ( (int) $result['code'] !== 101 ) {
 		// Possible errors, for translation.
-		// esc_html__('Posted fields do not contain a valid email address.', 'wp_sendsmaily');.
-		// esc_html__('No autoresponder data set.', 'wp_sendsmaily');.
-		echo esc_html__( $result['message'], 'wp_sendsmaily' );
+		// esc_html__('Posted fields do not contain a valid email address.', 'wp_smaily');.
+		// esc_html__('No autoresponder data set.', 'wp_smaily');.
+		echo esc_html__( $result['message'], 'wp_smaily' );
 	}
 
 	exit;
@@ -233,16 +233,16 @@ function smaily_nojs_subscribe_callback() {
 
 	$array = array_merge( $array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
-	$request = new Wp_Sendsmaily_Request( $server, $array );
+	$request = new Wp_Smaily_Request( $server, $array );
 	$result  = $request->exec();
 
 	if ( empty( $result ) ) {
-		echo esc_html__( 'Something went wrong', 'wp_sendsmaily' );
+		echo esc_html__( 'Something went wrong', 'wp_smaily' );
 	} elseif ( (int) $result['code'] !== 101 ) {
 		// Possible errors, for translation.
-		// esc_html__('Posted fields do not contain a valid email address.', 'wp_sendsmaily');.
-		// esc_html__('No autoresponder data set.', 'wp_sendsmaily');.
-		echo esc_html__( $result['message'], 'wp_sendsmaily' );
+		// esc_html__('Posted fields do not contain a valid email address.', 'wp_smaily');.
+		// esc_html__('No autoresponder data set.', 'wp_smaily');.
+		echo esc_html__( $result['message'], 'wp_smaily' );
 	}
 
 	wp_safe_redirect( home_url() );

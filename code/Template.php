@@ -1,6 +1,6 @@
 <?php
 
-class Wp_Sendsmaily_Template {
+class Wp_Smaily_Template {
 	/**
 	 * Template name.
 	 *
@@ -73,7 +73,7 @@ class Wp_Sendsmaily_Template {
 	 *
 	 * @param string|array $name Name.
 	 * @param object       $value [optional].
-	 * @return Sendsmaily_Subscribe_Abstract
+	 * @return Smaily_Subscribe_Abstract
 	 */
 	public function assign( $name, $value = null ) {
 		if ( is_array( $name ) && ! empty( $name ) && empty( $value ) ) {

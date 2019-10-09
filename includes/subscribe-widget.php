@@ -2,21 +2,21 @@
 /**
  * Widget that can be used to subscribe to newsletters
  *
- * @package    Sendsmaily
- * @subpackage Sendsmaily/includes
+ * @package    Smaily
+ * @subpackage Smaily/includes
  */
 
 /**
  * Create a class for the widget.
  */
-class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
+class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 
 	/**
 	 * Sets up a new instance of the widget.
 	 */
 	public function __construct() {
-		$widget_ops = array( 'description' => __( 'Sendsmaily newsletter subscription form', 'wp_sendsmaily' ) );
-		parent::__construct( 'sendsmaily_subscription_widget', __( 'Sendsmaily Newsletter Subscription', 'wp_sendsmaily' ), $widget_ops );
+		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'wp_smaily' ) );
+		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'wp_smaily' ), $widget_ops );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		// Create admin template.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
 		$file     = '1' === $config['is_advanced'] ? 'advanced.php' : 'basic.php';
-		$template = new Wp_Sendsmaily_Template( 'html' . DS . 'form' . DS . $file );
+		$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . $file );
 		$template->assign( $config );
 		// Render template.
 		echo $template->render();
@@ -87,7 +87,7 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$title_name        = esc_attr( $this->get_field_name( 'title' ) );
 		$instance['title'] = esc_attr( $instance['title'] );
 		echo '<p>
-			<label for="' . $title_id . '">' . __( 'Title', 'wp_sendsmaily' ) . ':</label>
+			<label for="' . $title_id . '">' . __( 'Title', 'wp_smaily' ) . ':</label>
 			<input class="widefat" id="' . $title_id . '" name="' . $title_name . '" type="text" value="' . $instance['title'] . '" />
 		</p>';
 
@@ -97,7 +97,7 @@ class Sendsmaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$instance['show_name'] = esc_attr( $instance['show_name'] );
 		echo '<p>
 			<input class="checkbox" id="' . $show_name_id . '" name="' . $show_name_name . '" type="checkbox"' . ( $instance['show_name'] ? 'checked' : '' ) . ' />
-			<label for="' . $show_name_id . '">' . __( 'Display name field?', 'wp_sendsmaily' ) . '</label>' .
+			<label for="' . $show_name_id . '">' . __( 'Display name field?', 'wp_smaily' ) . '</label>' .
 		'</p>';
 
 	}

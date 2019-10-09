@@ -2,8 +2,8 @@
 /**
  * Fired during plugin activation
  *
- * @package    Sendsmaily
- * @subpackage Sendsmaily/includes
+ * @package    Smaily
+ * @subpackage Smaily/includes
  */
 
 /**
@@ -11,7 +11,7 @@
  *
  * @return void
  */
-function sendsmaily_install() {
+function smaily_install() {
 	global $wpdb;
 	require_once( ABSPATH . 'wp-admin' . DS . 'includes' . DS . 'upgrade.php' );
 	$charset_collate = $wpdb->get_charset_collate();
