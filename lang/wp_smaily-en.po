@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: sendsmaily\n"
+"Project-Id-Version: smaily\n"
 "POT-Creation-Date: 2019-04-09 10:14+0000\n"
-"PO-Revision-Date: 2019-04-09 10:31+0000\n"
-"Last-Translator: Sendsmaily_OÜ <info@smaily.com>\n"
-"Language-Team: Eesti\n"
-"Language: et\n"
+"PO-Revision-Date: 2019-04-09 10:30+0000\n"
+"Last-Translator: Smaily_OÜ <info@smaily.com>\n"
+"Language-Team: English\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,176 +19,175 @@ msgstr ""
 
 #: action.php:64
 msgid "Please enter subdomain!"
-msgstr "Palun sisesta alamdomeen!"
+msgstr "Please enter subdomain!"
 
 #: action.php:72
 msgid "Please enter username!"
-msgstr "Palun sisesta kasutajatunnus!"
+msgstr "Please enter username!"
 
 #: action.php:80
 msgid "Please enter password!"
-msgstr "Palun sisesta parool!"
+msgstr "Please enter password!"
 
 #: action.php:105
 msgid "Wrong credentials"
-msgstr "Valed autentimise tunnused"
+msgstr "Wrong credentials"
 
 #: action.php:112
 msgid "Error in subdomain"
-msgstr "Viga alamdomeenis"
+msgstr "Error in subdomain"
 
 #: action.php:126
 msgid "Something went wrong with request to Smaily"
-msgstr "Ilmnes probleem Smaily-ga ühendamisel"
+msgstr "Something went wrong with request to Smaily"
 
 #: action.php:159
 msgid "Credentials validated."
-msgstr "Autentimise tunnused valideeritud."
+msgstr "Credentials validated."
 
 #: action.php:177
 msgid "Credentials removed."
-msgstr "Autentimise tunnused eemaldatud."
+msgstr "Credentials removed."
 
 #: action.php:197
 msgid "Newsletter subscription form reset to default."
-msgstr "Liitumisvormi kood taasloodud."
+msgstr "Newsletter subscription form reset to default."
 
 #: action.php:228
 msgid "Could not find any autoresponders!"
-msgstr "Ei leidnud Automaatvastajaid!"
+msgstr "Could not find any autoresponders!"
 
 #: action.php:247
 msgid "Autoresponders refreshed."
-msgstr "Automaatvastajad uuendatud."
+msgstr "Autoresponders refreshed."
 
 #: action.php:293
 msgid "Changes saved."
-msgstr "Salvestatud."
+msgstr "Changes saved."
 
-#: sendsmaily.php:106 sendsmaily.php:116
+#: smaily.php:106 smaily.php:116
 msgid "E-mail is required!"
-msgstr "E-post on nõutud!"
+msgstr "E-mail is required!"
 
-#: sendsmaily.php:158
+#: smaily.php:158
 msgid "Something went wrong"
-msgstr "Päringu viga"
+msgstr "Something went wrong"
 
 #: includes/subscribe-widget.php:18
-msgid "Sendsmaily newsletter subscription form"
-msgstr "Sendsmaily uudiskirjaga liitumise vorm"
+msgid "Smaily newsletter subscription form"
+msgstr "Smaily newsletter subscription form"
 
 #: includes/subscribe-widget.php:19
-msgid "Sendsmaily Newsletter Subscription"
-msgstr "Sendsmaily uudiskirjaga liitumine"
+msgid "Smaily Newsletter Subscription"
+msgstr "Smaily Newsletter Subscription"
 
 #: includes/subscribe-widget.php:90
 msgid "Title"
-msgstr "Pealkiri"
+msgstr "Title"
 
 #: includes/subscribe-widget.php:100
 msgid "Display name field?"
-msgstr "Näita nime välja?"
+msgstr "Display name field?"
 
 #: html/admin/page.php:31
-msgid "Sendsmaily Wordpress plugin"
-msgstr "Sendsmaily Wordpressi pistikmoodul"
+msgid "Smaily Wordpress plugin"
+msgstr "Smaily Wordpress plugin"
 
 #: html/admin/page.php:32
 msgid "Please wait, working..."
-msgstr "Palun oota..."
+msgstr "Please wait, working..."
 
 #: html/form/advanced.php:9 html/form/basic.php:3
 msgid "Thank you for subscribing to our newsletter."
-msgstr "Täname, et liitusite meie uudiskirjaga."
+msgstr "Thank you for subscribing to our newsletter."
 
 #: html/form/advanced.php:11 html/form/basic.php:6
 msgid "Email"
-msgstr "E-post"
+msgstr "Email"
 
 #: html/form/advanced.php:15 html/form/basic.php:10
 msgid "Name"
-msgstr "Nimi"
+msgstr "Name"
 
 #: html/form/advanced.php:20 html/form/basic.php:15
 msgid "Subscribe"
-msgstr "Liitu"
+msgstr "Subscribe"
 
 #: html/admin/html/form.php:13
 msgid "Your current credentials are validated"
-msgstr "Kasutajatunnused valideeritud"
+msgstr "Your current credentials are validated"
 
 #: html/admin/html/form.php:14
 msgid "Remove"
-msgstr "Eemalda"
+msgstr "Remove"
 
 #: html/admin/html/form.php:21
 msgid "Subdomain"
-msgstr "Alamdomeen"
+msgstr "Subdomain"
 
 #: html/admin/html/form.php:31
 msgid "Username"
-msgstr "Kasutajatunnus"
+msgstr "Username"
 
 #: html/admin/html/form.php:35
 msgid "Password"
-msgstr "Salasõna"
+msgstr "Password"
 
 #: html/admin/html/form.php:40
 msgid "Check"
-msgstr "Kontrolli"
+msgstr "Check"
 
 #: html/admin/html/form.php:46
 msgid "Basic"
-msgstr "Tavaseaded"
+msgstr "Basic"
 
 #: html/admin/html/form.php:47
 msgid "Advanced"
-msgstr "Spetsialisti seaded"
+msgstr "Advanced"
 
 #: html/admin/html/form.php:53
 msgid "Autoresponders"
-msgstr "Automaatvastajad"
+msgstr "Autoresponders"
 
 #: html/admin/html/form.php:53
 msgid "Refresh"
-msgstr "Uuenda"
+msgstr "Refresh"
 
 #: html/admin/html/form.php:54
 msgid "Select autoresponder to change regular opt-in functionality"
-msgstr "Vali automaatika, et muuta tavalist opt-in funktsionaalsust"
+msgstr "Select autoresponder to change regular opt-in functionality"
 
 #: html/admin/html/form.php:57
 msgid "No autoresponder"
-msgstr "Ilma automaatvastajata vorm"
+msgstr "No autoresponder"
 
 #: html/admin/html/form.php:63
 msgid "No autoresponders. Please click on refresh link to update."
-msgstr "Automaatvastajad puuduvad. Uuendamiseks vajutage värskenda viidet."
+msgstr "No autoresponders. Please click on refresh link to update."
 
 #: html/admin/html/form.php:70
 msgid "Newsletter subscription form"
-msgstr "Uudiskirja liitumisvorm"
+msgstr "Newsletter subscription form"
 
 #: html/admin/html/form.php:70
 msgid "Restore original subscription form"
-msgstr "Taasta algne liitumisvorm"
+msgstr "Restore original subscription form"
 
 #: html/admin/html/form.php:70
 msgid "Regenerate"
-msgstr "Taastekita"
+msgstr "Regenerate"
 
 #: html/admin/html/form.php:71
 msgid "HTML of subscription form"
-msgstr "Liitumisvormi HTML"
+msgstr "HTML of subscription form"
 
 #: html/admin/html/form.php:76
 msgid "Note: When you save under Basic tab, default form will be used."
-msgstr ""
-"Hoiatus: Kui salvestad Tavaseadete vaates, kasutatakse lehel vaikimisi vormi."
+msgstr "Note: When you save under Basic tab, default form will be used."
 
 #: html/admin/html/form.php:79
 msgid "Save changes"
-msgstr "Salvesta muudatused"
+msgstr "Save changes"
 
 #. Name of the plugin
 msgid "Smaily"
@@ -196,15 +195,15 @@ msgstr "Smaily"
 
 #. Description of the plugin
 msgid "Smaily newsletter subscription form."
-msgstr "Smaily uudiskirjaga liitumise vorm."
+msgstr "Smaily newsletter subscription form."
 
 #. URI of the plugin
-msgid "https://github.com/sendsmaily/sendsmaily-wordpress-plugin"
-msgstr "https://github.com/sendsmaily/sendsmaily-wordpress-plugin"
+msgid "https://github.com/smaily/smaily-wordpress-plugin"
+msgstr "https://github.com/smaily/smaily-wordpress-plugin"
 
 #. Author of the plugin
-msgid "Sendsmaily LLC"
-msgstr "Sendsmaily LLC"
+msgid "Smaily LLC"
+msgstr "Smaily LLC"
 
 #. Author URI of the plugin
 msgid "https://smaily.com"

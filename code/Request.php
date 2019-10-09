@@ -1,6 +1,6 @@
 <?php
 
-class Wp_Sendsmaily_Request {
+class Wp_Smaily_Request {
 	/**
 	 * Remote request url.
 	 *
