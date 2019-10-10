@@ -5,12 +5,12 @@
  * @package           Smaily
  *
  * @wordpress-plugin
- * Plugin Name:       Smaily
- * Plugin URI:        https://github.com/smaily/smaily-wordpress-plugin
+ * Plugin Name:       Smaily for Wordpress
+ * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin/
  * Text Domain:       wp_smaily
  * Description:       Smaily newsletter subscription form.
  * Version:           2.0.0
- * Author:            Smaily LLC
+ * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

@@ -1,4 +1,4 @@
-=== Smaily ===
+=== Smaily for Wordpress ===
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 5.2.2
 Stable tag: 2.0.0
@@ -22,4 +22,4 @@ Smaily newsletter subscription plugin for WordPress.
 == Changelog ==
 
 = 2.0.0 =
-* Changed database structure to simplify further updates.
+* First public release.
