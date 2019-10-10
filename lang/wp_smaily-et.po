@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: smaily\n"
 "POT-Creation-Date: 2019-04-09 10:14+0000\n"
 "PO-Revision-Date: 2019-04-09 10:31+0000\n"
-"Last-Translator: Smaily_OÜ <info@smaily.com>\n"
+"Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Eesti\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -199,12 +199,12 @@ msgid "Smaily newsletter subscription form."
 msgstr "Smaily uudiskirjaga liitumise vorm."
 
 #. URI of the plugin
-msgid "https://github.com/smaily/smaily-wordpress-plugin"
-msgstr "https://github.com/smaily/smaily-wordpress-plugin"
+msgid "https://github.com/sendsmaily/sendsmaily-wordpress-plugin/"
+msgstr "https://github.com/sendsmaily/sendsmaily-wordpress-plugin/"
 
 #. Author of the plugin
-msgid "Smaily LLC"
-msgstr "Smaily LLC"
+msgid "Sendsmaily LLC"
+msgstr "Sendsmaily LLC"
 
 #. Author URI of the plugin
 msgid "https://smaily.com"
