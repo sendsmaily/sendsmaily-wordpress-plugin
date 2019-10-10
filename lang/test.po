@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 22:46+0300\n"
-"PO-Revision-Date: 2019-10-10 22:46+0300\n"
+"POT-Creation-Date: 2019-10-10 16:20+0300\n"
+"PO-Revision-Date: 2019-10-10 16:20+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Eesti\n"
 "Language: et\n"
@@ -149,25 +149,21 @@ msgstr "Smaily Wordpressi pistikmoodul"
 msgid "Please wait, working..."
 msgstr "Palun oota..."
 
-#: html/form/advanced.php:9 html/form/basic.php:6
+#: html/form/advanced.php:9 html/form/basic.php:3
 msgid "Thank you for subscribing to our newsletter."
 msgstr "Täname, et liitusite meie uudiskirjaga."
 
-#: html/form/advanced.php:13 html/form/basic.php:9
+#: html/form/advanced.php:13 html/form/basic.php:6
 msgid "Email"
 msgstr "E-post"
 
-#: html/form/advanced.php:16 html/form/basic.php:13
+#: html/form/advanced.php:16 html/form/basic.php:10
 msgid "Name"
 msgstr "Nimi"
 
-#: html/form/advanced.php:20 html/form/basic.php:18
+#: html/form/advanced.php:20 html/form/basic.php:15
 msgid "Subscribe"
 msgstr "Liitu"
-
-#: html/form/basic.php:3
-msgid "Smaily credentials not validated. Subscription form will not work!"
-msgstr "Smaily kasutajatunnused on valideerimata.  Uudiskirja vorm ei tööta!"
 
 #: includes/subscribe-widget.php:18
 msgid "Smaily newsletter subscription form"
@@ -185,10 +181,11 @@ msgstr "Pealkiri"
 msgid "Display name field?"
 msgstr "Näita nime välja?"
 
-#: smaily-for-wordpress.php:106 smaily-for-wordpress.php:116
+#: smaily-for-wordpress.php:109 smaily-for-wordpress.php:115
+#: smaily-for-wordpress.php:125
 msgid "E-mail is required!"
 msgstr "E-post on nõutud!"
 
-#: smaily-for-wordpress.php:158 smaily-for-wordpress.php:240
+#: smaily-for-wordpress.php:167 smaily-for-wordpress.php:249
 msgid "Something went wrong"
 msgstr "Päringu viga"
