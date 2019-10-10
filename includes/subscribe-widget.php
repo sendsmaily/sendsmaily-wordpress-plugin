@@ -44,7 +44,7 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$config['show_name'] = $show_name;
 		// Create admin template.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$file     = '1' === $config['is_advanced'] ? 'advanced.php' : 'basic.php';
+		$file     = ( isset( $config['is_advanced'] ) &&  '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
 		$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . $file );
 		$template->assign( $config );
 		// Render template.

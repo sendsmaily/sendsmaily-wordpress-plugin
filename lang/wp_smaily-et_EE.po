@@ -1,117 +1,69 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
-"POT-Creation-Date: 2019-04-09 10:14+0000\n"
-"PO-Revision-Date: 2019-04-09 10:31+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-10-10 22:45+0300\n"
+"PO-Revision-Date: 2019-10-10 22:45+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Estonian (Estonia)\n"
 "Language: et_EE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_attr__;esc_attr_e;esc_html_e\n"
+"X-Loco-Version: 2.2.2; wp-5.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
-"Report-Msgid-Bugs-To: \n"
-"X-Loco-Version: 2.2.2; wp-5.1.1"
 
-#: action.php:64
+#: action.php:67
 msgid "Please enter subdomain!"
 msgstr "Palun sisesta alamdomeen!"
 
-#: action.php:72
+#: action.php:75
 msgid "Please enter username!"
 msgstr "Palun sisesta kasutajatunnus!"
 
-#: action.php:80
+#: action.php:83
 msgid "Please enter password!"
 msgstr "Palun sisesta salasõna!"
 
-#: action.php:105
+#: action.php:108
 msgid "Wrong credentials"
 msgstr "Valed autentimise tunnused"
 
-#: action.php:112
+#: action.php:115
 msgid "Error in subdomain"
 msgstr "Viga alamdomeenis"
 
-#: action.php:126
+#: action.php:129
 msgid "Something went wrong with request to Smaily"
 msgstr "Ilmnes probleem Smaily-ga ühendamisel"
 
-#: action.php:159
+#: action.php:165
 msgid "Credentials validated."
 msgstr "Autentimise tunnused valideeritud."
 
-#: action.php:177
+#: action.php:183
 msgid "Credentials removed."
 msgstr "Autentimise tunnused eemaldatud."
 
-#: action.php:197
+#: action.php:203
 msgid "Newsletter subscription form reset to default."
 msgstr "Liitumisvormi kood taasloodud."
 
-#: action.php:228
+#: action.php:234
 msgid "Could not find any autoresponders!"
-msgstr "Ei ole loodud ühtegi vormi postitus automaatikat."
+msgstr "Ei ole loodud ühtegi vormi postitus automaatikat!"
 
-#: action.php:247
+#: action.php:253
 msgid "Autoresponders refreshed."
 msgstr "Automaatvastajad uuendatud."
 
-#: action.php:293
+#: action.php:295
 msgid "Changes saved."
 msgstr "Salvestatud."
-
-#: smaily.php:106 smaily.php:116
-msgid "E-mail is required!"
-msgstr "E-post on nõutud!"
-
-#: smaily.php:158
-msgid "Something went wrong"
-msgstr "Päringu viga"
-
-#: includes/subscribe-widget.php:18
-msgid "Smaily newsletter subscription form"
-msgstr "Smaily uudiskirjaga liitumise vorm"
-
-#: includes/subscribe-widget.php:19
-msgid "Smaily Newsletter Subscription"
-msgstr "Smaily uudiskirjaga liitumine"
-
-#: includes/subscribe-widget.php:90
-msgid "Title"
-msgstr "Pealkiri"
-
-#: includes/subscribe-widget.php:100
-msgid "Display name field?"
-msgstr "Näita nime välja?"
-
-#: html/admin/page.php:31
-msgid "Smaily Wordpress plugin"
-msgstr "Smaily Wordpressi pistikmoodul"
-
-#: html/admin/page.php:32
-msgid "Please wait, working..."
-msgstr "Palun oota..."
-
-#: html/form/advanced.php:9 html/form/basic.php:3
-msgid "Thank you for subscribing to our newsletter."
-msgstr "Täname, et liitusite meie uudiskirjaga."
-
-#: html/form/advanced.php:11 html/form/basic.php:6
-msgid "Email"
-msgstr "E-post"
-
-#: html/form/advanced.php:15 html/form/basic.php:10
-msgid "Name"
-msgstr "Nimi"
-
-#: html/form/advanced.php:20 html/form/basic.php:15
-msgid "Subscribe"
-msgstr "Liitu"
 
 #: html/admin/html/form.php:13
 msgid "Your current credentials are validated"
@@ -183,29 +135,60 @@ msgstr "Liitumisvormi HTML"
 
 #: html/admin/html/form.php:76
 msgid "Note: When you save under Basic tab, default form will be used."
-msgstr ""
-"Hoiatus: Kui salvestad Tavaseadete vaates, kasutatakse lehel vaikimisi vormi."
+msgstr "Hoiatus: Kui salvestad Tavaseadete vaates, kasutatakse lehel vaikimisi vormi."
 
 #: html/admin/html/form.php:79
 msgid "Save changes"
 msgstr "Salvesta muudatused"
 
-#. Name of the plugin
-msgid "Smaily"
-msgstr "Smaily"
+#: html/admin/page.php:31
+msgid "Smaily Wordpress plugin"
+msgstr "Smaily Wordpressi pistikmoodul"
 
-#. Description of the plugin
-msgid "Smaily newsletter subscription form."
-msgstr "Smaily uudiskirjaga liitumise vorm."
+#: html/admin/page.php:32
+msgid "Please wait, working..."
+msgstr "Palun oota..."
 
-#. URI of the plugin
-msgid "https://github.com/sendsmaily/sendsmaily-wordpress-plugin/"
-msgstr "https://github.com/sendsmaily/sendsmaily-wordpress-plugin/"
+#: html/form/advanced.php:9 html/form/basic.php:6
+msgid "Thank you for subscribing to our newsletter."
+msgstr "Täname, et liitusite meie uudiskirjaga."
 
-#. Author of the plugin
-msgid "Sendsmaily LLC"
-msgstr "Sendsmaily LLC"
+#: html/form/advanced.php:13 html/form/basic.php:9
+msgid "Email"
+msgstr "E-post"
 
-#. Author URI of the plugin
-msgid "https://smaily.com"
-msgstr "https://smaily.com"
+#: html/form/advanced.php:16 html/form/basic.php:13
+msgid "Name"
+msgstr "Nimi"
+
+#: html/form/advanced.php:20 html/form/basic.php:18
+msgid "Subscribe"
+msgstr "Liitu"
+
+#: html/form/basic.php:3
+msgid "Smaily credentials not validated. Subscription form will not work!"
+msgstr "Smaily kasutajatunnused on valideerimata.  Uudiskirja vorm ei tööta!"
+
+#: includes/subscribe-widget.php:18
+msgid "Smaily newsletter subscription form"
+msgstr "Smaily uudiskirjaga liitumise vorm"
+
+#: includes/subscribe-widget.php:19
+msgid "Smaily Newsletter Subscription"
+msgstr "Smaily uudiskirjaga liitumine"
+
+#: includes/subscribe-widget.php:90
+msgid "Title"
+msgstr "Pealkiri"
+
+#: includes/subscribe-widget.php:100
+msgid "Display name field?"
+msgstr "Näita nime välja?"
+
+#: smaily-for-wordpress.php:106 smaily-for-wordpress.php:116
+msgid "E-mail is required!"
+msgstr "E-post on nõutud!"
+
+#: smaily-for-wordpress.php:158 smaily-for-wordpress.php:240
+msgid "Something went wrong"
+msgstr "Päringu viga"
