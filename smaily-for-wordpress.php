@@ -172,15 +172,18 @@ add_action( 'wp_ajax_nopriv_smaily_subscribe_callback', 'smaily_subscribe_callba
 function smaily_nojs_subscribe_callback() {
 	global $wpdb;
 
+	// Get redirect URL.
+	$redirect_url = wp_get_referer() ? wp_get_referer() : get_home_url();
+
 	// Verify nonce.
 	if ( ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'smaily_nonce_field' ) ) {
-		wp_safe_redirect( home_url() );
+		wp_safe_redirect( $redirect_url );
 		return;
 	}
 
 	// Form data required.
 	if ( ! $_POST ) {
-		wp_safe_redirect( home_url() );
+		wp_safe_redirect( $redirect_url );
 		exit;
 	}
 
@@ -195,12 +198,11 @@ function smaily_nojs_subscribe_callback() {
 
 	// E-mail required.
 	if ( ! ( isset( $params['email'] ) && ! empty( $params['email'] ) ) ) {
-		wp_safe_redirect( home_url() );
+		wp_safe_redirect( $redirect_url );
 		exit;
 	}
 
-	// Get home url.
-	$home_url = home_url();
+
 
 	// Get data from database.
 	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -211,8 +213,8 @@ function smaily_nojs_subscribe_callback() {
 	$lang   = explode( '-', $params['lang'] );
 	$array  = array(
 		'remote'        => 1,
-		'success_url'   => $home_url,
-		'failure_url'   => $home_url,
+		'success_url'   => $redirect_url,
+		'failure_url'   => $redirect_url,
 		'language'      => $lang[0],
 	);
 
@@ -245,7 +247,7 @@ function smaily_nojs_subscribe_callback() {
 		echo esc_html__( $result['message'], 'wp_smaily' );
 	}
 
-	wp_safe_redirect( home_url() );
+	wp_safe_redirect( $redirect_url );
 	exit;
 }
 add_action( 'admin_post_nopriv_smly', 'smaily_nojs_subscribe_callback' );
