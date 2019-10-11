@@ -183,7 +183,9 @@ function smaily_nojs_subscribe_callback() {
 	global $wpdb;
 
 	// Get redirect URL.
-	$redirect_url = wp_get_referer() ? wp_get_referer() : get_home_url();
+	$referer_url = wp_get_referer();
+	$redirect_url = $referer_url ? remove_query_arg( 'smaily_form_error', $referer_url ) : get_home_url();
+
 	// Verify nonce.
 	if ( ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'smaily_nonce_field' ) ) {
 		wp_safe_redirect( $redirect_url );
@@ -252,7 +254,7 @@ function smaily_nojs_subscribe_callback() {
 	} elseif ( (int) $result['code'] !== 101 ) {
 		switch ( $result['code'] ) {
 			case 201:
-				$error .= '?smaily_form_error=' . esc_html__( 'Form was not sent using POST method.', 'wp_smaily' );
+				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Form was not sent using POST method.', 'wp_smaily' );
 				break;
 			case 204:
 				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' );
@@ -265,11 +267,9 @@ function smaily_nojs_subscribe_callback() {
 				break;
 		}
 		$redirect_url = str_replace(' ', '%20', $redirect_url);
-		wp_safe_redirect( $redirect_url );
-		exit;
 	}
-	wp_safe_redirect( remove_query_arg( 'smaily_form_error', $redirect_url ) );
+	wp_safe_redirect( $redirect_url );
 	exit;
 }
-add_action( 'admin_post_nopriv_smly', 'smaily_nojs_subscribe_callback' );
-add_action( 'admin_post_smly', 'smaily_nojs_subscribe_callback' );
+add_action( 'admin_post_nopriv_smaily_nojs_subscribe_callback', 'smaily_nojs_subscribe_callback' );
+add_action( 'admin_post_smaily_nojs_subscribe_callback', 'smaily_nojs_subscribe_callback' );
