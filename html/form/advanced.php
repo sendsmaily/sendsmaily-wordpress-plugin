@@ -17,6 +17,7 @@ $form = $this->form;
 			<input type="text" name="name" value="" />
 		</p>
 	<?php endif; ?>
+	<p><?php echo !empty($_GET['smaily_form_error']) ? htmlspecialchars($_GET['smaily_form_error']) : ''; ?></p>
 	<p><button type="submit"><?php echo esc_html__( 'Subscribe', 'wp_smaily' ); ?></button></p>
 </form>
 <?php endif; ?>
