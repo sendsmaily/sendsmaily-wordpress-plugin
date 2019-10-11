@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-10 22:19+0300\n"
-"PO-Revision-Date: 2019-10-10 22:19+0300\n"
+"POT-Creation-Date: 2019-10-11 16:36+0300\n"
+"PO-Revision-Date: 2019-10-11 16:36+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -153,7 +153,7 @@ msgstr "Please wait, working..."
 msgid "Thank you for subscribing to our newsletter."
 msgstr "Thank you for subscribing to our newsletter."
 
-#: html/form/advanced.php:13 html/form/basic.php:9
+#: html/form/advanced.php:13 html/form/basic.php:10
 msgid "Email"
 msgstr "Email"
 
@@ -161,7 +161,7 @@ msgstr "Email"
 msgid "Name"
 msgstr "Name"
 
-#: html/form/advanced.php:20 html/form/basic.php:18
+#: html/form/advanced.php:21 html/form/basic.php:18
 msgid "Subscribe"
 msgstr "Subscribe"
 
@@ -189,14 +189,23 @@ msgstr "Display name field?"
 msgid "E-mail is required!"
 msgstr "E-mail is required!"
 
-#: smaily-for-wordpress.php:158 smaily-for-wordpress.php:244
+#: smaily-for-wordpress.php:158 smaily-for-wordpress.php:171
+#: smaily-for-wordpress.php:252 smaily-for-wordpress.php:265
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: smaily-for-wordpress.php:162 smaily-for-wordpress.php:248
-msgid "Posted fields do not contain a valid email address."
-msgstr "Posted fields do not contain a valid email address."
+#: smaily-for-wordpress.php:162 smaily-for-wordpress.php:256
+msgid "Form was not sent using POST method."
+msgstr "Form was not sent using POST method."
 
-#: smaily-for-wordpress.php:165 smaily-for-wordpress.php:251
-msgid "No autoresponder data set."
-msgstr "No autoresponder data set."
+#: smaily-for-wordpress.php:165 smaily-for-wordpress.php:259
+msgid "Input does not contain a recognizable email address."
+msgstr "Input does not contain a recognizable email address."
+
+#: smaily-for-wordpress.php:168 smaily-for-wordpress.php:262
+msgid ""
+"Could not add to subscriber list for an unknown reason. Probably something "
+"in Smaily."
+msgstr ""
+"Could not add to subscriber list for an unknown reason. Probably something "
+"in Smaily."

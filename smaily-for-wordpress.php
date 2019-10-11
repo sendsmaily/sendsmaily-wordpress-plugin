@@ -165,7 +165,7 @@ function smaily_subscribe_callback() {
 				echo esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' );
 				break;
 			case 205:
-				echo esc_html__( 'Could not add to subscriptions for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
+				echo esc_html__( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
 				break;
 			default:
 				echo esc_html__( 'Something went wrong', 'wp_smaily' );
