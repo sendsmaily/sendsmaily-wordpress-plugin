@@ -184,7 +184,6 @@ function smaily_nojs_subscribe_callback() {
 
 	// Get redirect URL.
 	$redirect_url = wp_get_referer() ? wp_get_referer() : get_home_url();
-	echo "Test";
 	// Verify nonce.
 	if ( ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'smaily_nonce_field' ) ) {
 		wp_safe_redirect( $redirect_url );
