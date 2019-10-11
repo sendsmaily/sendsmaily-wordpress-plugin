@@ -157,10 +157,20 @@ function smaily_subscribe_callback() {
 	if ( empty( $result ) ) {
 		echo esc_html__( 'Something went wrong', 'wp_smaily' );
 	} elseif ( (int) $result['code'] !== 101 ) {
-		// Possible errors, for translation.
-		// esc_html__('Posted fields do not contain a valid email address.', 'wp_smaily');.
-		// esc_html__('No autoresponder data set.', 'wp_smaily');.
-		echo esc_html__( $result['message'], 'wp_smaily' );
+		switch ( $result['code'] ) {
+			case 201:
+				echo esc_html__( 'Form was not sent using POST method.', 'wp_smaily' );
+				break;
+			case 204:
+				echo esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' );
+				break;
+			case 205:
+				echo esc_html__( 'Could not add to subscriptions for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
+				break;
+			default:
+				echo esc_html__( 'Something went wrong', 'wp_smaily' );
+				break;
+		}
 	}
 
 	exit;
@@ -174,7 +184,7 @@ function smaily_nojs_subscribe_callback() {
 
 	// Get redirect URL.
 	$redirect_url = wp_get_referer() ? wp_get_referer() : get_home_url();
-
+	echo "Test";
 	// Verify nonce.
 	if ( ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'smaily_nonce_field' ) ) {
 		wp_safe_redirect( $redirect_url );
@@ -239,15 +249,27 @@ function smaily_nojs_subscribe_callback() {
 	$result  = $request->exec();
 
 	if ( empty( $result ) ) {
-		echo esc_html__( 'Something went wrong', 'wp_smaily' );
+		$redirect_url .= '?smaily_form_error=' . esc_html__( 'Something went wrong', 'wp_smaily' );
 	} elseif ( (int) $result['code'] !== 101 ) {
-		// Possible errors, for translation.
-		// esc_html__('Posted fields do not contain a valid email address.', 'wp_smaily');.
-		// esc_html__('No autoresponder data set.', 'wp_smaily');.
-		echo esc_html__( $result['message'], 'wp_smaily' );
+		switch ( $result['code'] ) {
+			case 201:
+				$error .= '?smaily_form_error=' . esc_html__( 'Form was not sent using POST method.', 'wp_smaily' );
+				break;
+			case 204:
+				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' );
+				break;
+			case 205:
+				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
+				break;
+			default:
+				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Something went wrong', 'wp_smaily' );
+				break;
+		}
+		$redirect_url = str_replace(' ', '%20', $redirect_url);
+		wp_safe_redirect( $redirect_url );
+		exit;
 	}
-
-	wp_safe_redirect( $redirect_url );
+	wp_safe_redirect( remove_query_arg( 'smaily_form_error', $redirect_url ) );
 	exit;
 }
 add_action( 'admin_post_nopriv_smly', 'smaily_nojs_subscribe_callback' );
