@@ -182,8 +182,8 @@ add_action( 'wp_ajax_nopriv_smaily_subscribe_callback', 'smaily_subscribe_callba
 function smaily_nojs_subscribe_callback() {
 	global $wpdb;
 
-	// Get redirect URL.
 	$referer_url = wp_get_referer();
+	// Clean up arguments from referred URL.
 	$redirect_url = $referer_url ? remove_query_arg( 'smaily_form_error', $referer_url ) : get_home_url();
 
 	// Verify nonce.
@@ -250,23 +250,28 @@ function smaily_nojs_subscribe_callback() {
 	$result  = $request->exec();
 
 	if ( empty( $result ) ) {
-		$redirect_url .= '?smaily_form_error=' . esc_html__( 'Something went wrong', 'wp_smaily' );
+		$redirect_url = add_query_arg( 'smaily_form_error',
+			rawurlencode( esc_html__( 'Something went wrong', 'wp_smaily' ) ), $redirect_url );
 	} elseif ( (int) $result['code'] !== 101 ) {
-		switch ( $result['code'] ) {
+		switch ( (int) $result['code'] ) {
 			case 201:
-				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Form was not sent using POST method.', 'wp_smaily' );
+				$redirect_url = add_query_arg( 'smaily_form_error',
+					rawurlencode( esc_html__( 'Form was not sent using POST method.', 'wp_smaily' ) ), $redirect_url );
 				break;
 			case 204:
-				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' );
+				$redirect_url = add_query_arg( 'smaily_form_error',
+					rawurlencode( esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' ) ), $redirect_url );
 				break;
 			case 205:
-				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
+				$redirect_url = add_query_arg( 'smaily_form_error',
+					rawurlencode( esc_html__( 'Could not add to subscriber list for an unknown reason.
+					Probably something in Smaily.', 'wp_smaily' ) ), $redirect_url );
 				break;
 			default:
-				$redirect_url .= '?smaily_form_error=' . esc_html__( 'Something went wrong', 'wp_smaily' );
+				$redirect_url = add_query_arg( 'smaily_form_error',
+					rawurlencode( esc_html__( 'Something went wrong', 'wp_smaily' ) ), $redirect_url );
 				break;
 		}
-		$redirect_url = str_replace(' ', '%20', $redirect_url);
 	}
 	wp_safe_redirect( $redirect_url );
 	exit;
