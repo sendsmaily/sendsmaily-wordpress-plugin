@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-14 13:09+0300\n"
-"PO-Revision-Date: 2019-10-14 13:09+0300\n"
+"POT-Creation-Date: 2019-10-14 15:11+0300\n"
+"PO-Revision-Date: 2019-10-14 15:13+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Eesti\n"
 "Language: et\n"
@@ -150,23 +150,23 @@ msgstr "Smaily Wordpressi pistikmoodul"
 msgid "Please wait, working..."
 msgstr "Palun oota..."
 
-#: html/form/advanced.php:12 html/form/basic.php:9
+#: html/form/advanced.php:9 html/form/basic.php:6
 msgid "Thank you for subscribing to our newsletter."
 msgstr "Täname, et liitusite meie uudiskirjaga."
 
-#: html/form/advanced.php:16 html/form/basic.php:13
+#: html/form/advanced.php:13 html/form/basic.php:10
 msgid "Email"
 msgstr "E-post"
 
-#: html/form/advanced.php:19 html/form/basic.php:16
+#: html/form/advanced.php:16 html/form/basic.php:13
 msgid "Name"
 msgstr "Nimi"
 
-#: html/form/advanced.php:23 html/form/basic.php:20
+#: html/form/advanced.php:20 html/form/basic.php:17
 msgid "Subscribe"
 msgstr "Liitu"
 
-#: html/form/basic.php:3
+#: html/form/basic.php:3 includes/subscribe-widget.php:59
 msgid "Smaily credentials not validated. Subscription form will not work!"
 msgstr "Smaily kasutajatunnused on valideerimata.  Uudiskirja vorm ei tööta!"
 
@@ -178,11 +178,11 @@ msgstr "Smaily uudiskirjaga liitumise vorm"
 msgid "Smaily Newsletter Subscription"
 msgstr "Smaily uudiskirjaga liitumine"
 
-#: includes/subscribe-widget.php:90
+#: includes/subscribe-widget.php:105
 msgid "Title"
 msgstr "Pealkiri"
 
-#: includes/subscribe-widget.php:100
+#: includes/subscribe-widget.php:115
 msgid "Display name field?"
 msgstr "Näita nime välja?"
 
@@ -191,22 +191,34 @@ msgid "E-mail is required!"
 msgstr "E-post on nõutud!"
 
 #: smaily-for-wordpress.php:158 smaily-for-wordpress.php:171
-#: smaily-for-wordpress.php:254 smaily-for-wordpress.php:271
+#: smaily-for-wordpress.php:260 smaily-for-wordpress.php:277
 msgid "Something went wrong"
 msgstr "Päringu viga"
 
-#: smaily-for-wordpress.php:162 smaily-for-wordpress.php:259
+#: smaily-for-wordpress.php:162 smaily-for-wordpress.php:265
 msgid "Form was not sent using POST method."
 msgstr "Vorm ei saadetud POST meetodiga."
 
-#: smaily-for-wordpress.php:165 smaily-for-wordpress.php:263
+#: smaily-for-wordpress.php:165 smaily-for-wordpress.php:269
 msgid "Input does not contain a recognizable email address."
 msgstr "Sisend ei sisalda tuntavat emaili aadressi."
 
-#: smaily-for-wordpress.php:168 smaily-for-wordpress.php:267
+#: smaily-for-wordpress.php:168 smaily-for-wordpress.php:273
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
 msgstr ""
 "Ei suutnud lisada uudiskirja nimekirja teadmata põhjusel. Tõenäoliselt "
 "probleem Smaily-s."
+
+#: smaily-for-wordpress.php:192
+msgid "Sorry, your nonce did not verify."
+msgstr "Vabandust, sinu nonce turvatunnus ei verifeerinud."
+
+#: smaily-for-wordpress.php:200
+msgid "No form data."
+msgstr "Vormi andmed puuduvad."
+
+#: smaily-for-wordpress.php:217
+msgid "Email address input is empty."
+msgstr "Emaili sisend on  tühi."
