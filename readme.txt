@@ -1,8 +1,9 @@
-=== Smaily for Wordpress ===
+=== Smaily for WP ===
+Contributors: sendsmaily
+License: GPLv2 or later
+Stable tag: 2.0.0
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 5.2.2
-Stable tag: 2.0.0
-License: GPLv2 or later
 
 Smaily newsletter subscription plugin for WordPress
 

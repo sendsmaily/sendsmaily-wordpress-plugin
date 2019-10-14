@@ -5,7 +5,7 @@
  * @package           Smaily
  *
  * @wordpress-plugin
- * Plugin Name:       Smaily for Wordpress
+ * Plugin Name:       Smaily for WP
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin/
  * Text Domain:       wp_smaily
  * Description:       Smaily newsletter subscription form.
