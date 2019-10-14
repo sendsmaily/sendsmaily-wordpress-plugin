@@ -264,8 +264,7 @@ function smaily_nojs_subscribe_callback() {
 				break;
 			case 205:
 				$redirect_url = add_query_arg( 'smaily_form_error',
-					rawurlencode( esc_html__( 'Could not add to subscriber list for an unknown reason.
-					Probably something in Smaily.', 'wp_smaily' ) ), $redirect_url );
+					rawurlencode( esc_html__( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' ) ), $redirect_url );
 				break;
 			default:
 				$redirect_url = add_query_arg( 'smaily_form_error',
