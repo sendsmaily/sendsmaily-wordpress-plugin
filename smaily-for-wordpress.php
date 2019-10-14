@@ -214,7 +214,7 @@ function smaily_nojs_subscribe_callback() {
 	// E-mail required.
 	if ( ! ( isset( $params['email'] ) && ! empty( $params['email'] ) ) ) {
 		$redirect_url = add_query_arg( 'smaily_form_error',
-					rawurlencode( __( 'Email address input is empty.', 'wp_smaily' ) ), $redirect_url );
+			rawurlencode( __( 'Email address input is empty.', 'wp_smaily' ) ), $redirect_url );
 		wp_safe_redirect( $redirect_url );
 		exit;
 	}
