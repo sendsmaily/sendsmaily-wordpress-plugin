@@ -47,6 +47,21 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$file     = ( isset( $config['is_advanced'] ) &&  '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
 		$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . $file );
 		$template->assign( $config );
+		// Smaily form error logic for no JavaScript.
+		$form_has_error = false;
+		$error_message = null;
+
+		if ( isset( $_GET['smaily_form_error'] ) && !empty( $_GET['smaily_form_error'] ) ) {
+			$form_has_error = true;
+			$error_message = $_GET['smaily_form_error'];
+		} elseif ( !isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
+			$form_has_error = true;
+			$error_message = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
+		}
+		$template->assign( array(
+			'form_has_error' => $form_has_error,
+			'error_message' => $error_message,
+		) );
 		// Render template.
 		echo $template->render();
 
