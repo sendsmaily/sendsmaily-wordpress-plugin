@@ -185,24 +185,24 @@ msgstr "Title"
 msgid "Display name field?"
 msgstr "Display name field?"
 
-#: smaily-for-wordpress.php:106 smaily-for-wordpress.php:116
+#: smaily-for-wp.php:106 smaily-for-wp.php:116
 msgid "E-mail is required!"
 msgstr "E-mail is required!"
 
-#: smaily-for-wordpress.php:158 smaily-for-wordpress.php:171
-#: smaily-for-wordpress.php:260 smaily-for-wordpress.php:277
+#: smaily-for-wp.php:158 smaily-for-wp.php:171
+#: smaily-for-wp.php:260 smaily-for-wp.php:277
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: smaily-for-wordpress.php:162 smaily-for-wordpress.php:265
+#: smaily-for-wp.php:162 smaily-for-wp.php:265
 msgid "Form was not sent using POST method."
 msgstr "Form was not sent using POST method."
 
-#: smaily-for-wordpress.php:165 smaily-for-wordpress.php:269
+#: smaily-for-wp.php:165 smaily-for-wp.php:269
 msgid "Input does not contain a recognizable email address."
 msgstr "Input does not contain a recognizable email address."
 
-#: smaily-for-wordpress.php:168 smaily-for-wordpress.php:273
+#: smaily-for-wp.php:168 smaily-for-wp.php:273
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
@@ -210,14 +210,14 @@ msgstr ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
 
-#: smaily-for-wordpress.php:192
+#: smaily-for-wp.php:192
 msgid "Sorry, your nonce did not verify."
 msgstr "Sorry, your nonce did not verify."
 
-#: smaily-for-wordpress.php:200
+#: smaily-for-wp.php:200
 msgid "No form data."
 msgstr "No form data."
 
-#: smaily-for-wordpress.php:217
+#: smaily-for-wp.php:217
 msgid "Email address input is empty."
 msgstr "Email address input is empty."
