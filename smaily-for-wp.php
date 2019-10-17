@@ -152,7 +152,7 @@ function smaily_subscribe_callback() {
 	$array = array_merge( $array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
 	$request = new Wp_Smaily_Request( $server, $array );
-	$result  = $request->exec();
+	$result  = $request->post();
 
 	if ( empty( $result ) ) {
 		echo __( 'Something went wrong', 'wp_smaily' );
@@ -253,7 +253,7 @@ function smaily_nojs_subscribe_callback() {
 	$array = array_merge( $array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
 	$request = new Wp_Smaily_Request( $server, $array );
-	$result  = $request->exec();
+	$result  = $request->post();
 
 	if ( empty( $result ) ) {
 		$redirect_url = add_query_arg( 'smaily_form_error',
