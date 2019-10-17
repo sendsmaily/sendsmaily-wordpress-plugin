@@ -58,41 +58,20 @@ class Wp_Smaily_Request {
 	}
 
 	/**
-	 * Execute remote request.
+	 * Execute post request.
 	 *
 	 * @return array
 	 */
-	public function exec() {
-		// Set always as remote request.
-		$this->_data['remote'] = 1;
+	public function post() {
+		$response = [];
 
-		return $this->_asCurl();
-	}
-
-	/**
-	 * Execute remote request (with CURL).
-	 *
-	 * @return array|bool
-	 */
-	protected function _asCurl() {
-		$curl = curl_init();
-
-		// Set curl parameters.
-		curl_setopt( $curl, CURLOPT_URL, $this->_url );
-		curl_setopt( $curl, CURLOPT_HEADER, false );
-		curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
-
-		// Set request query.
-		curl_setopt( $curl, CURLOPT_POST, true );
-		curl_setopt( $curl, CURLOPT_POSTFIELDS, http_build_query( $this->_data ) );
-
-		// Execute curl.
-		$result = curl_exec( $curl );
-		curl_close( $curl );
-
-		// Parse result.
-		$result = json_decode( $result, true );
-		return $result;
+		$subscription_post = wp_remote_post( $this->_url, array( 'body' => http_build_query( $this->_data ) ) );
+		// Response code from Smaily API.
+		if ( is_wp_error( $subscription_post ) ) {
+			$response = array( 'error' => $subscription_post->get_error_message() );
+		}
+		$response = json_decode( wp_remote_retrieve_body( $subscription_post ), true );
+		return $response;
 	}
 
 }
