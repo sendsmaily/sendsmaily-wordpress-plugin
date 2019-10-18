@@ -20,6 +20,9 @@
 .tabs li a.selected {background:#21759B; color:#fff}
 --></style>
 
+<script type="text/javascript">//<![CDATA[
+  var SNSP_PLUGIN_URL = '<?php echo SNSP_PLUGIN_URL; ?>';
+//]]></script>
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"></div>
 	<h2>
