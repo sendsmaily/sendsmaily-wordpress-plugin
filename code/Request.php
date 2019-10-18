@@ -1,6 +1,6 @@
 <?php
 
-class Wp_Smaily_Request {
+class Smaily_Plugin_Request {
 	/**
 	 * Remote request url.
 	 *

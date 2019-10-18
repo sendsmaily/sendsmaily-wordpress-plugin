@@ -1,8 +1,8 @@
 <?php
 
 // Define params.
-define( 'BP', dirname( __FILE__ ) );
-define( 'DS', DIRECTORY_SEPARATOR );
+if ( !defined( 'BP' ) ) define( 'BP', dirname( __FILE__ ) );
+if ( !defined( 'DS' ) ) define( 'DS', DIRECTORY_SEPERATOR );
 
 // Disable cache.
 header( 'Cache-Control: no-cache, must-revalidate' );
@@ -79,7 +79,7 @@ switch ( $_POST['op'] ) {
 		}
 
 		// Validate credentials with get request.
-		$rqst = new Wp_Smaily_Request(
+		$rqst = new Smaily_Plugin_Request(
 			'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
 			array(
 				'username' => $params['username'],
@@ -181,7 +181,7 @@ switch ( $_POST['op'] ) {
 
 		// Generate form contents.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
+		$template = new Smaily_Plugin_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 		// Load configuration data.
 		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -207,7 +207,7 @@ switch ( $_POST['op'] ) {
 		// Credentials.
 		$api_credentials = explode( ':', $data->api_credentials );
 		// Get autoresponders.
-		$request = new Wp_Smaily_Request(
+		$request = new Smaily_Plugin_Request(
 			'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
 			array(
 				'username' => $api_credentials[0],
@@ -264,7 +264,7 @@ switch ( $_POST['op'] ) {
 		// Generate new form (if empty).
 		if ( empty( $form ) ) {
 			require_once( BP . DS . 'code' . DS . 'Template.php' );
-			$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
+			$template = new Smaily_Plugin_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
 			// Load configuration data.
 			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -299,7 +299,7 @@ if ( $refresh ) {
 
 	// Generate form contents.
 	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$template = new Wp_Smaily_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.php' );
+	$template = new Smaily_Plugin_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );

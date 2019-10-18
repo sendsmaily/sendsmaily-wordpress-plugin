@@ -19,7 +19,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SS_PLUGIN_VERSION', '2.0.0' );
+define( 'SNSP_PLUGIN_VERSION', '2.0.0' );
 
 if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
 
@@ -29,13 +29,13 @@ if (!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
 $exp = explode( DS, BP );
 $directory = array_pop( $exp );
 
-define( 'SS_PLUGIN_NAME', $directory );
+define( 'SNSP_PLUGIN_NAME', $directory );
 
-define( 'SS_PLUGIN_URL', plugins_url( '', __FILE__ ) );
+define( 'SNSP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 
-define( 'SS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'SNSP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-require_once( SS_PLUGIN_PATH . 'includes/activator.php' );
+require_once( SNSP_PLUGIN_PATH . 'includes/activator.php' );
 register_activation_hook( __FILE__, 'smaily_install' );
 
 /**
@@ -65,7 +65,7 @@ add_action( 'plugins_loaded', 'smaily_load_textdomain' );
  * Load subscribe widget.
  */
 function smaily_subscription_widget_init() {
-	require_once( SS_PLUGIN_PATH . 'includes/subscribe-widget.php' );
+	require_once( SNSP_PLUGIN_PATH . 'includes/subscribe-widget.php' );
 	register_widget( 'Smaily_Newsletter_Subscription_Widget' );
 }
 add_action( 'widgets_init', 'smaily_subscription_widget_init' );
@@ -80,7 +80,7 @@ function smaily_admin_render() {
 
 	// Create admin template.
 	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$template = new Wp_Smaily_Template( 'html' . DS . 'admin' . DS . 'page.php' );
+	$template = new Smaily_Plugin_Template( 'html' . DS . 'admin' . DS . 'page.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -93,7 +93,7 @@ function smaily_admin_render() {
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
-	add_menu_page( 'smaily', 'Smaily', 'manage_options', __FILE__, '', SS_PLUGIN_URL . '/gfx/icon.png' );
+	add_menu_page( 'smaily', 'Smaily', 'manage_options', __FILE__, '', SNSP_PLUGIN_URL . '/gfx/icon.png' );
 	add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', __FILE__, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'smaily_admin_render' );
@@ -151,7 +151,7 @@ function smaily_subscribe_callback() {
 
 	$array = array_merge( $array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
-	$request = new Wp_Smaily_Request( $server, $array );
+	$request = new Smaily_Plugin_Request( $server, $array );
 	$result  = $request->post();
 
 	if ( empty( $result ) ) {
@@ -252,7 +252,7 @@ function smaily_nojs_subscribe_callback() {
 
 	$array = array_merge( $array, $form_values );
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
-	$request = new Wp_Smaily_Request( $server, $array );
+	$request = new Smaily_Plugin_Request( $server, $array );
 	$result  = $request->post();
 
 	if ( empty( $result ) ) {

@@ -11,7 +11,7 @@ $autoresponders = $this->autoresponders;
 <?php if ( ! empty( $api_credentials ) ) : ?>
 <p>
 	<span><?php echo esc_html__( 'Your current credentials are validated', 'wp_smaily' ); ?></span>
-	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'wp_smaily' ); ?></strong><img src="<?php echo SS_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'wp_smaily' ); ?>" title="<?php echo esc_html__( 'Remove', 'wp_smaily' ); ?>" /></a>
+	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'wp_smaily' ); ?></strong><img src="<?php echo SNSP_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'wp_smaily' ); ?>" title="<?php echo esc_html__( 'Remove', 'wp_smaily' ); ?>" /></a>
 </p>
 <?php else : ?>
 <div>
