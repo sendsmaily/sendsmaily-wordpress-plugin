@@ -45,7 +45,7 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		// Create admin template.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );
 		$file     = ( isset( $config['is_advanced'] ) &&  '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
-		$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . $file );
+		$template = new Smaily_Plugin_Template( 'html' . DS . 'form' . DS . $file );
 		$template->assign( $config );
 		// Smaily form error logic for no JavaScript.
 		$form_has_error = false;

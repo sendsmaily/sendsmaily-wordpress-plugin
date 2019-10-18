@@ -1,6 +1,6 @@
 <?php
 
-class Wp_Smaily_Template {
+class Smaily_Plugin_Template {
 	/**
 	 * Template name.
 	 *

@@ -40,23 +40,23 @@ var Default = (function(){
 
 		jQuery('.wrap h2', '#wpbody-content').after(message);
 	}
-	
+
 	/**
 	 * Handle response.
 	 * @return void|bool
 	 */
 	function _handleResponse(response){
 		if(!response){ return false; }
-		
+
 		if(response.message){
 			// remove previous messages
 			jQuery('#message').remove();
-			
+
 			// throw message
 			_throwMessage(response.message, response.error);
 		}
 	}
-	
+
 	/**
 	 * build request query string
 	 * based on form values
@@ -64,17 +64,17 @@ var Default = (function(){
 	 */
 	function _buildQuery(){
 		var result = {};
-		
+
 		// get serialized data and restructure
 		var data = jQuery('#form-container').serializeArray();
 		for(var i in data){
 			var item = data[i];
 			result[item['name']] = item['value'];
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * request helper
 	 * @return void
@@ -82,22 +82,22 @@ var Default = (function(){
 	function _request(data, callback){
 		// show loader
 		jQuery('#h2-loader').show();
-		
+
 		// make the request
-		jQuery.post(SS_PLUGIN_URL + '/action.php', data, function(response){
+		jQuery.post(SNSP_PLUGIN_URL + '/action.php', data, function(response){
 			// handle response
 			_handleResponse(response);
-			
+
 			// execute callback function
 			if(typeof(callback) == 'function'){
 				callback(response);
 			}
-			
+
 			// hide loader
 			jQuery('#h2-loader').hide();
 		}, 'json');
 	}
-	
+
 	return {
 		/**
 		 * request api key validation
@@ -108,7 +108,7 @@ var Default = (function(){
 			var query = _buildQuery();
 			query['op'] = 'validateApiKey';
 			query['refresh'] = 1;
-		
+
 			// make the request
 			_request(query, function(response){
 				if(response.content){
@@ -116,7 +116,7 @@ var Default = (function(){
 				}
 			});
 		},
-		
+
 		/**
 		 * remove api key request
 		 * @return void
@@ -127,7 +127,7 @@ var Default = (function(){
 				'op': 'removeApiKey',
 				'refresh': 1
 			};
-			
+
 			// make the request
 			_request(query, function(response){
 				if(response.content){
@@ -135,7 +135,7 @@ var Default = (function(){
 				}
 			});
 		},
-		
+
 		/**
 		 * refresh newsletter subscription form
 		 * reset back to default form
@@ -146,7 +146,7 @@ var Default = (function(){
 			var query = {
 				'op': 'resetForm'
 			};
-			
+
 			// make the request
 			_request(query, function(response){
 				// set textarea content
@@ -154,7 +154,7 @@ var Default = (function(){
 				jQuery('#advanced-form').val(content);
 			});
 		},
-		
+
 		/**
 		 * refresh autoresponders
 		 * @return void
@@ -165,7 +165,7 @@ var Default = (function(){
 				'op': 'refreshAutoresp',
 				'refresh': 1
 			};
-			
+
 			// make the request
 			_request(query, function(response){
 				if(response.content){
@@ -173,7 +173,7 @@ var Default = (function(){
 				}
 			});
 		},
-		
+
 		/**
 		 * save form contents
 		 * @return void
@@ -182,7 +182,7 @@ var Default = (function(){
 			// build query
 			var query = _buildQuery();
 			query['op'] = 'save';
-			
+
 			// make the request
 			_request(query);
 		}
@@ -205,19 +205,19 @@ var Tabs = (function(args){
 
 	// check required target
 	if(!_options.target || _options.target.length < 1){ return false; }
-	
+
 	// bind click event to target tabs
 	jQuery(_options.target+' a').click(function(){
 		_select(this);
 	});
-	
+
 	// use location hash to select tab
 	var hash = location.hash.length > 0 ? location.hash : '';
 	if(hash.length > 0){
 		var target = jQuery(_options.target+' a[href='+hash+']');
 		_select(target);
 	}
-	
+
 	/**
 	 * select element
 	 * @param {Object} element
@@ -226,16 +226,16 @@ var Tabs = (function(args){
 		if(!element || element.length < 1){ return false; }
 		var href = jQuery(element).attr('href');
 		var hash = (href.length > 0 && /#/.test(href)) ? href.split('#')[1] : '';
-		
+
 		// exit if does not have hash
 		if(hash.length < 1){ return false; }
-		
+
 		// reset target tabs selected state
 		jQuery(_options.target+' a').removeClass('selected');
-		
+
 		// set this tab's state to selected
 		jQuery(element).addClass('selected');
-		
+
 		// hide tabs and make clicked tab contents visible
 		jQuery('*[id^=content\-]').addClass('hidden');
 		jQuery('#content-'+hash).removeClass('hidden');
