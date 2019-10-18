@@ -12,9 +12,10 @@ header( 'Pragma: No-Cache' );
 // Allow only posted data.
 if ( empty( $_POST ) ) { die( 'Must be post method.' ); }
 
-// @todo: clean up posted data
+// Validate posted operation.
 if ( ! isset( $_POST['op'] ) ) { die( 'No action or API key set.' ); }
-$_POST['op'] = trim( $_POST['op'] );
+$_POST['op'] = ( in_array( $_POST['op'], array( 'validateApiKey', 'removeApiKey', 'resetForm', 'refreshAutoresp', 'save' ), true )
+	?  $_POST['op'] : '' );
 
 // Require request class.
 require_once( BP . DS . 'code' . DS . 'Request.php' );
@@ -25,25 +26,16 @@ if ( ! function_exists( 'add_action' ) ) {
 	require_once( $path . DS . 'wp-config.php' );
 }
 
-$refresh = ( isset( $_POST[ 'refresh' ] ) && $_POST['refresh'] == 1 );
+$refresh = ( isset( $_POST[ 'refresh' ] ) && (int) $_POST['refresh'] === 1 );
 // Switch to action.
 switch ( $_POST['op'] ) {
 	case 'validateApiKey':
-		// Get request params.
-		$subdomain = isset( $_POST['subdomain'] ) ? trim( $_POST['subdomain'] ) : '';
-		$username  = isset( $_POST['username'] ) ? trim( $_POST['username'] ) : '';
-		$password  = isset( $_POST['password'] ) ? trim( $_POST['password'] ) : '';
-
+		// Get and sanitize request params.
 		$params = array(
-			'subdomain' => $subdomain,
-			'username'  => $username,
-			'password'  => $password,
+			'subdomain' => isset( $_POST['subdomain'] ) ? sanitize_text_field( $_POST['subdomain'] ) : '',
+			'username'  => isset( $_POST['username'] ) 	? sanitize_text_field( $_POST['username'] )	 : '',
+			'password'  => isset( $_POST['password'] ) 	? sanitize_text_field( $_POST['password'] )	 : ''
 		);
-
-		// Sanitize fields.
-		foreach ( $params as $key => $value ) {
-			$params[ $key ] = wp_unslash( sanitize_text_field( $value ) );
-		}
 
 		// Normalize subdomain.
 		// First, try to parse as full URL. If that fails, try to parse as subdomain.sendsmaily.net, and
@@ -257,16 +249,20 @@ switch ( $_POST['op'] ) {
 
 	case 'save':
 		global $wpdb;
-
-		// Get params.
+		// Get parameters.
 		$isAdvanced = ( isset( $_POST['is_advanced'] ) && ! empty( $_POST['is_advanced'] ) ) ? '1' : '0';
 
 		// Get basic and advanced parameters.
 		$basic    = ( isset( $_POST['basic'] ) && is_array( $_POST['basic'] ) ) ? $_POST['basic'] : array();
 		$advanced = ( isset( $_POST['advanced'] ) && is_array( $_POST['advanced'] ) ) ? $_POST['advanced'] : array();
 
+		// Validate and sanitize basic & advanced parameters values.
+		$autoresponder = ( isset( $basic['autoresponder'] ) && is_int( $basic['autoresponder'] ) )
+			? $basic['autoresponder'] : '';
+		$form = ( isset( $advanced['form'] ) && is_string( $advanced['form'] ) ) ? $advanced['form'] : '';
+
 		// Generate new form (if empty).
-		if ( empty( $advanced['form'] ) ) {
+		if ( empty( $form ) ) {
 			require_once( BP . DS . 'code' . DS . 'Template.php' );
 			$template = new Wp_Smaily_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
 
@@ -276,7 +272,7 @@ switch ( $_POST['op'] ) {
 			$template->assign( (array) $data );
 
 			// Render template.
-			$advanced['form'] = $template->render();
+			$form = $template->render();
 		}
 
 		// Update configuration.
@@ -286,7 +282,7 @@ switch ( $_POST['op'] ) {
 			UPDATE `$table_name`
 			SET `autoresponder` = %s, `form` = %s, `is_advanced` = %s
 			",
-			$basic['autoresponder'], $advanced['form'], $isAdvanced
+			$autoreponder, $form, $isAdvanced
 		) );
 
 		// Return response.
