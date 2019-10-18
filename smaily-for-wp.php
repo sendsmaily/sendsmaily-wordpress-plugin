@@ -50,6 +50,7 @@ function smaily_enqueue( $hook ) {
 
 }
 add_action( 'wp_enqueue_scripts', 'smaily_enqueue' );
+add_action( 'admin_enqueue_scripts', 'smaily_enqueue');
 
 /**
  * Load plugin textdomain.
