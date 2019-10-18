@@ -1,8 +1,9 @@
 <?php
 
 // Define params.
-if ( !defined( 'BP' ) ) define( 'BP', dirname( __FILE__ ) );
-if ( !defined( 'DS' ) ) define( 'DS', DIRECTORY_SEPERATOR );
+if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
+
+if (!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
 
 // Disable cache.
 header( 'Cache-Control: no-cache, must-revalidate' );
