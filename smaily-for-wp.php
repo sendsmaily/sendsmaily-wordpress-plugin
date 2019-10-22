@@ -36,6 +36,7 @@ define( 'SNSP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SNSP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once( SNSP_PLUGIN_PATH . 'includes/activator.php' );
+require_once( SNSP_PLUGIN_PATH . 'action.php' );
 register_activation_hook( __FILE__, 'smaily_install' );
 
 /**

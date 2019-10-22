@@ -19,7 +19,7 @@
             }
         );
         return false;
-    });
+	});
 });})(jQuery);
 
 var Default = (function(){
@@ -84,18 +84,25 @@ var Default = (function(){
 		jQuery('#h2-loader').show();
 
 		// make the request
-		jQuery.post(SNSP_PLUGIN_URL + '/action.php', data, function(response){
-			// handle response
-			_handleResponse(response);
+		jQuery.post(
 
-			// execute callback function
-			if(typeof(callback) == 'function'){
-				callback(response);
-			}
+			smaily.ajax_url,
+			{
+                'action' : 'smaily_admin_save',
+                'form_data' : jQuery.param(data)
+			},
+			function(response) {
+				// handle response
+				_handleResponse(response);
 
-			// hide loader
-			jQuery('#h2-loader').hide();
-		}, 'json');
+				// execute callback function
+				if(typeof(callback) == 'function'){
+					callback(response);
+				}
+
+				// hide loader
+				jQuery('#h2-loader').hide();
+			}, "json");
 	}
 
 	return {
