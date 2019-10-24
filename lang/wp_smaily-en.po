@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-23 13:22+0300\n"
-"PO-Revision-Date: 2019-10-23 13:22+0300\n"
+"POT-Creation-Date: 2019-10-24 13:58+0300\n"
+"PO-Revision-Date: 2019-10-24 13:59+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -17,57 +17,57 @@ msgstr ""
 "X-Loco-Version: 2.2.2; wp-5.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: action.php:59
+#: action.php:53
 msgid "Please enter subdomain!"
 msgstr "Please enter subdomain!"
 
-#: action.php:67
+#: action.php:61
 msgid "Please enter username!"
 msgstr "Please enter username!"
 
-#: action.php:75
+#: action.php:69
 msgid "Please enter password!"
 msgstr "Please enter password!"
 
-#: action.php:100
+#: action.php:94
 msgid "Wrong credentials"
 msgstr "Wrong credentials"
 
-#: action.php:107
+#: action.php:101
 msgid "Error in subdomain"
 msgstr "Error in subdomain"
 
-#: action.php:121
+#: action.php:115
 msgid "Something went wrong with request to Smaily"
 msgstr "Something went wrong with request to Smaily"
 
-#: action.php:157
+#: action.php:150
 msgid "Credentials validated."
 msgstr "Credentials validated."
 
-#: action.php:175
+#: action.php:167
 msgid "Credentials removed."
 msgstr "Credentials removed."
 
-#: action.php:195
+#: action.php:186
 msgid "Newsletter subscription form reset to default."
 msgstr "Newsletter subscription form reset to default."
 
-#: action.php:226 action.php:258
+#: action.php:217
 msgid "Could not find any autoresponders!"
 msgstr "Could not find any autoresponders!"
 
-#: action.php:271
+#: action.php:241
 msgid "Autoresponders refreshed."
 msgstr "Autoresponders refreshed."
 
-#: action.php:317
+#: action.php:286
 msgid "Changes saved."
 msgstr "Changes saved."
 
 #: html/admin/html/form.php:13
-msgid "Your current credentials are validated"
-msgstr "Your current credentials are validated"
+msgid "Your API credentials are valid"
+msgstr "Your API credentials are valid"
 
 #: html/admin/html/form.php:14
 msgid "Remove"
@@ -141,11 +141,11 @@ msgstr "Note: When you save under Basic tab, default form will be used."
 msgid "Save changes"
 msgstr "Save changes"
 
-#: html/admin/page.php:29
+#: html/admin/page.php:26
 msgid "Smaily Wordpress plugin"
 msgstr "Smaily Wordpress plugin"
 
-#: html/admin/page.php:30
+#: html/admin/page.php:27
 msgid "Please wait, working..."
 msgstr "Please wait, working..."
 
@@ -194,13 +194,13 @@ msgstr "E-mail is required!"
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: smaily-for-wp.php:164 smaily-for-wp.php:267
+#: smaily-for-wp.php:164
 msgid "Form was not sent using POST method."
 msgstr "Form was not sent using POST method."
 
-#: smaily-for-wp.php:167 smaily-for-wp.php:271
-msgid "Input does not contain a recognizable email address."
-msgstr "Input does not contain a recognizable email address."
+#: smaily-for-wp.php:167
+msgid "Input does not contain a valid email address."
+msgstr "Input does not contain a valid email address."
 
 #: smaily-for-wp.php:170 smaily-for-wp.php:275
 msgid ""
@@ -221,3 +221,11 @@ msgstr "No form data."
 #: smaily-for-wp.php:219
 msgid "Email address input is empty."
 msgstr "Email address input is empty."
+
+#: smaily-for-wp.php:267
+msgid "Form was not submitted using POST method."
+msgstr "Form was not submitted using POST method."
+
+#: smaily-for-wp.php:271
+msgid "Input does not contain a recognizable email address."
+msgstr "Input does not contain a recognizable email address."

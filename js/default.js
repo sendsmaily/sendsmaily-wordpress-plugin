@@ -88,8 +88,8 @@ var Default = (function(){
 
 			smaily.ajax_url,
 			{
-                'action' : 'smaily_admin_save',
-                'form_data' : jQuery.param(data)
+				'action' : 'smaily_admin_save',
+				'form_data' : jQuery.param(data)
 			},
 			function(response) {
 				// handle response
