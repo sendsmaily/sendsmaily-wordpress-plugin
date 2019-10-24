@@ -16,6 +16,7 @@ function smaily_admin_save() {
 	$form_data['op'] = ( in_array( $form_data['op'], array( 'validateApiKey', 'removeApiKey', 'resetForm', 'refreshAutoresp', 'save' ), true )
 		?  $form_data['op'] : '' );
 
+	if ( $form_data['op'] === '' ) { die( 'No valid operation submitted.' ); }
 	// Require request class.
 	require_once( BP . DS . 'code' . DS . 'Request.php' );
 
