@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-24 13:51+0300\n"
-"PO-Revision-Date: 2019-10-24 13:51+0300\n"
+"POT-Creation-Date: 2019-10-24 14:18+0300\n"
+"PO-Revision-Date: 2019-10-24 14:18+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Estonian (Estonia)\n"
 "Language: et_EE\n"
@@ -195,8 +195,8 @@ msgstr "E-post on nõutud!"
 msgid "Something went wrong"
 msgstr "Päringu viga"
 
-#: smaily-for-wp.php:164
-msgid "Form was not sent using POST method."
+#: smaily-for-wp.php:164 smaily-for-wp.php:267
+msgid "Form was not submitted using POST method."
 msgstr "Vorm ei saadetud POST meetodiga."
 
 #: smaily-for-wp.php:167
@@ -222,10 +222,6 @@ msgstr "Vormi andmed puuduvad."
 #: smaily-for-wp.php:219
 msgid "Email address input is empty."
 msgstr "Emaili sisend on  tühi."
-
-#: smaily-for-wp.php:267
-msgid "Form was not submitted using POST method."
-msgstr "Vorm ei saadetud POST meetodiga."
 
 #: smaily-for-wp.php:271
 msgid "Input does not contain a recognizable email address."
