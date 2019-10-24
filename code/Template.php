@@ -73,7 +73,7 @@ class Smaily_Plugin_Template {
 	 *
 	 * @param string|array $name Name.
 	 * @param object       $value [optional].
-	 * @return Smaily_Subscribe_Abstract
+	 * @return Smaily_Plugin_Template
 	 */
 	public function assign( $name, $value = null ) {
 		if ( is_array( $name ) && ! empty( $name ) && empty( $value ) ) {

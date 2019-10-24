@@ -20,9 +20,6 @@
 .tabs li a.selected {background:#21759B; color:#fff}
 --></style>
 
-<script type="text/javascript">//<![CDATA[
-  var SNSP_PLUGIN_URL = '<?php echo SNSP_PLUGIN_URL; ?>';
-//]]></script>
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"></div>
 	<h2>
@@ -32,7 +29,7 @@
 
 	<!-- @todo: display welcome/getting started message -->
 
-	<form id="form-container" action="<?php echo SNSP_PLUGIN_URL; ?>/admin-ajax.php" method="post">
+	<form id="form-container" action="<?php echo SMLY4WP_PLUGIN_URL; ?>/admin-ajax.php" method="post">
 		<?php echo $this->partial( 'html/admin/html/form.php', $this->getVars() ); ?>
 	</form>
 </div>

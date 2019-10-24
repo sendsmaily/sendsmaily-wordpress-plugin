@@ -1,14 +1,7 @@
 <?php
 
-// Define params.
-if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
-
-if (!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
-
-// Disable cache.
-header( 'Cache-Control: no-cache, must-revalidate' );
-header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
-header( 'Pragma: No-Cache' );
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 function smaily_admin_save() {
 	// Allow only posted data.
@@ -28,11 +21,12 @@ function smaily_admin_save() {
 
 	$refresh = ( isset( $form_data['refresh'] ) && (int) $form_data['refresh'] === 1 );
 	// Switch to action.
+	global $wpdb;
 	switch ( $form_data['op'] ) {
 		case 'validateApiKey':
 			// Get and sanitize request params.
 			$params = array(
-				'subdomain' => isset( $form_data['subdomain'] )	? sanitize_text_field( $form_data['subdomain'] ) : '',
+				'subdomain' => isset( $form_data['subdomain'] ) ? sanitize_text_field( $form_data['subdomain'] ) : '',
 				'username'  => isset( $form_data['username'] ) ? sanitize_text_field( $form_data['username'] ) : '',
 				'password'  => isset( $form_data['password'] ) ? sanitize_text_field( $form_data['password'] ) : '',
 			);
@@ -125,8 +119,7 @@ function smaily_admin_save() {
 			}
 
 			// Insert item to database.
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'smaily_config';
+			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 			// Add config.
 			$wpdb->insert(
 				$table_name,
@@ -143,7 +136,7 @@ function smaily_admin_save() {
 				$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
 			}
 			// Insert to db.
-			$table_name = $wpdb->prefix . 'smaily_autoresponders';
+			$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
 			// Clear previous data.
 			$wpdb->query( "DELETE FROM `$table_name`" );
 			// Add new autoresponders if set.
@@ -159,14 +152,13 @@ function smaily_admin_save() {
 			break;
 
 		case 'removeApiKey':
-			global $wpdb;
 
 			// Delete contents of config.
-			$table_name = $wpdb->prefix . 'smaily_config';
+			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 			$wpdb->query( "DELETE FROM `$table_name`" );
 
 			// Delete contents of autoresponders.
-			$table_name = $wpdb->prefix . 'smaily_autoresponders';
+			$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
 			$wpdb->query( "DELETE FROM `$table_name`" );
 
 			// Set result.
@@ -177,7 +169,6 @@ function smaily_admin_save() {
 			break;
 
 		case 'resetForm':
-			global $wpdb;
 
 			// Generate form contents.
 			require_once( BP . DS . 'code' . DS . 'Template.php' );
@@ -197,8 +188,8 @@ function smaily_admin_save() {
 			);
 			break;
 
+
 		case 'refreshAutoresp':
-			global $wpdb;
 
 			// Load configuration data.
 			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -229,41 +220,20 @@ function smaily_admin_save() {
 				break;
 			}
 
-			case 'refreshAutoresp':
-				global $wpdb;
-
-				// Load configuration data.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-
-				// Credentials.
-				$api_credentials = explode( ':', $data->api_credentials );
-				// Get autoresponders.
-				$request = new Smaily_Plugin_Request(
-					'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
-					array(
-						'username' => $api_credentials[0],
-						'password' => $api_credentials[1],
-					)
-				);
-				$result        = $request->get();
-				$autoresponders = $result['body'];
-
-				// Handle errors.
-				if ( isset( $result['code'] ) && $result['code'] !== 200 ) {
-					$result['error'] = true;
-					break;
-				} elseif ( empty( $autoresponders ) ) {
-					$result = array(
-						'message' => __( 'Could not find any autoresponders!', 'wp_smaily' ),
-						'error'   => true,
-					);
-					break;
-				}
-
-			$table_name = $wpdb->prefix . 'smaily_autoresponders';
+			// Get autoresponders.
+			$insert_query = array();
+			// Replace autoresponders.
+			foreach ( $rqst['body'] as $autoresponder ) {
+				$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
+			}
+			// Insert to db.
+			$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
+			// Clear previous data.
 			$wpdb->query( "DELETE FROM `$table_name`" );
-			$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
+			// Add new autoresponders if set.
+			if ( ! empty( $insert_query ) ) {
+				$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
+			}
 
 			// Return result.
 			$result = array(
@@ -274,16 +244,15 @@ function smaily_admin_save() {
 			break;
 
 		case 'save':
-			global $wpdb;
+
 			// Get parameters.
 			$isAdvanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? '1' : '0';
-
 			// Get basic and advanced parameters.
 			$basic    = ( isset( $form_data['basic'] ) && is_array( $form_data['basic'] ) ) ? $form_data['basic'] : array();
 			$advanced = ( isset( $form_data['advanced'] ) && is_array( $form_data['advanced'] ) ) ? $form_data['advanced'] : array();
 
 			// Validate and sanitize basic & advanced parameters values.
-			$autoresponder = ( isset( $basic['autoresponder'] ) && is_int( $basic['autoresponder'] ) )
+			$autoresponder = ( isset( $basic['autoresponder'] ) && is_int( (int) $basic['autoresponder'] ) )
 				? $basic['autoresponder'] : '';
 			$form = ( isset( $advanced['form'] ) && is_string( $advanced['form'] ) ) ? $advanced['form'] : '';
 
@@ -302,7 +271,7 @@ function smaily_admin_save() {
 			}
 
 			// Update configuration.
-			$table_name = $wpdb->prefix . 'smaily_config';
+			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 			$wpdb->query( $wpdb->prepare(
 				"
 				UPDATE `$table_name`
@@ -321,7 +290,6 @@ function smaily_admin_save() {
 
 	// Send refresh form content (if requested).
 	if ( $refresh ) {
-		global $wpdb;
 
 		// Generate form contents.
 		require_once( BP . DS . 'code' . DS . 'Template.php' );

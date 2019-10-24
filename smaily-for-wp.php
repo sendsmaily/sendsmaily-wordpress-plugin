@@ -19,7 +19,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SNSP_PLUGIN_VERSION', '2.0.0' );
+define( 'SMLY4WP_PLUGIN_VERSION', '2.0.0' );
 
 if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
 
@@ -29,14 +29,14 @@ if (!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
 $exp = explode( DS, BP );
 $directory = array_pop( $exp );
 
-define( 'SNSP_PLUGIN_NAME', $directory );
+define( 'SMLY4WP_PLUGIN_NAME', $directory );
 
-define( 'SNSP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
+define( 'SMLY4WP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 
-define( 'SNSP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-require_once( SNSP_PLUGIN_PATH . 'includes/activator.php' );
-require_once( SNSP_PLUGIN_PATH . 'action.php' );
+require_once( SMLY4WP_PLUGIN_PATH . 'includes/activator.php' );
+require_once( SMLY4WP_PLUGIN_PATH . 'action.php' );
 register_activation_hook( __FILE__, 'smaily_install' );
 
 /**
@@ -67,7 +67,7 @@ add_action( 'plugins_loaded', 'smaily_load_textdomain' );
  * Load subscribe widget.
  */
 function smaily_subscription_widget_init() {
-	require_once( SNSP_PLUGIN_PATH . 'includes/subscribe-widget.php' );
+	require_once( SMLY4WP_PLUGIN_PATH . 'includes/subscribe-widget.php' );
 	register_widget( 'Smaily_Newsletter_Subscription_Widget' );
 }
 add_action( 'widgets_init', 'smaily_subscription_widget_init' );
@@ -95,7 +95,7 @@ function smaily_admin_render() {
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
-	add_menu_page( 'smaily', 'Smaily', 'manage_options', __FILE__, '', SNSP_PLUGIN_URL . '/gfx/icon.png' );
+	add_menu_page( 'smaily', 'Smaily', 'manage_options', __FILE__, '', SMLY4WP_PLUGIN_URL . '/gfx/icon.png' );
 	add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', __FILE__, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'smaily_admin_render' );
@@ -164,7 +164,7 @@ function smaily_subscribe_callback() {
 				echo __( 'Form was not sent using POST method.', 'wp_smaily' );
 				break;
 			case 204:
-				echo __( 'Input does not contain a recognizable email address.', 'wp_smaily' );
+				echo __( 'Input does not contain a valid email address.', 'wp_smaily' );
 				break;
 			case 205:
 				echo __( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
@@ -264,7 +264,7 @@ function smaily_nojs_subscribe_callback() {
 		switch ( (int) $result['code'] ) {
 			case 201:
 				$redirect_url = add_query_arg( 'smaily_form_error',
-					rawurlencode( __( 'Form was not sent using POST method.', 'wp_smaily' ) ), $redirect_url );
+					rawurlencode( __( 'Form was not submitted using POST method.', 'wp_smaily' ) ), $redirect_url );
 				break;
 			case 204:
 				$redirect_url = add_query_arg( 'smaily_form_error',

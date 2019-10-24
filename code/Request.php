@@ -69,8 +69,10 @@ class Smaily_Plugin_Request {
 		// Response code from Smaily API.
 		if ( is_wp_error( $subscription_post ) ) {
 			$response = array( 'error' => $subscription_post->get_error_message() );
+		} else {
+			$response = json_decode( wp_remote_retrieve_body( $subscription_post ), true );
 		}
-		$response = json_decode( wp_remote_retrieve_body( $subscription_post ), true );
+
 		return $response;
 	}
 

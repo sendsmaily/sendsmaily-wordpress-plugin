@@ -10,8 +10,8 @@ $autoresponders = $this->autoresponders;
 
 <?php if ( ! empty( $api_credentials ) ) : ?>
 <p>
-	<span><?php echo esc_html__( 'Your current credentials are validated', 'wp_smaily' ); ?></span>
-	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'wp_smaily' ); ?></strong><img src="<?php echo SNSP_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'wp_smaily' ); ?>" title="<?php echo esc_html__( 'Remove', 'wp_smaily' ); ?>" /></a>
+	<span><?php echo esc_html__( 'Your API credentials are valid', 'wp_smaily' ); ?></span>
+	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'wp_smaily' ); ?></strong><img src="<?php echo SMLY4WP_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'wp_smaily' ); ?>" title="<?php echo esc_html__( 'Remove', 'wp_smaily' ); ?>" /></a>
 </p>
 <?php else : ?>
 <div>
@@ -22,7 +22,7 @@ $autoresponders = $this->autoresponders;
 		<td>
 			<input type="text" class="regular-text" name="subdomain" style="max-width:50%;"/>
 			<small class="form-text text-muted" style="display:block;">
-				For example <strong>"demo"</strong> from https://<strong>demo</strong>.smaily.net/
+				For example <strong>"demo"</strong> from https://<strong>demo</strong>.sendsmaily.net/
 			</small>
 		</td>
 
