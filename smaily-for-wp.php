@@ -161,7 +161,7 @@ function smaily_subscribe_callback() {
 	} elseif ( (int) $result['code'] !== 101 ) {
 		switch ( $result['code'] ) {
 			case 201:
-				echo __( 'Form was not sent using POST method.', 'wp_smaily' );
+				echo __( 'Form was not submitted using POST method.', 'wp_smaily' );
 				break;
 			case 204:
 				echo __( 'Input does not contain a valid email address.', 'wp_smaily' );

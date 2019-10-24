@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-24 13:58+0300\n"
-"PO-Revision-Date: 2019-10-24 13:59+0300\n"
+"POT-Creation-Date: 2019-10-24 14:19+0300\n"
+"PO-Revision-Date: 2019-10-24 14:19+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -194,9 +194,9 @@ msgstr "E-mail is required!"
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: smaily-for-wp.php:164
-msgid "Form was not sent using POST method."
-msgstr "Form was not sent using POST method."
+#: smaily-for-wp.php:164 smaily-for-wp.php:267
+msgid "Form was not submitted using POST method."
+msgstr "Form was not submitted using POST method."
 
 #: smaily-for-wp.php:167
 msgid "Input does not contain a valid email address."
@@ -221,10 +221,6 @@ msgstr "No form data."
 #: smaily-for-wp.php:219
 msgid "Email address input is empty."
 msgstr "Email address input is empty."
-
-#: smaily-for-wp.php:267
-msgid "Form was not submitted using POST method."
-msgstr "Form was not submitted using POST method."
 
 #: smaily-for-wp.php:271
 msgid "Input does not contain a recognizable email address."
