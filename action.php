@@ -253,8 +253,8 @@ function smaily_admin_save() {
 			$advanced = ( isset( $form_data['advanced'] ) && is_array( $form_data['advanced'] ) ) ? $form_data['advanced'] : array();
 
 			// Validate and sanitize basic & advanced parameters values.
-			$autoresponder = ( isset( $basic['autoresponder'] ) && is_int( (int) $basic['autoresponder'] ) )
-				? $basic['autoresponder'] : '';
+			$autoresponder = ( isset( $basic['autoresponder'] ) ) && ( filter_var( $basic['autoresponder'], FILTER_VALIDATE_INT ) !== false )
+				? $basic['autoresponder'] : 0;
 			$form = ( isset( $advanced['form'] ) && is_string( $advanced['form'] ) ) ? $advanced['form'] : '';
 
 			// Generate new form (if empty).
@@ -276,11 +276,11 @@ function smaily_admin_save() {
 			$wpdb->query( $wpdb->prepare(
 				"
 				UPDATE `$table_name`
-				SET `autoresponder` = %s, `form` = %s, `is_advanced` = %s
+				SET `autoresponder` = %d, `form` = %s, `is_advanced` = %d
 				",
 				$autoresponder, $form, $isAdvanced
 			) );
-
+				var_dump($autoresponder, $form, $isAdvanced);
 			// Return response.
 			$result = array(
 				'error' => false,
