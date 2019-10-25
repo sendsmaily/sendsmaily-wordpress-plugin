@@ -144,10 +144,10 @@ function smaily_subscribe_callback() {
 	$form_values = [];
 	// Add custom form values to Api request if available.
 	foreach ( $params as $key => $value ) {
-		if ( array_key_exists( $key, $array ) || $key === 'action' ) {
+		if ( array_key_exists( $key, $array ) || $key === 'action' || $key === 'nonce' ) {
 			continue;
 		} else {
-			$form_values[ $key ] = $value;
+			$form_values[ $key ] = sanitize_text_field( $value );
 		}
 	}
 
