@@ -280,7 +280,6 @@ function smaily_admin_save() {
 				",
 				$autoresponder, $form, $isAdvanced
 			) );
-				var_dump($autoresponder, $form, $isAdvanced);
 			// Return response.
 			$result = array(
 				'error' => false,
