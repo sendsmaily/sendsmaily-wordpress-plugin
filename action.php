@@ -18,7 +18,7 @@ function smaily_admin_save() {
 
 	if ( $form_data['op'] === '' ) { die( 'No valid operation submitted.' ); }
 	// Require request class.
-	require_once( BP . DS . 'code' . DS . 'Request.php' );
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'code' . DIRECTORY_SEPARATOR . 'Request.php' );
 
 	$refresh = ( isset( $form_data['refresh'] ) && (int) $form_data['refresh'] === 1 );
 	// Switch to action.
@@ -172,8 +172,8 @@ function smaily_admin_save() {
 		case 'resetForm':
 
 			// Generate form contents.
-			require_once( BP . DS . 'code' . DS . 'Template.php' );
-			$template = new Smaily_Plugin_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
+			require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'code' . DIRECTORY_SEPARATOR . 'Template.php' );
+			$template = new Smaily_Plugin_Template( 'html' . DIRECTORY_SEPARATOR . 'form' . DIRECTORY_SEPARATOR . 'advanced.php' );
 
 			// Load configuration data.
 			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -259,8 +259,8 @@ function smaily_admin_save() {
 
 			// Generate new form (if empty).
 			if ( empty( $form ) ) {
-				require_once( BP . DS . 'code' . DS . 'Template.php' );
-				$template = new Smaily_Plugin_Template( 'html' . DS . 'form' . DS . 'advanced.php' );
+				require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'code' . DIRECTORY_SEPARATOR . 'Template.php' );
+				$template = new Smaily_Plugin_Template( 'html' . DIRECTORY_SEPARATOR . 'form' . DIRECTORY_SEPARATOR . 'advanced.php' );
 
 				// Load configuration data.
 				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -292,8 +292,8 @@ function smaily_admin_save() {
 	if ( $refresh ) {
 
 		// Generate form contents.
-		require_once( BP . DS . 'code' . DS . 'Template.php' );
-		$template = new Smaily_Plugin_Template( 'html' . DS . 'admin' . DS . 'html' . DS . 'form.php' );
+		require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'code' . DIRECTORY_SEPARATOR . 'Template.php' );
+		$template = new Smaily_Plugin_Template( 'html' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'html' . DIRECTORY_SEPARATOR . 'form.php' );
 
 		// Load configuration data.
 		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
