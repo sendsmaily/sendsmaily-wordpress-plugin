@@ -21,12 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 define( 'SMLY4WP_PLUGIN_VERSION', '2.0.0' );
 
-if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
-
-if (!defined('DS')) define( 'DS', DIRECTORY_SEPARATOR );
-
 // Get plugin path.
-$exp = explode( DS, BP );
+$exp = explode( DIRECTORY_SEPARATOR, dirname( __FILE__ ) );
 $directory = array_pop( $exp );
 
 define( 'SMLY4WP_PLUGIN_NAME', $directory );
@@ -59,7 +55,7 @@ add_action( 'admin_enqueue_scripts', 'smaily_enqueue');
  * @since 1.0.0
  */
 function smaily_load_textdomain() {
-	load_plugin_textdomain( 'wp_smaily', false, plugin_basename( BP ) . DS . 'lang' );
+	load_plugin_textdomain( 'wp_smaily', false, plugin_basename( dirname( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'lang' );
 }
 add_action( 'plugins_loaded', 'smaily_load_textdomain' );
 
@@ -81,8 +77,8 @@ function smaily_admin_render() {
 	global $wpdb;
 
 	// Create admin template.
-	require_once( BP . DS . 'code' . DS . 'Template.php' );
-	$template = new Smaily_Plugin_Template( 'html' . DS . 'admin' . DS . 'page.php' );
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'code' . DIRECTORY_SEPARATOR . 'Template.php' );
+	$template = new Smaily_Plugin_Template( 'html' . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'page.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -152,7 +148,7 @@ function smaily_subscribe_callback() {
 	}
 
 	$array = array_merge( $array, $form_values );
-	require_once( BP . DS . 'code' . DS . 'Request.php' );
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'code' . DIRECTORY_SEPARATOR . 'Request.php' );
 	$request = new Smaily_Plugin_Request( $server, $array );
 	$result  = $request->post();
 
@@ -253,7 +249,7 @@ function smaily_nojs_subscribe_callback() {
 	}
 
 	$array = array_merge( $array, $form_values );
-	require_once( BP . DS . 'code' . DS . 'Request.php' );
+	require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'code' . DIRECTORY_SEPARATOR . 'Request.php' );
 	$request = new Smaily_Plugin_Request( $server, $array );
 	$result  = $request->post();
 

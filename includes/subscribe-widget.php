@@ -43,9 +43,9 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$config              = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 		$config['show_name'] = $show_name;
 		// Create admin template.
-		require_once( BP . DS . 'code' . DS . 'Template.php' );
+		require_once( SMLY4WP_PLUGIN_PATH . DIRECTORY_SEPARATOR . 'code' . DIRECTORY_SEPARATOR . 'Template.php' );
 		$file     = ( isset( $config['is_advanced'] ) &&  '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
-		$template = new Smaily_Plugin_Template( 'html' . DS . 'form' . DS . $file );
+		$template = new Smaily_Plugin_Template( 'html' . DIRECTORY_SEPARATOR . 'form' . DIRECTORY_SEPARATOR . $file );
 		$template->assign( $config );
 		// Smaily form error logic for no JavaScript.
 		$form_has_error = false;
@@ -53,7 +53,7 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 
 		if ( isset( $_GET['smaily_form_error'] ) && !empty( $_GET['smaily_form_error'] ) ) {
 			$form_has_error = true;
-			$error_message = $_GET['smaily_form_error'];
+			$error_message = sanitize_text_field( $_GET['smaily_form_error'] );
 		} elseif ( !isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
 			$form_has_error = true;
 			$error_message = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
