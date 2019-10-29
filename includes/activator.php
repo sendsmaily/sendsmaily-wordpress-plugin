@@ -13,7 +13,7 @@
  */
 function smaily_install() {
 	global $wpdb;
-	require_once( ABSPATH . 'wp-admin' . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'upgrade.php' );
+	require_once( ABSPATH . 'wp-admin' . '/' . 'includes' . '/' . 'upgrade.php' );
 	$charset_collate = $wpdb->get_charset_collate();
 
 	// Create database table - settings.
