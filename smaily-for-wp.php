@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 define( 'SMLY4WP_PLUGIN_VERSION', '2.0.0' );
 // Absolute URL to the plugin, for HTML markup.
-define( 'SMLY4WP_PLUGIN_URL', plugins_url( '', __FILE__ ) ); 
+define( 'SMLY4WP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once( SMLY4WP_PLUGIN_PATH . 'includes/activator.php' );
@@ -48,7 +48,7 @@ add_action( 'admin_enqueue_scripts', 'smaily_enqueue');
  * @since 1.0.0
  */
 function smaily_load_textdomain() {
-	load_plugin_textdomain( 'wp_smaily', false, plugin_basename( SMLY4WP_PLUGIN_PATH ) . '/' . 'lang' );
+	load_plugin_textdomain( 'wp_smaily', false, plugin_basename( SMLY4WP_PLUGIN_PATH ) . '/lang' );
 }
 add_action( 'plugins_loaded', 'smaily_load_textdomain' );
 
@@ -70,8 +70,8 @@ function smaily_admin_render() {
 	global $wpdb;
 
 	// Create admin template.
-	require_once( SMLY4WP_PLUGIN_PATH . '/' . 'code' . '/' . 'Template.php' );
-	$template = new Smaily_Plugin_Template( 'html' . '/' . 'admin' . '/' . 'page.php' );
+	require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );
+	$template = new Smaily_Plugin_Template( 'html/admin/page.php' );
 
 	// Load configuration data.
 	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
@@ -84,7 +84,7 @@ function smaily_admin_render() {
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
-	add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', SMLY4WP_PLUGIN_URL . '/gfx/icon.png' );
+	add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', plugins_url( 'gfx/icon.png', __FILE__) );
 	add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', SMLY4WP_PLUGIN_PATH, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'smaily_admin_render' );
@@ -141,7 +141,7 @@ function smaily_subscribe_callback() {
 	}
 
 	$array = array_merge( $array, $form_values );
-	require_once( SMLY4WP_PLUGIN_PATH . '/' . 'code' . '/' . 'Request.php' );
+	require_once( SMLY4WP_PLUGIN_PATH . '/code/Request.php' );
 	$request = new Smaily_Plugin_Request( $server, $array );
 	$result  = $request->post();
 
@@ -242,7 +242,7 @@ function smaily_nojs_subscribe_callback() {
 	}
 
 	$array = array_merge( $array, $form_values );
-	require_once( SMLY4WP_PLUGIN_PATH . '/' . 'code' . '/' . 'Request.php' );
+	require_once( SMLY4WP_PLUGIN_PATH . '/code/Request.php' );
 	$request = new Smaily_Plugin_Request( $server, $array );
 	$result  = $request->post();
 
