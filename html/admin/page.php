@@ -29,7 +29,7 @@
 
 	<!-- @todo: display welcome/getting started message -->
 
-	<form id="form-container" action="<?php echo SMLY4WP_PLUGIN_URL; ?>/admin-ajax.php" method="post">
+	<form id="form-container" action="<?php echo admin_url('admin-ajax.php'); ?>" method="post">
 		<?php echo $this->partial( 'html/admin/html/form.php', $this->getVars() ); ?>
 	</form>
 </div>
