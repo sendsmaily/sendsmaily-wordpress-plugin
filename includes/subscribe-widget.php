@@ -43,9 +43,9 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$config              = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 		$config['show_name'] = $show_name;
 		// Create admin template.
-		require_once( SMLY4WP_PLUGIN_PATH . '/' . 'code' . '/' . 'Template.php' );
+		require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );
 		$file     = ( isset( $config['is_advanced'] ) &&  '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
-		$template = new Smaily_Plugin_Template( 'html' . '/' . 'form' . '/' . $file );
+		$template = new Smaily_Plugin_Template( 'html/form/' . $file );
 		$template->assign( $config );
 		// Smaily form error logic for no JavaScript.
 		$form_has_error = false;
