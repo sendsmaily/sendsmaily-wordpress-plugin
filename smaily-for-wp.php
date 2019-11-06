@@ -102,6 +102,12 @@ function smaily_subscribe_callback() {
 	$params = array();
 	parse_str( $_POST['form_data'], $params );
 
+	// Verify nonce.
+	if ( ! wp_verify_nonce( sanitize_key( $params['nonce'] ), 'smaily_nonce_field' ) ) {
+		echo esc_html__( 'Sorry, your nonce did not verify.', 'wp_smaily' );
+		exit;
+	}
+
 	// E-mail required.
 	if ( ! ( isset( $params['email'] ) && ! empty( $params['email'] ) ) ) {
 		echo esc_html__( 'E-mail is required!', 'wp_smaily' );
