@@ -3,7 +3,7 @@ Contributors: sendsmaily
 License: GPLv2 or later
 Stable tag: 2.0.0
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
-Tested up to: 5.2.2
+Tested up to: 5.3
 
 Smaily newsletter subscription plugin for WordPress
 
