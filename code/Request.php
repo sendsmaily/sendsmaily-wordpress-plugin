@@ -1,19 +1,30 @@
 <?php
 
 class Smaily_Plugin_Request {
-	/**
-	 * Remote request url.
-	 *
-	 * @var string
-	 */
-	protected $_url = '';
 
-	/**
-	 * Remote request data.
-	 *
-	 * @var array
-	 */
+	protected $_url = NULL;
+
 	protected $_data = array();
+
+	private $_username = NULL;
+
+	private $_password = NULL;
+
+	public function auth($username, $password) {
+		$this->_username = $username;
+		$this->_password = $password;
+		return $this;
+}
+
+	public function setUrl($url) {
+		$this->_url = $url;
+		return $this;
+    }
+
+	public function setData(array $data) {
+		$this->_data = $data;
+		return $this;
+}
 
 	/**
 	 * Constructor (set request variables).
