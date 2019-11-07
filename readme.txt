@@ -27,11 +27,6 @@ Automatically generate a simple sign-up form and add new subscribers to Smaily s
 - Functional even with NoScript users.
 - Supports sending custom form values to Smaily.
 
-= Requirements =
-
-- PHP 5.6+
-- Wordpress 4.0+
-
 = Documentation & Support =
 
 Online documentation with help is available at the [Knowledgebase](http://help.smaily.com/en/support/home).
@@ -63,8 +58,10 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 == Screenshots ==
 
 1. Smaily plugin in admin view.
-2. Smaily plugin in widgets view.
-3. Smaily basic newsletter form.
+2. Smaily plugin in admin view with validated credentials.
+3. Smaily plugin in widgets view.
+4. Smaily basic newsletter form.
+
 
 == Changelog ==
 
