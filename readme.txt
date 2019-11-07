@@ -61,6 +61,7 @@ There is no need to select autoresponder for widget form, but if you want to cus
 When no autoresponder selected regular opt-in workflow will run. You can add delay, filter by field and send email after subscription. For that edit settings in Smaily automation page.
 
 == Screenshots ==
+
 1. Smaily plugin in admin view.
 2. Smaily plugin in widgets view.
 3. Smaily basic newsletter form.
