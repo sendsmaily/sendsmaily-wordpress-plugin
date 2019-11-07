@@ -23,7 +23,6 @@ Automatically generate a simple sign-up form and add new subscribers to Smaily s
 - Option for custom advanced HTML form.
 - Functional even with NoScript users.
 - Supports sending custom form values to Smaily.
-- Possible to add widget anywhere.
 
 = Requirements =
 - PHP 5.6+
