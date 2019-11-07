@@ -74,15 +74,10 @@ function smaily_admin_save() {
 			}
 
 			// Validate credentials with get request.
-			$rqst = new Smaily_Plugin_Request(
-				'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
-				array(
-					'username' => $params['username'],
-					'password' => $params['password'],
-				)
-			);
-			// Response.
-			$rqst = $rqst->get();
+			$rqst = (new Smaily_Plugin_Request())
+				->auth($params['username'], $params['password'])
+				->setUrl('https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted')
+				->get();
 
 			// Error handilng.
 			$code = isset( $rqst['code'] ) ? $rqst['code'] : '';
@@ -199,14 +194,10 @@ function smaily_admin_save() {
 			// Credentials.
 			$api_credentials = explode( ':', $data->api_credentials );
 			// Get autoresponders.
-			$request = new Smaily_Plugin_Request(
-				'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted',
-				array(
-					'username' => $api_credentials[0],
-					'password' => $api_credentials[1],
-				)
-			);
-			$result        = $request->get();
+			$result = (new Smaily_Plugin_Request())
+				->setUrl('https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted')
+				->auth($api_credentials[0], $api_credentials[1])
+				->get();
 			$autoresponders = $result['body'];
 
 			// Handle errors.
