@@ -1,6 +1,26 @@
 # Smaily Wordpress plugin
 
-Smaily newsletter subscription plugin for Wordpress
+Smaily email marketing and automation extension plugin for Wordpress.
+Automatically generate a simple sign-up form and add new subscribers to Smaily subscribers list.
+## Features
+### Wordpress Newsletter Subscription
+- Add new subscribers to Smaily subscribers list.
+- Select autoresponder to send automated emails.
+### Subscription Widget
+- Option for custom advanced HTML form.
+- Functional with NoScript users.
+- Send custom form values to Smaily.
+- Possiblility to place multiple widgets.
+
+## Requirements
+- PHP 5.6+
+- Wordpress 4.0+
+## Documentation & Support
+Online documentation with help is available at the [Knowledgebase](http://help.smaily.com/en/support/home).
+## Contribution
+All development for Smaily for Wordpress is handled via [GitHub](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/).
+
+Opening new issues and submitting pull requests are welcome.
 
 ## Installation
 
