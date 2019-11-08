@@ -45,7 +45,7 @@ Opening new issues and submitting pull requests are welcome.
 
 = How to set up widget for signup form? =
 
-1. Validate your smaily credentials in Smaily settings menu.
+1. Validate your Smaily credentials in Smaily settings menu.
 2. Move to Appearance -> Widget menu from admin page sidepanel.
 3. Add Smaily Newsletter widget to your prefered location on page.
 4. Select Title for your subscribe newsletter form.
