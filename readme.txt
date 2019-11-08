@@ -38,7 +38,7 @@ Opening new issues and submitting pull requests are welcome.
 
 == Installation ==
 
-1. Upload or extract the `sendsmaily-wordpress-plugin` folder to your site's `/wp-content/plugins/` directory. You can also use the *Add new** option found in the **Plugins** menu in WordPress.
+1. Upload or extract the `sendsmaily-wordpress-plugin` folder to your site's `/wp-content/plugins/` directory. You can also use the **Add new** option found in the **Plugins** menu in WordPress.
 2. Activate the plugin from the **Plugins** menu in WordPress.
 
 == Frequently Asked Questions ==
