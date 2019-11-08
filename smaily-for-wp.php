@@ -26,7 +26,7 @@ define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 require_once( SMLY4WP_PLUGIN_PATH . 'includes/activator.php' );
 require_once( SMLY4WP_PLUGIN_PATH . 'action.php' );
-register_activation_hook( SMLY4WP_PLUGIN_PATH, 'smaily_install' );
+register_activation_hook( __FILE__, 'smaily_install' );
 
 /**
  * Initialize.
