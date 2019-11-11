@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-11 12:54+0200\n"
-"PO-Revision-Date: 2019-11-11 12:54+0200\n"
+"POT-Creation-Date: 2019-10-24 14:19+0300\n"
+"PO-Revision-Date: 2019-10-24 14:19+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -17,51 +17,51 @@ msgstr ""
 "X-Loco-Version: 2.2.2; wp-5.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: action.php:54
+#: action.php:53
 msgid "Please enter subdomain!"
 msgstr "Please enter subdomain!"
 
-#: action.php:62
+#: action.php:61
 msgid "Please enter username!"
 msgstr "Please enter username!"
 
-#: action.php:70
+#: action.php:69
 msgid "Please enter password!"
 msgstr "Please enter password!"
 
-#: action.php:90
+#: action.php:94
 msgid "Wrong credentials"
 msgstr "Wrong credentials"
 
-#: action.php:97
+#: action.php:101
 msgid "Error in subdomain"
 msgstr "Error in subdomain"
 
-#: action.php:111
+#: action.php:115
 msgid "Something went wrong with request to Smaily"
 msgstr "Something went wrong with request to Smaily"
 
-#: action.php:146
+#: action.php:150
 msgid "Credentials validated."
 msgstr "Credentials validated."
 
-#: action.php:163
+#: action.php:167
 msgid "Credentials removed."
 msgstr "Credentials removed."
 
-#: action.php:182
+#: action.php:186
 msgid "Newsletter subscription form reset to default."
 msgstr "Newsletter subscription form reset to default."
 
-#: action.php:209
+#: action.php:217
 msgid "Could not find any autoresponders!"
 msgstr "Could not find any autoresponders!"
 
-#: action.php:233
+#: action.php:241
 msgid "Autoresponders refreshed."
 msgstr "Autoresponders refreshed."
 
-#: action.php:277
+#: action.php:286
 msgid "Changes saved."
 msgstr "Changes saved."
 
@@ -185,28 +185,24 @@ msgstr "Title"
 msgid "Display name field?"
 msgstr "Display name field?"
 
-#: smaily-for-wp.php:97 smaily-for-wp.php:113
+#: smaily-for-wp.php:108 smaily-for-wp.php:118
 msgid "E-mail is required!"
 msgstr "E-mail is required!"
 
-#: smaily-for-wp.php:107 smaily-for-wp.php:191
-msgid "Sorry, your nonce did not verify."
-msgstr "Sorry, your nonce did not verify."
-
-#: smaily-for-wp.php:157 smaily-for-wp.php:170 smaily-for-wp.php:261
-#: smaily-for-wp.php:278
+#: smaily-for-wp.php:160 smaily-for-wp.php:173 smaily-for-wp.php:262
+#: smaily-for-wp.php:279
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: smaily-for-wp.php:161 smaily-for-wp.php:266
+#: smaily-for-wp.php:164 smaily-for-wp.php:267
 msgid "Form was not submitted using POST method."
 msgstr "Form was not submitted using POST method."
 
-#: smaily-for-wp.php:164
+#: smaily-for-wp.php:167
 msgid "Input does not contain a valid email address."
 msgstr "Input does not contain a valid email address."
 
-#: smaily-for-wp.php:167 smaily-for-wp.php:274
+#: smaily-for-wp.php:170 smaily-for-wp.php:275
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
@@ -214,14 +210,18 @@ msgstr ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
 
-#: smaily-for-wp.php:199
+#: smaily-for-wp.php:194
+msgid "Sorry, your nonce did not verify."
+msgstr "Sorry, your nonce did not verify."
+
+#: smaily-for-wp.php:202
 msgid "No form data."
 msgstr "No form data."
 
-#: smaily-for-wp.php:216
+#: smaily-for-wp.php:219
 msgid "Email address input is empty."
 msgstr "Email address input is empty."
 
-#: smaily-for-wp.php:270
+#: smaily-for-wp.php:271
 msgid "Input does not contain a recognizable email address."
 msgstr "Input does not contain a recognizable email address."
