@@ -19,7 +19,7 @@
 # ----- START EDITING HERE -----
 
 # The slug of your WordPress.org plugin
-PLUGIN_SLUG="smaily-for-wp"
+PLUGIN_SLUG="sendsmaily-subscription-opt-in-form"
 
 # Wordpress.org SVN repository username
 SVN_USER="sendsmaily"
@@ -147,3 +147,4 @@ rm -Rf $TEMP_SVN_REPO
 
 # DONE, BYE
 echo "RELEASER DONE :D"
+
