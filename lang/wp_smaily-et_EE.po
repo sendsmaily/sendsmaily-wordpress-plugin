@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-24 14:18+0300\n"
-"PO-Revision-Date: 2019-10-24 14:18+0300\n"
+"POT-Creation-Date: 2019-11-11 15:35+0200\n"
+"PO-Revision-Date: 2019-11-11 15:35+0200\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Estonian (Estonia)\n"
 "Language: et_EE\n"
@@ -17,51 +17,51 @@ msgstr ""
 "X-Loco-Version: 2.2.2; wp-5.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: action.php:53
+#: action.php:54
 msgid "Please enter subdomain!"
 msgstr "Palun sisesta alamdomeen!"
 
-#: action.php:61
+#: action.php:62
 msgid "Please enter username!"
 msgstr "Palun sisesta kasutajatunnus!"
 
-#: action.php:69
+#: action.php:70
 msgid "Please enter password!"
 msgstr "Palun sisesta salasõna!"
 
-#: action.php:94
+#: action.php:90
 msgid "Wrong credentials"
 msgstr "Valed autentimise tunnused"
 
-#: action.php:101
+#: action.php:97
 msgid "Error in subdomain"
 msgstr "Viga alamdomeenis"
 
-#: action.php:115
+#: action.php:111
 msgid "Something went wrong with request to Smaily"
 msgstr "Ilmnes probleem Smaily-ga ühendamisel"
 
-#: action.php:150
+#: action.php:146
 msgid "Credentials validated."
 msgstr "Autentimise tunnused valideeritud."
 
-#: action.php:167
+#: action.php:163
 msgid "Credentials removed."
 msgstr "Autentimise tunnused eemaldatud."
 
-#: action.php:186
+#: action.php:182
 msgid "Newsletter subscription form reset to default."
 msgstr "Liitumisvormi kood taasloodud."
 
-#: action.php:217
+#: action.php:209
 msgid "Could not find any autoresponders!"
 msgstr "Ei ole loodud ühtegi vormi postitus automaatikat!"
 
-#: action.php:241
+#: action.php:233
 msgid "Autoresponders refreshed."
 msgstr "Automaatvastajad uuendatud."
 
-#: action.php:286
+#: action.php:277
 msgid "Changes saved."
 msgstr "Salvestatud."
 
@@ -186,24 +186,28 @@ msgstr "Pealkiri"
 msgid "Display name field?"
 msgstr "Näita nime välja?"
 
-#: smaily-for-wp.php:108 smaily-for-wp.php:118
+#: smaily-for-wp.php:97 smaily-for-wp.php:113
 msgid "E-mail is required!"
 msgstr "E-post on nõutud!"
 
-#: smaily-for-wp.php:160 smaily-for-wp.php:173 smaily-for-wp.php:262
-#: smaily-for-wp.php:279
+#: smaily-for-wp.php:107 smaily-for-wp.php:191
+msgid "Sorry, your nonce did not verify."
+msgstr "Vabandust, sinu nonce turvatunnus ei verifeerinud."
+
+#: smaily-for-wp.php:157 smaily-for-wp.php:170 smaily-for-wp.php:261
+#: smaily-for-wp.php:278
 msgid "Something went wrong"
 msgstr "Päringu viga"
 
-#: smaily-for-wp.php:164 smaily-for-wp.php:267
+#: smaily-for-wp.php:161 smaily-for-wp.php:266
 msgid "Form was not submitted using POST method."
 msgstr "Vorm ei saadetud POST meetodiga."
 
-#: smaily-for-wp.php:167
+#: smaily-for-wp.php:164
 msgid "Input does not contain a valid email address."
 msgstr "Sisend ei sisalda tuntavat emaili aadressi."
 
-#: smaily-for-wp.php:170 smaily-for-wp.php:275
+#: smaily-for-wp.php:167 smaily-for-wp.php:274
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
@@ -211,18 +215,14 @@ msgstr ""
 "Ei suutnud lisada uudiskirja nimekirja teadmata põhjusel. Tõenäoliselt "
 "probleem Smaily-s."
 
-#: smaily-for-wp.php:194
-msgid "Sorry, your nonce did not verify."
-msgstr "Vabandust, sinu nonce turvatunnus ei verifeerinud."
-
-#: smaily-for-wp.php:202
+#: smaily-for-wp.php:199
 msgid "No form data."
 msgstr "Vormi andmed puuduvad."
 
-#: smaily-for-wp.php:219
+#: smaily-for-wp.php:216
 msgid "Email address input is empty."
 msgstr "Emaili sisend on  tühi."
 
-#: smaily-for-wp.php:271
+#: smaily-for-wp.php:270
 msgid "Input does not contain a recognizable email address."
 msgstr "Sisend ei sisalda tuntavat emaili aadressi."
