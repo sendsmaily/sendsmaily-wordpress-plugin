@@ -37,6 +37,7 @@ register_activation_hook( __FILE__, 'smaily_install' );
 function smaily_enqueue( $hook ) {
 	wp_enqueue_script( 'smaily', plugins_url( '/js/default.js', __FILE__ ), array( 'jquery' ) );
 	wp_localize_script( 'smaily', 'smaily', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+	wp_enqueue_style( 'smaily', plugins_url( 'css/notificationbar.css', __FILE__ ) );
 
 }
 add_action( 'wp_enqueue_scripts', 'smaily_enqueue' );
@@ -89,198 +90,38 @@ function smaily_admin_render() {
 }
 add_action( 'admin_menu', 'smaily_admin_render' );
 
-function smaily_subscribe_callback() {
-	global $wpdb;
+/**
+ * Render notification bar.
+ *
+ * @return void
+ */
+function smaily_handle_response() {
+	$isset_response = isset( $_GET['code'] ) && isset( $_GET['message'] );
+	$code = $isset_response ? $_GET['code'] : '';
+	switch ( (int) $code ) {
+		case 101:
+			echo '<div id="notifybar">
+					<p>' . esc_html__( 'You have been successfully subscribed.', 'wp_smaily' ) . '</p>
+				 </div>';
+			break;
 
-	// Form data required.
-	if ( ! ( isset( $_POST['form_data'] ) && ! empty( $_POST['form_data'] ) ) ) {
-		echo esc_html__( 'E-mail is required!', 'wp_smaily' );
-		exit;
+		case 201:
+			echo '<div id="notifybar">
+					<p>' . esc_html__( 'Data must be posted with POST method.', 'wp_smaily' ) . '</p>
+				 </div>';
+			break;
+
+		case 204:
+			echo '<div id="notifybar">
+					<p>' . esc_html__( 'Data does not contain a recognizable email address.', 'wp_smaily' ) . '</p>
+				 </div>';
+			break;
+
+		case 205:
+			echo '<div id="notifybar">
+					<p>' . esc_html__( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' ) . '</p>
+				 </div>';
+			break;
 	}
-
-	// Parse form data out of the serialization.
-	$params = array();
-	parse_str( $_POST['form_data'], $params );
-
-	// Verify nonce.
-	if ( ! wp_verify_nonce( sanitize_key( $params['nonce'] ), 'smaily_nonce_field' ) ) {
-		echo esc_html__( 'Sorry, your nonce did not verify.', 'wp_smaily' );
-		exit;
-	}
-
-	// E-mail required.
-	if ( ! ( isset( $params['email'] ) && ! empty( $params['email'] ) ) ) {
-		echo esc_html__( 'E-mail is required!', 'wp_smaily' );
-		exit;
-	}
-
-	// Get current url.
-	$current_url = ( isset( $_SERVER['HTTPS'] ) ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
-	// Get data from database.
-	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-	$config     = $wpdb->get_row( "SELECT * FROM `$table_name`" );
-
-	// Make a opt-in request to server.
-	$server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
-	$lang   = explode( '-', $params['lang'] );
-	$array  = array(
-		'remote'        => 1,
-		'success_url'   => $current_url,
-		'failure_url'   => $current_url,
-		'language'      => $lang[0],
-	);
-
-	// Add autoresponder if selected.
-	if ( (int) $config->autoresponder !== 0 ) {
-		$array['autoresponder'] = $config->autoresponder;
-	}
-
-	$form_values = [];
-	// Add custom form values to Api request if available.
-	foreach ( $params as $key => $value ) {
-		if ( array_key_exists( $key, $array ) || $key === 'action' || $key === 'nonce' ) {
-			continue;
-		} else {
-			$form_values[ $key ] = sanitize_text_field( $value );
-		}
-	}
-
-	$array = array_merge( $array, $form_values );
-	require_once( SMLY4WP_PLUGIN_PATH . '/code/Request.php' );
-	$result = (new Smaily_Plugin_Request())
-		->setUrl($server)
-		->setData($array)
-		->post();
-
-	if ( empty( $result ) ) {
-		echo __( 'Something went wrong', 'wp_smaily' );
-	} elseif ( (int) $result['code'] !== 101 ) {
-		switch ( $result['code'] ) {
-			case 201:
-				echo __( 'Form was not submitted using POST method.', 'wp_smaily' );
-				break;
-			case 204:
-				echo __( 'Input does not contain a valid email address.', 'wp_smaily' );
-				break;
-			case 205:
-				echo __( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
-				break;
-			default:
-				echo __( 'Something went wrong', 'wp_smaily' );
-				break;
-		}
-	}
-
-	exit;
 }
-add_action( 'wp_ajax_smaily_subscribe_callback', 'smaily_subscribe_callback' );
-add_action( 'wp_ajax_nopriv_smaily_subscribe_callback', 'smaily_subscribe_callback' );
-
-// Handles action for form submit in case of no js. Like free icegram plugin.
-function smaily_nojs_subscribe_callback() {
-	global $wpdb;
-
-	$referer_url = wp_get_referer();
-	// Clean up arguments from referred URL.
-	$redirect_url = $referer_url ? remove_query_arg( 'smaily_form_error', $referer_url ) : get_home_url();
-
-	// Verify nonce.
-	if ( ! wp_verify_nonce( sanitize_key( $_POST['nonce'] ), 'smaily_nonce_field' ) ) {
-		$redirect_url = add_query_arg( 'smaily_form_error',
-			rawurlencode( __( 'Sorry, your nonce did not verify.', 'wp_smaily' ) ), $redirect_url );
-		wp_safe_redirect( $redirect_url );
-		return;
-	}
-
-	// Form data required.
-	if ( ! $_POST ) {
-		$redirect_url = add_query_arg( 'smaily_form_error',
-			rawurlencode( __( 'No form data.', 'wp_smaily' ) ), $redirect_url );
-		wp_safe_redirect( $redirect_url );
-		exit;
-	}
-
-	// Parse form data out of POST and sanitize.
-	$params = array();
-	foreach( $_POST as $key => $value ) {
-		if ( $key === "action" || $key === "nonce" ) {
-			continue;
-		}
-		$params[ $key ] = sanitize_text_field( $value );
-	}
-
-	// E-mail required.
-	if ( ! ( isset( $params['email'] ) && ! empty( $params['email'] ) ) ) {
-		$redirect_url = add_query_arg( 'smaily_form_error',
-			rawurlencode( __( 'Email address input is empty.', 'wp_smaily' ) ), $redirect_url );
-		wp_safe_redirect( $redirect_url );
-		exit;
-	}
-
-
-
-	// Get data from database.
-	$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-	$config     = $wpdb->get_row( "SELECT * FROM `$table_name`" );
-
-	// Make a opt-in request to server.
-	$server = 'https://' . $config->domain . '.sendsmaily.net/api/opt-in/';
-	$lang   = explode( '-', $params['lang'] );
-	$array  = array(
-		'remote'        => 1,
-		'success_url'   => $redirect_url,
-		'failure_url'   => $redirect_url,
-		'language'      => $lang[0],
-	);
-
-	// Add autoresponder if selected.
-	if ( (int) $config->autoresponder !== 0 ) {
-		$array['autoresponder'] = $config->autoresponder;
-	}
-
-	$form_values = [];
-	// Add custom form values to Api request if available.
-	foreach ( $params as $key => $value ) {
-		if ( array_key_exists( $key, $array ) ) {
-			continue;
-		} else {
-			$form_values[ $key ] = $value;
-		}
-	}
-
-	$array = array_merge( $array, $form_values );
-	require_once( SMLY4WP_PLUGIN_PATH . '/code/Request.php' );
-	$result  = (new Smaily_Plugin_Request())
-		->setUrl($server)
-		->setData($array)
-		->post();
-
-	if ( empty( $result ) ) {
-		$redirect_url = add_query_arg( 'smaily_form_error',
-			rawurlencode( __( 'Something went wrong', 'wp_smaily' ) ), $redirect_url );
-	} elseif ( (int) $result['code'] !== 101 ) {
-		switch ( (int) $result['code'] ) {
-			case 201:
-				$redirect_url = add_query_arg( 'smaily_form_error',
-					rawurlencode( __( 'Form was not submitted using POST method.', 'wp_smaily' ) ), $redirect_url );
-				break;
-			case 204:
-				$redirect_url = add_query_arg( 'smaily_form_error',
-					rawurlencode( __( 'Input does not contain a recognizable email address.', 'wp_smaily' ) ), $redirect_url );
-				break;
-			case 205:
-				$redirect_url = add_query_arg( 'smaily_form_error',
-					rawurlencode( __( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' ) ), $redirect_url );
-				break;
-			default:
-				$redirect_url = add_query_arg( 'smaily_form_error',
-					rawurlencode( __( 'Something went wrong', 'wp_smaily' ) ), $redirect_url );
-				break;
-		}
-	}
-	wp_safe_redirect( $redirect_url );
-	exit;
-}
-add_action( 'admin_post_nopriv_smaily_nojs_subscribe_callback', 'smaily_nojs_subscribe_callback' );
-add_action( 'admin_post_smaily_nojs_subscribe_callback', 'smaily_nojs_subscribe_callback' );
+add_action( 'wp', 'smaily_handle_response' );
