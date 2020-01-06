@@ -96,32 +96,25 @@ add_action( 'admin_menu', 'smaily_admin_render' );
  * @return void
  */
 function smaily_handle_response() {
-	$isset_response = isset( $_GET['code'] ) && isset( $_GET['message'] );
-	$code = $isset_response ? $_GET['code'] : '';
-	switch ( (int) $code ) {
+	if ( ! isset( $_GET['code'] ) || ! isset( $_GET['message'] ) ) {
+		return;
+	}
+	$error_message = NULL;
+	switch ( (int) $_GET['code'] ) {
 		case 101:
-			echo '<div id="notifybar">
-					<p>' . esc_html__( 'You have been successfully subscribed.', 'wp_smaily' ) . '</p>
-				 </div>';
+			$error_message = esc_html__( 'You have been successfully subscribed.', 'wp_smaily' );
 			break;
-
 		case 201:
-			echo '<div id="notifybar">
-					<p>' . esc_html__( 'Data must be posted with POST method.', 'wp_smaily' ) . '</p>
-				 </div>';
+			$error_message = esc_html__( 'Data must be posted with POST method.', 'wp_smaily' );
 			break;
-
 		case 204:
-			echo '<div id="notifybar">
-					<p>' . esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' ) . '</p>
-				 </div>';
+			$error_message = esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' );
 			break;
-
-		case 205:
-			echo '<div id="notifybar">
-					<p>' . esc_html__( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' ) . '</p>
-				 </div>';
+		default:
+			$error_message = esc_html__( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
 			break;
 	}
+
+	echo '<div id="notifybar"><p>' . $error_message . '</p></div>';
 }
 add_action( 'wp', 'smaily_handle_response' );
