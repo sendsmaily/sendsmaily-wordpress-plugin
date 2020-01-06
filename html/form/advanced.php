@@ -10,7 +10,6 @@ $form = $this->form;
 	<input type="hidden" name="lang" value="<?php echo ( defined( 'ICL_LANGUAGE_CODE' ) ) ? ICL_LANGUAGE_CODE : ''; ?>" />
 	<input type="hidden" name="success_url" value="<?php echo $this->success_url ? $this->success_url : get_site_url(); ?>" />
 	<input type="hidden" name="failure_url" value="<?php echo $this->failure_url ? $this->failure_url : get_site_url(); ?>" />
-	<?php wp_nonce_field( 'smaily_nonce_field', 'nonce', false ); ?>
 	<p><input type="text" name="email" value="" placeholder="<?php echo esc_html__( 'Email', 'wp_smaily' ); ?>" required/></p>
 	<?php if ( $this->show_name ) : ?>
 		<p>
