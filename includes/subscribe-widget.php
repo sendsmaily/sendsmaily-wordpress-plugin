@@ -31,7 +31,7 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		$show_name = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
+		$show_name   = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
 		$success_url = isset( $instance['success_url'] ) ? $instance['success_url'] : '';
 		$failure_url = isset( $instance['failure_url'] ) ? $instance['failure_url'] : '';
 
@@ -98,8 +98,8 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$instance = wp_parse_args(
 			(array) $instance,
 			array(
-				'title'     => '',
-				'show_name' => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
+				'title'       => '',
+				'show_name'   => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
 				'success_url' => '',
 				'failure_url' => '',
 			)
