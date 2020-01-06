@@ -41,30 +41,30 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		}
 
 		// Load configuration data.
-		$table_name          = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$config              = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-		$config['show_name'] = $show_name;
+		$table_name            = esc_sql( $wpdb->prefix . 'smaily_config' );
+		$config                = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$config['show_name']   = $show_name;
 		$config['success_url'] = $success_url;
 		$config['failure_url'] = $failure_url;
 		// Create admin template.
 		require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );
-		$file     = ( isset( $config['is_advanced'] ) &&  '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
+		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
 		$template = new Smaily_Plugin_Template( 'html/form/' . $file );
 		$template->assign( $config );
 		// Smaily form error logic for no JavaScript.
 		$form_has_error = false;
-		$error_message = null;
+		$error_message  = null;
 
-		if ( isset( $_GET['smaily_form_error'] ) && !empty( $_GET['smaily_form_error'] ) ) {
+		if ( isset( $_GET['smaily_form_error'] ) && ! empty( $_GET['smaily_form_error'] ) ) {
 			$form_has_error = true;
-			$error_message = sanitize_text_field( $_GET['smaily_form_error'] );
-		} elseif ( !isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
+			$error_message  = sanitize_text_field( $_GET['smaily_form_error'] );
+		} elseif ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
 			$form_has_error = true;
-			$error_message = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
+			$error_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
 		}
 		$template->assign( array(
 			'form_has_error' => $form_has_error,
-			'error_message' => $error_message,
+			'error_message'  => $error_message,
 		) );
 		// Render template.
 		echo $template->render();
@@ -81,9 +81,9 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-		$instance['title'] = esc_textarea( $new_instance['title'] );
-		$instance['show_name'] = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
+		$instance                = $old_instance;
+		$instance['title']       = esc_textarea( $new_instance['title'] );
+		$instance['show_name']   = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
 		$instance['success_url'] = esc_url( $new_instance['success_url'] );
 		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
 		return $instance;
@@ -123,16 +123,16 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 			<label for="' . $show_name_id . '">' . __( 'Display name field?', 'wp_smaily' ) . '</label>' .
 		'</p>';
 		// Display inputs for success/failure URLs.
-		$success_url_id     = esc_attr( $this->get_field_id( 'success_url' ) );
-		$success_url        = esc_attr( $this->get_field_name( 'success_url' ) );
+		$success_url_id          = esc_attr( $this->get_field_id( 'success_url' ) );
+		$success_url             = esc_attr( $this->get_field_name( 'success_url' ) );
 		$instance['success_url'] = esc_attr( $instance['success_url'] );
 		echo '<p>
 			<label for="' . $success_url_id . '">' . __( 'Success URL', 'wp_smaily' ) . ':</label>
 			<input id="' . $success_url_id . '" name="' . $success_url . '" type="text" value="' . $instance['success_url'] . '" />
 		</p>';
 
-		$failure_url_id     = esc_attr( $this->get_field_id( 'failure_url' ) );
-		$failure_url        = esc_attr( $this->get_field_name( 'failure_url' ) );
+		$failure_url_id          = esc_attr( $this->get_field_id( 'failure_url' ) );
+		$failure_url             = esc_attr( $this->get_field_name( 'failure_url' ) );
 		$instance['failure_url'] = esc_attr( $instance['failure_url'] );
 		echo '<p>
 			<label for="' . $failure_url_id . '">' . __( 'Failure URL', 'wp_smaily' ) . ':</label>
