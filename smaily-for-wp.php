@@ -41,7 +41,7 @@ function smaily_enqueue( $hook ) {
 
 }
 add_action( 'wp_enqueue_scripts', 'smaily_enqueue' );
-add_action( 'admin_enqueue_scripts', 'smaily_enqueue');
+add_action( 'admin_enqueue_scripts', 'smaily_enqueue' );
 
 /**
  * Load plugin textdomain.
@@ -85,7 +85,7 @@ function smaily_admin_render() {
 	$template->assign( 'autoresponders', $data );
 
 	// Add menu elements.
-	add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', plugins_url( 'gfx/icon.png', __FILE__) );
+	add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', plugins_url( 'gfx/icon.png', __FILE__ ) );
 	add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', SMLY4WP_PLUGIN_PATH, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'smaily_admin_render' );
@@ -99,7 +99,7 @@ function smaily_handle_response() {
 	if ( ! isset( $_GET['code'] ) || ! isset( $_GET['message'] ) ) {
 		return;
 	}
-	$error_message = NULL;
+	$error_message = true;
 	switch ( (int) $_GET['code'] ) {
 		case 101:
 			$error_message = esc_html__( 'You have been successfully subscribed.', 'wp_smaily' );
