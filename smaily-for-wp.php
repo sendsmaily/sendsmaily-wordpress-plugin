@@ -113,7 +113,7 @@ function smaily_handle_response() {
 
 		case 204:
 			echo '<div id="notifybar">
-					<p>' . esc_html__( 'Data does not contain a recognizable email address.', 'wp_smaily' ) . '</p>
+					<p>' . esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' ) . '</p>
 				 </div>';
 			break;
 
