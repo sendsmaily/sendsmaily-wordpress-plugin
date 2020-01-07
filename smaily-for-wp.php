@@ -89,32 +89,3 @@ function smaily_admin_render() {
 	add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', SMLY4WP_PLUGIN_PATH, array( $template, 'dispatch' ) );
 }
 add_action( 'admin_menu', 'smaily_admin_render' );
-
-/**
- * Render notification bar.
- *
- * @return void
- */
-function smaily_handle_response() {
-	if ( ! isset( $_GET['code'] ) || ! isset( $_GET['message'] ) ) {
-		return;
-	}
-	$error_message = true;
-	switch ( (int) $_GET['code'] ) {
-		case 101:
-			$error_message = esc_html__( 'You have been successfully subscribed.', 'wp_smaily' );
-			break;
-		case 201:
-			$error_message = esc_html__( 'Data must be posted with POST method.', 'wp_smaily' );
-			break;
-		case 204:
-			$error_message = esc_html__( 'Input does not contain a recognizable email address.', 'wp_smaily' );
-			break;
-		default:
-			$error_message = esc_html__( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
-			break;
-	}
-
-	echo '<div id="notifybar"><p>' . $error_message . '</p></div>';
-}
-add_action( 'wp', 'smaily_handle_response' );
