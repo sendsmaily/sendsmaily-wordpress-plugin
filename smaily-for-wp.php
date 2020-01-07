@@ -37,8 +37,6 @@ register_activation_hook( __FILE__, 'smaily_install' );
 function smaily_enqueue( $hook ) {
 	wp_enqueue_script( 'smaily', plugins_url( '/js/default.js', __FILE__ ), array( 'jquery' ) );
 	wp_localize_script( 'smaily', 'smaily', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
-	wp_enqueue_style( 'smaily', plugins_url( 'css/notificationbar.css', __FILE__ ) );
-
 }
 add_action( 'wp_enqueue_scripts', 'smaily_enqueue' );
 add_action( 'admin_enqueue_scripts', 'smaily_enqueue' );
