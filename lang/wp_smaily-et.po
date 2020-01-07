@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 12:23+0200\n"
-"PO-Revision-Date: 2020-01-07 12:23+0200\n"
+"POT-Creation-Date: 2020-01-07 12:29+0200\n"
+"PO-Revision-Date: 2020-01-07 12:29+0200\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Eesti\n"
 "Language: et\n"
@@ -184,7 +184,7 @@ msgstr "Teid lisati edukalt uudiskirja."
 
 #: includes/subscribe-widget.php:68
 msgid "Form was not submitted using POST method."
-msgstr "Vorm ei postitatud POST tegevusviisiga."
+msgstr "Andmeid peab saatma POST tegevusviisiga."
 
 #: includes/subscribe-widget.php:71
 msgid "Input does not contain a recognizable email address."
@@ -213,6 +213,3 @@ msgstr "Õnnestumise URL"
 #: includes/subscribe-widget.php:151
 msgid "Failure URL"
 msgstr "Ebaõnnestumise URL"
-
-#~ msgid "Data must be posted with POST method."
-#~ msgstr "Andmeid peab saatma POST tegevusviisiga."
