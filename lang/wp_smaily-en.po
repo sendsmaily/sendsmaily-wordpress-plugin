@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-06 10:05+0200\n"
-"PO-Revision-Date: 2020-01-06 10:07+0200\n"
+"POT-Creation-Date: 2020-01-07 12:24+0200\n"
+"PO-Revision-Date: 2020-01-07 12:24+0200\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: English\n"
 "Language: en\n"
@@ -53,15 +53,15 @@ msgstr "Credentials removed."
 msgid "Newsletter subscription form reset to default."
 msgstr "Newsletter subscription form reset to default."
 
-#: action.php:209
+#: action.php:208
 msgid "Could not find any autoresponders!"
 msgstr "Could not find any autoresponders!"
 
-#: action.php:233
+#: action.php:232
 msgid "Autoresponders refreshed."
 msgstr "Autoresponders refreshed."
 
-#: action.php:277
+#: action.php:276
 msgid "Changes saved."
 msgstr "Changes saved."
 
@@ -153,15 +153,15 @@ msgstr "Please wait, working..."
 msgid "Thank you for subscribing to our newsletter."
 msgstr "Thank you for subscribing to our newsletter."
 
-#: html/form/advanced.php:14 html/form/basic.php:8
+#: html/form/advanced.php:13 html/form/basic.php:7
 msgid "Email"
 msgstr "Email"
 
-#: html/form/advanced.php:17 html/form/basic.php:11
+#: html/form/advanced.php:16 html/form/basic.php:10
 msgid "Name"
 msgstr "Name"
 
-#: html/form/advanced.php:21 html/form/basic.php:15
+#: html/form/advanced.php:20 html/form/basic.php:14
 msgid "Subscribe"
 msgstr "Subscribe"
 
@@ -173,42 +173,45 @@ msgstr "Smaily newsletter subscription form"
 msgid "Smaily Newsletter Subscription"
 msgstr "Smaily Newsletter Subscription"
 
-#: includes/subscribe-widget.php:63
+#: includes/subscribe-widget.php:60
 msgid "Smaily credentials not validated. Subscription form will not work!"
 msgstr "Smaily credentials not validated. Subscription form will not work!"
 
-#: includes/subscribe-widget.php:113
-msgid "Title"
-msgstr "Title"
-
-#: includes/subscribe-widget.php:123
-msgid "Display name field?"
-msgstr "Display name field?"
-
-#: includes/subscribe-widget.php:130
-msgid "Success URL"
-msgstr "Success URL"
-
-#: includes/subscribe-widget.php:138
-msgid "Failure URL"
-msgstr "Failure URL"
-
-#: smaily-for-wp.php:104
+#: includes/subscribe-widget.php:65
 msgid "You have been successfully subscribed."
 msgstr "You have been successfully subscribed."
 
-#: smaily-for-wp.php:110
-msgid "Data must be posted with POST method."
-msgstr "Data must be posted with POST method."
+#: includes/subscribe-widget.php:68
+msgid "Form was not submitted using POST method."
+msgstr "Form was not submitted using POST method."
 
-#: smaily-for-wp.php:116
+#: includes/subscribe-widget.php:71
 msgid "Input does not contain a recognizable email address."
 msgstr "Input does not contain a recognizable email address."
 
-#: smaily-for-wp.php:122
+#: includes/subscribe-widget.php:74
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
 msgstr ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
+
+#: includes/subscribe-widget.php:126
+msgid "Title"
+msgstr "Title"
+
+#: includes/subscribe-widget.php:136
+msgid "Display name field?"
+msgstr "Display name field?"
+
+#: includes/subscribe-widget.php:143
+msgid "Success URL"
+msgstr "Success URL"
+
+#: includes/subscribe-widget.php:151
+msgid "Failure URL"
+msgstr "Failure URL"
+
+#~ msgid "Data must be posted with POST method."
+#~ msgstr "Data must be posted with POST method."
