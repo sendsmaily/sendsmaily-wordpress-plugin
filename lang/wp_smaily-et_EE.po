@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-06 10:00+0200\n"
-"PO-Revision-Date: 2020-01-06 10:07+0200\n"
+"POT-Creation-Date: 2020-01-07 12:22+0200\n"
+"PO-Revision-Date: 2020-01-07 12:23+0200\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Estonian (Estonia)\n"
 "Language: et_EE\n"
@@ -53,15 +53,15 @@ msgstr "Autentimise tunnused eemaldatud."
 msgid "Newsletter subscription form reset to default."
 msgstr "Liitumisvormi kood taasloodud."
 
-#: action.php:209
+#: action.php:208
 msgid "Could not find any autoresponders!"
 msgstr "Ei ole loodud ühtegi vormi postitus automaatikat!"
 
-#: action.php:233
+#: action.php:232
 msgid "Autoresponders refreshed."
 msgstr "Automaatvastajad uuendatud."
 
-#: action.php:277
+#: action.php:276
 msgid "Changes saved."
 msgstr "Salvestatud."
 
@@ -154,15 +154,15 @@ msgstr "Palun oota..."
 msgid "Thank you for subscribing to our newsletter."
 msgstr "Täname, et liitusite meie uudiskirjaga."
 
-#: html/form/advanced.php:14 html/form/basic.php:8
+#: html/form/advanced.php:13 html/form/basic.php:7
 msgid "Email"
 msgstr "E-post"
 
-#: html/form/advanced.php:17 html/form/basic.php:11
+#: html/form/advanced.php:16 html/form/basic.php:10
 msgid "Name"
 msgstr "Nimi"
 
-#: html/form/advanced.php:21 html/form/basic.php:15
+#: html/form/advanced.php:20 html/form/basic.php:14
 msgid "Subscribe"
 msgstr "Liitu"
 
@@ -174,42 +174,45 @@ msgstr "Smaily uudiskirjaga liitumise vorm"
 msgid "Smaily Newsletter Subscription"
 msgstr "Smaily uudiskirjaga liitumine"
 
-#: includes/subscribe-widget.php:63
+#: includes/subscribe-widget.php:60
 msgid "Smaily credentials not validated. Subscription form will not work!"
 msgstr "Smaily kasutajatunnused on valideerimata.  Uudiskirja vorm ei tööta!"
 
-#: includes/subscribe-widget.php:113
-msgid "Title"
-msgstr "Pealkiri"
-
-#: includes/subscribe-widget.php:123
-msgid "Display name field?"
-msgstr "Näita nime välja?"
-
-#: includes/subscribe-widget.php:130
-msgid "Success URL"
-msgstr "Õnnestumise URL"
-
-#: includes/subscribe-widget.php:138
-msgid "Failure URL"
-msgstr "Ebaõnnestumise URL"
-
-#: smaily-for-wp.php:104
+#: includes/subscribe-widget.php:65
 msgid "You have been successfully subscribed."
 msgstr "Teid lisati edukalt uudiskirja."
 
-#: smaily-for-wp.php:110
-msgid "Data must be posted with POST method."
-msgstr "Andmeid peab saatma POST tegevusviisiga."
+#: includes/subscribe-widget.php:68
+msgid "Form was not submitted using POST method."
+msgstr "Vorm ei postitatud POST tegevusviisiga."
 
-#: smaily-for-wp.php:116
+#: includes/subscribe-widget.php:71
 msgid "Input does not contain a recognizable email address."
 msgstr "Sisend ei sisalda tuntavat emaili aadressi."
 
-#: smaily-for-wp.php:122
+#: includes/subscribe-widget.php:74
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
 msgstr ""
 "Ei suutnud lisada uudiskirja nimekirja teadmata põhjusel. Tõenäoliselt "
 "probleem Smaily-s."
+
+#: includes/subscribe-widget.php:126
+msgid "Title"
+msgstr "Pealkiri"
+
+#: includes/subscribe-widget.php:136
+msgid "Display name field?"
+msgstr "Näita nime välja?"
+
+#: includes/subscribe-widget.php:143
+msgid "Success URL"
+msgstr "Õnnestumise URL"
+
+#: includes/subscribe-widget.php:151
+msgid "Failure URL"
+msgstr "Ebaõnnestumise URL"
+
+#~ msgid "Data must be posted with POST method."
+#~ msgstr "Andmeid peab saatma POST tegevusviisiga."
