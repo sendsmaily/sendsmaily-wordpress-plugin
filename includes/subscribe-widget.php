@@ -51,20 +51,33 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
 		$template = new Smaily_Plugin_Template( 'html/form/' . $file );
 		$template->assign( $config );
-		// Smaily form error logic for no JavaScript.
-		$form_has_error = false;
-		$error_message  = null;
+		// Display responses on Smaily subscription form.
+		$form_has_response = false;
+		$response_message  = null;
 
-		if ( isset( $_GET['smaily_form_error'] ) && ! empty( $_GET['smaily_form_error'] ) ) {
-			$form_has_error = true;
-			$error_message  = sanitize_text_field( $_GET['smaily_form_error'] );
-		} elseif ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
-			$form_has_error = true;
-			$error_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
+		if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
+			$form_has_response = true;
+			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
+		} elseif ( isset( $_GET['code'] ) || ! empty( $_GET['code'] ) ) {
+			$form_has_response = true;
+			switch ( (int) $_GET['code'] ) {
+				case 101:
+					$response_message = __( 'You have been successfully subscribed.', 'wp_smaily' );
+					break;
+				case 201:
+					$response_message = __( 'Form was not submitted using POST method.', 'wp_smaily' );
+					break;
+				case 204:
+					$response_message = __( 'Input does not contain a recognizable email address.', 'wp_smaily' );
+					break;
+				default:
+					$response_message = __( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
+					break;
+			}
 		}
 		$template->assign( array(
-			'form_has_error' => $form_has_error,
-			'error_message'  => $error_message,
+			'form_has_response' => $form_has_response,
+			'response_message'  => $response_message,
 		) );
 		// Render template.
 		echo $template->render();
