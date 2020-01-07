@@ -49,23 +49,4 @@ class Smaily_Plugin_Request {
 
 	}
 
-	/**
-	 * Execute post request.
-	 *
-	 * @return array
-	 */
-	public function post() {
-		$response = [];
-
-		$subscription_post = wp_remote_post( $this->_url, array( 'body' => http_build_query( $this->_data ) ) );
-		// Response code from Smaily API.
-		if ( is_wp_error( $subscription_post ) ) {
-			$response = array( 'error' => $subscription_post->get_error_message() );
-		} else {
-			$response = json_decode( wp_remote_retrieve_body( $subscription_post ), true );
-		}
-
-		return $response;
-	}
-
 }

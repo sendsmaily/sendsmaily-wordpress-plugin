@@ -62,7 +62,6 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 3. Smaily plugin in widgets view.
 4. Smaily basic newsletter form.
 
-
 == Changelog ==
 
 = 2.0.0 =

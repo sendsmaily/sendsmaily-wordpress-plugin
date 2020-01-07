@@ -1,27 +1,3 @@
-(function($){$().ready(function(){
-    $('#smly').submit(function(e) {
-        e.preventDefault();
-        var $smly = $(this);
-        $.post(
-            smaily.ajax_url,
-            {
-                'action' : 'smaily_subscribe_callback',
-                'form_data' : $smly.serialize()
-            },
-            function(data) {
-                if (data.length) {
-                    $smly.find('p.error').text(data).show();
-                }
-                else {
-                    $smly.find(':not(p.success)').hide();
-                    $smly.find('p.success').show();
-                }
-            }
-        );
-        return false;
-	});
-});})(jQuery);
-
 var Default = (function(){
 	var _form = null;
 
