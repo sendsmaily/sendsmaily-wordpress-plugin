@@ -254,7 +254,7 @@ add_action( 'admin_post_smly', 'smaily_nojs_subscribe_callback' );
 // Place a deprecation notice into the plugin's metainfo row as the first element.
 function smaily_add_deprecation_notice($meta, $file) {
 	if ($file === plugin_basename( __FILE__ )) {
-		array_unshift($meta, '<b>This version is deprecated, please update</b>');
+		array_unshift($meta, '<b>This plugin is deprecated, please install <a href=https://wordpress.org/plugins/smaily-for-wp/>Smaily for Wordpress</a></b>');
 	}
 	return $meta;
 }
