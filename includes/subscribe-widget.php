@@ -53,17 +53,17 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$template->assign( $config );
 		// Display responses on Smaily subscription form.
 		$form_has_response = false;
+		$form_is_successful = false;
 		$response_message  = null;
 
 		if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
 			$form_has_response = true;
 			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
+		} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {
+			$form_is_successful = true;
 		} elseif ( isset( $_GET['code'] ) || ! empty( $_GET['code'] ) ) {
 			$form_has_response = true;
 			switch ( (int) $_GET['code'] ) {
-				case 101:
-					$response_message = __( 'You have been successfully subscribed.', 'wp_smaily' );
-					break;
 				case 201:
 					$response_message = __( 'Form was not submitted using POST method.', 'wp_smaily' );
 					break;
@@ -78,6 +78,7 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$template->assign( array(
 			'form_has_response' => $form_has_response,
 			'response_message'  => $response_message,
+			'form_is_successful' => $form_is_successful,
 		) );
 		// Render template.
 		echo $template->render();
