@@ -1,6 +1,6 @@
 <?php
 
-class Wp_Sendsmaily_Template {
+class Smaily_Plugin_Template {
 	/**
 	 * Template name.
 	 *
@@ -44,7 +44,7 @@ class Wp_Sendsmaily_Template {
 	 * @throws Exception Exeption.
 	 */
 	public function render() {
-		$file_name = BP . DS . $this->_template;
+		$file_name = SMLY4WP_PLUGIN_PATH . '/' . $this->_template;
 		// Check for template file.
 		if ( empty( $this->_template ) || ! file_exists( $file_name ) || ! is_readable( $file_name ) ) {
 			throw new Exception( 'Could not find template "' . $file_name . '"! Please check for file existence.' );
@@ -73,7 +73,7 @@ class Wp_Sendsmaily_Template {
 	 *
 	 * @param string|array $name Name.
 	 * @param object       $value [optional].
-	 * @return Sendsmaily_Subscribe_Abstract
+	 * @return Smaily_Plugin_Template
 	 */
 	public function assign( $name, $value = null ) {
 		if ( is_array( $name ) && ! empty( $name ) && empty( $value ) ) {

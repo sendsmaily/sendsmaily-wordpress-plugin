@@ -20,21 +20,16 @@
 .tabs li a.selected {background:#21759B; color:#fff}
 --></style>
 
-<script type="text/javascript">//<![CDATA[
-  var SS_PLUGIN_URL = '<?php echo SS_PLUGIN_URL; ?>';
-//]]></script>
-<script type="text/javascript" src="<?php echo SS_PLUGIN_URL; ?>/js/default.js"></script>
-
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"></div>
 	<h2>
-		<?php echo __( 'Sendsmaily Wordpress plugin', 'wp_sendsmaily' ); ?>
-		<sup id="h2-loader" style="display:none">(<?php echo __( 'Please wait, working...', 'wp_sendsmaily' ); ?>)</sup>
+		<?php echo __( 'Smaily Wordpress plugin', 'wp_smaily' ); ?>
+		<sup id="h2-loader" style="display:none">(<?php echo __( 'Please wait, working...', 'wp_smaily' ); ?>)</sup>
 	</h2>
-	
+
 	<!-- @todo: display welcome/getting started message -->
-	
-	<form id="form-container" action="<?php echo SS_PLUGIN_URL; ?>/action.php" method="post">
+
+	<form id="form-container" action="<?php echo admin_url('admin-ajax.php'); ?>" method="post">
 		<?php echo $this->partial( 'html/admin/html/form.php', $this->getVars() ); ?>
 	</form>
 </div>
