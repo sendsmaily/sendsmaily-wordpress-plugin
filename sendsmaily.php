@@ -9,7 +9,7 @@
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin
  * Text Domain:       wp_sendsmaily
  * Description:       Smaily newsletter subscription form.
- * Version:           1.2.3
+ * Version:           1.2.4
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SS_PLUGIN_VERSION', '1.2.3' );
+define( 'SS_PLUGIN_VERSION', '1.2.4' );
 
 if (!defined('BP')) define( 'BP', dirname( __FILE__ ) );
 
@@ -250,3 +250,12 @@ function smaily_nojs_subscribe_callback() {
 }
 add_action( 'admin_post_nopriv_smly', 'smaily_nojs_subscribe_callback' );
 add_action( 'admin_post_smly', 'smaily_nojs_subscribe_callback' );
+
+// Place a deprecation notice into the plugin's metainfo row as the first element.
+function smaily_add_deprecation_notice($meta, $file) {
+	if ($file === plugin_basename( __FILE__ )) {
+		array_unshift($meta, '<b>This plugin is deprecated, please install <a href=https://wordpress.org/plugins/smaily-for-wp/>Smaily for Wordpress</a></b>');
+	}
+	return $meta;
+}
+add_filter('plugin_row_meta', 'smaily_add_deprecation_notice', 10, 4);
