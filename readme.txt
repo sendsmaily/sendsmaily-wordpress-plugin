@@ -3,7 +3,7 @@ Contributors: sendsmaily
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 5.3
 
@@ -63,6 +63,9 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 4. Smaily basic newsletter form.
 
 == Changelog ==
+
+= 2.0.1 =
+- Maintenance release to update the branding on Wordpress.org.
 
 = 2.0.0 =
 * First public release.
