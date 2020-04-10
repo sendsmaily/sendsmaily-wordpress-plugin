@@ -55,6 +55,7 @@ if [[ ! -d $TEMP_SVN_REPO ]];
 then
 	echo "Checking out WordPress.org plugin repository"
 	svn checkout $SVN_REPO $TEMP_SVN_REPO --depth immediates || { echo "Unable to checkout repo."; exit 1; }
+    svn update $TEMP_SVN_REPO/assets --set-depth infinity
     svn update $TEMP_SVN_REPO/tags/${VERSION} --set-depth infinity
 	svn update $TEMP_SVN_REPO/trunk --set-depth infinity
 fi
@@ -72,6 +73,11 @@ cd $TEMP_SVN_REPO
 # UPDATE SVN
 echo "Updating SVN"
 svn update || { echo "Unable to update SVN."; exit 1; }
+
+# UPDATE ASSETS
+echo "Updating assets"
+rm -Rf assets/
+cp -R $GIT_REPO_PATH/assets assets/
 
 # REPLACE TRUNK
 echo "Replacing trunk"
