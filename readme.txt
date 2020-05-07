@@ -1,5 +1,5 @@
 === Smaily for WP ===
-Contributors: sendsmaily
+Contributors: sendsmaily, kaarel, tomabel
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
