@@ -30,13 +30,15 @@ class Smaily_Plugin_Request {
 	 * Execute get request.
 	 */
 	public function get() {
-		$response = [];
-		$auth     = array(
+		$response  = [];
+		$useragent = 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' ) . '; smaily-for-wp/' . SMLY4WP_PLUGIN_VERSION;
+		$args      = array(
 			'headers' => array(
 				'Authorization' => 'Basic ' . base64_encode( $this->_username . ':' . $this->_password ),
 			),
+			'user-agent' => $useragent,
 		);
-		$api_call = wp_remote_get( $this->_url, $auth );
+		$api_call  = wp_remote_get( $this->_url, $args );
 
 		// Response code from Smaily API.
 		if ( is_wp_error( $api_call ) ) {
