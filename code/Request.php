@@ -32,7 +32,7 @@ class Smaily_Plugin_Request {
 	public function get() {
 		$response = [];
 		$useragent = 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' ) . '; smaily-for-wp/' . SMLY4WP_PLUGIN_VERSION;
-		$args     = array(
+		$args      = array(
 			'headers' => array(
 				'Authorization' => 'Basic ' . base64_encode( $this->_username . ':' . $this->_password ),
 			),
