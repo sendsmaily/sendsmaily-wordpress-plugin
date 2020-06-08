@@ -156,4 +156,4 @@ function smaily_shortcode_render( $atts ) {
 	// Render template.
 	return $template->render();
 }
-add_shortcode( 'smaily_newsletter_form', 'smaily_shortcode_render' );
+add_shortcode( 'smaily_for_wp_newsletter_form', 'smaily_shortcode_render' );

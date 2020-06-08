@@ -59,11 +59,11 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 = How to add shortcode for signup form? =
 
 1. Navigate to a Pages section and select a page to edit for adding newsletter form with shortcode.
-2. Add a [smaily_newsletter_form] shortcode to a preferred location.
-3. You can choose a page to return in case of successful subscription by providing success_url attribute to the shortcode. [smaily_newsletter_form success_url="http://www.example.com/?page_id=2"]
-4. You can also choose a page to return in case of error by providing failure_url attribute to the shortcode. [smaily_newsletter_form failure_url="http://www.example.com/?page_id=2"]
+2. Add a [smaily_for_wp_newsletter_form] shortcode to a preferred location.
+3. You can choose a page to return in case of successful subscription by providing success_url attribute to the shortcode. [smaily_for_wp_newsletter_form success_url="http://www.example.com/?page_id=2"]
+4. You can also choose a page to return in case of error by providing failure_url attribute to the shortcode. [smaily_for_wp_newsletter_form failure_url="http://www.example.com/?page_id=2"]
 5. Default return path for both is the site`s home url.
-6. You can add the name field to the form by providing show_name attribute to the shortcode. [smaily_newsletter_form show_name="true"]
+6. You can add the name field to the form by providing show_name attribute to the shortcode. [smaily_for_wp_newsletter_form show_name="true"]
 
 == Screenshots ==
 
