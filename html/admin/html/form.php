@@ -28,11 +28,11 @@ $autoresponders = $this->autoresponders;
 
 	</tr>
 	<tr class="form-field">
-		<th><?php echo esc_html__( 'Username', 'wp_smaily' ); ?></th>
+		<th><?php echo esc_html__( 'API Username', 'wp_smaily' ); ?></th>
 		<td><input type="text" class="regular-text" name="username" style="max-width:50%;"/></td>
 	</tr>
 	<tr class="form-field">
-		<th><?php echo esc_html__( 'Password', 'wp_smaily' ); ?></th>
+		<th><?php echo esc_html__( 'API Password', 'wp_smaily' ); ?></th>
 		<td><input type="password" class="regular-text" name="password" style="max-width:50%;"/></td>
 	</tr>
 	</tbody>
