@@ -30,7 +30,7 @@ do
     case $option in
         u ) SVN_USER=${OPTARG}
             ;;
-        h ) echo "Usage: $(basename "$0") [-u SVN Username] -- Github to WordPress.org RELEASER"
+        h ) echo "Usage: $(basename "$0") [-u SVN Username] [-h] -- Github to WordPress.org RELEASER"
             exit
             ;;
     esac
