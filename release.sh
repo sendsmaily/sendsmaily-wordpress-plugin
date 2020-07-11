@@ -24,6 +24,18 @@ PLUGIN_SLUG="smaily-for-wp"
 # Wordpress.org SVN repository username
 SVN_USER="sendsmaily"
 
+# Set SVN username/Display help
+while getopts "u:h" option
+do
+    case $option in
+        u ) SVN_USER=${OPTARG}
+            ;;
+        h ) echo "Usage: $(basename "$0") [-u SVN Username] -- Github to WordPress.org RELEASER"
+            exit
+            ;;
+    esac
+done
+
 # ----- STOP EDITING HERE -----
 
 set -e
