@@ -12,10 +12,7 @@ $form = $this->form;
 	<input type="hidden" name="failure_url" value="<?php echo $this->failure_url ? $this->failure_url : get_site_url(); ?>" />
 	<p><input type="text" name="email" value="" placeholder="<?php echo esc_html__( 'Email', 'wp_smaily' ); ?>" required/></p>
 	<?php if ( $this->show_name ) : ?>
-		<p>
-			<label><?php echo esc_html__( 'Name', 'wp_smaily' ); ?></label>
-			<input type="text" name="name" value="" />
-		</p>
+		<p><input type="text" name="name" value="" placeholder="<?php echo esc_html__( 'Name', 'wp_smaily' ); ?>" /></p>
 	<?php endif; ?>
 	<p><button type="submit"><?php echo esc_html__( 'Subscribe', 'wp_smaily' ); ?></button></p>
 </form>
