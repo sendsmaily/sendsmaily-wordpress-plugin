@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 12:29+0200\n"
-"PO-Revision-Date: 2020-01-07 12:29+0200\n"
+"POT-Creation-Date: 2020-07-13 16:32+0300\n"
+"PO-Revision-Date: 2020-07-13 16:33+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: English (United States)\n"
 "Language: en_US\n"
@@ -78,14 +78,18 @@ msgid "Subdomain"
 msgstr "Subdomain"
 
 #: html/admin/html/form.php:31
-msgid "Username"
-msgstr "Username"
+msgid "API Username"
+msgstr "API Username"
 
 #: html/admin/html/form.php:35
-msgid "Password"
-msgstr "Password"
+msgid "API Password"
+msgstr "API Password"
 
 #: html/admin/html/form.php:40
+msgid "How to create API credentials?"
+msgstr "How to create API credentials?"
+
+#: html/admin/html/form.php:47
 msgid "Check"
 msgstr "Check"
 
