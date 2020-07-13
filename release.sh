@@ -21,17 +21,14 @@
 # The slug of your WordPress.org plugin
 PLUGIN_SLUG="smaily-for-wp"
 
-# Wordpress.org SVN repository username
-SVN_USER="sendsmaily"
-
-# Set SVN username/Display help
 while getopts "u:h" option
 do
     case $option in
+        # Set Wordpress.org SVN repository username
         u ) SVN_USER=${OPTARG}
             ;;
-        h ) echo "Usage: $(basename "$0") [-u SVN Username] [-h] -- Github to WordPress.org RELEASER"
-            exit
+        h | * ) echo "Usage: $(basename "$0") -u SVN Username [-h] -- Github to WordPress.org RELEASER"
+            exit 1
             ;;
     esac
 done
