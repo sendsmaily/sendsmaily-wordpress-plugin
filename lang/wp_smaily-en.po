@@ -10,12 +10,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_attr__;esc_attr_e;esc_html_e\n"
 "X-Loco-Version: 2.2.2; wp-5.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
 
 #: action.php:54
 msgid "Please enter subdomain!"
@@ -93,55 +94,55 @@ msgstr "How to create API credentials?"
 msgid "Check"
 msgstr "Check"
 
-#: html/admin/html/form.php:46
+#: html/admin/html/form.php:53
 msgid "Basic"
 msgstr "Basic"
 
-#: html/admin/html/form.php:47
+#: html/admin/html/form.php:54
 msgid "Advanced"
 msgstr "Advanced"
 
-#: html/admin/html/form.php:53
+#: html/admin/html/form.php:60
 msgid "Autoresponders"
 msgstr "Autoresponders"
 
-#: html/admin/html/form.php:53
+#: html/admin/html/form.php:60
 msgid "Refresh"
 msgstr "Refresh"
 
-#: html/admin/html/form.php:54
+#: html/admin/html/form.php:61
 msgid "Select autoresponder to change regular opt-in functionality"
 msgstr "Select autoresponder to change regular opt-in functionality"
 
-#: html/admin/html/form.php:57
+#: html/admin/html/form.php:64
 msgid "No autoresponder"
 msgstr "No autoresponder"
 
-#: html/admin/html/form.php:63
+#: html/admin/html/form.php:70
 msgid "No autoresponders. Please click on refresh link to update."
 msgstr "No autoresponders. Please click on refresh link to update."
 
-#: html/admin/html/form.php:70
+#: html/admin/html/form.php:77
 msgid "Newsletter subscription form"
 msgstr "Newsletter subscription form"
 
-#: html/admin/html/form.php:70
+#: html/admin/html/form.php:77
 msgid "Restore original subscription form"
 msgstr "Restore original subscription form"
 
-#: html/admin/html/form.php:70
+#: html/admin/html/form.php:77
 msgid "Regenerate"
 msgstr "Regenerate"
 
-#: html/admin/html/form.php:71
+#: html/admin/html/form.php:78
 msgid "HTML of subscription form"
 msgstr "HTML of subscription form"
 
-#: html/admin/html/form.php:76
+#: html/admin/html/form.php:83
 msgid "Note: When you save under Basic tab, default form will be used."
 msgstr "Note: When you save under Basic tab, default form will be used."
 
-#: html/admin/html/form.php:79
+#: html/admin/html/form.php:86
 msgid "Save changes"
 msgstr "Save changes"
 
@@ -177,23 +178,19 @@ msgstr "Smaily newsletter subscription form"
 msgid "Smaily Newsletter Subscription"
 msgstr "Smaily Newsletter Subscription"
 
-#: includes/subscribe-widget.php:60
+#: includes/subscribe-widget.php:61 smaily-for-wp.php:130
 msgid "Smaily credentials not validated. Subscription form will not work!"
 msgstr "Smaily credentials not validated. Subscription form will not work!"
 
-#: includes/subscribe-widget.php:65
-msgid "You have been successfully subscribed."
-msgstr "You have been successfully subscribed."
-
-#: includes/subscribe-widget.php:68
+#: includes/subscribe-widget.php:68 smaily-for-wp.php:137
 msgid "Form was not submitted using POST method."
 msgstr "Form was not submitted using POST method."
 
-#: includes/subscribe-widget.php:71
+#: includes/subscribe-widget.php:71 smaily-for-wp.php:140
 msgid "Input does not contain a recognizable email address."
 msgstr "Input does not contain a recognizable email address."
 
-#: includes/subscribe-widget.php:74
+#: includes/subscribe-widget.php:74 smaily-for-wp.php:143
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
@@ -201,18 +198,18 @@ msgstr ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
 
-#: includes/subscribe-widget.php:126
+#: includes/subscribe-widget.php:127
 msgid "Title"
 msgstr "Title"
 
-#: includes/subscribe-widget.php:136
+#: includes/subscribe-widget.php:137
 msgid "Display name field?"
 msgstr "Display name field?"
 
-#: includes/subscribe-widget.php:143
+#: includes/subscribe-widget.php:144
 msgid "Success URL"
 msgstr "Success URL"
 
-#: includes/subscribe-widget.php:151
+#: includes/subscribe-widget.php:152
 msgid "Failure URL"
 msgstr "Failure URL"
