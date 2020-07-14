@@ -2,20 +2,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 16:33+0300\n"
-"PO-Revision-Date: 2020-07-13 16:40+0300\n"
+"POT-Creation-Date: 2020-07-14 19:31+0300\n"
+"PO-Revision-Date: 2020-07-14 19:32+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Eesti\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_attr__;esc_attr_e;esc_html_e\n"
 "X-Loco-Version: 2.2.2; wp-5.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
 
 #: action.php:54
 msgid "Please enter subdomain!"
@@ -78,16 +79,16 @@ msgid "Subdomain"
 msgstr "Alamdomeen"
 
 #: html/admin/html/form.php:31
-msgid "API Username"
-msgstr "API Kasutajatunnus"
+msgid "API username"
+msgstr "API kasutajatunnus"
 
 #: html/admin/html/form.php:35
-msgid "API Password"
-msgstr "API Salasõna"
+msgid "API password"
+msgstr "API salasõna"
 
 #: html/admin/html/form.php:40
 msgid "How to create API credentials?"
-msgstr "Kuidas luua API volikirjad?"
+msgstr "Kuidas luua API kasutaja?"
 
 #: html/admin/html/form.php:47
 msgid "Check"

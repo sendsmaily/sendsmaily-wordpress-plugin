@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 16:40+0300\n"
-"PO-Revision-Date: 2020-07-13 16:41+0300\n"
+"POT-Creation-Date: 2020-07-14 19:32+0300\n"
+"PO-Revision-Date: 2020-07-14 19:32+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Estonian (Estonia)\n"
 "Language: et_EE\n"
@@ -79,12 +79,12 @@ msgid "Subdomain"
 msgstr "Alamdomeen"
 
 #: html/admin/html/form.php:31
-msgid "API Username"
-msgstr "API Kasutajatunnus"
+msgid "API username"
+msgstr "API kasutajatunnus"
 
 #: html/admin/html/form.php:35
-msgid "API Password"
-msgstr "API Salasõna"
+msgid "API password"
+msgstr "API salasõna"
 
 #: html/admin/html/form.php:40
 msgid "How to create API credentials?"
