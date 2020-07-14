@@ -3,7 +3,7 @@ Contributors: sendsmaily, kaarel, tomabel
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 2.1.1
+Stable tag: 2.2.0
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 5.4.1
 
@@ -75,7 +75,7 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 
 == Changelog ==
 
-= 2.1.1 =
+= 2.2.0 =
 - Also use Polylang and WordPress's locale when determining language field.
 - Add link to API user creation guide for admin form.
 - Rename username & password to API username & API password.
