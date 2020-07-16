@@ -214,7 +214,7 @@ function smaily_admin_save() {
 			// Get autoresponders.
 			$insert_query = array();
 			// Replace autoresponders.
-			foreach ( $rqst['body'] as $autoresponder ) {
+			foreach ( $autoresponders as $autoresponder ) {
 				$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
 			}
 			// Insert to db.
