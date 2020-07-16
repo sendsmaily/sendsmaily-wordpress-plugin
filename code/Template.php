@@ -88,6 +88,29 @@ class Smaily_Plugin_Template {
 	}
 
 	/**
+	 * Get language code currently in use.
+	 *
+	 * @return string $lang Language code.
+	 */
+	private function getLanguageCode() {
+		// Language code if using WPML.
+		$lang = '';
+		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
+			$lang = ICL_LANGUAGE_CODE;
+			// Language code if using polylang.
+		} elseif ( function_exists( 'pll_current_language' ) ) {
+			$lang = pll_current_language();
+		} else {
+			$lang = get_locale();
+			if ( strlen( $lang ) > 0 ) {
+				// Remove any value past underscore if exists.
+				$lang = explode( '_', $lang )[0];
+			}
+		}
+		return $lang;
+	}
+
+	/**
 	 * Get all assigned variables.
 	 *
 	 * @return array

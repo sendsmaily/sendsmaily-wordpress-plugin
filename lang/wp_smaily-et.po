@@ -2,20 +2,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-07 12:29+0200\n"
-"PO-Revision-Date: 2020-01-07 12:29+0200\n"
+"POT-Creation-Date: 2020-07-16 10:41+0300\n"
+"PO-Revision-Date: 2020-07-16 10:42+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Eesti\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;esc_html__;esc_attr__;esc_attr_e;esc_html_e\n"
 "X-Loco-Version: 2.2.2; wp-5.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
 
 #: action.php:54
 msgid "Please enter subdomain!"
@@ -78,67 +79,71 @@ msgid "Subdomain"
 msgstr "Alamdomeen"
 
 #: html/admin/html/form.php:31
-msgid "Username"
-msgstr "Kasutajatunnus"
+msgid "API username"
+msgstr "API kasutajatunnus"
 
 #: html/admin/html/form.php:35
-msgid "Password"
-msgstr "Salasõna"
+msgid "API password"
+msgstr "API salasõna"
 
 #: html/admin/html/form.php:40
+msgid "How to create API credentials?"
+msgstr "Kuidas luua API kasutaja?"
+
+#: html/admin/html/form.php:47
 msgid "Check"
 msgstr "Kontrolli"
 
-#: html/admin/html/form.php:46
+#: html/admin/html/form.php:53
 msgid "Basic"
 msgstr "Tavaseaded"
 
-#: html/admin/html/form.php:47
+#: html/admin/html/form.php:54
 msgid "Advanced"
 msgstr "Spetsialisti seaded"
 
-#: html/admin/html/form.php:53
+#: html/admin/html/form.php:60
 msgid "Autoresponders"
 msgstr "Automaatvastajad"
 
-#: html/admin/html/form.php:53
+#: html/admin/html/form.php:60
 msgid "Refresh"
 msgstr "Uuenda"
 
-#: html/admin/html/form.php:54
+#: html/admin/html/form.php:61
 msgid "Select autoresponder to change regular opt-in functionality"
 msgstr "Vali automaatika, et muuta tavalist opt-in funktsionaalsust"
 
-#: html/admin/html/form.php:57
+#: html/admin/html/form.php:64
 msgid "No autoresponder"
 msgstr "Ilma automaatvastajata vorm"
 
-#: html/admin/html/form.php:63
+#: html/admin/html/form.php:70
 msgid "No autoresponders. Please click on refresh link to update."
 msgstr "Automaatvastajad puuduvad. Uuendamiseks vajutage värskenda viidet."
 
-#: html/admin/html/form.php:70
+#: html/admin/html/form.php:77
 msgid "Newsletter subscription form"
 msgstr "Uudiskirja liitumisvorm"
 
-#: html/admin/html/form.php:70
+#: html/admin/html/form.php:77
 msgid "Restore original subscription form"
 msgstr "Taasta algne liitumisvorm"
 
-#: html/admin/html/form.php:70
+#: html/admin/html/form.php:77
 msgid "Regenerate"
 msgstr "Taastekita"
 
-#: html/admin/html/form.php:71
+#: html/admin/html/form.php:78
 msgid "HTML of subscription form"
 msgstr "Liitumisvormi HTML"
 
-#: html/admin/html/form.php:76
+#: html/admin/html/form.php:83
 msgid "Note: When you save under Basic tab, default form will be used."
 msgstr ""
 "Hoiatus: Kui salvestad Tavaseadete vaates, kasutatakse lehel vaikimisi vormi."
 
-#: html/admin/html/form.php:79
+#: html/admin/html/form.php:86
 msgid "Save changes"
 msgstr "Salvesta muudatused"
 
@@ -174,23 +179,19 @@ msgstr "Smaily uudiskirjaga liitumise vorm"
 msgid "Smaily Newsletter Subscription"
 msgstr "Smaily uudiskirjaga liitumine"
 
-#: includes/subscribe-widget.php:60
+#: includes/subscribe-widget.php:61 smaily-for-wp.php:130
 msgid "Smaily credentials not validated. Subscription form will not work!"
 msgstr "Smaily kasutajatunnused on valideerimata.  Uudiskirja vorm ei tööta!"
 
-#: includes/subscribe-widget.php:65
-msgid "You have been successfully subscribed."
-msgstr "Teid lisati edukalt uudiskirja."
-
-#: includes/subscribe-widget.php:68
+#: includes/subscribe-widget.php:68 smaily-for-wp.php:137
 msgid "Form was not submitted using POST method."
 msgstr "Andmeid peab saatma POST tegevusviisiga."
 
-#: includes/subscribe-widget.php:71
+#: includes/subscribe-widget.php:71 smaily-for-wp.php:140
 msgid "Input does not contain a recognizable email address."
 msgstr "Sisend ei sisalda tuntavat emaili aadressi."
 
-#: includes/subscribe-widget.php:74
+#: includes/subscribe-widget.php:74 smaily-for-wp.php:143
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
@@ -198,18 +199,18 @@ msgstr ""
 "Ei suutnud lisada uudiskirja nimekirja teadmata põhjusel. Tõenäoliselt "
 "probleem Smaily-s."
 
-#: includes/subscribe-widget.php:126
+#: includes/subscribe-widget.php:127
 msgid "Title"
 msgstr "Pealkiri"
 
-#: includes/subscribe-widget.php:136
+#: includes/subscribe-widget.php:137
 msgid "Display name field?"
 msgstr "Näita nime välja?"
 
-#: includes/subscribe-widget.php:143
+#: includes/subscribe-widget.php:144
 msgid "Success URL"
 msgstr "Õnnestumise URL"
 
-#: includes/subscribe-widget.php:151
+#: includes/subscribe-widget.php:152
 msgid "Failure URL"
 msgstr "Ebaõnnestumise URL"
