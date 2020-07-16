@@ -28,12 +28,19 @@ $autoresponders = $this->autoresponders;
 
 	</tr>
 	<tr class="form-field">
-		<th><?php echo esc_html__( 'Username', 'wp_smaily' ); ?></th>
+		<th><?php echo esc_html__( 'API username', 'wp_smaily' ); ?></th>
 		<td><input type="text" class="regular-text" name="username" style="max-width:50%;"/></td>
 	</tr>
 	<tr class="form-field">
-		<th><?php echo esc_html__( 'Password', 'wp_smaily' ); ?></th>
-		<td><input type="password" class="regular-text" name="password" style="max-width:50%;"/></td>
+		<th><?php echo esc_html__( 'API password', 'wp_smaily' ); ?></th>
+		<td>
+			<input type="password" class="regular-text" name="password" style="max-width:50%;"/>
+			<small class="form-text text-muted" style="display:block;">
+				<a href="http://help.smaily.com/en/support/solutions/articles/16000062943-create-api-user">
+					<?php echo esc_html__( 'How to create API credentials?', 'wp_smaily' ); ?>
+				</a>
+			</small>
+		</td>
 	</tr>
 	</tbody>
 </table>
