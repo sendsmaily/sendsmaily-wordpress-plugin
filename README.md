@@ -1,6 +1,4 @@
-# Smaily Wordpress plugin
-
-Smaily email marketing and automation extension plugin for Wordpress.
+Smaily email marketing and automation plugin for Wordpress.
 Automatically generate a simple sign-up form and add new subscribers to Smaily subscribers list.
 
 ## Features
@@ -47,5 +45,6 @@ Opening new issues and submitting pull requests are welcome.
 - Add a `[smaily_for_wp_newsletter_form]` shortcode to a preferred location.
 - You can choose a page to return in case of successful subscription by providing `success_url` attribute to the shortcode. `[smaily_for_wp_newsletter_form success_url="http://www.example.com/?page_id=2"]`
 - You can also choose a page to return in case of error by providing `failure_url` attribute to the shortcode. `[smaily_for_wp_newsletter_form failure_url="http://www.example.com/?page_id=2"]`
-- Default return path for both is the site`s home url.
+- Default return path for both is the site's home URL.
 - You can add the name field to the form by providing `show_name` attribute to the shortcode. `[smaily_for_wp_newsletter_form show_name="true"]`
+- Targeting of a specific automation can be done by adding `autoresponder_id` attribute to the shortcode. `[smaily_for_wp_newsletter_form autoresponder_id="123"]`
