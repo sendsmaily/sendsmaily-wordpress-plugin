@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smaily\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-05 15:11+0300\n"
-"PO-Revision-Date: 2020-10-05 15:11+0300\n"
+"POT-Creation-Date: 2020-10-05 15:41+0300\n"
+"PO-Revision-Date: 2020-10-05 15:41+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Eesti\n"
 "Language: et\n"
@@ -179,19 +179,19 @@ msgstr "Smaily uudiskirjaga liitumise vorm"
 msgid "Smaily Newsletter Subscription"
 msgstr "Smaily uudiskirjaga liitumine"
 
-#: includes/subscribe-widget.php:63 smaily-for-wp.php:130
+#: includes/subscribe-widget.php:63 smaily-for-wp.php:132
 msgid "Smaily credentials not validated. Subscription form will not work!"
 msgstr "Smaily kasutajatunnused on valideerimata.  Uudiskirja vorm ei tööta!"
 
-#: includes/subscribe-widget.php:70 smaily-for-wp.php:137
+#: includes/subscribe-widget.php:70 smaily-for-wp.php:139
 msgid "Form was not submitted using POST method."
 msgstr "Andmeid peab saatma POST tegevusviisiga."
 
-#: includes/subscribe-widget.php:73 smaily-for-wp.php:140
+#: includes/subscribe-widget.php:73 smaily-for-wp.php:142
 msgid "Input does not contain a recognizable email address."
 msgstr "Sisend ei sisalda tuntavat emaili aadressi."
 
-#: includes/subscribe-widget.php:76 smaily-for-wp.php:143
+#: includes/subscribe-widget.php:76 smaily-for-wp.php:145
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
