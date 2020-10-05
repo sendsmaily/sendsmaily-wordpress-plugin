@@ -3,7 +3,7 @@ Contributors: sendsmaily, kaarel, tomabel
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 5.4.1
 
@@ -74,6 +74,10 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 5. Smaily plugin shortcode from.
 
 == Changelog ==
+
+= 2.2.1 =
+- Fix opt-in form not using selected automation ID
+- Fix shortcode not having attribute to provide automation ID
 
 = 2.2.0 =
 - Also use Polylang and WordPress's locale when determining language field.

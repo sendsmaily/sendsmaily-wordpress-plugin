@@ -9,7 +9,7 @@
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin/
  * Text Domain:       wp_smaily
  * Description:       Smaily newsletter subscription form.
- * Version:           2.2.0
+ * Version:           2.2.1
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SMLY4WP_PLUGIN_VERSION', '2.2.0' );
+define( 'SMLY4WP_PLUGIN_VERSION', '2.2.1' );
 // Absolute URL to the plugin, for HTML markup.
 define( 'SMLY4WP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
@@ -105,15 +105,17 @@ function smaily_shortcode_render( $atts ) {
 	// Parse attributes out of shortcode tag.
 	$shortcode_atts = shortcode_atts(
 		array(
-			'success_url' => get_site_url(),
-			'failure_url' => get_site_url(),
-			'show_name'   => false,
+			'success_url'      => get_site_url(),
+			'failure_url'      => get_site_url(),
+			'show_name'        => false,
+			'autoresponder_id' => '',
 		),
 		$atts
 	);
-	$config['success_url'] = $shortcode_atts['success_url'];
-	$config['failure_url'] = $shortcode_atts['failure_url'];
-	$config['show_name']   = $shortcode_atts['show_name'];
+	$config['success_url']      = $shortcode_atts['success_url'];
+	$config['failure_url']      = $shortcode_atts['failure_url'];
+	$config['show_name']        = $shortcode_atts['show_name'];
+	$config['autoresponder_id'] = $shortcode_atts['autoresponder_id'];
 
 	// Create admin template.
 	require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );

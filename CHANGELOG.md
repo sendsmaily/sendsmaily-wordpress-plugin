@@ -1,5 +1,10 @@
 # Changelog
 
+### 2.2.1
+
+- Fix opt-in form not using selected automation ID [#64]
+- Fix shortcode not having attribute to provide automation ID [#65]
+
 ### 2.2.0
 
 - Also use Polylang and WordPress's locale when determining language field.
