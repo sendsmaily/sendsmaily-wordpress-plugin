@@ -75,6 +75,10 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 
 == Changelog ==
 
+= 2.2.1 =
+- Fix opt-in form not using selected automation ID
+- Fix shortcode not having attribute to provide automation ID
+
 = 2.2.0 =
 - Also use Polylang and WordPress's locale when determining language field.
 - Add link to API user creation guide for admin form.
