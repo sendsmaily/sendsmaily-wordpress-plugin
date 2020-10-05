@@ -105,15 +105,17 @@ function smaily_shortcode_render( $atts ) {
 	// Parse attributes out of shortcode tag.
 	$shortcode_atts = shortcode_atts(
 		array(
-			'success_url' => get_site_url(),
-			'failure_url' => get_site_url(),
-			'show_name'   => false,
+			'success_url'      => get_site_url(),
+			'failure_url'      => get_site_url(),
+			'show_name'        => false,
+			'autoresponder_id' => '',
 		),
 		$atts
 	);
-	$config['success_url'] = $shortcode_atts['success_url'];
-	$config['failure_url'] = $shortcode_atts['failure_url'];
-	$config['show_name']   = $shortcode_atts['show_name'];
+	$config['success_url']      = $shortcode_atts['success_url'];
+	$config['failure_url']      = $shortcode_atts['failure_url'];
+	$config['show_name']        = $shortcode_atts['show_name'];
+	$config['autoresponder_id'] = $shortcode_atts['autoresponder_id'];
 
 	// Create admin template.
 	require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );
