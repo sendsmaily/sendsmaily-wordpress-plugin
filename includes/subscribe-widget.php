@@ -41,11 +41,13 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		}
 
 		// Load configuration data.
-		$table_name            = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$config                = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-		$config['show_name']   = $show_name;
-		$config['success_url'] = $success_url;
-		$config['failure_url'] = $failure_url;
+		$table_name                 = esc_sql( $wpdb->prefix . 'smaily_config' );
+		$config                     = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$config['show_name']        = $show_name;
+		$config['success_url']      = $success_url;
+		$config['failure_url']      = $failure_url;
+		$config['autoresponder_id'] = !empty( $config['autoresponder'] ) ? (int) $config['autoresponder'] : '';
+
 		// Create admin template.
 		require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );
 		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
