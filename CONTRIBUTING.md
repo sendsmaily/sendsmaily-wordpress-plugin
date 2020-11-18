@@ -76,6 +76,6 @@ Relasing a new version of the plugin to Wordpress.org requires [SVN client](http
 
 After creating a release in GitHub, plugin must also be deployed to Wordpress.org. The repository contains a handy script for that:
 
-    $ ./release.sh
+    $ ./release.sh -u [Your Wordpress.org username]
 
 > It will guide you through the release process step-by-step.
