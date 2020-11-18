@@ -14,7 +14,7 @@ First off, thanks for taking the time to contribute!
 
 # Getting started
 
-The development environment requires [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to run. Please refert to the official documentation for step-by-step installation guide.
+The development environment requires [Docker](https://docs.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to run. Please refer to the official documentation for step-by-step installation guide.
 
 Clone the repository:
 
@@ -72,7 +72,7 @@ If you need to reset the Wordpress installation in the development environment, 
 
 # Releasing
 
-Relasing a new version of the plugin to Wordpress.org requires [SVN client](https://subversion.apache.org/packages.html).
+Releasing a new version of the plugin to Wordpress.org requires [SVN client](https://subversion.apache.org/packages.html).
 
 After creating a release in GitHub, plugin must also be deployed to Wordpress.org. The repository contains a handy script for that:
 
