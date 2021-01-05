@@ -14,7 +14,7 @@ msgstr ""
 "_n_noop:1,2;_c;_nc:4c,1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_ex:1,2c;"
 "esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
 "esc_html_x:1,2c\n"
-"Last-Translator: \n"
+"Last-Translator: Tom <tom@smaily.com>\n"
 "Language: et\n"
 "X-Poedit-SearchPath-0: .\n"
 
