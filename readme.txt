@@ -99,3 +99,9 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 
 = 2.0.0 =
 * First public release.
+
+== Upgrade Notice ==
+
+= 2.3.0 =
+
+Localization files were restructured with version 2.3.0, as a result all custom translations of Smaily for WP will stop working.
