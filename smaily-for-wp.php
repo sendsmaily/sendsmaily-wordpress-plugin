@@ -47,10 +47,7 @@ add_action( 'admin_enqueue_scripts', 'smaily_enqueue' );
  * @since 1.0.0
  */
 function smaily_load_textdomain() {
-	$t = load_plugin_textdomain( 'smaily-for-wp', false, plugin_basename( SMLY4WP_PLUGIN_PATH ) . '/lang' );
-	echo "<pre>";
-	var_dump($t);
-	echo "</pre>";
+	load_plugin_textdomain( 'smaily-for-wp', false, plugin_basename( SMLY4WP_PLUGIN_PATH ) . '/lang' );
 }
 add_action( 'plugins_loaded', 'smaily_load_textdomain' );
 
