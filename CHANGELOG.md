@@ -2,8 +2,8 @@
 
 ### 2.3.0
 
-- Restructure plugin localizations - [[#72](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/issues/72)]
-- Add support for WordPress 5.6 - [[#73](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/issues/73)]
+- Restructured plugin localizations - [[#72](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/issues/72)]
+- Added support for WordPress 5.6 - [[#73](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/issues/73)]
 
 ### 2.2.1
 
