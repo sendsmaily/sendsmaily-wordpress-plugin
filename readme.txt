@@ -3,7 +3,7 @@ Contributors: sendsmaily, kaarel, tomabel, marispulk
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 2.2.1
+Stable tag: 2.3.0
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 5.6.0
 
