@@ -51,7 +51,7 @@ function smaily_admin_save() {
 				// Don't refresh the page.
 				$refresh = false;
 				$result  = array(
-					'message' => __( 'Please enter subdomain!', 'wp_smaily' ),
+					'message' => __( 'Please enter subdomain!', 'smaily-for-wp' ),
 					'error'   => true,
 				);
 				break;
@@ -59,7 +59,7 @@ function smaily_admin_save() {
 				// Don't refresh the page.
 				$refresh = false;
 				$result  = array(
-					'message' => __( 'Please enter username!', 'wp_smaily' ),
+					'message' => __( 'Please enter username!', 'smaily-for-wp' ),
 					'error'   => true,
 				);
 				break;
@@ -67,7 +67,7 @@ function smaily_admin_save() {
 				// Don't refresh the page.
 				$refresh = false;
 				$result  = array(
-					'message' => __( 'Please enter password!', 'wp_smaily' ),
+					'message' => __( 'Please enter password!', 'smaily-for-wp' ),
 					'error'   => true,
 				);
 				break;
@@ -87,28 +87,28 @@ function smaily_admin_save() {
 				if ( $code === 401) {
 					// If wrong credentials.
 					$result = array(
-						'message' => __( 'Wrong credentials', 'wp_smaily' ),
+						'message' => __( 'Wrong credentials', 'smaily-for-wp' ),
 						'error'   => true,
 					);
 					break;
 				} elseif ( $code === 404 ) {
 					// If wrong subdomain.
 					$result = array(
-						'message' => __( 'Error in subdomain', 'wp_smaily' ),
+						'message' => __( 'Error in subdomain', 'smaily-for-wp' ),
 						'error'   => true,
 					);
 					break;
 				} elseif ( array_key_exists( 'error', $rqst ) ) {
 					// If there is WordPress error message.
 					$result = array(
-						'message' => __( $rqst['error'], 'wp_smaily' ),
+						'message' => __( $rqst['error'], 'smaily-for-wp' ),
 						'error'   => true,
 					);
 					break;
 				}
 				// If not determined error.
 				$result = array(
-					'message' => __( 'Something went wrong with request to Smaily', 'wp_smaily' ),
+					'message' => __( 'Something went wrong with request to Smaily', 'smaily-for-wp' ),
 					'error'   => true,
 				);
 				break;
@@ -143,7 +143,7 @@ function smaily_admin_save() {
 			// Return result.
 			$result = array(
 				'error'   => false,
-				'message' => __( 'Credentials validated.', 'wp_smaily' ),
+				'message' => __( 'Credentials validated.', 'smaily-for-wp' ),
 			);
 			break;
 
@@ -160,7 +160,7 @@ function smaily_admin_save() {
 			// Set result.
 			$result = array(
 				'error'   => false,
-				'message' => __( 'Credentials removed.', 'wp_smaily' ),
+				'message' => __( 'Credentials removed.', 'smaily-for-wp' ),
 			);
 			break;
 
@@ -179,7 +179,7 @@ function smaily_admin_save() {
 			// Render template.
 			$result = array(
 				'error'   => false,
-				'message' => __( 'Newsletter subscription form reset to default.', 'wp_smaily' ),
+				'message' => __( 'Newsletter subscription form reset to default.', 'smaily-for-wp' ),
 				'content' => $template->render(),
 			);
 			break;
@@ -205,7 +205,7 @@ function smaily_admin_save() {
 				break;
 			} elseif ( empty( $autoresponders ) ) {
 				$result = array(
-					'message' => __( 'Could not find any autoresponders!', 'wp_smaily' ),
+					'message' => __( 'Could not find any autoresponders!', 'smaily-for-wp' ),
 					'error'   => true,
 				);
 				break;
@@ -229,7 +229,7 @@ function smaily_admin_save() {
 			// Return result.
 			$result = array(
 				'error'   => false,
-				'message' => __( 'Autoresponders refreshed.', 'wp_smaily' ),
+				'message' => __( 'Autoresponders refreshed.', 'smaily-for-wp' ),
 			);
 
 			break;
@@ -273,7 +273,7 @@ function smaily_admin_save() {
 			// Return response.
 			$result = array(
 				'error'   => false,
-				'message' => __( 'Changes saved.', 'wp_smaily' ),
+				'message' => __( 'Changes saved.', 'smaily-for-wp' ),
 			);
 			break;
 	}
