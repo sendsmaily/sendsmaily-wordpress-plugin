@@ -75,6 +75,10 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 
 == Changelog ==
 
+= 2.3.0 =
+- Restructured plugin localizations (see upgrade notice below)
+- Added support for WordPress 5.6
+
 = 2.2.1 =
 - Fix opt-in form not using selected automation ID
 - Fix shortcode not having attribute to provide automation ID
