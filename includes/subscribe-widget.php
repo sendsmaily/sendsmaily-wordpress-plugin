@@ -15,8 +15,8 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 	 * Sets up a new instance of the widget.
 	 */
 	public function __construct() {
-		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'wp_smaily' ) );
-		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'wp_smaily' ), $widget_ops );
+		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'smaily-for-wp' ) );
+		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
 	}
 
 	/**
@@ -60,20 +60,20 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 
 		if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
 			$form_has_response = true;
-			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
+			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'smaily-for-wp' );
 		} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {
 			$form_is_successful = true;
 		} elseif ( isset( $_GET['code'] ) || ! empty( $_GET['code'] ) ) {
 			$form_has_response = true;
 			switch ( (int) $_GET['code'] ) {
 				case 201:
-					$response_message = __( 'Form was not submitted using POST method.', 'wp_smaily' );
+					$response_message = __( 'Form was not submitted using POST method.', 'smaily-for-wp' );
 					break;
 				case 204:
-					$response_message = __( 'Input does not contain a recognizable email address.', 'wp_smaily' );
+					$response_message = __( 'Input does not contain a recognizable email address.', 'smaily-for-wp' );
 					break;
 				default:
-					$response_message = __( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
+					$response_message = __( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'smaily-for-wp' );
 					break;
 			}
 		}
@@ -126,7 +126,7 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$title_name        = esc_attr( $this->get_field_name( 'title' ) );
 		$instance['title'] = esc_attr( $instance['title'] );
 		echo '<p>
-			<label for="' . $title_id . '">' . __( 'Title', 'wp_smaily' ) . ':</label>
+			<label for="' . $title_id . '">' . __( 'Title', 'smaily-for-wp' ) . ':</label>
 			<input class="widefat" id="' . $title_id . '" name="' . $title_name . '" type="text" value="' . $instance['title'] . '" />
 		</p>';
 
@@ -136,14 +136,14 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$instance['show_name'] = esc_attr( $instance['show_name'] );
 		echo '<p>
 			<input class="checkbox" id="' . $show_name_id . '" name="' . $show_name_name . '" type="checkbox"' . ( $instance['show_name'] ? 'checked' : '' ) . ' />
-			<label for="' . $show_name_id . '">' . __( 'Display name field?', 'wp_smaily' ) . '</label>' .
+			<label for="' . $show_name_id . '">' . __( 'Display name field?', 'smaily-for-wp' ) . '</label>' .
 		'</p>';
 		// Display inputs for success/failure URLs.
 		$success_url_id          = esc_attr( $this->get_field_id( 'success_url' ) );
 		$success_url             = esc_attr( $this->get_field_name( 'success_url' ) );
 		$instance['success_url'] = esc_attr( $instance['success_url'] );
 		echo '<p>
-			<label for="' . $success_url_id . '">' . __( 'Success URL', 'wp_smaily' ) . ':</label>
+			<label for="' . $success_url_id . '">' . __( 'Success URL', 'smaily-for-wp' ) . ':</label>
 			<input id="' . $success_url_id . '" name="' . $success_url . '" type="text" value="' . $instance['success_url'] . '" />
 		</p>';
 
@@ -151,7 +151,7 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$failure_url             = esc_attr( $this->get_field_name( 'failure_url' ) );
 		$instance['failure_url'] = esc_attr( $instance['failure_url'] );
 		echo '<p>
-			<label for="' . $failure_url_id . '">' . __( 'Failure URL', 'wp_smaily' ) . ':</label>
+			<label for="' . $failure_url_id . '">' . __( 'Failure URL', 'smaily-for-wp' ) . ':</label>
 			<input id="' . $failure_url_id . '" name="' . $failure_url . '" type="text" value="' . $instance['failure_url'] . '" />
 		</p>';
 	}

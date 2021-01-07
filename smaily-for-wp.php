@@ -7,9 +7,9 @@
  * @wordpress-plugin
  * Plugin Name:       Smaily for WP
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin/
- * Text Domain:       wp_smaily
+ * Text Domain:       smaily-for-wp
  * Description:       Smaily newsletter subscription form.
- * Version:           2.2.1
+ * Version:           2.3.0
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -19,7 +19,7 @@
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define( 'SMLY4WP_PLUGIN_VERSION', '2.2.1' );
+define( 'SMLY4WP_PLUGIN_VERSION', '2.3.0' );
 // Absolute URL to the plugin, for HTML markup.
 define( 'SMLY4WP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
@@ -47,7 +47,7 @@ add_action( 'admin_enqueue_scripts', 'smaily_enqueue' );
  * @since 1.0.0
  */
 function smaily_load_textdomain() {
-	load_plugin_textdomain( 'wp_smaily', false, plugin_basename( SMLY4WP_PLUGIN_PATH ) . '/lang' );
+	load_plugin_textdomain( 'smaily-for-wp', false, plugin_basename( SMLY4WP_PLUGIN_PATH ) . '/lang' );
 }
 add_action( 'plugins_loaded', 'smaily_load_textdomain' );
 
@@ -129,20 +129,20 @@ function smaily_shortcode_render( $atts ) {
 
 	if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
 		$form_has_response = true;
-		$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'wp_smaily' );
+		$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'smaily-for-wp' );
 	} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {
 		$form_is_successful = true;
 	} elseif ( isset( $_GET['code'] ) || ! empty( $_GET['code'] ) ) {
 		$form_has_response = true;
 		switch ( (int) $_GET['code'] ) {
 			case 201:
-				$response_message = __( 'Form was not submitted using POST method.', 'wp_smaily' );
+				$response_message = __( 'Form was not submitted using POST method.', 'smaily-for-wp' );
 				break;
 			case 204:
-				$response_message = __( 'Input does not contain a recognizable email address.', 'wp_smaily' );
+				$response_message = __( 'Input does not contain a recognizable email address.', 'smaily-for-wp' );
 				break;
 			default:
-				$response_message = __( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'wp_smaily' );
+				$response_message = __( 'Could not add to subscriber list for an unknown reason. Probably something in Smaily.', 'smaily-for-wp' );
 				break;
 		}
 	}

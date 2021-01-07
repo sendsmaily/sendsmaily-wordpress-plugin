@@ -1,11 +1,11 @@
 === Smaily for WP ===
-Contributors: sendsmaily, kaarel, tomabel
+Contributors: sendsmaily, kaarel, tomabel, marispulk
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 2.2.1
+Stable tag: 2.3.0
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
-Tested up to: 5.4.1
+Tested up to: 5.6.0
 
 Smaily newsletter subscription plugin for WordPress
 
@@ -75,6 +75,10 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 
 == Changelog ==
 
+= 2.3.0 =
+- Restructured plugin localizations (see upgrade notice section)
+- Added support for WordPress 5.6
+
 = 2.2.1 =
 - Fix opt-in form not using selected automation ID
 - Fix shortcode not having attribute to provide automation ID
@@ -99,3 +103,9 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 
 = 2.0.0 =
 * First public release.
+
+== Upgrade Notice ==
+
+= 2.3.0 =
+
+Localization files were restructured with version 2.3.0, as a result all custom translations of Smaily for WP will stop working.
