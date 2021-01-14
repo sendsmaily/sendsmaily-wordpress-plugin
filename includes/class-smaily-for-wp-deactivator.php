@@ -3,11 +3,11 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       http://example.com
- * @since      1.0.0
+
+ * @since      3.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    Smaily_For_WP
+ * @subpackage Smaily_For_WP/includes
  */
 
 /**
@@ -15,19 +15,18 @@
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- * @author     Your Name <email@example.com>
+ * @since      3.0.0
+ * @package    Smaily_For_WP
+ * @subpackage Smaily_For_WP/includes
  */
-class Plugin_Name_Deactivator {
+class Smaily_For_WP_Deactivator {
 
 	/**
 	 * Short Description. (use period)
 	 *
 	 * Long Description.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public static function deactivate() {
 

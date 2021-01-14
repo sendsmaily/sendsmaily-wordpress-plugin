@@ -9,7 +9,7 @@
 /**
  * Create a class for the widget.
  */
-class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
+class Smaily_For_WP_Widget extends WP_Widget {
 
 	/**
 	 * Sets up a new instance of the widget.
@@ -49,9 +49,8 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$config['autoresponder_id'] = !empty( $config['autoresponder'] ) ? (int) $config['autoresponder'] : '';
 
 		// Create admin template.
-		require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );
 		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
-		$template = new Smaily_Plugin_Template( 'html/form/' . $file );
+		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $file );
 		$template->assign( $config );
 		// Display responses on Smaily subscription form.
 		$form_has_response = false;
