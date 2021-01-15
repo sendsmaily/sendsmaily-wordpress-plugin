@@ -45,15 +45,15 @@ function activate_smaily_for_wp() {
 }
 
 /**
- * The code that runs during plugin deactivation.
+ * The code that runs for plugin uninstallation.
  */
-function deactivate_smaily_for_wp() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-smaily-for-wp-deactivator.php';
-	Smaily_For_WP_Deactivator::deactivate();
+function uninstall_smaily_for_wp() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-smaily-for-wp-uninstaller.php';
+	Smaily_For_WP_Uninstaller::uninstall();
 }
 
 register_activation_hook( __FILE__, 'activate_smaily_for_wp' );
-register_deactivation_hook( __FILE__, 'deactivate_smaily_for_wp' );
+register_uninstall_hook( __FILE__, 'uninstall_smaily_for_wp' );
 
 /**
  * The core plugin class that is used to define internationalization,
