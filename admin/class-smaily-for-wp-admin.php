@@ -169,7 +169,7 @@ class Smaily_For_WP_Admin {
 				}
 
 				// Validate credentials with get request.
-				$rqst = ( new Smaily_Plugin_Request() )
+				$rqst = ( new Smaily_For_WP_Request() )
 					->auth( $params['username'], $params['password'] )
 					->setUrl( 'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
 					->get();
@@ -287,7 +287,7 @@ class Smaily_For_WP_Admin {
 				// Credentials.
 				$api_credentials = explode( ':', $data->api_credentials );
 				// Get autoresponders.
-				$result         = ( new Smaily_Plugin_Request() )
+				$result         = ( new Smaily_For_WP_Request() )
 					->setUrl( 'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
 					->auth( $api_credentials[0], $api_credentials[1] )
 					->get();
