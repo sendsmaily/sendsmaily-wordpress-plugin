@@ -1,9 +1,7 @@
 <?php
-
 /**
  * Fired during plugin deactivation
  *
-
  * @since      3.0.0
  *
  * @package    Smaily_For_WP
@@ -20,7 +18,6 @@
  * @subpackage Smaily_For_WP/includes
  */
 class Smaily_For_WP_Deactivator {
-
 	/**
 	 * Short Description. (use period)
 	 *
@@ -31,5 +28,4 @@ class Smaily_For_WP_Deactivator {
 	public static function deactivate() {
 
 	}
-
 }
