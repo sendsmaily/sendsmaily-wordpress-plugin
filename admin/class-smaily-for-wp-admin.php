@@ -58,6 +58,7 @@ class Smaily_For_WP_Admin {
 	 */
 	public function enqueue_styles() {
 		wp_register_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/smaily-for-wp-admin.css', array(), $this->version, 'all' );
+		// Only enqueue in module page.
 		$screen = get_current_screen();
 		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_sendsmaily-wordpress-plugin' ) {
 			wp_enqueue_style( $this->plugin_name );
