@@ -1,1 +1,1 @@
-<?php // Silence is golden
+<?php // Prevent display of folder layout.
