@@ -52,6 +52,19 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since 3.0.0
+	 */
+	public function enqueue_styles() {
+		wp_register_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/smaily-for-wp-admin.css', array(), $this->version, 'all' );
+		$screen = get_current_screen();
+		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_sendsmaily-wordpress-plugin' ) {
+			wp_enqueue_style( $this->plugin_name );
+		}
+	}
+
+	/**
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since 3.0.0

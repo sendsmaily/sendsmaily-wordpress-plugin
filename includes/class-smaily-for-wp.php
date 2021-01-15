@@ -153,6 +153,7 @@ class Smaily_For_WP {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Smaily_For_WP_Admin( $this->get_plugin_name(), $this->get_version() );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_smaily_admin_save', $plugin_admin, 'smaily_admin_save' );
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'smaily_subscription_widget_init' );
