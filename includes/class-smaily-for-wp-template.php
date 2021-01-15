@@ -44,7 +44,7 @@ class Smaily_For_WP_Template {
 	 * @throws Exception Exeption.
 	 */
 	public function render() {
-		$file_name = plugin_dir_path( dirname( __FILE__ ) ) . $this->_template;
+		$file_name = SMLY4WP_PLUGIN_PATH . '/' . $this->_template;
 		// Check for template file.
 		if ( empty( $this->_template ) || ! file_exists( $file_name ) || ! is_readable( $file_name ) ) {
 			throw new Exception( 'Could not find template "' . $file_name . '"! Please check for file existence.' );

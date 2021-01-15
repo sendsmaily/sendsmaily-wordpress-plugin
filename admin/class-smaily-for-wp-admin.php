@@ -83,7 +83,7 @@ class Smaily_For_WP_Admin {
 		$template->assign( 'autoresponders', $data );
 
 		// Add menu elements.
-		add_menu_page( 'smaily', 'Smaily', 'manage_options', plugin_dir_path( dirname( __FILE__ ) ), '', plugins_url( '/gfx/icon.png', dirname( __FILE__ ) ) );
+		add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', plugins_url( '/gfx/icon.png', dirname( __FILE__ ) ) );
 		add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', SMLY4WP_PLUGIN_PATH, array( $template, 'dispatch' ) );
 	}
 

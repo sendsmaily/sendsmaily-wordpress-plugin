@@ -31,7 +31,7 @@ class Smaily_For_WP_i18n {
 		load_plugin_textdomain(
 			'smaily-for-wp',
 			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/lang/'
+			plugin_basename( SMLY4WP_PLUGIN_PATH ) . '/lang/'
 		);
 	}
 }
