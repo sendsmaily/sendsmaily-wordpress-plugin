@@ -71,8 +71,13 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
-		wp_localize_script( $this->plugin_name, $this->plugin_name, array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
+		// Only enqueue in module page.
+		$screen = get_current_screen();
+		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_sendsmaily-wordpress-plugin' ) {
+			wp_enqueue_script( $this->plugin_name );
+			wp_localize_script( $this->plugin_name, $this->plugin_name, array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+		}
 	}
 
 	/**
