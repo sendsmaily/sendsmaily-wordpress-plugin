@@ -375,7 +375,7 @@ class Smaily_For_WP_Admin {
 		if ( $refresh ) {
 
 			// Generate form contents.
-			$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-form.php' );
+			$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-form.php' );
 
 			// Load configuration data.
 			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
