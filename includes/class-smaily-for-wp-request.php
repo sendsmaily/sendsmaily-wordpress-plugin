@@ -108,5 +108,4 @@ class Smaily_For_WP_Request {
 
 		return $response;
 	}
-
 }

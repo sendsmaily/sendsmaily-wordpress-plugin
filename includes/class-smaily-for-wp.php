@@ -222,5 +222,4 @@ class Smaily_For_WP {
 	public function get_version() {
 		return $this->version;
 	}
-
 }

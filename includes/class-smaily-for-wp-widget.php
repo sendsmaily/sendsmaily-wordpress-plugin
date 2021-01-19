@@ -86,6 +86,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 
 		echo $args['after_widget'];
 	}
+
 	/**
 	 * This function should check that $new_instance is set correctly. The newly
 	 * calculated value of $instance should be returned. If "false" is returned,
@@ -104,6 +105,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
 		return $instance;
 	}
+
 	/**
 	 * Widget form on widgets page in admin panel.
 	 *
