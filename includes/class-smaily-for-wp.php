@@ -136,7 +136,7 @@ class Smaily_For_WP {
 	/**
 	 * Install database structure (on activation).
 	 *
-	 * @since    3.0.0
+	 * @since 3.0.0
 	 */
 	public static function activate() {
 		global $wpdb;
@@ -174,7 +174,7 @@ class Smaily_For_WP {
 	/**
 	 * Clean up plugin's database entities.
 	 *
-	 * @since    3.0.0
+	 * @since 3.0.0
 	 */
 	public static function uninstall() {
 		global $wpdb;

@@ -10,6 +10,8 @@ class Smaily_For_WP_Widget extends WP_Widget {
 
 	/**
 	 * Sets up a new instance of the widget.
+	 *
+	 * @since 3.0.0
 	 */
 	public function __construct() {
 		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'smaily-for-wp' ) );
@@ -19,6 +21,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	/**
 	 * Outputs the content for the current widget instance.
 	 *
+	 * @since 3.0.0
 	 * @param array $args     Display arguments including 'before_title', 'after_title',
 	 *                        'before_widget', and 'after_widget'.
 	 * @param array $instance Settings for the current Search widget instance.
@@ -88,8 +91,9 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	 * calculated value of $instance should be returned. If "false" is returned,
 	 * the instance won't be saved/updated.
 	 *
-	 * @param array $new_instance New instance.
-	 * @param array $old_instance Old instance.
+	 * @since  3.0.0
+	 * @param  array $new_instance New instance.
+	 * @param  array $old_instance Old instance.
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
@@ -103,7 +107,8 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	/**
 	 * Widget form on widgets page in admin panel.
 	 *
-	 * @param array $instance Widget fields array.
+	 * @since  3.0.0
+	 * @param  array $instance Widget fields array.
 	 * @return void
 	 */
 	public function form( $instance ) {

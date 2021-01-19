@@ -37,8 +37,9 @@ class Smaily_For_WP_Template {
 	/**
 	 * Render partial html.
 	 *
-	 * @param string $template Template.
-	 * @param array  $params Template params.
+	 * @since  3.0.0
+	 * @param  string $template Template.
+	 * @param  array  $params Template params.
 	 * @return string
 	 */
 	public function partial( $template, $params = array() ) {
@@ -50,6 +51,7 @@ class Smaily_For_WP_Template {
 	/**
 	 * Render template.
 	 *
+	 * @since  3.0.0
 	 * @return string|bool
 	 * @throws Exception Exeption.
 	 */
@@ -72,6 +74,7 @@ class Smaily_For_WP_Template {
 	/**
 	 * Dispatch template.
 	 *
+	 * @since  3.0.0
 	 * @return void
 	 */
 	public function dispatch() {
@@ -81,8 +84,9 @@ class Smaily_For_WP_Template {
 	/**
 	 * Assign template variables.
 	 *
-	 * @param string|array $name Name.
-	 * @param object       $value [optional].
+	 * @since  3.0.0
+	 * @param  string|array $name Name.
+	 * @param  object       $value [optional].
 	 * @return Smaily_For_WP_Template
 	 */
 	public function assign( $name, $value = null ) {
@@ -100,6 +104,7 @@ class Smaily_For_WP_Template {
 	/**
 	 * Get language code currently in use.
 	 *
+	 * @since  3.0.0
 	 * @return string $lang Language code.
 	 */
 	private function getLanguageCode() {
@@ -123,6 +128,7 @@ class Smaily_For_WP_Template {
 	/**
 	 * Get all assigned variables.
 	 *
+	 * @since  3.0.0
 	 * @return array
 	 */
 	public function getVars() {
@@ -132,7 +138,8 @@ class Smaily_For_WP_Template {
 	/**
 	 * Return assigned var value.
 	 *
-	 * @param string $name Name.
+	 * @since  3.0.0
+	 * @param  string $name Name.
 	 * @return string|object|void
 	 */
 	public function __get( $name ) {
@@ -146,8 +153,9 @@ class Smaily_For_WP_Template {
 	/**
 	 * Assign single param.
 	 *
-	 * @param string $name Name.
-	 * @param object $value Value.
+	 * @since  3.0.0
+	 * @param  string $name Name.
+	 * @param  object $value Value.
 	 * @return void
 	 */
 	public function __set( $name, $value ) {

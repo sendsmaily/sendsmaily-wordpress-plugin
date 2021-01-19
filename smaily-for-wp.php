@@ -37,8 +37,7 @@ define( 'SMLY4WP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * The core plugin class.
  */
 require SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp.php';
 
@@ -52,7 +51,7 @@ register_uninstall_hook( __FILE__, array( 'Smaily_For_WP', 'uninstall' ) );
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    3.0.0
+ * @since 3.0.0
  */
 function run_smaily_for_wp() {
 	$plugin = new Smaily_For_WP();

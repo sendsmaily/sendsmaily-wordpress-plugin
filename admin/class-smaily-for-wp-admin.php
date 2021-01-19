@@ -2,9 +2,6 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
  * @since      3.0.0
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/admin
@@ -59,6 +56,7 @@ class Smaily_For_WP_Admin {
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since 3.0.0
+	 * @return void
 	 */
 	public function enqueue_scripts() {
 		wp_register_script( $this->plugin_name, SMLY4WP_PLUGIN_PATH . 'js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
@@ -73,6 +71,7 @@ class Smaily_For_WP_Admin {
 	/**
 	 * Render admin page.
 	 *
+	 * @since 3.0.0
 	 * @return void
 	 */
 	public function smaily_admin_render() {
@@ -98,6 +97,9 @@ class Smaily_For_WP_Admin {
 
 	/**
 	 * Load subscribe widget.
+	 *
+	 * @since 3.0.0
+	 * @return void
 	 */
 	public function smaily_subscription_widget_init() {
 		register_widget( 'Smaily_For_WP_Widget' );

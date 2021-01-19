@@ -2,9 +2,6 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
- *
  * @since      3.0.0
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/public
