@@ -23,7 +23,7 @@ class Smaily_For_WP_Request {
 	 * @access   protected
 	 * @var      string    $_url    The URL endpoint against which the request is made.
 	 */
-	protected $_url = NULL;
+	protected $_url = null;
 
 	/**
 	 * Request data.
@@ -41,7 +41,7 @@ class Smaily_For_WP_Request {
 	 * @access   private
 	 * @var      string    $_username    Smaily API username used for authentication.
 	 */
-	private $_username = NULL;
+	private $_username = null;
 
 	/**
 	 * Smaily API Password.
@@ -50,7 +50,7 @@ class Smaily_For_WP_Request {
 	 * @access   private
 	 * @var      string    $_password    Smaily API password used for authentication.
 	 */
-	private $_password = NULL;
+	private $_password = null;
 
 	/**
 	 * Set Smaily API Credentials for request.
@@ -60,7 +60,7 @@ class Smaily_For_WP_Request {
 	 *
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
-	public function auth($username, $password) {
+	public function auth( $username, $password ) {
 		$this->_username = $username;
 		$this->_password = $password;
 		return $this;
@@ -73,7 +73,7 @@ class Smaily_For_WP_Request {
 	 *
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
-	public function setUrl($url) {
+	public function setUrl( $url ) {
 		$this->_url = $url;
 		return $this;
 	}
@@ -84,7 +84,7 @@ class Smaily_For_WP_Request {
 	 * @param  array $data Shortcode attributes.
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
-	public function setData(array $data) {
+	public function setData( array $data ) {
 		$this->_data = $data;
 		return $this;
 	}
@@ -95,7 +95,7 @@ class Smaily_For_WP_Request {
 	 * @return array $response. Data recieved back from making the request.
 	 */
 	public function get() {
-		$response  = [];
+		$response  = array();
 		$useragent = 'WordPress/' . get_bloginfo( 'version' ) . '; ' . get_bloginfo( 'url' ) . '; smaily-for-wp/' . SMLY4WP_PLUGIN_VERSION;
 		$args      = array(
 			'headers' => array(
