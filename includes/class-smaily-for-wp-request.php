@@ -79,10 +79,10 @@ class Smaily_For_WP_Request {
 	}
 
 	/**
-	 * Render Smaily form using shortcode.
+	 * Set data which is sent via request.
 	 *
 	 * @since  3.0.0
-	 * @param  array $data Shortcode attributes.
+	 * @param  array $data Request data.
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
 	public function setData( array $data ) {
