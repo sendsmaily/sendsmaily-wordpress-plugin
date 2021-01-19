@@ -10,14 +10,18 @@ class Smaily_For_WP_Template {
 	/**
 	 * Template name.
 	 *
-	 * @var string
+	 * @since    3.0.0
+	 * @access   protected
+	 * @var      string    $_template    Filename of template.
 	 */
 	protected $_template = '';
 
 	/**
 	 * Template variables.
 	 *
-	 * @var array
+	 * @since    3.0.0
+	 * @access   protected
+	 * @var      array    $_vars    Variables assigned to template.
 	 */
 	protected $_vars = array();
 

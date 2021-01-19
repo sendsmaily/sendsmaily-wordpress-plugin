@@ -55,9 +55,9 @@ class Smaily_For_WP_Request {
 	/**
 	 * Set Smaily API Credentials for request.
 	 *
+	 * @since  3.0.0
 	 * @param  string $username Smaily API Username.
 	 * @param  string $password Smaily API Password.
-	 *
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
 	public function auth( $username, $password ) {
@@ -69,8 +69,8 @@ class Smaily_For_WP_Request {
 	/**
 	 * Set request URL endpoint.
 	 *
+	 * @since  3.0.0
 	 * @param  string $url Request endpoint.
-	 *
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
 	public function setUrl( $url ) {
@@ -81,6 +81,7 @@ class Smaily_For_WP_Request {
 	/**
 	 * Render Smaily form using shortcode.
 	 *
+	 * @since  3.0.0
 	 * @param  array $data Shortcode attributes.
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
@@ -92,6 +93,7 @@ class Smaily_For_WP_Request {
 	/**
 	 * Execute get request.
 	 *
+	 * @since  3.0.0
 	 * @return array $response. Data recieved back from making the request.
 	 */
 	public function get() {
