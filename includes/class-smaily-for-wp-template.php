@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Defines the template generating and rendering functionality of the plugin.
+ *
+ * @package    Smaily_For_WP
+ * @subpackage Smaily_For_WP/includes
+ */
 class Smaily_For_WP_Template {
 	/**
 	 * Template name.
