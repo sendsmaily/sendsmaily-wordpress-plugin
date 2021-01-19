@@ -2,7 +2,6 @@
 /**
  * Fired during plugin activation
  *
-
  * @since      3.0.0
  *
  * @package    Smaily_For_WP
