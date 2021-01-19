@@ -62,7 +62,6 @@ class Smaily_For_WP_Request {
 		$response['code'] = wp_remote_retrieve_response_code( $api_call );
 
 		return $response;
-
 	}
 
 }

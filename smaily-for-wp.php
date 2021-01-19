@@ -71,9 +71,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-smaily-for-wp.php';
  * @since    3.0.0
  */
 function run_smaily_for_wp() {
-
 	$plugin = new Smaily_For_WP();
 	$plugin->run();
-
 }
 run_smaily_for_wp();

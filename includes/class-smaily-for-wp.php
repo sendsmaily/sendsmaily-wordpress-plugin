@@ -136,11 +136,9 @@ class Smaily_For_WP {
 	 * @access private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Smaily_For_WP_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -151,14 +149,12 @@ class Smaily_For_WP {
 	 * @access private
 	 */
 	private function define_admin_hooks() {
-
 		$plugin_admin = new Smaily_For_WP_Admin( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_smaily_admin_save', $plugin_admin, 'smaily_admin_save' );
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'smaily_subscription_widget_init' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'smaily_admin_render' );
-
 	}
 
 	/**
@@ -169,7 +165,6 @@ class Smaily_For_WP {
 	 * @access private
 	 */
 	private function define_public_hooks() {
-
 		$plugin_public = new Smaily_For_WP_Public( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'init', $plugin_public, 'add_shortcodes' );
 	}
