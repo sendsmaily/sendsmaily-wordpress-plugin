@@ -55,7 +55,7 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function enqueue_styles() {
-		wp_register_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/smaily-for-wp-admin.css', array(), $this->version, 'all' );
+		wp_register_style( $this->plugin_name, SMLY4WP_PLUGIN_PATH . 'css/smaily-for-wp-admin.css', array(), $this->version, 'all' );
 		// Only enqueue in module page.
 		$screen = get_current_screen();
 		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_sendsmaily-wordpress-plugin' ) {
@@ -69,7 +69,7 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
+		wp_register_script( $this->plugin_name, SMLY4WP_PLUGIN_PATH . 'js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
 		// Only enqueue in module page.
 		$screen = get_current_screen();
 		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_sendsmaily-wordpress-plugin' ) {
@@ -100,7 +100,7 @@ class Smaily_For_WP_Admin {
 		$template->assign( 'autoresponders', $data );
 
 		// Add menu elements.
-		add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', plugins_url( '/gfx/icon.png', dirname( __FILE__ ) ) );
+		add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', SMLY4WP_PLUGIN_PATH . '/gfx/icon.png' );
 		add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', SMLY4WP_PLUGIN_PATH, array( $template, 'dispatch' ) );
 	}
 

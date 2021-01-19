@@ -6,6 +6,6 @@
 	</h2>
 
 	<form id="form-container" action="<?php echo admin_url('admin-ajax.php'); ?>" method="post">
-		<?php echo $this->partial( 'html/admin/html/form.php', $this->getVars() ); ?>
+		<?php echo $this->partial( 'admin/partials/smaily-for-wp-admin-form.php', $this->getVars() ); ?>
 	</form>
 </div>
