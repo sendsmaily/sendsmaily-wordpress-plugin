@@ -7,6 +7,7 @@
  * @subpackage Smaily_For_WP/includes
  */
 class Smaily_For_WP_Template {
+
 	/**
 	 * Template name.
 	 *
