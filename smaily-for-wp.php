@@ -44,6 +44,7 @@ require SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp.php';
 
 register_activation_hook( __FILE__, array( 'Smaily_For_WP', 'activate' ) );
 register_uninstall_hook( __FILE__, array( 'Smaily_For_WP', 'uninstall' ) );
+
 /**
  * Begins execution of the plugin.
  *

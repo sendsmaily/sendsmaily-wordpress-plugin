@@ -1,8 +1,8 @@
 <?php
-
 /**
  * Defines the template generating and rendering functionality of the plugin.
  *
+ * @since      3.0.0
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */

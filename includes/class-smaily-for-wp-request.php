@@ -1,16 +1,8 @@
 <?php
 /**
- * File that defines the request making functionality.
- *
- * @since      3.0.0
- *
- * @package    Smaily_For_WP
- * @subpackage Smaily_For_WP/includes
- */
-
-/**
  * Defines the request making functionality of the plugin.
  *
+ * @since      3.0.0
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */

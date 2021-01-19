@@ -1,13 +1,10 @@
 <?php
 /**
- * Widget that can be used to subscribe to newsletters
+ * Defines the widget functionality of the plugin.
  *
+ * @since      3.0.0
  * @package    Smaily
  * @subpackage Smaily/includes
- */
-
-/**
- * Create a class for the widget.
  */
 class Smaily_For_WP_Widget extends WP_Widget {
 

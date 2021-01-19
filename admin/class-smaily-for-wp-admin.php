@@ -2,18 +2,10 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @since      3.0.0
- *
- * @package    Smaily_For_WP
- * @subpackage Smaily_For_WP/admin
- */
-
-/**
- * The admin-specific functionality of the plugin.
- *
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
+ * @since      3.0.0
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/admin
  */

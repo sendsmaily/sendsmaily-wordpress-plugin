@@ -1,23 +1,14 @@
 <?php
 /**
- * Register all actions and filters for the plugin
- *
- * @since      3.0.0
- *
- * @package    Smaily_For_WP
- * @subpackage Smaily_For_WP/includes
- */
-
-/**
  * Register all actions and filters for the plugin.
  *
  * Maintain a list of all hooks that are registered throughout
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
+ * @since      3.0.0
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
- *
  */
 class Smaily_For_WP_Loader {
 
