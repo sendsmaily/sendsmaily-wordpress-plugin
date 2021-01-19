@@ -37,30 +37,13 @@ define( 'SMLY4WP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
- * The code that runs during plugin activation.
- */
-function activate_smaily_for_wp() {
-	require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-activator.php';
-	Smaily_For_WP_Activator::activate();
-}
-
-/**
- * The code that runs for plugin uninstallation.
- */
-function uninstall_smaily_for_wp() {
-	require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-uninstaller.php';
-	Smaily_For_WP_Uninstaller::uninstall();
-}
-
-register_activation_hook( __FILE__, 'activate_smaily_for_wp' );
-register_uninstall_hook( __FILE__, 'uninstall_smaily_for_wp' );
-
-/**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
 require SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp.php';
 
+register_activation_hook( __FILE__, array( 'Smaily_For_WP', 'activate' ) );
+register_uninstall_hook( __FILE__, array( 'Smaily_For_WP', 'uninstall' ) );
 /**
  * Begins execution of the plugin.
  *

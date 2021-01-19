@@ -146,6 +146,58 @@ class Smaily_For_WP {
 	}
 
 	/**
+	 * Install database structure (on activation).
+	 *
+	 * @since    3.0.0
+	 */
+	public static function activate() {
+		global $wpdb;
+		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		$charset_collate = $wpdb->get_charset_collate();
+
+		// Create database table - settings.
+		$table_name            = esc_sql( $wpdb->prefix . 'smaily_config' );
+		$settings_table_exists = $wpdb->get_var(
+			$wpdb->prepare(
+				'SHOW TABLES LIKE %s',
+				$table_name
+			)
+		);
+		if ( ! $settings_table_exists ) {
+			$sql = "CREATE TABLE $table_name (
+					api_credentials VARCHAR(128) NOT NULL,
+					domain VARCHAR(255) NOT NULL,
+					autoresponder INT(16) NOT NULL,
+					form TEXT NOT NULL,
+					is_advanced TINYINT(1) NOT NULL,
+					PRIMARY KEY  (api_credentials)
+				) $charset_collate;";
+			dbDelta( $sql );
+		}
+
+		// Create database table - autoresponders.
+		$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
+		$sql        = "CREATE TABLE $table_name (
+					id int(16) NOT NULL,
+					title varchar(255) NOT NULL,
+					PRIMARY KEY  (id)
+				) $charset_collate;";
+		dbDelta( $sql );
+	}
+
+	/**
+	 * Clean up plugin's database entities.
+	 *
+	 * @since    3.0.0
+	 */
+	public static function uninstall() {
+		global $wpdb;
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_autoresponders" );
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_config" );
+		delete_option( 'widget_smaily_subscription_widget' );
+	}
+
+	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
 	 * @since 3.0.0
