@@ -151,17 +151,15 @@ class Smaily_For_WP {
 				$table_name
 			)
 		);
-		if ( ! $settings_table_exists ) {
-			$sql = "CREATE TABLE $table_name (
-					api_credentials VARCHAR(128) NOT NULL,
-					domain VARCHAR(255) NOT NULL,
-					autoresponder INT(16) NOT NULL,
-					form TEXT NOT NULL,
-					is_advanced TINYINT(1) NOT NULL,
-					PRIMARY KEY  (api_credentials)
-				) $charset_collate;";
-			dbDelta( $sql );
-		}
+		$sql = "CREATE TABLE $table_name (
+			api_credentials VARCHAR(128) NOT NULL,
+			domain VARCHAR(255) NOT NULL,
+			autoresponder INT(16) NOT NULL,
+			form TEXT NOT NULL,
+			is_advanced TINYINT(1) NOT NULL,
+			PRIMARY KEY  (api_credentials)
+		) $charset_collate;";
+		dbDelta( $sql );
 
 		// Create database table - autoresponders.
 		$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
