@@ -92,36 +92,12 @@ class Smaily_For_WP {
 	 * @access private
 	 */
 	private function load_dependencies() {
-		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
 		require_once SMLY4WP_PLUGIN_PATH . '/admin/class-smaily-for-wp-admin.php';
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-i18n.php';
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-loader.php';
-		/**
-		 * The class responsible for defining the request making functionality of the plugin.
-		 */
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-request.php';
-		/**
-		 * The class responsible for defining the templating functionality of the plugin.
-		 */
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-template.php';
-		/**
-		 * The class responsible for defining the widget functionality.
-		 */
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-widget.php';
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
 		require_once SMLY4WP_PLUGIN_PATH . '/public/class-smaily-for-wp-public.php';
 		$this->loader = new Smaily_For_WP_Loader();
 	}
