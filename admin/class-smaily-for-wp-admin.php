@@ -329,7 +329,6 @@ class Smaily_For_WP_Admin {
 					'error'   => false,
 					'message' => __( 'Autoresponders refreshed.', 'smaily-for-wp' ),
 				);
-
 				break;
 
 			case 'save':
@@ -376,7 +375,6 @@ class Smaily_For_WP_Admin {
 
 		// Send refresh form content (if requested).
 		if ( $refresh ) {
-
 			// Generate form contents.
 			$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-form.php' );
 
@@ -393,7 +391,6 @@ class Smaily_For_WP_Admin {
 			// Render template.
 			$result['content'] = $template->render();
 		}
-
 		// Display result messages as JSON.
 		echo json_encode( $result );
 		wp_die();
