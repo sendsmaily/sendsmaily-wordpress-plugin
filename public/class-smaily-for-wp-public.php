@@ -42,7 +42,6 @@ class Smaily_For_WP_Public {
 	 * Register all shortcodes present in the function.
 	 *
 	 * @since  3.0.0
-	 * @return void
 	 */
 	public function add_shortcodes() {
 		add_shortcode( 'smaily_for_wp_newsletter_form', array( $this, 'smaily_shortcode_render' ) );

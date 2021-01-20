@@ -76,7 +76,6 @@ class Smaily_For_WP_Template {
 	 * Dispatch template.
 	 *
 	 * @since  3.0.0
-	 * @return void
 	 */
 	public function dispatch() {
 		echo $this->render();
@@ -157,7 +156,6 @@ class Smaily_For_WP_Template {
 	 * @since  3.0.0
 	 * @param  string $name Name.
 	 * @param  object $value Value.
-	 * @return void
 	 */
 	public function __set( $name, $value ) {
 		$this->_vars[ $name ] = $value;

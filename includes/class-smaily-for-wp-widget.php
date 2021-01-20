@@ -111,7 +111,6 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	 *
 	 * @since  3.0.0
 	 * @param  array $instance Widget fields array.
-	 * @return void
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args(
