@@ -105,7 +105,6 @@ class Smaily_For_WP_Admin {
 		register_widget( 'Smaily_For_WP_Widget' );
 	}
 
-
 	/**
 	 * Function is run when user performs action which is handled Ajax.
 	 *
