@@ -21,6 +21,7 @@ services:
       MYSQL_ROOT_PASSWORD: smailydev1
     volumes:
       - db:/var/lib/mysql
+
   phpmyadmin:
     depends_on:
       - db
@@ -30,6 +31,8 @@ services:
       - '8888:80'
     environment:
       PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: smailydev1
       MYSQL_ROOT_PASSWORD: smailydev1
 volumes:
   wordpress:
