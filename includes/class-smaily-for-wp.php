@@ -143,14 +143,8 @@ class Smaily_For_WP {
 		$charset_collate = $wpdb->get_charset_collate();
 
 		// Create database table - settings.
-		$table_name            = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$settings_table_exists = $wpdb->get_var(
-			$wpdb->prepare(
-				'SHOW TABLES LIKE %s',
-				$table_name
-			)
-		);
-		$sql = "CREATE TABLE $table_name (
+		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
+		$sql        = "CREATE TABLE $table_name (
 			api_credentials VARCHAR(128) NOT NULL,
 			domain VARCHAR(255) NOT NULL,
 			autoresponder INT(16) NOT NULL,
