@@ -139,7 +139,7 @@ class Smaily_For_WP {
 	 */
 	public static function activate() {
 		global $wpdb;
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		$charset_collate = $wpdb->get_charset_collate();
 
 		// Create database table - settings.
