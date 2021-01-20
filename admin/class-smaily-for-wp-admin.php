@@ -189,7 +189,7 @@ class Smaily_For_WP_Admin {
 				if ( $code !== 200 ) {
 					// Don't refresh the page.
 					$refresh = false;
-					if ( $code === 401) {
+					if ( $code === 401 ) {
 						// If wrong credentials.
 						$result = array(
 							'message' => __( 'Wrong credentials', 'smaily-for-wp' ),
