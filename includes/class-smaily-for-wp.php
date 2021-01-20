@@ -101,7 +101,6 @@ class Smaily_For_WP {
 	 */
 	private function set_locale() {
 		$plugin_i18n = new Smaily_For_WP_i18n();
-
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
 
