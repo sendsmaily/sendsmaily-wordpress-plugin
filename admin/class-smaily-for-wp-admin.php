@@ -253,7 +253,6 @@ class Smaily_For_WP_Admin {
 				break;
 
 			case 'removeApiKey':
-
 				// Delete contents of config.
 				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 				$wpdb->query( "DELETE FROM `$table_name`" );
@@ -270,7 +269,6 @@ class Smaily_For_WP_Admin {
 				break;
 
 			case 'resetForm':
-
 				// Generate form contents.
 				$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
 
@@ -289,7 +287,6 @@ class Smaily_For_WP_Admin {
 				break;
 
 			case 'refreshAutoresp':
-
 				// Load configuration data.
 				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
 				$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
@@ -339,7 +336,6 @@ class Smaily_For_WP_Admin {
 				break;
 
 			case 'save':
-
 				// Get parameters.
 				$isAdvanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? '1' : '0';
 				// Get basic and advanced parameters.
