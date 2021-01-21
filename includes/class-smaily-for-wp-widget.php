@@ -1,18 +1,17 @@
 <?php
 /**
- * Widget that can be used to subscribe to newsletters
+ * Defines the widget functionality of the plugin.
  *
+ * @since      3.0.0
  * @package    Smaily
  * @subpackage Smaily/includes
  */
-
-/**
- * Create a class for the widget.
- */
-class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
+class Smaily_For_WP_Widget extends WP_Widget {
 
 	/**
 	 * Sets up a new instance of the widget.
+	 *
+	 * @since 3.0.0
 	 */
 	public function __construct() {
 		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'smaily-for-wp' ) );
@@ -22,6 +21,7 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 	/**
 	 * Outputs the content for the current widget instance.
 	 *
+	 * @since 3.0.0
 	 * @param array $args     Display arguments including 'before_title', 'after_title',
 	 *                        'before_widget', and 'after_widget'.
 	 * @param array $instance Settings for the current Search widget instance.
@@ -49,9 +49,8 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$config['autoresponder_id'] = !empty( $config['autoresponder'] ) ? (int) $config['autoresponder'] : '';
 
 		// Create admin template.
-		require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );
 		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
-		$template = new Smaily_Plugin_Template( 'html/form/' . $file );
+		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $file );
 		$template->assign( $config );
 		// Display responses on Smaily subscription form.
 		$form_has_response = false;
@@ -87,13 +86,15 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 
 		echo $args['after_widget'];
 	}
+
 	/**
 	 * This function should check that $new_instance is set correctly. The newly
 	 * calculated value of $instance should be returned. If "false" is returned,
 	 * the instance won't be saved/updated.
 	 *
-	 * @param array $new_instance New instance.
-	 * @param array $old_instance Old instance.
+	 * @since  3.0.0
+	 * @param  array $new_instance New instance.
+	 * @param  array $old_instance Old instance.
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
@@ -104,11 +105,12 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
 		return $instance;
 	}
+
 	/**
 	 * Widget form on widgets page in admin panel.
 	 *
-	 * @param array $instance Widget fields array.
-	 * @return void
+	 * @since  3.0.0
+	 * @param  array $instance Widget fields array.
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args(

@@ -62,7 +62,7 @@ var Default = (function(){
 		// make the request
 		jQuery.post(
 
-			smaily.ajax_url,
+			smaily_for_wp.ajax_url,
 			{
 				'action' : 'smaily_admin_save',
 				'form_data' : jQuery.param(data)
