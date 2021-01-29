@@ -151,7 +151,7 @@ class Smaily_For_WP {
 			is_advanced TINYINT(1) NOT NULL,
 			PRIMARY KEY  (api_credentials)
 		) $charset_collate;";
-		dbDelta( $sql );W
+		dbDelta( $sql );
 	}
 
 	/**
