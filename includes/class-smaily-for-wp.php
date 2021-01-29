@@ -87,6 +87,7 @@ class Smaily_For_WP {
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-template.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-widget.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/public/class-smaily-for-wp-public.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'kint.phar';
 		$this->loader = new Smaily_For_WP_Loader();
 	}
 
@@ -147,21 +148,11 @@ class Smaily_For_WP {
 		$sql        = "CREATE TABLE $table_name (
 			api_credentials VARCHAR(128) NOT NULL,
 			domain VARCHAR(255) NOT NULL,
-			autoresponder INT(16) NOT NULL,
 			form TEXT NOT NULL,
 			is_advanced TINYINT(1) NOT NULL,
 			PRIMARY KEY  (api_credentials)
 		) $charset_collate;";
-		dbDelta( $sql );
-
-		// Create database table - autoresponders.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
-		$sql        = "CREATE TABLE $table_name (
-					id int(16) NOT NULL,
-					title varchar(255) NOT NULL,
-					PRIMARY KEY  (id)
-				) $charset_collate;";
-		dbDelta( $sql );
+		dbDelta( $sql );W
 	}
 
 	/**

@@ -34,6 +34,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$show_name   = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
 		$success_url = isset( $instance['success_url'] ) ? $instance['success_url'] : '';
 		$failure_url = isset( $instance['failure_url'] ) ? $instance['failure_url'] : '';
+		$autoresponder = isset( $instance['autoresponder'] ) ? $instance['autoresponder'] : '';
 
 		echo $args['before_widget'];
 		if ( $title ) {
@@ -46,7 +47,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$config['show_name']        = $show_name;
 		$config['success_url']      = $success_url;
 		$config['failure_url']      = $failure_url;
-		$config['autoresponder_id'] = !empty( $config['autoresponder'] ) ? (int) $config['autoresponder'] : '';
+		$config['autoresponder_id'] = $autoresponder;
 
 		// Create admin template.
 		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
@@ -103,6 +104,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$instance['show_name']   = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
 		$instance['success_url'] = esc_url( $new_instance['success_url'] );
 		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
+		$instance['autoresponder'] = isset( $new_instance['autoresponder'] ) ? $new_instance['autoresponder'] : '';
 		return $instance;
 	}
 
@@ -120,6 +122,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 				'show_name'   => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
 				'success_url' => '',
 				'failure_url' => '',
+				'autoresponder' => '',
 			)
 		);
 
@@ -156,5 +159,17 @@ class Smaily_For_WP_Widget extends WP_Widget {
 			<label for="' . $failure_url_id . '">' . __( 'Failure URL', 'smaily-for-wp' ) . ':</label>
 			<input id="' . $failure_url_id . '" name="' . $failure_url . '" type="text" value="' . $instance['failure_url'] . '" />
 		</p>';
+		// Display autoresponder select menu.
+		$autoresponder_id          = esc_attr( $this->get_field_id( 'autoresponder' ) );
+		$autoresponder             = esc_attr( $this->get_field_name( 'autoresponder' ) );
+		$instance['autoresponder'] = esc_attr( $instance['autoresponder'] );
+		echo '<p>
+			<label for="' . $autoresponder_id . '">' . esc_html__( 'Autoresponders', 'smaily-for-wp' ) . ':</label>
+			<select id="' . $autoresponder_id . '" name="' . $autoresponder . '">
+			<option value="">' . esc_html__( 'No autoresponder', 'smaily-for-wp' ) . '</option>';
+		foreach ( Smaily_For_WP_Admin::get_autoresponders() as $id => $title ) {
+			echo '<option value="' . esc_attr( $id ) .  '"' . selected( $instance['autoresponder'], $id, false ) .  '>' . esc_attr( $title ) . '</option>';
+		}
+		echo '</select></p>';
 	}
 }
