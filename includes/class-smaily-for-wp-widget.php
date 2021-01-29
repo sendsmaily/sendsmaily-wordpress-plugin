@@ -99,11 +99,11 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance                = $old_instance;
-		$instance['title']       = esc_textarea( $new_instance['title'] );
-		$instance['show_name']   = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
-		$instance['success_url'] = esc_url( $new_instance['success_url'] );
-		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
+		$instance                  = $old_instance;
+		$instance['title']         = esc_textarea( $new_instance['title'] );
+		$instance['show_name']     = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
+		$instance['success_url']   = esc_url( $new_instance['success_url'] );
+		$instance['failure_url']   = esc_url( $new_instance['failure_url'] );
 		$instance['autoresponder'] = isset( $new_instance['autoresponder'] ) ? $new_instance['autoresponder'] : '';
 		return $instance;
 	}
@@ -118,10 +118,10 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$instance = wp_parse_args(
 			(array) $instance,
 			array(
-				'title'       => '',
-				'show_name'   => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
-				'success_url' => '',
-				'failure_url' => '',
+				'title'         => '',
+				'show_name'     => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
+				'success_url'   => '',
+				'failure_url'   => '',
 				'autoresponder' => '',
 			)
 		);
