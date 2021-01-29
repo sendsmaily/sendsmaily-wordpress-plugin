@@ -31,9 +31,9 @@ class Smaily_For_WP_Widget extends WP_Widget {
 
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		$show_name   = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
-		$success_url = isset( $instance['success_url'] ) ? $instance['success_url'] : '';
-		$failure_url = isset( $instance['failure_url'] ) ? $instance['failure_url'] : '';
+		$show_name     = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
+		$success_url   = isset( $instance['success_url'] ) ? $instance['success_url'] : '';
+		$failure_url   = isset( $instance['failure_url'] ) ? $instance['failure_url'] : '';
 		$autoresponder = isset( $instance['autoresponder'] ) ? $instance['autoresponder'] : '';
 
 		echo $args['before_widget'];
@@ -168,7 +168,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 			<select id="' . $autoresponder_id . '" name="' . $autoresponder . '">
 			<option value="">' . esc_html__( 'No autoresponder', 'smaily-for-wp' ) . '</option>';
 		foreach ( Smaily_For_WP_Admin::get_autoresponders() as $id => $title ) {
-			echo '<option value="' . esc_attr( $id ) .  '"' . selected( $instance['autoresponder'], $id, false ) .  '>' . esc_attr( $title ) . '</option>';
+			echo '<option value="' . esc_attr( $id ) . '"' . selected( $instance['autoresponder'], $id, false ) . '>' . esc_attr( $title ) . '</option>';
 		}
 		echo '</select></p>';
 	}
