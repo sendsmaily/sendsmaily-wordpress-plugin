@@ -6,6 +6,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/admin
  */
+require SMLY4WP_PLUGIN_PATH . 'kint.phar';
 class Smaily_For_WP_Admin {
 
 	/**
@@ -35,7 +36,7 @@ class Smaily_For_WP_Admin {
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -65,6 +66,66 @@ class Smaily_For_WP_Admin {
 			wp_enqueue_script( $this->plugin_name );
 			wp_localize_script( $this->plugin_name, $this->plugin_name, array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 		}
+	}
+
+	/**
+	 * Verify if plugin's database needs an upgrade.
+	 *
+	 * @since 3.0.0
+	 */
+	public function check_for_upgrade() {
+		$version = SMLY4WP_PLUGIN_VERSION;
+
+		if ( $version === get_option( 'smailyforwp_db_version' ) ) {
+			// No update required.
+			return;
+		}
+		if ( version_compare( $version, '3.0.0', '=' ) ) {
+			set_transient( 'smailyforwp_upgrade_3_0_0_notice', true, 10 );
+			$this->upgrade_3_0_0();
+		}
+	}
+
+	/**
+	 * Display notices when database upgrades are applied.
+	 *
+	 * @since 3.0.0
+	 */
+	public function upgrade_notices() {
+		if ( get_transient( 'smailyforwp_upgrade_3_0_0_notice' ) ) {
+			$message = __(
+				'Smaily for WordPress has moved autoresponder selection to widget settings.'
+				. ' Please check your plugin settings!',
+				'smaily-for-wp'
+			);
+			echo ( '<div class="notice notice-warning"><p>' . esc_html( $message ) . '</p></div>' );
+			// Only display this once.
+			delete_transient( 'smailyforwp_upgrade_3_0_0_notice' );
+		}
+	}
+
+	/**
+	 * Autoresponder configuration moved from settings page to widget settings with 3.0.0 version.
+	 * Need to add autoresponder ID, which user has saved in settings page, to widget settings.
+	 *
+	 * @since 3.0.0
+	 */
+	private function upgrade_3_0_0() {
+		global $wpdb;
+		// Get saved autoresponder ID.
+		$table_name       = esc_sql( $wpdb->prefix . 'smaily_config' );
+		$autoresponder_id = $wpdb->get_col( "SELECT autoresponder FROM `$table_name` LIMIT 1" )[0];
+		// Get widgets' options.
+		$widget_options = get_option( 'widget_smaily_subscription_widget' );
+
+		foreach ( $widget_options as &$widget ) {
+			// Widgets created before 3.0.0 do not have autoresponder value, adding it here.
+			if ( is_array( $widget ) && ! isset( $widget['autoresponder'] ) ) {
+				$widget['autoresponder'] = $autoresponder_id;
+			}
+		}
+		update_option( 'widget_smaily_subscription_widget', $widget_options );
+		update_option( 'smailyforwp_db_version', '3.0.0' );
 	}
 
 	/**
@@ -104,18 +165,21 @@ class Smaily_For_WP_Admin {
 	 */
 	public function smaily_admin_save() {
 		// Allow only posted data.
-		if ( empty( $_POST ) ) { die( 'Must be post method.' ); }
+		if ( empty( $_POST ) ) {
+			die( 'Must be post method.' ); }
 
 		// Parse form data out of the serialization.
 		$form_data = array();
 		parse_str( $_POST['form_data'], $form_data );
 
 		// Validate posted operation.
-		if ( ! isset( $form_data['op'] ) ) { die( 'No action or API key set.' ); }
+		if ( ! isset( $form_data['op'] ) ) {
+			die( 'No action or API key set.' ); }
 		$form_data['op'] = ( in_array( $form_data['op'], array( 'validateApiKey', 'removeApiKey', 'resetForm', 'refreshAutoresp', 'save' ), true )
 			? $form_data['op'] : '' );
 
-		if ( $form_data['op'] === '' ) { die( 'No valid operation submitted.' ); }
+		if ( $form_data['op'] === '' ) {
+			die( 'No valid operation submitted.' ); }
 
 		$refresh = ( isset( $form_data['refresh'] ) && (int) $form_data['refresh'] === 1 );
 		// Switch to action.
@@ -262,8 +326,8 @@ class Smaily_For_WP_Admin {
 			case 'save':
 				// Get parameters.
 				$isAdvanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? '1' : '0';
-				$advanced   = ( isset( $form_data['advanced'] )    && is_array( $form_data['advanced'] ) ) ? $form_data['advanced'] : array();
-				$form       = ( isset( $advanced['form'] )         && is_string( $advanced['form'] ) ) ? $advanced['form'] : '';
+				$advanced   = ( isset( $form_data['advanced'] ) && is_array( $form_data['advanced'] ) ) ? $form_data['advanced'] : array();
+				$form       = ( isset( $advanced['form'] ) && is_string( $advanced['form'] ) ) ? $advanced['form'] : '';
 
 				// Generate new form (if empty).
 				if ( empty( $form ) ) {
@@ -280,13 +344,16 @@ class Smaily_For_WP_Admin {
 
 				// Update configuration.
 				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				$wpdb->query( $wpdb->prepare(
-					"
+				$wpdb->query(
+					$wpdb->prepare(
+						"
 					UPDATE `$table_name`
 					SET `form` = %s, `is_advanced` = %d
 					",
-					$form, $isAdvanced
-				) );
+						$form,
+						$isAdvanced
+					)
+				);
 				// Return response.
 				$result = array(
 					'error'   => false,
@@ -323,9 +390,9 @@ class Smaily_For_WP_Admin {
 		global $wpdb;
 
 		// Load configuration data.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$config       = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-		$api_credentials = explode(":", $config['api_credentials']);
+		$table_name      = esc_sql( $wpdb->prefix . 'smaily_config' );
+		$config          = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$api_credentials = explode( ':', $config['api_credentials'] );
 
 		$result = ( new Smaily_For_WP_Request() )
 			->setUrl( 'https://' . $config['domain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
@@ -338,8 +405,8 @@ class Smaily_For_WP_Admin {
 
 		$autoresponder_list = array();
 		foreach ( $result['body'] as $autoresponder ) {
-			$id                         = $autoresponder['id'];
-			$title                      = $autoresponder['title'];
+			$id                        = $autoresponder['id'];
+			$title                     = $autoresponder['title'];
 			$autoresponder_list[ $id ] = $title;
 		}
 		return $autoresponder_list;

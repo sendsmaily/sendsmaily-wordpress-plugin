@@ -85,6 +85,7 @@ class Smaily_For_WP {
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-loader.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-request.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-template.php';
+		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-upgrade.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-widget.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/public/class-smaily-for-wp-public.php';
 		$this->loader = new Smaily_For_WP_Loader();
@@ -118,6 +119,9 @@ class Smaily_For_WP {
 		$this->loader->add_action( 'wp_ajax_smaily_admin_save', $plugin_admin, 'smaily_admin_save' );
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'smaily_subscription_widget_init' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'smaily_admin_render' );
+		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin, 'upgrade', 10, 2 );
+		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'check_for_upgrade' );
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'upgrade_notices' );
 	}
 
 	/**
