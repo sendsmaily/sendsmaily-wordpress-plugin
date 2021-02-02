@@ -67,39 +67,43 @@ class Smaily_For_WP_Admin {
 		}
 	}
 
-	/**
-	 * Verify if plugin's database needs an upgrade.
-	 *
-	 * @since 3.0.0
-	 */
-	public function check_for_upgrade() {
-		$version = SMLY4WP_PLUGIN_VERSION;
-
-		if ( $version === get_option( 'smailyforwp_db_version' ) ) {
-			// No update required.
+	public function listen_for_upgrade_transient() {
+		if ( ! get_transient( 'smailyforwp_plugin_updated' ) ) {
 			return;
 		}
-		if ( version_compare( $version, '3.0.0', '=' ) ) {
-			set_transient( 'smailyforwp_upgrade_3_0_0_notice', true, 10 );
+
+		$plugin_version = SMLY4WP_PLUGIN_VERSION;
+		if ( $plugin_version === get_option( 'smailyforwp_db_version' ) ) {
+			return;
+		}
+
+		if ( version_compare( $plugin_version, '3.0.0', '=' ) ) {
 			$this->upgrade_3_0_0();
 		}
+		delete_transient( 'smailyforwp_plugin_updated' );
 	}
 
 	/**
-	 * Display notices when database upgrades are applied.
+	 * Check if plugin was updated, make a transient option if so.
+	 * This alows us to trigger a DB upgrade script if necessary.
 	 *
 	 * @since 3.0.0
+	 * @param Plugin_Upgrader $upgrader_object Instance of WP_Upgrader.
+	 * @param array           $options         Array of bulk item update data.
 	 */
-	public function upgrade_notices() {
-		if ( get_transient( 'smailyforwp_upgrade_3_0_0_notice' ) ) {
-			$message = __(
-				'Smaily for WordPress has moved autoresponder selection to widget settings.'
-				. ' Please check your plugin settings!',
-				'smaily-for-wp'
-			);
-			echo ( '<div class="notice notice-warning"><p>' . esc_html( $message ) . '</p></div>' );
-			// Only display this once.
-			delete_transient( 'smailyforwp_upgrade_3_0_0_notice' );
+	public function check_for_update( $upgrader_object, $options ) {
+		$smaily_basename = SMLY4WP_PLUGIN_BASENAME;
+
+		$plugin_was_updated = $options['action'] === 'update' && $options['type'] === 'plugin';
+		if ( ! $plugin_was_updated || ! isset( $options['plugins'] ) ) {
+			return;
+		}
+
+		foreach ( $options['plugins'] as $plugin_basename ) {
+			if ( $smaily_basename === $plugin_basename ) {
+				set_transient( 'smailyforwp_plugin_updated', 1 );
+				return;
+			}
 		}
 	}
 

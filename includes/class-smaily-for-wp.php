@@ -118,9 +118,8 @@ class Smaily_For_WP {
 		$this->loader->add_action( 'wp_ajax_smaily_admin_save', $plugin_admin, 'smaily_admin_save' );
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'smaily_subscription_widget_init' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'smaily_admin_render' );
-		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin, 'upgrade', 10, 2 );
-		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'check_for_upgrade' );
-		$this->loader->add_action( 'admin_notices', $plugin_admin, 'upgrade_notices' );
+		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'listen_for_upgrade_transient' );
+		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin, 'check_for_update', 10, 2 );
 	}
 
 	/**
