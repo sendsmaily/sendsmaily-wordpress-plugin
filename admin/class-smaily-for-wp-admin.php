@@ -163,21 +163,18 @@ class Smaily_For_WP_Admin {
 	 */
 	public function smaily_admin_save() {
 		// Allow only posted data.
-		if ( empty( $_POST ) ) {
-			die( 'Must be post method.' ); }
+		if ( empty( $_POST ) ) { die( 'Must be post method.' ); }
 
 		// Parse form data out of the serialization.
 		$form_data = array();
 		parse_str( $_POST['form_data'], $form_data );
 
 		// Validate posted operation.
-		if ( ! isset( $form_data['op'] ) ) {
-			die( 'No action or API key set.' ); }
+		if ( ! isset( $form_data['op'] ) ) { die( 'No action or API key set.' ); }
 		$form_data['op'] = ( in_array( $form_data['op'], array( 'validateApiKey', 'removeApiKey', 'resetForm', 'refreshAutoresp', 'save' ), true )
 			? $form_data['op'] : '' );
 
-		if ( $form_data['op'] === '' ) {
-			die( 'No valid operation submitted.' ); }
+		if ( $form_data['op'] === '' ) { die( 'No valid operation submitted.' ); }
 
 		$refresh = ( isset( $form_data['refresh'] ) && (int) $form_data['refresh'] === 1 );
 		// Switch to action.
