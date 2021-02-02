@@ -104,8 +104,7 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
-	 * Autoresponder configuration moved from settings page to widget settings with 3.0.0 version.
-	 * Need to add autoresponder ID, which user has saved in settings page, to widget settings.
+	 * Upgrade database structure to 3.0.0 version.
 	 *
 	 * @since 3.0.0
 	 */
