@@ -6,7 +6,6 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/admin
  */
-require SMLY4WP_PLUGIN_PATH . 'kint.phar';
 class Smaily_For_WP_Admin {
 
 	/**
