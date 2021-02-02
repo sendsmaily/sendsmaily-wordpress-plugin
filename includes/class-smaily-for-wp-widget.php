@@ -6,7 +6,6 @@
  * @package    Smaily
  * @subpackage Smaily/includes
  */
-require SMLY4WP_PLUGIN_PATH . 'kint.phar';
 class Smaily_For_WP_Widget extends WP_Widget {
 
 	/**
