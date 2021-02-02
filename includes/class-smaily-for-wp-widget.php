@@ -6,7 +6,17 @@
  * @package    Smaily
  * @subpackage Smaily/includes
  */
+require SMLY4WP_PLUGIN_PATH . 'kint.phar';
 class Smaily_For_WP_Widget extends WP_Widget {
+
+	/**
+	 * Array of autoresponders.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array    $autoresponders Used to populate the autoresponder <select> field.
+	 */
+	private $autoresponders;
 
 	/**
 	 * Sets up a new instance of the widget.
@@ -16,6 +26,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'smaily-for-wp' ) );
 		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
+		$this->autoresponders = Smaily_For_WP_Admin::get_autoresponders();
 	}
 
 	/**
@@ -167,7 +178,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 			<label for="' . $autoresponder_id . '">' . esc_html__( 'Autoresponders', 'smaily-for-wp' ) . ':</label>
 			<select id="' . $autoresponder_id . '" name="' . $autoresponder . '">
 			<option value="">' . esc_html__( 'No autoresponder', 'smaily-for-wp' ) . '</option>';
-		foreach ( Smaily_For_WP_Admin::get_autoresponders() as $id => $title ) {
+		foreach ( $this->autoresponders as $id => $title ) {
 			echo '<option value="' . esc_attr( $id ) . '"' . selected( $instance['autoresponder'], $id, false ) . '>' . esc_attr( $title ) . '</option>';
 		}
 		echo '</select></p>';
