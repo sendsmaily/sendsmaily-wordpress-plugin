@@ -83,7 +83,7 @@ class Smaily_For_WP_Admin {
 		}
 
 		if ( version_compare( $plugin_version, '3.0.0', '=' ) ) {
-			include SMLY4WP_PLUGIN_PATH . '/migrations/upgrade-3-0-0.php';
+			require_once SMLY4WP_PLUGIN_PATH . '/migrations/upgrade-3-0-0.php';
 			smailyforwp_upgrade_3_0_0();
 		}
 		delete_transient( 'smailyforwp_plugin_updated' );
