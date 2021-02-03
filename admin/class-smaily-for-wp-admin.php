@@ -67,6 +67,11 @@ class Smaily_For_WP_Admin {
 		}
 	}
 
+	/**
+	 * Verify plugin was updated via transient and trigger DB upgrades.
+	 *
+	 * @since 3.0.0
+	 */
 	public function listen_for_upgrade_transient() {
 		if ( ! get_transient( 'smailyforwp_plugin_updated' ) ) {
 			return;
