@@ -140,6 +140,15 @@ class Smaily_For_WP {
 	 * @since 3.0.0
 	 */
 	public static function activate() {
+		// Run upgrade scripts before dbDelta, as the latter may delete information.
+		$plugin_version = SMLY4WP_PLUGIN_VERSION;
+		if ( $plugin_version !== get_option( 'smailyforwp_db_version' ) ) {
+			if ( version_compare( $plugin_version, '3.0.0', '=' ) ) {
+				require_once SMLY4WP_PLUGIN_PATH . '/migrations/upgrade-3-0-0.php';
+				smailyforwp_upgrade_3_0_0();
+			}
+		}
+
 		global $wpdb;
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		$charset_collate = $wpdb->get_charset_collate();
@@ -154,15 +163,6 @@ class Smaily_For_WP {
 			PRIMARY KEY  (api_credentials)
 		) $charset_collate;";
 		dbDelta( $sql );
-
-		$plugin_version = SMLY4WP_PLUGIN_VERSION;
-		if ( $plugin_version === get_option( 'smailyforwp_db_version' ) ) {
-			return;
-		}
-
-		if ( version_compare( $plugin_version, '3.0.0', '=' ) ) {
-			require_once SMLY4WP_PLUGIN_PATH . '/migrations/upgrade-3-0-0.php';
-		}
 	}
 
 	/**
