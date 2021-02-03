@@ -131,6 +131,7 @@ class Smaily_For_WP_Admin {
 				$widget['autoresponder'] = $autoresponder_id;
 			}
 		}
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_autoresponders" );
 		update_option( 'widget_smaily_subscription_widget', $widget_options );
 		update_option( 'smailyforwp_db_version', '3.0.0' );
 	}
