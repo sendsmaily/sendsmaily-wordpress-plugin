@@ -79,7 +79,7 @@ class Smaily_For_WP_Admin {
 
 		$plugin_version = SMLY4WP_PLUGIN_VERSION;
 		if ( $plugin_version === get_option( 'smailyforwp_db_version' ) ) {
-			return;
+			return delete_transient( 'smailyforwp_plugin_updated' );
 		}
 
 		if ( version_compare( $plugin_version, '3.0.0', '=' ) ) {
