@@ -73,7 +73,7 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function listen_for_upgrade_transient() {
-		if ( ! get_transient( 'smailyforwp_plugin_updated' ) ) {
+		if ( get_transient( 'smailyforwp_plugin_updated' ) !== true ) {
 			return;
 		}
 
@@ -83,7 +83,7 @@ class Smaily_For_WP_Admin {
 		}
 
 		if ( version_compare( $plugin_version, '3.0.0', '=' ) ) {
-			Smaily_For_WP::upgrade_3_0_0();
+			include SMLY4WP_PLUGIN_PATH . '/migrations/upgrade-3-0-0.php';
 		}
 		delete_transient( 'smailyforwp_plugin_updated' );
 	}
@@ -106,14 +106,14 @@ class Smaily_For_WP_Admin {
 
 		// If updating a single plugin, $options['plugins'] is string of the updated plugin's basename.
 		if ( is_string( $options['plugins'] ) && $options['plugins'] === $plugin_basename ) {
-			set_transient( 'smailyforwp_plugin_updated', 1 );
+			set_transient( 'smailyforwp_plugin_updated', true );
 			return;
 		}
 
 		// If updating multiple plugins, $options['plugins'] is an array of updated plugins' basenames.
 		foreach ( $options['plugins'] as $plugin_basename ) {
 			if ( $smaily_basename === $plugin_basename ) {
-				set_transient( 'smailyforwp_plugin_updated', 1 );
+				set_transient( 'smailyforwp_plugin_updated', true );
 				return;
 			}
 		}
