@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Smaily for WP\n"
-"POT-Creation-Date: 2021-02-02 11:57+0200\n"
+"POT-Creation-Date: 2021-02-03 12:57+0200\n"
 "PO-Revision-Date: 2021-01-05 20:12+0200\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Smaily <info@smaily.com>\n"
@@ -18,49 +18,43 @@ msgstr ""
 "esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-smaily-for-wp-admin.php:97
-msgid ""
-"Smaily for WordPress has moved autoresponder selection to widget settings. "
-"Please check your plugin settings!"
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:215
+#: admin/class-smaily-for-wp-admin.php:202
 msgid "Please enter subdomain!"
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:223
+#: admin/class-smaily-for-wp-admin.php:210
 msgid "Please enter username!"
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:231
+#: admin/class-smaily-for-wp-admin.php:218
 msgid "Please enter password!"
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:251
+#: admin/class-smaily-for-wp-admin.php:238
 msgid "Wrong credentials"
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:258
+#: admin/class-smaily-for-wp-admin.php:245
 msgid "Error in subdomain"
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:272
+#: admin/class-smaily-for-wp-admin.php:259
 msgid "Something went wrong with request to Smaily"
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:292
+#: admin/class-smaily-for-wp-admin.php:279
 msgid "Credentials validated."
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:304
+#: admin/class-smaily-for-wp-admin.php:291
 msgid "Credentials removed."
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:321
+#: admin/class-smaily-for-wp-admin.php:308
 msgid "Newsletter subscription form reset to default."
 msgstr ""
 
-#: admin/class-smaily-for-wp-admin.php:360
+#: admin/class-smaily-for-wp-admin.php:347
 msgid "Changes saved."
 msgstr ""
 
@@ -132,57 +126,57 @@ msgstr ""
 msgid "Please wait, working..."
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:17
+#: includes/class-smaily-for-wp-widget.php:26
 msgid "Smaily newsletter subscription form"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:18
+#: includes/class-smaily-for-wp-widget.php:27
 msgid "Smaily Newsletter Subscription"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:63
+#: includes/class-smaily-for-wp-widget.php:73
 #: public/class-smaily-for-wp-public.php:89
 msgid "Smaily credentials not validated. Subscription form will not work!"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:70
+#: includes/class-smaily-for-wp-widget.php:80
 #: public/class-smaily-for-wp-public.php:96
 msgid "Form was not submitted using POST method."
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:73
+#: includes/class-smaily-for-wp-widget.php:83
 #: public/class-smaily-for-wp-public.php:99
 msgid "Input does not contain a recognizable email address."
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:76
+#: includes/class-smaily-for-wp-widget.php:86
 #: public/class-smaily-for-wp-public.php:102
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:134
+#: includes/class-smaily-for-wp-widget.php:144
 msgid "Title"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:144
+#: includes/class-smaily-for-wp-widget.php:154
 msgid "Display name field?"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:151
+#: includes/class-smaily-for-wp-widget.php:161
 msgid "Success URL"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:159
+#: includes/class-smaily-for-wp-widget.php:169
 msgid "Failure URL"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:167
+#: includes/class-smaily-for-wp-widget.php:177
 msgid "Autoresponders"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:169
+#: includes/class-smaily-for-wp-widget.php:179
 msgid "No autoresponder"
 msgstr ""
 
