@@ -84,7 +84,7 @@ class Smaily_For_WP_Lifecycle {
 		$plugin_version = SMLY4WP_PLUGIN_VERSION;
 		$db_version     = get_option( 'smailyforwp_db_version' );
 
-		if ( version_compare( $plugin_version, $db_version ) ) {
+		if ( version_compare( $plugin_version, $db_version, '==' ) ) {
 			return;
 		}
 
