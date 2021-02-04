@@ -9,8 +9,12 @@
  */
 function smailyforwp_upgrade_3_0_0() {
 	global $wpdb;
+	// Halt upgrade if no table exists.
+	$table_name = $wpdb->prefix . 'smaily_config';
+	if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) !== $table_name ) {
+		return update_option( 'smailyforwp_db_version', '3.0.0' );
+	}
 	// Get saved autoresponder ID.
-	$table_name       = esc_sql( $wpdb->prefix . 'smaily_config' );
 	$autoresponder_id = $wpdb->get_col( "SELECT autoresponder FROM `$table_name` LIMIT 1" )[0];
 	// Get widgets' options.
 	$widget_options = get_option( 'widget_smaily_subscription_widget' );
