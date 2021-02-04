@@ -23,8 +23,8 @@ function smailyforwp_upgrade_3_0_0() {
 				$widget['autoresponder'] = $autoresponder_id;
 			}
 		}
+		update_option( 'widget_smaily_subscription_widget', $widget_options );
 	}
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_autoresponders" );
-	update_option( 'widget_smaily_subscription_widget', $widget_options );
 	update_option( 'smailyforwp_db_version', '3.0.0' );
 }
