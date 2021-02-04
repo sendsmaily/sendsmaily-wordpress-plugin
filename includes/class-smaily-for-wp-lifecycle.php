@@ -11,7 +11,7 @@ class Smaily_For_WP_Lifecycle {
 	/**
 	 * Callback for plugin activation hook.
 	 *
-	 * Start a migration process when plugin is activated.
+	 * Start run_migrations() when plugin is activated.
 	 *
 	 * @since 3.0.0
 	 */
@@ -22,7 +22,7 @@ class Smaily_For_WP_Lifecycle {
 	/**
 	 * Callback for plugins_loaded hook.
 	 *
-	 * Start run_migrations if plugin was updated.
+	 * Start run_migrations() if plugin was updated.
 	 *
 	 * @since 3.0.0
 	 */
