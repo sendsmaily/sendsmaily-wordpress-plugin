@@ -7,10 +7,10 @@
  *
  * @since 3.0.0
  */
-function smailyforwp_upgrade_3_0_0() {
+$upgrade_3_0_0 = function() {
 	global $wpdb;
-	// Halt upgrade if no table exists.
 	$table_name = $wpdb->prefix . 'smaily_config';
+
 	if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) === $table_name ) {
 		// Get saved autoresponder ID.
 		$autoresponder_id = $wpdb->get_var( "SELECT autoresponder FROM `$table_name` LIMIT 1" );
@@ -26,5 +26,5 @@ function smailyforwp_upgrade_3_0_0() {
 		update_option( 'widget_smaily_subscription_widget', $widget_options );
 	}
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_autoresponders" );
-	update_option( 'smailyforwp_db_version', '3.0.0' );
-}
+	return $upgrade_3_0_0;
+};
