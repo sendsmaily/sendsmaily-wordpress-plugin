@@ -37,12 +37,14 @@ define( 'SMLY4WP_PLUGIN_URL', plugins_url( '', __FILE__ ) );
 define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
+ * Core plugin file and directory, relative to plugins directory.
+ */
+define( 'SMLY4WP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+
+/**
  * The core plugin class.
  */
 require SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp.php';
-
-register_activation_hook( __FILE__, array( 'Smaily_For_WP', 'activate' ) );
-register_uninstall_hook( __FILE__, array( 'Smaily_For_WP', 'uninstall' ) );
 
 /**
  * Begins execution of the plugin.

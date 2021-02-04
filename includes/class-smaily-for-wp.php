@@ -56,6 +56,7 @@ class Smaily_For_WP {
 		$this->plugin_name = 'smaily_for_wp';
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->define_lifecycle_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 	}
@@ -82,6 +83,7 @@ class Smaily_For_WP {
 	private function load_dependencies() {
 		require_once SMLY4WP_PLUGIN_PATH . '/admin/class-smaily-for-wp-admin.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-i18n.php';
+		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-lifecycle.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-loader.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-request.php';
 		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-template.php';
@@ -105,6 +107,23 @@ class Smaily_For_WP {
 	}
 
 	/**
+	 * Register all hooks related to the lifecycle of the plugin.
+	 *
+	 * Uses the Smaily_For_WP_Lifecycle class in order to
+	 * activate, upgrade or uninstall the plugin within WordPress.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 */
+	private function define_lifecycle_hooks() {
+		$plugin_lifecycle = new Smaily_For_WP_Lifecycle();
+		register_activation_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'activate' ) );
+		register_uninstall_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'uninstall' ) );
+		$this->loader->add_action( 'plugins_loaded', $plugin_lifecycle, 'listen_for_update_transient' );
+		$this->loader->add_action( 'upgrader_process_complete', $plugin_lifecycle, 'set_update_transient', 10, 2 );
+	}
+
+	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
@@ -118,8 +137,6 @@ class Smaily_For_WP {
 		$this->loader->add_action( 'wp_ajax_smaily_admin_save', $plugin_admin, 'smaily_admin_save' );
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'smaily_subscription_widget_init' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'smaily_admin_render' );
-		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'listen_for_upgrade_transient' );
-		$this->loader->add_action( 'upgrader_process_complete', $plugin_admin, 'check_for_update', 10, 2 );
 	}
 
 	/**
