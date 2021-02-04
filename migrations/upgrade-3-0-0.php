@@ -15,7 +15,7 @@ function smailyforwp_upgrade_3_0_0() {
 		return update_option( 'smailyforwp_db_version', '3.0.0' );
 	}
 	// Get saved autoresponder ID.
-	$autoresponder_id = $wpdb->get_col( "SELECT autoresponder FROM `$table_name` LIMIT 1" )[0];
+	$autoresponder_id = $wpdb->get_var( "SELECT autoresponder FROM `$table_name` LIMIT 1" );
 	// Get widgets' options.
 	$widget_options = get_option( 'widget_smaily_subscription_widget' );
 
