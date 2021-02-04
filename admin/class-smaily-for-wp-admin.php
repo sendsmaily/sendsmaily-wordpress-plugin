@@ -105,13 +105,10 @@ class Smaily_For_WP_Admin {
 			return;
 		}
 
-		// If updating a single plugin, $options['plugins'] is string of the updated plugin's basename.
-		if ( is_string( $options['plugins'] ) && $options['plugins'] === $plugin_basename ) {
-			return set_transient( 'smailyforwp_plugin_updated', true );
-		}
+		// $options['plugins'] is string during single update, array if multiple plugins updated.
+		$upgraded_plugins = (array) $options['plugins'];
 
-		// If updating multiple plugins, $options['plugins'] is an array of updated plugins' basenames.
-		foreach ( $options['plugins'] as $plugin_basename ) {
+		foreach ( $upgraded_plugins as $plugin_basename ) {
 			if ( $smaily_basename === $plugin_basename ) {
 				return set_transient( 'smailyforwp_plugin_updated', true );
 			}
