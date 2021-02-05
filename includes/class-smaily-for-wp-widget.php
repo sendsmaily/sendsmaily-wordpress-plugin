@@ -25,7 +25,9 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'smaily-for-wp' ) );
 		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
-		$this->autoresponders = Smaily_For_WP_Admin::get_autoresponders();
+
+		$admin_model          = new Smaily_For_WP_Admin();
+		$this->autoresponders = $admin_model->get_autoresponders();
 	}
 
 	/**
