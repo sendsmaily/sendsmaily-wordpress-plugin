@@ -76,19 +76,20 @@ class Smaily_For_WP_Lifecycle {
 	}
 
 	/**
-	 * Run migrations if plugin version differs from DB version.
+	 * Get plugin's DB version, run any migrations the database requires.
+	 * Update DB version with current plugin version.
 	 *
 	 * @since 3.0.0
 	 */
 	private function run_migrations() {
 		$plugin_version = SMLY4WP_PLUGIN_VERSION;
-		$db_version     = get_option( 'smailyforwp_db_version' );
+		$db_version     = get_option( 'smailyforwp_db_version', '0.0.0' );
 
-		if ( version_compare( $plugin_version, $db_version, '==' ) ) {
+		if ( $plugin_version === $db_version ) {
 			return;
 		}
 
-		if ( version_compare( $plugin_version, '3.0.0', '>=' ) ) {
+		if ( version_compare( $db_version, '3.0.0', '<' ) ) {
 			$upgrade_3_0_0 = null;
 			require_once SMLY4WP_PLUGIN_PATH . '/migrations/upgrade_3_0_0.php';
 			if ( is_callable( $upgrade_3_0_0 ) ) {
