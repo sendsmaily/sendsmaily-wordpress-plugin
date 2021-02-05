@@ -68,54 +68,6 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
-	 * Verify plugin was updated via transient and trigger DB upgrades.
-	 *
-	 * @since 3.0.0
-	 */
-	public function listen_for_upgrade_transient() {
-		if ( get_transient( 'smailyforwp_plugin_updated' ) !== true ) {
-			return;
-		}
-
-		$plugin_version = SMLY4WP_PLUGIN_VERSION;
-		if ( $plugin_version === get_option( 'smailyforwp_db_version' ) ) {
-			return delete_transient( 'smailyforwp_plugin_updated' );
-		}
-
-		if ( version_compare( $plugin_version, '3.0.0', '=' ) ) {
-			require_once SMLY4WP_PLUGIN_PATH . '/migrations/upgrade-3-0-0.php';
-			smailyforwp_upgrade_3_0_0();
-		}
-		delete_transient( 'smailyforwp_plugin_updated' );
-	}
-
-	/**
-	 * Check if plugin was updated, make a transient option if so.
-	 * This alows us to trigger a DB upgrade script if necessary.
-	 *
-	 * @since 3.0.0
-	 * @param Plugin_Upgrader $upgrader_object Instance of WP_Upgrader.
-	 * @param array           $options         Array of bulk item update data.
-	 */
-	public function check_for_update( $upgrader_object, $options ) {
-		$smaily_basename = SMLY4WP_PLUGIN_BASENAME;
-
-		$plugin_was_updated = $options['action'] === 'update' && $options['type'] === 'plugin';
-		if ( ! isset( $options['plugins'] ) || ! $plugin_was_updated ) {
-			return;
-		}
-
-		// $options['plugins'] is string during single update, array if multiple plugins updated.
-		$upgraded_plugins = (array) $options['plugins'];
-
-		foreach ( $upgraded_plugins as $plugin_basename ) {
-			if ( $smaily_basename === $plugin_basename ) {
-				return set_transient( 'smailyforwp_plugin_updated', true );
-			}
-		}
-	}
-
-	/**
 	 * Render admin page.
 	 *
 	 * @since 3.0.0
