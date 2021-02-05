@@ -91,7 +91,7 @@ class Smaily_For_WP_Lifecycle {
 
 		if ( version_compare( $db_version, '3.0.0', '<' ) ) {
 			$upgrade_3_0_0 = null;
-			require_once SMLY4WP_PLUGIN_PATH . 'migrations/upgrade_3_0_0.php';
+			require_once SMLY4WP_PLUGIN_PATH . 'migrations/upgrade-3_0_0.php';
 			if ( is_callable( $upgrade_3_0_0 ) ) {
 				$upgrade_3_0_0();
 			}
