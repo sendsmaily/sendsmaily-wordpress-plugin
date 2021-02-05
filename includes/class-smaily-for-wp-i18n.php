@@ -17,7 +17,7 @@ class Smaily_For_WP_i18n {
 		load_plugin_textdomain(
 			'smaily-for-wp',
 			false,
-			plugin_basename( SMLY4WP_PLUGIN_PATH ) . '/lang/'
+			plugin_basename( SMLY4WP_PLUGIN_PATH ) . 'lang/'
 		);
 	}
 }

@@ -81,14 +81,14 @@ class Smaily_For_WP {
 	 * @access private
 	 */
 	private function load_dependencies() {
-		require_once SMLY4WP_PLUGIN_PATH . '/admin/class-smaily-for-wp-admin.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-i18n.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-lifecycle.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-loader.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-request.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-template.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-widget.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/public/class-smaily-for-wp-public.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'admin/class-smaily-for-wp-admin.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-i18n.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-lifecycle.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-loader.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-request.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-template.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-widget.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'public/class-smaily-for-wp-public.php';
 		$this->loader = new Smaily_For_WP_Loader();
 	}
 
