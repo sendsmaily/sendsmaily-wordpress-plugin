@@ -66,9 +66,9 @@ class Smaily_For_WP_Lifecycle {
 		}
 
 		// $options['plugins'] is string during single update, array if multiple plugins updated.
-		$upgraded_plugins = (array) $options['plugins'];
+		$updated_plugins = (array) $options['plugins'];
 
-		foreach ( $upgraded_plugins as $plugin_basename ) {
+		foreach ( $updated_plugins as $plugin_basename ) {
 			if ( $smaily_basename === $plugin_basename ) {
 				return set_transient( 'smailyforwp_plugin_updated', true );
 			}
