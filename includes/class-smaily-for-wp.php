@@ -66,13 +66,14 @@ class Smaily_For_WP {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Smaily_For_WP_Admin.    Defines all hooks for the admin area.
-	 * - Smaily_For_WP_i18n.     Defines internationalization functionality.
-	 * - Smaily_For_WP_Loader.   Orchestrates the hooks of the plugin.
-	 * - Smaily_For_WP_Request.  Defines the request making functionality.
-	 * - Smaily_For_WP_Template. Defines the templating making functionality.
-	 * - Smaily_For_WP_Widget.   Defines the widget functionality.
-	 * - Smaily_For_WP_Public.   Defines all hooks for the public side of the site.
+	 * - Smaily_For_WP_Admin.     Defines all hooks for the admin area.
+	 * - Smaily_For_WP_i18n.      Defines internationalization functionality.
+	 * - Smaily_For_WP_Lifecycle. Defines the install, upgrade and uninstall functionality.
+	 * - Smaily_For_WP_Loader.    Orchestrates the hooks of the plugin.
+	 * - Smaily_For_WP_Request.   Defines the request making functionality.
+	 * - Smaily_For_WP_Template.  Defines the templating making functionality.
+	 * - Smaily_For_WP_Widget.    Defines the widget functionality.
+	 * - Smaily_For_WP_Public.    Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
