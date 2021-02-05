@@ -120,8 +120,8 @@ class Smaily_For_WP {
 		$plugin_lifecycle = new Smaily_For_WP_Lifecycle();
 		register_activation_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'activate' ) );
 		register_uninstall_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'uninstall' ) );
-		$this->loader->add_action( 'plugins_loaded', $plugin_lifecycle, 'listen_for_update_transient' );
-		$this->loader->add_action( 'upgrader_process_complete', $plugin_lifecycle, 'set_update_transient', 10, 2 );
+		$this->loader->add_action( 'plugins_loaded', $plugin_lifecycle, 'update' );
+		$this->loader->add_action( 'upgrader_process_complete', $plugin_lifecycle, 'check_for_update', 10, 2 );
 	}
 
 	/**

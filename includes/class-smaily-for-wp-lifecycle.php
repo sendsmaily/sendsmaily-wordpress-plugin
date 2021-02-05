@@ -26,7 +26,7 @@ class Smaily_For_WP_Lifecycle {
 	 *
 	 * @since 3.0.0
 	 */
-	public function listen_for_update_transient() {
+	public function update() {
 		if ( get_transient( 'smailyforwp_plugin_updated' ) !== true ) {
 			return;
 		}
@@ -57,7 +57,7 @@ class Smaily_For_WP_Lifecycle {
 	 * @param Plugin_Upgrader $upgrader_object Instance of WP_Upgrader.
 	 * @param array           $options         Array of bulk item update data.
 	 */
-	public function set_update_transient( $upgrader_object, $options ) {
+	public function check_for_update( $upgrader_object, $options ) {
 		$smaily_basename = SMLY4WP_PLUGIN_BASENAME;
 
 		$plugin_was_updated = $options['action'] === 'update' && $options['type'] === 'plugin';
