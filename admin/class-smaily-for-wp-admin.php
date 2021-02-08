@@ -329,6 +329,11 @@ class Smaily_For_WP_Admin {
 		// Load configuration data.
 		$table_name      = esc_sql( $wpdb->prefix . 'smaily_config' );
 		$config          = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+
+		if ( empty( $config['api_credentials'] ) ) {
+			return array();
+		}
+
 		$api_credentials = explode( ':', $config['api_credentials'] );
 
 		$result = ( new Smaily_For_WP_Request() )
