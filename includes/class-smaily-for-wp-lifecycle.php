@@ -74,7 +74,7 @@ class Smaily_For_WP_Lifecycle {
 	 * @param array           $options         Array of bulk item update data.
 	 */
 	public function check_for_update( $upgrader_object, $options ) {
-		$smaily_basename = SMLY4WP_PLUGIN_BASENAME;
+		$smaily_basename = plugin_basename( SMLY4WP_PLUGIN_FILE );
 
 		$plugin_was_updated = $options['action'] === 'update' && $options['type'] === 'plugin';
 		if ( ! isset( $options['plugins'] ) || ! $plugin_was_updated ) {
