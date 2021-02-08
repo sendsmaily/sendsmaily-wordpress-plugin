@@ -39,7 +39,7 @@ define( 'SMLY4WP_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 /**
  * Core plugin file and directory, relative to plugins directory.
  */
-define( 'SMLY4WP_PLUGIN_FILE', plugin_basename( __FILE__ ) );
+define( 'SMLY4WP_PLUGIN_FILE', __FILE__ );
 
 /**
  * The core plugin class.
