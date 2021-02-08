@@ -92,7 +92,8 @@ class Smaily_For_WP_Lifecycle {
 	 * Get plugin's DB version, run any migrations the database requires.
 	 * Update DB version with current plugin version.
 	 *
-	 * @since 3.0.0
+	 * @since  3.0.0
+	 * @access private
 	 */
 	private function run_migrations() {
 		$plugin_version = SMLY4WP_PLUGIN_VERSION;
