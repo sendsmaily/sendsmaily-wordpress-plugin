@@ -7,7 +7,7 @@
  *
  * @since 3.0.0
  */
-$upgrade_3_0_0 = function() {
+$upgrade = function() {
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'smaily_config';
 
@@ -26,5 +26,4 @@ $upgrade_3_0_0 = function() {
 		update_option( 'widget_smaily_subscription_widget', $widget_options );
 	}
 	$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_autoresponders" );
-	return $upgrade_3_0_0;
 };

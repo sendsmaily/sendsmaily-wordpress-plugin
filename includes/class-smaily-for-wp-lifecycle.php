@@ -102,11 +102,25 @@ class Smaily_For_WP_Lifecycle {
 			return;
 		}
 
-		if ( version_compare( $db_version, '3.0.0', '<' ) ) {
-			$upgrade_3_0_0 = null;
-			require_once SMLY4WP_PLUGIN_PATH . 'migrations/upgrade-3_0_0.php';
-			if ( is_callable( $upgrade_3_0_0 ) ) {
-				$upgrade_3_0_0();
+		$migrations = array(
+			'3.0.0' => 'upgrade-3_0_0.php',
+		);
+
+		foreach ( $migrations as $migration_version => $migration_file ) {
+			// Database is up-to-date with plugin version.
+			if ( version_compare( $db_version, $migration_version, '>=' ) ) {
+				continue;
+			}
+
+			$migration_file = SMLY4WP_PLUGIN_PATH . 'migrations/' . $migration_file;
+			if ( ! file_exists( $migration_file ) ) {
+				continue;
+			}
+
+			$upgrade = null;
+			require_once $migration_file;
+			if ( is_callable( $upgrade ) ) {
+				$upgrade();
 			}
 		}
 
