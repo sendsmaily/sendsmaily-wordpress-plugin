@@ -94,7 +94,8 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function smaily_subscription_widget_init() {
-		register_widget( 'Smaily_For_WP_Widget' );
+		$widget = new Smaily_For_WP_Widget( $this );
+		register_widget( $widget );
 	}
 
 	/**
@@ -317,12 +318,12 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
-	 * Make a request to Smaily asking for autoresponders
+	 * Make a request to Smaily asking for autoresponders.
 	 * Request is authenticated via saved credentials.
 	 *
 	 * @return array $autoresponder_list List of autoresponders in format [id => title].
 	 */
-	public static function get_autoresponders() {
+	public function get_autoresponders() {
 		global $wpdb;
 
 		// Load configuration data.
