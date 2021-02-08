@@ -35,7 +35,7 @@ class Smaily_For_WP_Lifecycle {
 	/**
 	 * Callback for plugins_loaded hook.
 	 *
-	 * Start run_migrations() if plugin was updated.
+	 * Start migrations if plugin was updated.
 	 *
 	 * @since 3.0.0
 	 */
