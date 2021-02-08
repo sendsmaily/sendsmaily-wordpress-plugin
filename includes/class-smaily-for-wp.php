@@ -119,7 +119,7 @@ class Smaily_For_WP {
 	private function define_lifecycle_hooks() {
 		$plugin_lifecycle = new Smaily_For_WP_Lifecycle();
 		register_activation_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'activate' ) );
-		register_uninstall_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'uninstall' ) );
+		register_uninstall_hook( SMLY4WP_PLUGIN_FILE, array( 'Smaily_For_WP_Lifecycle', 'uninstall' ) );
 		$this->loader->add_action( 'plugins_loaded', $plugin_lifecycle, 'update' );
 		$this->loader->add_action( 'upgrader_process_complete', $plugin_lifecycle, 'check_for_update', 10, 2 );
 	}

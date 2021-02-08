@@ -54,7 +54,7 @@ class Smaily_For_WP_Lifecycle {
 	 *
 	 * @since 3.0.0
 	 */
-	public function uninstall() {
+	public static function uninstall() {
 		global $wpdb;
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_config" );
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_autoresponder" );
