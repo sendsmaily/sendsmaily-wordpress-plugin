@@ -53,7 +53,7 @@ class Smaily_For_WP_Public {
 	 * @param  array $atts Shortcode attributes.
 	 * @return string
 	 */
-	private function smaily_shortcode_render( $atts ) {
+	public function smaily_shortcode_render( $atts ) {
 		global $wpdb;
 
 		// Load configuration data.
