@@ -56,6 +56,7 @@ class Smaily_For_WP {
 		$this->plugin_name = 'smaily_for_wp';
 		$this->load_dependencies();
 		$this->set_locale();
+		$this->define_lifecycle_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 	}
@@ -65,13 +66,14 @@ class Smaily_For_WP {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Smaily_For_WP_Admin.    Defines all hooks for the admin area.
-	 * - Smaily_For_WP_i18n.     Defines internationalization functionality.
-	 * - Smaily_For_WP_Loader.   Orchestrates the hooks of the plugin.
-	 * - Smaily_For_WP_Request.  Defines the request making functionality.
-	 * - Smaily_For_WP_Template. Defines the templating making functionality.
-	 * - Smaily_For_WP_Widget.   Defines the widget functionality.
-	 * - Smaily_For_WP_Public.   Defines all hooks for the public side of the site.
+	 * - Smaily_For_WP_Admin.     Defines all hooks for the admin area.
+	 * - Smaily_For_WP_i18n.      Defines internationalization functionality.
+	 * - Smaily_For_WP_Lifecycle. Defines the install, upgrade and uninstall functionality.
+	 * - Smaily_For_WP_Loader.    Orchestrates the hooks of the plugin.
+	 * - Smaily_For_WP_Request.   Defines the request making functionality.
+	 * - Smaily_For_WP_Template.  Defines the templating making functionality.
+	 * - Smaily_For_WP_Widget.    Defines the widget functionality.
+	 * - Smaily_For_WP_Public.    Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -80,13 +82,14 @@ class Smaily_For_WP {
 	 * @access private
 	 */
 	private function load_dependencies() {
-		require_once SMLY4WP_PLUGIN_PATH . '/admin/class-smaily-for-wp-admin.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-i18n.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-loader.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-request.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-template.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/includes/class-smaily-for-wp-widget.php';
-		require_once SMLY4WP_PLUGIN_PATH . '/public/class-smaily-for-wp-public.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'admin/class-smaily-for-wp-admin.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-i18n.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-lifecycle.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-loader.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-request.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-template.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-widget.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'public/class-smaily-for-wp-public.php';
 		$this->loader = new Smaily_For_WP_Loader();
 	}
 
@@ -102,6 +105,23 @@ class Smaily_For_WP {
 	private function set_locale() {
 		$plugin_i18n = new Smaily_For_WP_i18n();
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+	}
+
+	/**
+	 * Register all hooks related to the lifecycle of the plugin.
+	 *
+	 * Uses the Smaily_For_WP_Lifecycle class in order to
+	 * activate, upgrade or uninstall the plugin within WordPress.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 */
+	private function define_lifecycle_hooks() {
+		$plugin_lifecycle = new Smaily_For_WP_Lifecycle();
+		register_activation_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'activate' ) );
+		register_uninstall_hook( SMLY4WP_PLUGIN_FILE, array( 'Smaily_For_WP_Lifecycle', 'uninstall' ) );
+		$this->loader->add_action( 'plugins_loaded', $plugin_lifecycle, 'update' );
+		$this->loader->add_action( 'upgrader_process_complete', $plugin_lifecycle, 'check_for_update', 10, 2 );
 	}
 
 	/**
@@ -130,50 +150,6 @@ class Smaily_For_WP {
 	private function define_public_hooks() {
 		$plugin_public = new Smaily_For_WP_Public( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'init', $plugin_public, 'add_shortcodes' );
-	}
-
-	/**
-	 * Install database structure (on activation).
-	 *
-	 * @since 3.0.0
-	 */
-	public static function activate() {
-		global $wpdb;
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		$charset_collate = $wpdb->get_charset_collate();
-
-		// Create database table - settings.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$sql        = "CREATE TABLE $table_name (
-			api_credentials VARCHAR(128) NOT NULL,
-			domain VARCHAR(255) NOT NULL,
-			autoresponder INT(16) NOT NULL,
-			form TEXT NOT NULL,
-			is_advanced TINYINT(1) NOT NULL,
-			PRIMARY KEY  (api_credentials)
-		) $charset_collate;";
-		dbDelta( $sql );
-
-		// Create database table - autoresponders.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
-		$sql        = "CREATE TABLE $table_name (
-					id int(16) NOT NULL,
-					title varchar(255) NOT NULL,
-					PRIMARY KEY  (id)
-				) $charset_collate;";
-		dbDelta( $sql );
-	}
-
-	/**
-	 * Clean up plugin's database entities.
-	 *
-	 * @since 3.0.0
-	 */
-	public static function uninstall() {
-		global $wpdb;
-		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_autoresponders" );
-		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_config" );
-		delete_option( 'widget_smaily_subscription_widget' );
 	}
 
 	/**

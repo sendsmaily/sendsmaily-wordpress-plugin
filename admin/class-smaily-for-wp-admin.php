@@ -35,7 +35,7 @@ class Smaily_For_WP_Admin {
 	 */
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -83,11 +83,6 @@ class Smaily_For_WP_Admin {
 		$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 		$template->assign( (array) $data );
 
-		// Load autoresponders.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
-		$data       = $wpdb->get_results( "SELECT * FROM `$table_name`" );
-		$template->assign( 'autoresponders', $data );
-
 		// Add menu elements.
 		add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', SMLY4WP_PLUGIN_URL . '/gfx/icon.png' );
 		add_submenu_page( 'smaily', 'Newsletter subscription form', 'Form', 'manage_options', SMLY4WP_PLUGIN_PATH, array( $template, 'dispatch' ) );
@@ -99,7 +94,8 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function smaily_subscription_widget_init() {
-		register_widget( 'Smaily_For_WP_Widget' );
+		$widget = new Smaily_For_WP_Widget( $this );
+		register_widget( $widget );
 	}
 
 	/**
@@ -227,21 +223,6 @@ class Smaily_For_WP_Admin {
 					)
 				);
 
-				// Get autoresponders.
-				$insert_query = array();
-				// Replace autoresponders.
-				foreach ( $rqst['body'] as $autoresponder ) {
-					$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
-				}
-				// Insert to db.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
-				// Clear previous data.
-				$wpdb->query( "DELETE FROM `$table_name`" );
-				// Add new autoresponders if set.
-				if ( ! empty( $insert_query ) ) {
-					$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
-				}
-
 				// Return result.
 				$result = array(
 					'error'   => false,
@@ -252,10 +233,6 @@ class Smaily_For_WP_Admin {
 			case 'removeApiKey':
 				// Delete contents of config.
 				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				$wpdb->query( "DELETE FROM `$table_name`" );
-
-				// Delete contents of autoresponders.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
 				$wpdb->query( "DELETE FROM `$table_name`" );
 
 				// Set result.
@@ -283,65 +260,11 @@ class Smaily_For_WP_Admin {
 				);
 				break;
 
-			case 'refreshAutoresp':
-				// Load configuration data.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-
-				// Credentials.
-				$api_credentials = explode( ':', $data->api_credentials );
-				// Get autoresponders.
-				$result         = ( new Smaily_For_WP_Request() )
-					->setUrl( 'https://' . $data->domain . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
-					->auth( $api_credentials[0], $api_credentials[1] )
-					->get();
-				$autoresponders = $result['body'];
-
-				// Handle errors.
-				if ( isset( $result['code'] ) && $result['code'] !== 200 ) {
-					$result['error'] = true;
-					break;
-				} elseif ( empty( $autoresponders ) ) {
-					$result = array(
-						'message' => __( 'Could not find any autoresponders!', 'smaily-for-wp' ),
-						'error'   => true,
-					);
-					break;
-				}
-
-				// Get autoresponders.
-				$insert_query = array();
-				// Replace autoresponders.
-				foreach ( $autoresponders as $autoresponder ) {
-					$insert_query[] = $wpdb->prepare( '(%d, %s)', $autoresponder['id'], $autoresponder['title'] );
-				}
-				// Insert to db.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
-				// Clear previous data.
-				$wpdb->query( "DELETE FROM `$table_name`" );
-				// Add new autoresponders if set.
-				if ( ! empty( $insert_query ) ) {
-					$wpdb->query( "INSERT INTO `$table_name`(`id`, `title`) VALUES " . implode( ',', $insert_query ) );
-				}
-
-				// Return result.
-				$result = array(
-					'error'   => false,
-					'message' => __( 'Autoresponders refreshed.', 'smaily-for-wp' ),
-				);
-				break;
-
 			case 'save':
 				// Get parameters.
 				$isAdvanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? '1' : '0';
-				// Get basic and advanced parameters.
-				$basic    = ( isset( $form_data['basic'] ) && is_array( $form_data['basic'] ) ) ? $form_data['basic'] : array();
-				$advanced = ( isset( $form_data['advanced'] ) && is_array( $form_data['advanced'] ) ) ? $form_data['advanced'] : array();
-
-				// Validate and sanitize basic & advanced parameters values.
-				$autoresponder = ( isset( $basic['autoresponder'] ) ) && ( filter_var( $basic['autoresponder'], FILTER_VALIDATE_INT ) !== false )
-					? $basic['autoresponder'] : 0;
-				$form          = ( isset( $advanced['form'] ) && is_string( $advanced['form'] ) ) ? $advanced['form'] : '';
+				$advanced   = ( isset( $form_data['advanced'] ) && is_array( $form_data['advanced'] ) ) ? $form_data['advanced'] : array();
+				$form       = ( isset( $advanced['form'] ) && is_string( $advanced['form'] ) ) ? $advanced['form'] : '';
 
 				// Generate new form (if empty).
 				if ( empty( $form ) ) {
@@ -358,13 +281,16 @@ class Smaily_For_WP_Admin {
 
 				// Update configuration.
 				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				$wpdb->query( $wpdb->prepare(
-					"
+				$wpdb->query(
+					$wpdb->prepare(
+						"
 					UPDATE `$table_name`
-					SET `autoresponder` = %d, `form` = %s, `is_advanced` = %d
+					SET `form` = %s, `is_advanced` = %d
 					",
-					$autoresponder, $form, $isAdvanced
-				) );
+						$form,
+						$isAdvanced
+					)
+				);
 				// Return response.
 				$result = array(
 					'error'   => false,
@@ -383,16 +309,48 @@ class Smaily_For_WP_Admin {
 			$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
 			$template->assign( (array) $data );
 
-			// Load autoresponders.
-			$table_name = esc_sql( $wpdb->prefix . 'smaily_autoresponders' );
-			$data       = $wpdb->get_results( "SELECT * FROM `$table_name`" );
-			$template->assign( 'autoresponders', $data );
-
 			// Render template.
 			$result['content'] = $template->render();
 		}
 		// Display result messages as JSON.
 		echo json_encode( $result );
 		wp_die();
+	}
+
+	/**
+	 * Make a request to Smaily asking for autoresponders.
+	 * Request is authenticated via saved credentials.
+	 *
+	 * @return array $autoresponder_list List of autoresponders in format [id => title].
+	 */
+	public function get_autoresponders() {
+		global $wpdb;
+
+		// Load configuration data.
+		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
+		$config     = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+
+		if ( empty( $config['api_credentials'] ) ) {
+			return array();
+		}
+
+		$api_credentials = explode( ':', $config['api_credentials'] );
+
+		$result = ( new Smaily_For_WP_Request() )
+			->setUrl( 'https://' . $config['domain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
+			->auth( $api_credentials[0], $api_credentials[1] )
+			->get();
+
+		if ( empty( $result['body'] ) ) {
+			return array();
+		}
+
+		$autoresponder_list = array();
+		foreach ( $result['body'] as $autoresponder ) {
+			$id                        = $autoresponder['id'];
+			$title                     = $autoresponder['title'];
+			$autoresponder_list[ $id ] = $title;
+		}
+		return $autoresponder_list;
 	}
 }

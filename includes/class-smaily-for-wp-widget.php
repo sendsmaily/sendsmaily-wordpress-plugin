@@ -9,13 +9,25 @@
 class Smaily_For_WP_Widget extends WP_Widget {
 
 	/**
+	 * Array of autoresponders.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array    $autoresponders Used to populate the autoresponder <select> field.
+	 */
+	private $autoresponders;
+
+	/**
 	 * Sets up a new instance of the widget.
 	 *
 	 * @since 3.0.0
+	 * @param Smaily_For_WP_Admin $admin_model Reference to admin class.
 	 */
-	public function __construct() {
+	public function __construct( $admin_model ) {
 		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'smaily-for-wp' ) );
 		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
+
+		$this->autoresponders = $admin_model->get_autoresponders();
 	}
 
 	/**
@@ -31,9 +43,10 @@ class Smaily_For_WP_Widget extends WP_Widget {
 
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		$show_name   = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
-		$success_url = isset( $instance['success_url'] ) ? $instance['success_url'] : '';
-		$failure_url = isset( $instance['failure_url'] ) ? $instance['failure_url'] : '';
+		$show_name     = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
+		$success_url   = isset( $instance['success_url'] ) ? $instance['success_url'] : '';
+		$failure_url   = isset( $instance['failure_url'] ) ? $instance['failure_url'] : '';
+		$autoresponder = isset( $instance['autoresponder'] ) ? $instance['autoresponder'] : '';
 
 		echo $args['before_widget'];
 		if ( $title ) {
@@ -46,16 +59,16 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$config['show_name']        = $show_name;
 		$config['success_url']      = $success_url;
 		$config['failure_url']      = $failure_url;
-		$config['autoresponder_id'] = !empty( $config['autoresponder'] ) ? (int) $config['autoresponder'] : '';
+		$config['autoresponder_id'] = $autoresponder;
 
 		// Create admin template.
 		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
 		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $file );
 		$template->assign( $config );
 		// Display responses on Smaily subscription form.
-		$form_has_response = false;
+		$form_has_response  = false;
 		$form_is_successful = false;
-		$response_message  = null;
+		$response_message   = null;
 
 		if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
 			$form_has_response = true;
@@ -77,8 +90,8 @@ class Smaily_For_WP_Widget extends WP_Widget {
 			}
 		}
 		$template->assign( array(
-			'form_has_response' => $form_has_response,
-			'response_message'  => $response_message,
+			'form_has_response'  => $form_has_response,
+			'response_message'   => $response_message,
 			'form_is_successful' => $form_is_successful,
 		) );
 		// Render template.
@@ -98,11 +111,16 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance                = $old_instance;
-		$instance['title']       = esc_textarea( $new_instance['title'] );
-		$instance['show_name']   = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
-		$instance['success_url'] = esc_url( $new_instance['success_url'] );
-		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
+		$instance                  = $old_instance;
+		$instance['title']         = esc_textarea( $new_instance['title'] );
+		$instance['show_name']     = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
+		$instance['success_url']   = esc_url( $new_instance['success_url'] );
+		$instance['failure_url']   = esc_url( $new_instance['failure_url'] );
+
+		// Only update autoresponder ID if its one of existing autoresponder IDs.
+		if ( array_key_exists( $new_instance['autoresponder'], $this->autoresponders ) ) {
+			$instance['autoresponder'] = $new_instance['autoresponder'];
+		}
 		return $instance;
 	}
 
@@ -116,10 +134,11 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$instance = wp_parse_args(
 			(array) $instance,
 			array(
-				'title'       => '',
-				'show_name'   => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
-				'success_url' => '',
-				'failure_url' => '',
+				'title'         => '',
+				'show_name'     => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
+				'success_url'   => '',
+				'failure_url'   => '',
+				'autoresponder' => '',
 			)
 		);
 
@@ -156,5 +175,17 @@ class Smaily_For_WP_Widget extends WP_Widget {
 			<label for="' . $failure_url_id . '">' . __( 'Failure URL', 'smaily-for-wp' ) . ':</label>
 			<input id="' . $failure_url_id . '" name="' . $failure_url . '" type="text" value="' . $instance['failure_url'] . '" />
 		</p>';
+		// Display autoresponder select menu.
+		$autoresponder_id          = esc_attr( $this->get_field_id( 'autoresponder' ) );
+		$autoresponder             = esc_attr( $this->get_field_name( 'autoresponder' ) );
+		$instance['autoresponder'] = esc_attr( $instance['autoresponder'] );
+		echo '<p>
+			<label for="' . $autoresponder_id . '">' . esc_html__( 'Autoresponders', 'smaily-for-wp' ) . ':</label>
+			<select id="' . $autoresponder_id . '" name="' . $autoresponder . '">
+			<option value="">' . esc_html__( 'No autoresponder', 'smaily-for-wp' ) . '</option>';
+		foreach ( $this->autoresponders as $id => $title ) {
+			echo '<option value="' . esc_attr( $id ) . '"' . selected( $instance['autoresponder'], $id, false ) . '>' . esc_attr( $title ) . '</option>';
+		}
+		echo '</select></p>';
 	}
 }

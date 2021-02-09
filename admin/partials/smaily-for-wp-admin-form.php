@@ -1,6 +1,5 @@
 <?php
 $api_credentials = $this->api_credentials;
-$autoresponders = $this->autoresponders;
 ?>
 
 <div>
@@ -54,23 +53,6 @@ $autoresponders = $this->autoresponders;
 	<li><a id="link-advanced" href="#advanced"><?php echo esc_html__( 'Advanced', 'smaily-for-wp' ); ?></a></li>
 </ul>
 <div class="clear"></div>
-
-<div id="content-basic" class="tab-content">
-	<div class="wrap">
-		<label><?php echo esc_html__( 'Autoresponders', 'smaily-for-wp' ); ?> <a href="#" onclick="javascript:Default.refreshAutoresp();return false;">(<?php echo esc_html__( 'Refresh', 'smaily-for-wp' ); ?>)</a></label>
-		<em><?php echo esc_html__( 'Select autoresponder to change regular opt-in functionality', 'smaily-for-wp' ); ?></em>
-		<?php if ( ! empty( $autoresponders ) ) : ?>
-		<select name="basic[autoresponder]">
-			<option value=""><?php echo esc_html__( 'No autoresponder', 'smaily-for-wp' ); ?></option>
-			<?php foreach ( $this->autoresponders as $item ) : ?>
-			<option value="<?php echo $item->id; ?>"<?php if ( $this->autoresponder == $item->id ) : ?> selected="selected"<?php endif; ?>><?php echo $item->title; ?></option>
-			<?php endforeach; ?>
-		</select>
-		<?php else : ?>
-		<span><?php echo esc_html__( 'No autoresponders. Please click on refresh link to update.', 'smaily-for-wp' ); ?></span>
-		<?php endif; ?>
-	</div>
-</div>
 
 <div id="content-advanced" class="tab-content hidden">
 	<div class="wrap">

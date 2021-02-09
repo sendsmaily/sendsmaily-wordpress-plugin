@@ -139,25 +139,6 @@ var Default = (function(){
 		},
 
 		/**
-		 * refresh autoresponders
-		 * @return void
-		 */
-		refreshAutoresp: function(){
-			// build query
-			var query = {
-				'op': 'refreshAutoresp',
-				'refresh': 1
-			};
-
-			// make the request
-			_request(query, function(response){
-				if(response.content){
-					jQuery('#form-container').html(response.content);
-				}
-			});
-		},
-
-		/**
 		 * save form contents
 		 * @return void
 		 */

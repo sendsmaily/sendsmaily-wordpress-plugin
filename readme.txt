@@ -106,6 +106,10 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 
 == Upgrade Notice ==
 
+= 3.0.0 =
+
+Since version 3.0.0, autoresponders can be configured in widget settings.
+
 = 2.3.0 =
 
 Localization files were restructured with version 2.3.0, as a result all custom translations of Smaily for WP will stop working.
