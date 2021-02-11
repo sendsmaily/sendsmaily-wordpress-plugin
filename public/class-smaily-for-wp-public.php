@@ -84,7 +84,8 @@ class Smaily_For_WP_Public {
 		$form_is_successful = false;
 		$response_message   = null;
 
-		if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
+		$credentials_not_valid = empty( $api_credentials['subdomain'] ) || empty( $api_credentials['username'] ) || empty( $api_credentials['password'] );
+		if ( $credentials_not_valid ) {
 			$form_has_response = true;
 			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'smaily-for-wp' );
 		} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {
