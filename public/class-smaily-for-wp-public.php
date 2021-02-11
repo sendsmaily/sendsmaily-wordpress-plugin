@@ -54,11 +54,11 @@ class Smaily_For_WP_Public {
 	 * @return string
 	 */
 	public function smaily_shortcode_render( $atts ) {
-		global $wpdb;
-
 		// Load configuration data.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$config = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$config = (array) get_option( 'smailyforwp_form_option' );
+
+		$api_credentials  = get_option( 'smailyforwp_api_option' );
+		$config['domain'] = isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '';
 
 		// Parse attributes out of shortcode tag.
 		$shortcode_atts = shortcode_atts(

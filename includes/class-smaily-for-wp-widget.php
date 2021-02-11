@@ -39,8 +39,6 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	 * @param array $instance Settings for the current Search widget instance.
 	 */
 	public function widget( $args, $instance ) {
-		global $wpdb;
-
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
 		$show_name     = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
@@ -54,8 +52,9 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		}
 
 		// Load configuration data.
-		$table_name                 = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$config                     = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$config                     = (array) get_option( 'smailyforwp_form_option' );
+		$api_credentials            = get_option( 'smailyforwp_api_option' );
+		$config['domain']           = isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '';
 		$config['show_name']        = $show_name;
 		$config['success_url']      = $success_url;
 		$config['failure_url']      = $failure_url;
@@ -70,7 +69,8 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$form_is_successful = false;
 		$response_message   = null;
 
-		if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
+		$credentials_not_valid = empty( $api_credentials['subdomain'] ) || empty( $api_credentials['username'] ) || empty( $api_credentials['password'] );
+		if ( $credentials_not_valid ) {
 			$form_has_response = true;
 			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'smaily-for-wp' );
 		} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {
@@ -89,11 +89,13 @@ class Smaily_For_WP_Widget extends WP_Widget {
 					break;
 			}
 		}
-		$template->assign( array(
-			'form_has_response'  => $form_has_response,
-			'response_message'   => $response_message,
-			'form_is_successful' => $form_is_successful,
-		) );
+		$template->assign(
+			array(
+				'form_has_response'  => $form_has_response,
+				'response_message'   => $response_message,
+				'form_is_successful' => $form_is_successful,
+			)
+		);
 		// Render template.
 		echo $template->render();
 
@@ -111,11 +113,11 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
-		$instance                  = $old_instance;
-		$instance['title']         = esc_textarea( $new_instance['title'] );
-		$instance['show_name']     = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
-		$instance['success_url']   = esc_url( $new_instance['success_url'] );
-		$instance['failure_url']   = esc_url( $new_instance['failure_url'] );
+		$instance                = $old_instance;
+		$instance['title']       = esc_textarea( $new_instance['title'] );
+		$instance['show_name']   = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
+		$instance['success_url'] = esc_url( $new_instance['success_url'] );
+		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
 
 		// Only update autoresponder ID if its one of existing autoresponder IDs.
 		if ( array_key_exists( $new_instance['autoresponder'], $this->autoresponders ) ) {

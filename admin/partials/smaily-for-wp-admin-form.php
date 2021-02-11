@@ -1,5 +1,5 @@
 <?php
-$api_credentials = $this->api_credentials;
+$api_credentials_set = $this->api_credentials_set;
 ?>
 
 <div>
@@ -7,7 +7,7 @@ $api_credentials = $this->api_credentials;
 	<input type="hidden" name="is_advanced" value="0" />
 </div>
 
-<?php if ( ! empty( $api_credentials ) ) : ?>
+<?php if ( $api_credentials_set ) : ?>
 <p>
 	<span><?php echo esc_html__( 'Your API credentials are valid', 'smaily-for-wp' ); ?></span>
 	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?></strong><img src="<?php echo SMLY4WP_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?>" title="<?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?>" /></a>
@@ -47,7 +47,7 @@ $api_credentials = $this->api_credentials;
 </div>
 <?php endif; ?>
 
-<?php if ( ! empty( $api_credentials ) ) : ?>
+<?php if ( $api_credentials_set ) : ?>
 <ul class="tabs">
 	<li><a id="link-basic" href="#basic" class="selected"><?php echo esc_html__( 'Basic', 'smaily-for-wp' ); ?></a></li>
 	<li><a id="link-advanced" href="#advanced"><?php echo esc_html__( 'Advanced', 'smaily-for-wp' ); ?></a></li>
@@ -58,7 +58,7 @@ $api_credentials = $this->api_credentials;
 	<div class="wrap">
 		<label><?php echo esc_html__( 'Newsletter subscription form', 'smaily-for-wp' ); ?> <a href="#" onclick="javascript:Default.resetForm();return false;" title="<?php echo esc_html__( 'Restore original subscription form', 'smaily-for-wp' ); ?>">(<?php echo esc_html__( 'Regenerate', 'smaily-for-wp' ); ?>)</a></label>
 		<em><?php echo esc_html__( 'HTML of subscription form', 'smaily-for-wp' ); ?></em>
-		<textarea id="advanced-form" name="advanced[form]" rows="15"><?php echo stripslashes( $this->form ); ?></textarea>
+		<textarea id="advanced-form" name="form" rows="15"><?php echo esc_textarea( $this->form ); ?></textarea>
 	</div>
 </div>
 

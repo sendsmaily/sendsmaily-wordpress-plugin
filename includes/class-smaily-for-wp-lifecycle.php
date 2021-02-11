@@ -15,21 +15,6 @@ class Smaily_For_WP_Lifecycle {
 	 */
 	public function activate() {
 		$this->run_migrations();
-
-		global $wpdb;
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		$charset_collate = $wpdb->get_charset_collate();
-
-		// Create database table - settings.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$sql        = "CREATE TABLE $table_name (
-			api_credentials VARCHAR(128) NOT NULL,
-			domain VARCHAR(255) NOT NULL,
-			form TEXT NOT NULL,
-			is_advanced TINYINT(1) NOT NULL,
-			PRIMARY KEY  (api_credentials)
-		) $charset_collate;";
-		dbDelta( $sql );
 	}
 
 	/**

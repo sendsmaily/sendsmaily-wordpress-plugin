@@ -73,15 +73,21 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function smaily_admin_render() {
-		global $wpdb;
-
 		// Create admin template.
 		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-page.php' );
 
 		// Load configuration data.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-		$template->assign( (array) $data );
+		$api_credentials = get_option( 'smailyforwp_api_option' );
+		$form_options    = get_option( 'smailyforwp_form_option' );
+
+		$credentials_set = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
+
+		$template->assign(
+			array(
+				'form'                => isset( $form_options['form'] ) ? $form_options['form'] : '',
+				'api_credentials_set' => $credentials_set,
+			)
+		);
 
 		// Add menu elements.
 		add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', SMLY4WP_PLUGIN_URL . '/gfx/icon.png' );
@@ -105,216 +111,270 @@ class Smaily_For_WP_Admin {
 	 */
 	public function smaily_admin_save() {
 		// Allow only posted data.
-		if ( empty( $_POST ) ) { die( 'Must be post method.' ); }
+		if ( empty( $_POST ) ) {
+			wp_die( 'Must be post method.' );
+		}
 
 		// Parse form data out of the serialization.
 		$form_data = array();
 		parse_str( $_POST['form_data'], $form_data );
 
 		// Validate posted operation.
-		if ( ! isset( $form_data['op'] ) ) { die( 'No action or API key set.' ); }
-		$form_data['op'] = ( in_array( $form_data['op'], array( 'validateApiKey', 'removeApiKey', 'resetForm', 'refreshAutoresp', 'save' ), true )
-			? $form_data['op'] : '' );
+		if ( ! isset( $form_data['op'] ) ) {
+			wp_die( 'No action or API key set.' );
+		}
 
-		if ( $form_data['op'] === '' ) { die( 'No valid operation submitted.' ); }
+		$valid_operations = array( 'validateApiKey', 'removeApiKey', 'resetForm', 'save' );
+		$form_data['op']  = in_array( $form_data['op'], $valid_operations, true ) ? $form_data['op'] : '';
+
+		if ( $form_data['op'] === '' ) {
+			wp_die( 'No valid operation submitted.' );
+		}
 
 		$refresh = ( isset( $form_data['refresh'] ) && (int) $form_data['refresh'] === 1 );
+		$result  = array(
+			'message' => '',
+			'error'   => true,
+			'content' => '',
+
+		);
 		// Switch to action.
-		global $wpdb;
 		switch ( $form_data['op'] ) {
 			case 'validateApiKey':
-				// Get and sanitize request params.
-				$params = array(
-					'subdomain' => isset( $form_data['subdomain'] ) ? sanitize_text_field( $form_data['subdomain'] ) : '',
-					'username'  => isset( $form_data['username'] ) ? sanitize_text_field( $form_data['username'] ) : '',
-					'password'  => isset( $form_data['password'] ) ? sanitize_text_field( $form_data['password'] ) : '',
-				);
-
-				// Normalize subdomain.
-				// First, try to parse as full URL. If that fails, try to parse as subdomain.sendsmaily.net, and
-				// if all else fails, then clean up subdomain and pass as is.
-				if ( filter_var( $params['subdomain'], FILTER_VALIDATE_URL ) ) {
-					$url                 = wp_parse_url( $params['subdomain'] );
-					$parts               = explode( '.', $url['host'] );
-					$params['subdomain'] = count( $parts ) >= 3 ? $parts[0] : '';
-				} elseif ( preg_match( '/^[^\.]+\.sendsmaily\.net$/', $params['subdomain'] ) ) {
-					$parts               = explode( '.', $params['subdomain'] );
-					$params['subdomain'] = $parts[0];
-				}
-
-				$params['subdomain'] = preg_replace( '/[^a-zA-Z0-9]+/', '', $params['subdomain'] );
-
-				// Show error messages to user if no data is entered to form.
-				if ( $params['subdomain'] === '' ) {
-					// Don't refresh the page.
-					$refresh = false;
-					$result  = array(
-						'message' => __( 'Please enter subdomain!', 'smaily-for-wp' ),
-						'error'   => true,
-					);
-					break;
-				} elseif ( $params['username'] === '' ) {
-					// Don't refresh the page.
-					$refresh = false;
-					$result  = array(
-						'message' => __( 'Please enter username!', 'smaily-for-wp' ),
-						'error'   => true,
-					);
-					break;
-				} elseif ( $params['password'] === '' ) {
-					// Don't refresh the page.
-					$refresh = false;
-					$result  = array(
-						'message' => __( 'Please enter password!', 'smaily-for-wp' ),
-						'error'   => true,
-					);
-					break;
-				}
-
-				// Validate credentials with get request.
-				$rqst = ( new Smaily_For_WP_Request() )
-					->auth( $params['username'], $params['password'] )
-					->setUrl( 'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
-					->get();
-
-				// Error handilng.
-				$code = isset( $rqst['code'] ) ? $rqst['code'] : '';
-				if ( $code !== 200 ) {
-					// Don't refresh the page.
-					$refresh = false;
-					if ( $code === 401 ) {
-						// If wrong credentials.
-						$result = array(
-							'message' => __( 'Wrong credentials', 'smaily-for-wp' ),
-							'error'   => true,
-						);
-						break;
-					} elseif ( $code === 404 ) {
-						// If wrong subdomain.
-						$result = array(
-							'message' => __( 'Error in subdomain', 'smaily-for-wp' ),
-							'error'   => true,
-						);
-						break;
-					} elseif ( array_key_exists( 'error', $rqst ) ) {
-						// If there is WordPress error message.
-						$result = array(
-							'message' => __( $rqst['error'], 'smaily-for-wp' ),
-							'error'   => true,
-						);
-						break;
-					}
-					// If not determined error.
-					$result = array(
-						'message' => __( 'Something went wrong with request to Smaily', 'smaily-for-wp' ),
-						'error'   => true,
-					);
-					break;
-				}
-
-				// Insert item to database.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				// Add config.
-				$wpdb->insert(
-					$table_name,
-					array(
-						'api_credentials' => $params['username'] . ':' . $params['password'],
-						'domain'          => $params['subdomain'],
-					)
-				);
-
-				// Return result.
-				$result = array(
-					'error'   => false,
-					'message' => __( 'Credentials validated.', 'smaily-for-wp' ),
-				);
+				$result = array_merge( $result, $this->validate_api_key( $form_data ) );
 				break;
-
 			case 'removeApiKey':
-				// Delete contents of config.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				$wpdb->query( "DELETE FROM `$table_name`" );
-
-				// Set result.
-				$result = array(
-					'error'   => false,
-					'message' => __( 'Credentials removed.', 'smaily-for-wp' ),
-				);
+				$result = array_merge( $result, $this->remove_api_key() );
 				break;
-
 			case 'resetForm':
-				// Generate form contents.
-				$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
-
-				// Load configuration data.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-				$data->form = '';
-				$template->assign( (array) $data );
-
-				// Render template.
-				$result = array(
-					'error'   => false,
-					'message' => __( 'Newsletter subscription form reset to default.', 'smaily-for-wp' ),
-					'content' => $template->render(),
-				);
+				$result = array_merge( $result, $this->reset_form() );
 				break;
-
 			case 'save':
-				// Get parameters.
-				$isAdvanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? '1' : '0';
-				$advanced   = ( isset( $form_data['advanced'] ) && is_array( $form_data['advanced'] ) ) ? $form_data['advanced'] : array();
-				$form       = ( isset( $advanced['form'] ) && is_string( $advanced['form'] ) ) ? $advanced['form'] : '';
-
-				// Generate new form (if empty).
-				if ( empty( $form ) ) {
-					$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
-
-					// Load configuration data.
-					$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-					$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-					$template->assign( (array) $data );
-
-					// Render template.
-					$form = $template->render();
-				}
-
-				// Update configuration.
-				$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-				$wpdb->query(
-					$wpdb->prepare(
-						"
-					UPDATE `$table_name`
-					SET `form` = %s, `is_advanced` = %d
-					",
-						$form,
-						$isAdvanced
-					)
-				);
-				// Return response.
-				$result = array(
-					'error'   => false,
-					'message' => __( 'Changes saved.', 'smaily-for-wp' ),
-				);
+				$result = array_merge( $result, $this->save( $form_data ) );
 				break;
 		}
 
-		// Send refresh form content (if requested).
-		if ( $refresh ) {
-			// Generate form contents.
-			$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-form.php' );
+		if ( $refresh && $result['error'] === false ) {
+			$result['content'] = $this->generate_admin_form();
+		}
+
+		echo wp_json_encode( $result );
+		wp_die();
+	}
+
+	/**
+	 * Regenerate admin form using options stored in DB.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @return string HTML of admin form.
+	 */
+	private function generate_admin_form() {
+		// Generate form contents.
+		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-form.php' );
+
+		// Load configuration data.
+		$api_credentials = get_option( 'smailyforwp_api_option' );
+		$form_options    = get_option( 'smailyforwp_form_option' );
+		$credentials_set = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
+
+		$template->assign(
+			array(
+				'form'                => $form_options['form'],
+				'api_credentials_set' => $credentials_set,
+			)
+		);
+
+		// Render template.
+		return $template->render();
+	}
+
+	/**
+	 * Function is run when user submits Smaily API credentials.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @param  array $form_data Posted form data (unserialized).
+	 * @return array Response of operation.
+	 */
+	private function validate_api_key( $form_data ) {
+		// Get and sanitize request params.
+		$params = array(
+			'subdomain' => isset( $form_data['subdomain'] ) ? sanitize_text_field( $form_data['subdomain'] ) : '',
+			'username'  => isset( $form_data['username'] ) ? sanitize_text_field( $form_data['username'] ) : '',
+			'password'  => isset( $form_data['password'] ) ? sanitize_text_field( $form_data['password'] ) : '',
+		);
+
+		$params['subdomain'] = $this->normalize_subdomain( $params['subdomain'] );
+
+		// Show error messages to user if no data is entered to form.
+		if ( $params['subdomain'] === '' ) {
+			return array(
+				'message' => __( 'Please enter subdomain!', 'smaily-for-wp' ),
+			);
+		} elseif ( $params['username'] === '' ) {
+			return array(
+				'message' => __( 'Please enter username!', 'smaily-for-wp' ),
+			);
+		} elseif ( $params['password'] === '' ) {
+			return array(
+				'message' => __( 'Please enter password!', 'smaily-for-wp' ),
+			);
+		}
+
+		// Validate credentials with get request.
+		$rqst = ( new Smaily_For_WP_Request() )
+			->auth( $params['username'], $params['password'] )
+			->setUrl( 'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
+			->get();
+
+		// Error handilng.
+		$code = isset( $rqst['code'] ) ? $rqst['code'] : '';
+		if ( $code !== 200 ) {
+			if ( $code === 401 ) {
+				// If wrong credentials.
+				return array(
+					'message' => __( 'Wrong credentials', 'smaily-for-wp' ),
+				);
+			} elseif ( $code === 404 ) {
+				// If wrong subdomain.
+				return array(
+					'message' => __( 'Error in subdomain', 'smaily-for-wp' ),
+				);
+			} elseif ( array_key_exists( 'error', $rqst ) ) {
+				// If there is WordPress error message.
+				return array(
+					'message' => $rqst['error'],
+				);
+			}
+			// If not determined error.
+			return array(
+				'message' => __( 'Something went wrong with request to Smaily', 'smaily-for-wp' ),
+			);
+		}
+		// Insert item to database.
+		update_option( 'smailyforwp_api_option', $params, false );
+
+		// Return result.
+		return array(
+			'error'   => false,
+			'message' => __( 'Credentials validated.', 'smaily-for-wp' ),
+		);
+	}
+
+	/**
+	 * Function is run when user removes saved API key.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @return array Response of operation.
+	 */
+	private function remove_api_key() {
+		// Delete contents of config.
+		update_option( 'smailyforwp_api_option', array(), false );
+
+		// Set result.
+		return array(
+			'error'   => false,
+			'message' => __( 'Credentials removed.', 'smaily-for-wp' ),
+		);
+	}
+
+
+	/**
+	 * Function is run when user regenerates signup form.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @return array Response of operation.
+	 */
+	private function reset_form() {
+		// Generate form contents.
+		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
+
+		$api_credentials = get_option( 'smailyforwp_api_option' );
+		$template->assign(
+			array(
+				'domain' => isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '',
+				'form'   => '',
+			)
+		);
+
+		// Render template.
+		return array(
+			'error'   => false,
+			'message' => __( 'Newsletter subscription form reset to default.', 'smaily-for-wp' ),
+			'content' => $template->render(),
+		);
+	}
+
+	/**
+	 * Function is run when user presses save button.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @param  array $form_data Posted form data (deserialized).
+	 * @return array Response of operation.
+	 */
+	private function save( $form_data ) {
+		// Get parameters.
+		$is_advanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? '1' : '0';
+		$form        = ( isset( $form_data['form'] ) && is_string( $form_data['form'] ) ) ? $form_data['form'] : '';
+
+		// Generate new form (if empty).
+		if ( empty( $form ) ) {
+			$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
 
 			// Load configuration data.
-			$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-			$data       = $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-			$template->assign( (array) $data );
+			$api_credentials = get_option( 'smailyforwp_api_option' );
+			$form_options    = get_option( 'smailyforwp_form_option' );
+
+			$template->assign(
+				array(
+					'domain' => isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '',
+					'form'   => isset( $form_options['form'] ) ? $form_options['form'] : '',
+				)
+			);
 
 			// Render template.
-			$result['content'] = $template->render();
+			$form = ltrim( $template->render() );
 		}
-		// Display result messages as JSON.
-		echo json_encode( $result );
-		wp_die();
+
+		$form_options = array(
+			'is_advanced' => $is_advanced,
+			'form'        => $form,
+		);
+		update_option( 'smailyforwp_form_option', $form_options );
+
+		// Return response.
+		return array(
+			'error'   => false,
+			'message' => __( 'Changes saved.', 'smaily-for-wp' ),
+		);
+	}
+
+	/**
+	 * Normalize subdomain into the bare necessity.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @param  string  $subdomain Messy subdomain, e.g http://demo.sendsmaily.net
+	 * @return string  Clean subdomain, e.g demo
+	 */
+	private function normalize_subdomain( $subdomain ) {
+		// Normalize subdomain.
+		// First, try to parse as full URL. If that fails, try to parse as subdomain.sendsmaily.net, and
+		// if all else fails, then clean up subdomain and pass as is.
+		if ( filter_var( $subdomain, FILTER_VALIDATE_URL ) ) {
+			$url       = wp_parse_url( $subdomain );
+			$parts     = explode( '.', $url['host'] );
+			$subdomain = count( $parts ) >= 3 ? $parts[0] : '';
+		} elseif ( preg_match( '/^[^\.]+\.sendsmaily\.net$/', $subdomain ) ) {
+			$parts     = explode( '.', $subdomain );
+			$subdomain = $parts[0];
+		}
+
+		return preg_replace( '/[^a-zA-Z0-9]+/', '', $subdomain );
 	}
 
 	/**
@@ -324,21 +384,16 @@ class Smaily_For_WP_Admin {
 	 * @return array $autoresponder_list List of autoresponders in format [id => title].
 	 */
 	public function get_autoresponders() {
-		global $wpdb;
-
 		// Load configuration data.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$config     = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$api_credentials = get_option( 'smailyforwp_api_option', array() );
 
-		if ( empty( $config['api_credentials'] ) ) {
+		if ( ! isset( $api_credentials['subdomain'], $api_credentials['username'], $api_credentials['password'] ) ) {
 			return array();
 		}
 
-		$api_credentials = explode( ':', $config['api_credentials'] );
-
 		$result = ( new Smaily_For_WP_Request() )
-			->setUrl( 'https://' . $config['domain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
-			->auth( $api_credentials[0], $api_credentials[1] )
+			->setUrl( 'https://' . $api_credentials['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
+			->auth( $api_credentials['username'], $api_credentials['password'] )
 			->get();
 
 		if ( empty( $result['body'] ) ) {
