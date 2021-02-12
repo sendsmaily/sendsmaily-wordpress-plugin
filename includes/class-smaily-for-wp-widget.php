@@ -18,6 +18,15 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	private $autoresponders;
 
 	/**
+	 * Handler for storing/retrieving data via Options API.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    Smaily_For_WP_Option_Handler $option_handler Handler for Options API.
+	 */
+	private $option_handler;
+
+	/**
 	 * Sets up a new instance of the widget.
 	 *
 	 * @since 3.0.0
@@ -28,6 +37,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
 
 		$this->autoresponders = $admin_model->get_autoresponders();
+		$this->option_handler = new Smaily_For_WP_Option_Handler();
 	}
 
 	/**
@@ -52,9 +62,13 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		}
 
 		// Load configuration data.
-		$config                     = (array) get_option( 'smailyforwp_form_option' );
-		$api_credentials            = get_option( 'smailyforwp_api_option' );
+		$api_credentials = $this->option_handler->get_api_credentials();
+		$form_options    = $this->option_handler->get_form_options();
+		// Data to be assigned to template.
+		$config                     = array();
 		$config['domain']           = isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '';
+		$config['form']             = isset( $form_options['form'] ) ? $form_options['form'] : '';
+		$config['is_advanced']      = isset( $form_options['is_advanced'] ) ? $form_options['is_advanced'] : '';
 		$config['show_name']        = $show_name;
 		$config['success_url']      = $success_url;
 		$config['failure_url']      = $failure_url;

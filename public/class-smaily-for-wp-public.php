@@ -27,6 +27,15 @@ class Smaily_For_WP_Public {
 	private $version;
 
 	/**
+	 * Handler for storing/retrieving data via Options API.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    Smaily_For_WP_Option_Handler $option_handler Handler for Options API.
+	 */
+	private $option_handler;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 3.0.0
@@ -34,8 +43,9 @@ class Smaily_For_WP_Public {
 	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->plugin_name    = $plugin_name;
+		$this->version        = $version;
+		$this->option_handler = new Smaily_For_WP_Option_Handler();
 	}
 
 	/**
@@ -55,10 +65,13 @@ class Smaily_For_WP_Public {
 	 */
 	public function smaily_shortcode_render( $atts ) {
 		// Load configuration data.
-		$config = (array) get_option( 'smailyforwp_form_option' );
-
-		$api_credentials  = get_option( 'smailyforwp_api_option' );
-		$config['domain'] = isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '';
+		$api_credentials = $this->option_handler->get_api_credentials();
+		$form_options    = $this->option_handler->get_form_options();
+		// Data to be assigned to template.
+		$config                = array();
+		$config['domain']      = isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '';
+		$config['form']        = isset( $form_options['form'] ) ? $form_options['form'] : '';
+		$config['is_advanced'] = isset( $form_options['is_advanced'] ) ? $form_options['is_advanced'] : '';
 
 		// Parse attributes out of shortcode tag.
 		$shortcode_atts = shortcode_atts(

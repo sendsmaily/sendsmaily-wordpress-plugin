@@ -70,6 +70,7 @@ class Smaily_For_WP {
 	 * - Smaily_For_WP_i18n.      Defines internationalization functionality.
 	 * - Smaily_For_WP_Lifecycle. Defines the install, upgrade and uninstall functionality.
 	 * - Smaily_For_WP_Loader.    Orchestrates the hooks of the plugin.
+	 * - Smaily_For_WP_Option.    Defines the database related queries of Options API.
 	 * - Smaily_For_WP_Request.   Defines the request making functionality.
 	 * - Smaily_For_WP_Template.  Defines the templating making functionality.
 	 * - Smaily_For_WP_Widget.    Defines the widget functionality.
@@ -86,6 +87,7 @@ class Smaily_For_WP {
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-i18n.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-lifecycle.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-loader.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-option-handler.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-request.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-template.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-widget.php';

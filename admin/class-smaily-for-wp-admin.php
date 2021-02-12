@@ -27,6 +27,15 @@ class Smaily_For_WP_Admin {
 	private $version;
 
 	/**
+	 * Handler for storing/retrieving data via Options API.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    Smaily_For_WP_Option_Handler Handler for Options API.
+	 */
+	private $option_handler;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 3.0.0
@@ -34,8 +43,9 @@ class Smaily_For_WP_Admin {
 	 * @param string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name = $plugin_name;
-		$this->version     = $version;
+		$this->plugin_name    = $plugin_name;
+		$this->version        = $version;
+		$this->option_handler = new Smaily_For_WP_Option_Handler();
 	}
 
 	/**
@@ -77,8 +87,8 @@ class Smaily_For_WP_Admin {
 		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-page.php' );
 
 		// Load configuration data.
-		$api_credentials = get_option( 'smailyforwp_api_option' );
-		$form_options    = get_option( 'smailyforwp_form_option' );
+		$api_credentials = $this->option_handler->get_api_credentials();
+		$form_options    = $this->option_handler->get_form_options();
 
 		$has_credentials = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
 
@@ -174,8 +184,8 @@ class Smaily_For_WP_Admin {
 		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-form.php' );
 
 		// Load configuration data.
-		$api_credentials = get_option( 'smailyforwp_api_option' );
-		$form_options    = get_option( 'smailyforwp_form_option' );
+		$api_credentials = $this->option_handler->get_api_credentials();
+		$form_options    = $this->option_handler->get_form_options();
 		$has_credentials = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
 
 		$template->assign(
@@ -253,7 +263,7 @@ class Smaily_For_WP_Admin {
 			);
 		}
 		// Insert item to database.
-		update_option( 'smailyforwp_api_option', $params, false );
+		$this->option_handler->update_api_credentials( $params );
 
 		// Return result.
 		return array(
@@ -271,7 +281,7 @@ class Smaily_For_WP_Admin {
 	 */
 	private function remove_api_key() {
 		// Delete contents of config.
-		update_option( 'smailyforwp_api_option', array(), false );
+		$this->option_handler->update_api_credentials( array() );
 
 		// Set result.
 		return array(
@@ -292,7 +302,7 @@ class Smaily_For_WP_Admin {
 		// Generate form contents.
 		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
 
-		$api_credentials = get_option( 'smailyforwp_api_option' );
+		$api_credentials = $this->option_handler->get_api_credentials();
 		$template->assign(
 			array(
 				'domain' => isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '',
@@ -326,8 +336,8 @@ class Smaily_For_WP_Admin {
 			$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
 
 			// Load configuration data.
-			$api_credentials = get_option( 'smailyforwp_api_option' );
-			$form_options    = get_option( 'smailyforwp_form_option' );
+			$api_credentials = $this->option_handler->get_api_credentials();
+			$form_options    = $this->option_handler->get_form_options();
 
 			$template->assign(
 				array(
@@ -344,7 +354,7 @@ class Smaily_For_WP_Admin {
 			'is_advanced' => $is_advanced,
 			'form'        => $form,
 		);
-		update_option( 'smailyforwp_form_option', $form_options );
+		$this->option_handler->update_form_options( $form_options );
 
 		// Return response.
 		return array(
@@ -385,9 +395,10 @@ class Smaily_For_WP_Admin {
 	 */
 	public function get_autoresponders() {
 		// Load configuration data.
-		$api_credentials = get_option( 'smailyforwp_api_option', array() );
+		$api_credentials = $this->option_handler->get_api_credentials();
 
-		if ( ! isset( $api_credentials['subdomain'], $api_credentials['username'], $api_credentials['password'] ) ) {
+		$credentials_not_valid = empty( $api_credentials['subdomain'] ) || empty( $api_credentials['username'] ) || empty( $api_credentials['password'] );
+		if ( $credentials_not_valid ) {
 			return array();
 		}
 
