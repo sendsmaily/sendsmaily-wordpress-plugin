@@ -80,12 +80,12 @@ class Smaily_For_WP_Admin {
 		$api_credentials = get_option( 'smailyforwp_api_option' );
 		$form_options    = get_option( 'smailyforwp_form_option' );
 
-		$credentials_set = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
+		$has_credentials = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
 
 		$template->assign(
 			array(
-				'form'                => isset( $form_options['form'] ) ? $form_options['form'] : '',
-				'api_credentials_set' => $credentials_set,
+				'form'            => isset( $form_options['form'] ) ? $form_options['form'] : '',
+				'has_credentials' => $has_credentials,
 			)
 		);
 
@@ -176,12 +176,12 @@ class Smaily_For_WP_Admin {
 		// Load configuration data.
 		$api_credentials = get_option( 'smailyforwp_api_option' );
 		$form_options    = get_option( 'smailyforwp_form_option' );
-		$credentials_set = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
+		$has_credentials = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
 
 		$template->assign(
 			array(
-				'form'                => $form_options['form'],
-				'api_credentials_set' => $credentials_set,
+				'form'            => $form_options['form'],
+				'has_credentials' => $has_credentials,
 			)
 		);
 
