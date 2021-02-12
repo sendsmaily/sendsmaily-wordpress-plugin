@@ -350,11 +350,12 @@ class Smaily_For_WP_Admin {
 			$form = ltrim( $template->render() );
 		}
 
-		$form_options = array(
-			'is_advanced' => $is_advanced,
-			'form'        => $form,
+		$this->option_handler->update_form_options(
+			array(
+				'is_advanced' => $is_advanced,
+				'form'        => $form,
+			)
 		);
-		$this->option_handler->update_form_options( $form_options );
 
 		// Return response.
 		return array(
