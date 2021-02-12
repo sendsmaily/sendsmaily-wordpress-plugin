@@ -358,8 +358,8 @@ class Smaily_For_WP_Admin {
 	 *
 	 * @since  3.0.0
 	 * @access private
-	 * @param  string  $subdomain Messy subdomain, e.g http://demo.sendsmaily.net
-	 * @return string  Clean subdomain, e.g demo
+	 * @param  string $subdomain Messy subdomain, e.g http://demo.sendsmaily.net
+	 * @return string Clean subdomain, e.g demo
 	 */
 	private function normalize_subdomain( $subdomain ) {
 		// Normalize subdomain.
