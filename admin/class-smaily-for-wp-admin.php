@@ -173,30 +173,6 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
-	 * Generate admin area template and assign required variables via function parameters.
-	 *
-	 * @since  3.0.0
-	 * @access private
-	 * @param  string $template_name            Name of template file to use, without any prefixes (i.e form.php).
-	 * @param  bool   $has_credentials          User has saved valid credentials? Yes/No.
-	 * @param  string $newsletter_form          HTML of newsletter subscription form.
-	 * @return Smaily_For_WP_Template $template Template of admin form.
-	 */
-	private function generate_admin_template( $template_name, $has_credentials, $newsletter_form ) {
-		// Generate form contents.
-		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-' . $template_name );
-
-		$template->assign(
-			array(
-				'has_credentials' => $has_credentials,
-				'form'            => $newsletter_form,
-			)
-		);
-
-		return $template;
-	}
-
-	/**
 	 * Function is run when user submits Smaily API credentials.
 	 *
 	 * @since  3.0.0
@@ -288,29 +264,6 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
-	 * Generate newsletter signup template and assign required variables via function parameters.
-	 *
-	 * @since  3.0.0
-	 * @access private
-	 * @param  string $template_name            Name of template file to use, without any prefixes (i.e advanced.php).
-	 * @param  string $subdomain                Smaily API subdomain.
-	 * @param  string $newsletter_form          HTML of newsletter subscription form.
-	 * @return Smaily_For_WP_Template $template Template of admin form.
-	 */
-	private function generate_signup_template( $template_name, $subdomain, $newsletter_form = '' ) {
-		// Generate form contents.
-		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $template_name );
-
-		$template->assign(
-			array(
-				'domain' => $subdomain,
-				'form'   => $newsletter_form,
-			)
-		);
-		return $template;
-	}
-
-	/**
 	 * Function is run when user presses save button.
 	 *
 	 * @since  3.0.0
@@ -346,6 +299,54 @@ class Smaily_For_WP_Admin {
 			'error'   => false,
 			'message' => __( 'Changes saved.', 'smaily-for-wp' ),
 		);
+	}
+
+
+	/**
+	 * Generate admin area template and assign required variables via function parameters.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @param  string $template_name            Name of template file to use, without any prefixes (i.e form.php).
+	 * @param  bool   $has_credentials          User has saved valid credentials? Yes/No.
+	 * @param  string $newsletter_form          HTML of newsletter subscription form.
+	 * @return Smaily_For_WP_Template $template Template of admin form.
+	 */
+	private function generate_admin_template( $template_name, $has_credentials, $newsletter_form ) {
+		// Generate form contents.
+		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-' . $template_name );
+
+		$template->assign(
+			array(
+				'has_credentials' => $has_credentials,
+				'form'            => $newsletter_form,
+			)
+		);
+
+		return $template;
+	}
+
+	/**
+	 * Generate newsletter signup template and assign required variables via function parameters.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @param  string $template_name            Name of template file to use, without any prefixes (i.e advanced.php).
+	 * @param  string $subdomain                Smaily API subdomain.
+	 * @param  string $newsletter_form          HTML of newsletter subscription form.
+	 * @return Smaily_For_WP_Template $template Template of admin form.
+	 */
+	private function generate_signup_template( $template_name, $subdomain, $newsletter_form = '' ) {
+		// Generate form contents.
+		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $template_name );
+
+		$template->assign(
+			array(
+				'domain' => $subdomain,
+				'form'   => $newsletter_form,
+			)
+		);
+		return $template;
 	}
 
 	/**
