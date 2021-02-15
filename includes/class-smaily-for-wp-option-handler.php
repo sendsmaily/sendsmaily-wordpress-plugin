@@ -71,8 +71,10 @@ class Smaily_For_WP_Option_Handler {
 	 * @access private
 	 * @return boolean User has saved credentials to DB.
 	 */
-	public function has_credentials() {
-		$credentials = $this->get_api_credentials();
+	public function has_credentials( $credentials = null ) {
+		if ( ! isset( $credentials ) ) {
+			$credentials = $this->get_api_credentials();
+		}
 		return ! empty( $credentials['subdomain'] ) && ! empty( $credentials['username'] ) && ! empty( $credentials['password'] );
 	}
 }
