@@ -325,19 +325,11 @@ class Smaily_For_WP_Admin {
 
 		// Generate new form (if empty).
 		if ( empty( $form ) ) {
-			$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
-
 			// Load configuration data.
-			$api_credentials = $this->option_handler->get_api_credentials();
-			$form_options    = $this->option_handler->get_form_options();
+			$subdomain = $this->option_handler->get_api_credentials()['subdomain'];
+			$form      = $this->option_handler->get_form_options()['form'];
 
-			$template->assign(
-				array(
-					'domain' => $api_credentials['subdomain'],
-					'form'   => $form_options['form'],
-				)
-			);
-
+			$template = $this->generate_signup_template( 'advanced.php', $subdomain, $form );
 			// Render template.
 			$form = ltrim( $template->render() );
 		}
