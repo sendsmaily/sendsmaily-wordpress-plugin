@@ -63,4 +63,16 @@ class Smaily_For_WP_Option_Handler {
 	public function update_form_options( $form_options ) {
 		update_option( 'smailyforwp_form_option', $form_options );
 	}
+
+	/**
+	 * Has user saved valid Smaily API credentials to database.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @return boolean User has saved credentials to DB.
+	 */
+	public function has_credentials() {
+		$credentials = $this->get_api_credentials();
+		return ! empty( $credentials['subdomain'] ) && ! empty( $credentials['username'] ) && ! empty( $credentials['password'] );
+	}
 }

@@ -165,7 +165,9 @@ class Smaily_For_WP_Admin {
 		}
 
 		if ( $refresh && $result['error'] === false ) {
-			$result['content'] = $this->generate_admin_form();
+			$has_credentials   = $this->option_handler->has_credentials();
+			$signup_form       = $this->option_handler->get_form_options()['form'];
+			$result['content'] = $this->generate_admin_template( 'form.php', $has_credentials, $signup_form )->render();
 		}
 
 		echo wp_json_encode( $result );
@@ -173,30 +175,27 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
-	 * Regenerate admin form using options stored in DB.
+	 * Generate admin area template and assign required variables via function parameters.
 	 *
 	 * @since  3.0.0
 	 * @access private
-	 * @return string HTML of admin form.
+	 * @param  string $template_name            Name of template file to use, without any prefixes (i.e form.php).
+	 * @param  bool   $has_credentials          User has saved valid credentials? Yes/No.
+	 * @param  string $newsletter_form          HTML of newsletter subscription form.
+	 * @return Smaily_For_WP_Template $template Template of admin form.
 	 */
-	private function generate_admin_form() {
+	private function generate_admin_template( $template_name, $has_credentials, $newsletter_form ) {
 		// Generate form contents.
-		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-form.php' );
-
-		// Load configuration data.
-		$api_credentials = $this->option_handler->get_api_credentials();
-		$form_options    = $this->option_handler->get_form_options();
-		$has_credentials = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
+		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-' . $template_name );
 
 		$template->assign(
 			array(
-				'form'            => $form_options['form'],
 				'has_credentials' => $has_credentials,
+				'form'            => $newsletter_form,
 			)
 		);
 
-		// Render template.
-		return $template->render();
+		return $template;
 	}
 
 	/**
