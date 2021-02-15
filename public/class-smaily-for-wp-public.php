@@ -69,9 +69,9 @@ class Smaily_For_WP_Public {
 		$form_options    = $this->option_handler->get_form_options();
 		// Data to be assigned to template.
 		$config                = array();
-		$config['domain']      = isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '';
-		$config['form']        = isset( $form_options['form'] ) ? $form_options['form'] : '';
-		$config['is_advanced'] = isset( $form_options['is_advanced'] ) ? $form_options['is_advanced'] : '';
+		$config['domain']      = $api_credentials['subdomain'];
+		$config['form']        = $form_options['form'];
+		$config['is_advanced'] = $form_options['is_advanced'];
 
 		// Parse attributes out of shortcode tag.
 		$shortcode_atts = shortcode_atts(
@@ -89,7 +89,7 @@ class Smaily_For_WP_Public {
 		$config['autoresponder_id'] = $shortcode_atts['autoresponder_id'];
 
 		// Create admin template.
-		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
+		$file     = $config['is_advanced'] === '1' ? 'advanced.php' : 'basic.php';
 		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $file );
 		$template->assign( $config );
 		// Display responses on Smaily subscription form.

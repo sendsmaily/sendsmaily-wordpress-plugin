@@ -94,7 +94,7 @@ class Smaily_For_WP_Admin {
 
 		$template->assign(
 			array(
-				'form'            => isset( $form_options['form'] ) ? $form_options['form'] : '',
+				'form'            => $form_options['form'],
 				'has_credentials' => $has_credentials,
 			)
 		);
@@ -304,7 +304,7 @@ class Smaily_For_WP_Admin {
 		$api_credentials = $this->option_handler->get_api_credentials();
 		$template->assign(
 			array(
-				'domain' => isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '',
+				'domain' => $api_credentials['subdomain'],
 				'form'   => '',
 			)
 		);
@@ -340,8 +340,8 @@ class Smaily_For_WP_Admin {
 
 			$template->assign(
 				array(
-					'domain' => isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '',
-					'form'   => isset( $form_options['form'] ) ? $form_options['form'] : '',
+					'domain' => $api_credentials['subdomain'],
+					'form'   => $form_options['form']
 				)
 			);
 

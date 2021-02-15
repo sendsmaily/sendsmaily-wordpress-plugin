@@ -18,9 +18,9 @@ class Smaily_For_WP_Option_Handler {
 		$credentials = get_option( 'smailyforwp_api_option', array() );
 		return array_merge(
 			array(
-				'subdomain' => null,
-				'username'  => null,
-				'password'  => null,
+				'subdomain' => '',
+				'username'  => '',
+				'password'  => '',
 			),
 			$credentials
 		);
@@ -36,8 +36,8 @@ class Smaily_For_WP_Option_Handler {
 		$form_options = get_option( 'smailyforwp_form_option', array() );
 		return array_merge(
 			array(
-				'form'        => null,
-				'is_advanced' => null,
+				'form'        => '',
+				'is_advanced' => '',
 			),
 			$form_options
 		);

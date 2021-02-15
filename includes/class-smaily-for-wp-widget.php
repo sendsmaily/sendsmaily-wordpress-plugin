@@ -66,16 +66,16 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$form_options    = $this->option_handler->get_form_options();
 		// Data to be assigned to template.
 		$config                     = array();
-		$config['domain']           = isset( $api_credentials['subdomain'] ) ? $api_credentials['subdomain'] : '';
-		$config['form']             = isset( $form_options['form'] ) ? $form_options['form'] : '';
-		$config['is_advanced']      = isset( $form_options['is_advanced'] ) ? $form_options['is_advanced'] : '';
+		$config['domain']           = $api_credentials['subdomain'];
+		$config['form']             = $form_options['form'];
+		$config['is_advanced']      = $form_options['is_advanced'];
 		$config['show_name']        = $show_name;
 		$config['success_url']      = $success_url;
 		$config['failure_url']      = $failure_url;
 		$config['autoresponder_id'] = $autoresponder;
 
 		// Create admin template.
-		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
+		$file     = $config['is_advanced'] === '1' ? 'advanced.php' : 'basic.php';
 		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $file );
 		$template->assign( $config );
 		// Display responses on Smaily subscription form.
