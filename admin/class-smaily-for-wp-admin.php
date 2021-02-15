@@ -394,8 +394,7 @@ class Smaily_For_WP_Admin {
 		// Load configuration data.
 		$api_credentials = $this->option_handler->get_api_credentials();
 
-		$credentials_not_valid = empty( $api_credentials['subdomain'] ) || empty( $api_credentials['username'] ) || empty( $api_credentials['password'] );
-		if ( $credentials_not_valid ) {
+		if ( ! $this->option_handler->has_credentials( $api_credentials ) ) {
 			return array();
 		}
 
