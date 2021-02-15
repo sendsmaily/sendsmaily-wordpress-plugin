@@ -1,13 +1,9 @@
-<?php
-$has_credentials = $this->has_credentials;
-?>
-
 <div>
 	<input type="hidden" name="op" value="save" />
 	<input type="hidden" name="is_advanced" value="0" />
 </div>
 
-<?php if ( $has_credentials ) : ?>
+<?php if ( $this->has_credentials ) : ?>
 <p>
 	<span><?php echo esc_html__( 'Your API credentials are valid', 'smaily-for-wp' ); ?></span>
 	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?></strong><img src="<?php echo SMLY4WP_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?>" title="<?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?>" /></a>
@@ -47,7 +43,7 @@ $has_credentials = $this->has_credentials;
 </div>
 <?php endif; ?>
 
-<?php if ( $has_credentials ) : ?>
+<?php if ( $this->has_credentials ) : ?>
 <ul class="tabs">
 	<li><a id="link-basic" href="#basic" class="selected"><?php echo esc_html__( 'Basic', 'smaily-for-wp' ); ?></a></li>
 	<li><a id="link-advanced" href="#advanced"><?php echo esc_html__( 'Advanced', 'smaily-for-wp' ); ?></a></li>
