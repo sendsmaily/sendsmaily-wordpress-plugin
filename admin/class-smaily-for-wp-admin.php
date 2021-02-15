@@ -148,7 +148,14 @@ class Smaily_For_WP_Admin {
 				$result = array_merge( $result, $this->remove_api_key() );
 				break;
 			case 'resetForm':
-				$result = array_merge( $result, $this->reset_form() );
+				$subdomain = $this->option_handler->get_api_credentials()['subdomain'];
+				$template  = $this->generate_signup_template( 'advanced.php', $subdomain );
+
+				$result = array(
+					'message' => __( 'Newsletter subscription form reset to default.', 'smaily-for-wp' ),
+					'error'   => false,
+					'content' => $template->render(),
+				);
 				break;
 			case 'save':
 				$result = array_merge( $result, $this->save( $form_data ) );
@@ -280,32 +287,27 @@ class Smaily_For_WP_Admin {
 		);
 	}
 
-
 	/**
-	 * Function is run when user regenerates signup form.
+	 * Generate newsletter signup template and assign required variables via function parameters.
 	 *
 	 * @since  3.0.0
 	 * @access private
-	 * @return array Response of operation.
+	 * @param  string $template_name            Name of template file to use, without any prefixes (i.e advanced.php).
+	 * @param  string $subdomain                Smaily API subdomain.
+	 * @param  string $newsletter_form          HTML of newsletter subscription form.
+	 * @return Smaily_For_WP_Template $template Template of admin form.
 	 */
-	private function reset_form() {
+	private function generate_signup_template( $template_name, $subdomain, $newsletter_form = '' ) {
 		// Generate form contents.
-		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-advanced.php' );
+		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $template_name );
 
-		$api_credentials = $this->option_handler->get_api_credentials();
 		$template->assign(
 			array(
-				'domain' => $api_credentials['subdomain'],
-				'form'   => '',
+				'domain' => $subdomain,
+				'form'   => $newsletter_form,
 			)
 		);
-
-		// Render template.
-		return array(
-			'error'   => false,
-			'message' => __( 'Newsletter subscription form reset to default.', 'smaily-for-wp' ),
-			'content' => $template->render(),
-		);
+		return $template;
 	}
 
 	/**
@@ -332,7 +334,7 @@ class Smaily_For_WP_Admin {
 			$template->assign(
 				array(
 					'domain' => $api_credentials['subdomain'],
-					'form'   => $form_options['form']
+					'form'   => $form_options['form'],
 				)
 			);
 
