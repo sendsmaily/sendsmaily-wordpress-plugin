@@ -295,7 +295,7 @@ class Smaily_For_WP_Admin {
 
 			$template = $this->generate_signup_template( 'advanced.php', $subdomain, $form );
 			// Render template.
-			$form = ltrim( $template->render() );
+			$form = trim( $template->render() );
 		}
 
 		$this->option_handler->update_form_options(
