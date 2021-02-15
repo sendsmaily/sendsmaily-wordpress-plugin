@@ -148,14 +148,7 @@ class Smaily_For_WP_Admin {
 				$result = array_merge( $result, $this->remove_api_key() );
 				break;
 			case 'resetForm':
-				$subdomain = $this->option_handler->get_api_credentials()['subdomain'];
-				$template  = $this->generate_signup_template( 'advanced.php', $subdomain );
-
-				$result = array(
-					'message' => __( 'Newsletter subscription form reset to default.', 'smaily-for-wp' ),
-					'error'   => false,
-					'content' => $template->render(),
-				);
+				$result = array_merge( $result, $this->reset_form() );
 				break;
 			case 'save':
 				$result = array_merge( $result, $this->save( $form_data ) );
@@ -260,6 +253,24 @@ class Smaily_For_WP_Admin {
 		return array(
 			'error'   => false,
 			'message' => __( 'Credentials removed.', 'smaily-for-wp' ),
+		);
+	}
+
+	/**
+	 * Function is run when user regenerates signup form.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @return array Response of operation.
+	 */
+	private function reset_form() {
+		$subdomain = $this->option_handler->get_api_credentials()['subdomain'];
+		$template  = $this->generate_signup_template( 'advanced.php', $subdomain );
+
+		return array(
+			'message' => __( 'Newsletter subscription form reset to default.', 'smaily-for-wp' ),
+			'error'   => false,
+			'content' => $template->render(),
 		);
 	}
 
