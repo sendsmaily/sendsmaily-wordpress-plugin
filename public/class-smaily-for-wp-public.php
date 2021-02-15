@@ -45,7 +45,7 @@ class Smaily_For_WP_Public {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name    = $plugin_name;
 		$this->version        = $version;
-		$this->option_handler = new Smaily_For_WP_Options();
+		$this->options = new Smaily_For_WP_Options();
 	}
 
 	/**
@@ -65,8 +65,8 @@ class Smaily_For_WP_Public {
 	 */
 	public function smaily_shortcode_render( $atts ) {
 		// Load configuration data.
-		$api_credentials = $this->option_handler->get_api_credentials();
-		$form_options    = $this->option_handler->get_form_options();
+		$api_credentials = $this->options->get_api_credentials();
+		$form_options    = $this->options->get_form_options();
 		// Data to be assigned to template.
 		$config                = array();
 		$config['domain']      = $api_credentials['subdomain'];

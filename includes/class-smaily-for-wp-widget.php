@@ -37,7 +37,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
 
 		$this->autoresponders = $admin_model->get_autoresponders();
-		$this->option_handler = new Smaily_For_WP_Options();
+		$this->options = new Smaily_For_WP_Options();
 	}
 
 	/**
@@ -62,8 +62,8 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		}
 
 		// Load configuration data.
-		$api_credentials = $this->option_handler->get_api_credentials();
-		$form_options    = $this->option_handler->get_form_options();
+		$api_credentials = $this->options->get_api_credentials();
+		$form_options    = $this->options->get_form_options();
 		// Data to be assigned to template.
 		$config                     = array();
 		$config['domain']           = $api_credentials['subdomain'];
@@ -83,7 +83,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$form_is_successful = false;
 		$response_message   = null;
 
-		if ( ! $this->option_handler->has_credentials( $api_credentials ) ) {
+		if ( ! $this->options->has_credentials( $api_credentials ) ) {
 			$form_has_response = true;
 			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'smaily-for-wp' );
 		} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {

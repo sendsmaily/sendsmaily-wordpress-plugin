@@ -45,7 +45,7 @@ class Smaily_For_WP_Admin {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name    = $plugin_name;
 		$this->version        = $version;
-		$this->option_handler = new Smaily_For_WP_Options();
+		$this->options = new Smaily_For_WP_Options();
 	}
 
 	/**
@@ -84,8 +84,8 @@ class Smaily_For_WP_Admin {
 	 */
 	public function smaily_admin_render() {
 		// Load configuration data.
-		$has_credentials = $this->option_handler->has_credentials();
-		$form_options    = $this->option_handler->get_form_options();
+		$has_credentials = $this->options->has_credentials();
+		$form_options    = $this->options->get_form_options();
 
 		// Create admin template.
 		$template = $this->generate_admin_template( 'page.php', $has_credentials, $form_options['form'] );
@@ -156,8 +156,8 @@ class Smaily_For_WP_Admin {
 		}
 
 		if ( $refresh && $result['error'] === false ) {
-			$has_credentials   = $this->option_handler->has_credentials();
-			$signup_form       = $this->option_handler->get_form_options()['form'];
+			$has_credentials   = $this->options->has_credentials();
+			$signup_form       = $this->options->get_form_options()['form'];
 			$result['content'] = $this->generate_admin_template( 'form.php', $has_credentials, $signup_form )->render();
 		}
 
@@ -229,7 +229,7 @@ class Smaily_For_WP_Admin {
 			);
 		}
 		// Insert item to database.
-		$this->option_handler->update_api_credentials( $params );
+		$this->options->update_api_credentials( $params );
 
 		// Return result.
 		return array(
@@ -247,7 +247,7 @@ class Smaily_For_WP_Admin {
 	 */
 	private function remove_api_key() {
 		// Delete contents of config.
-		$this->option_handler->update_api_credentials( array() );
+		$this->options->update_api_credentials( array() );
 
 		// Set result.
 		return array(
@@ -264,7 +264,7 @@ class Smaily_For_WP_Admin {
 	 * @return array Response of operation.
 	 */
 	private function reset_form() {
-		$subdomain = $this->option_handler->get_api_credentials()['subdomain'];
+		$subdomain = $this->options->get_api_credentials()['subdomain'];
 		$template  = $this->generate_signup_template( 'advanced.php', $subdomain );
 
 		return array(
@@ -290,15 +290,15 @@ class Smaily_For_WP_Admin {
 		// Generate new form (if empty).
 		if ( empty( $form ) ) {
 			// Load configuration data.
-			$subdomain = $this->option_handler->get_api_credentials()['subdomain'];
-			$form      = $this->option_handler->get_form_options()['form'];
+			$subdomain = $this->options->get_api_credentials()['subdomain'];
+			$form      = $this->options->get_form_options()['form'];
 
 			$template = $this->generate_signup_template( 'advanced.php', $subdomain, $form );
 			// Render template.
 			$form = trim( $template->render() );
 		}
 
-		$this->option_handler->update_form_options(
+		$this->options->update_form_options(
 			array(
 				'is_advanced' => $is_advanced,
 				'form'        => $form,
@@ -392,9 +392,9 @@ class Smaily_For_WP_Admin {
 	 */
 	public function get_autoresponders() {
 		// Load configuration data.
-		$api_credentials = $this->option_handler->get_api_credentials();
+		$api_credentials = $this->options->get_api_credentials();
 
-		if ( ! $this->option_handler->has_credentials( $api_credentials ) ) {
+		if ( ! $this->options->has_credentials( $api_credentials ) ) {
 			return array();
 		}
 
