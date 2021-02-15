@@ -83,21 +83,12 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function smaily_admin_render() {
-		// Create admin template.
-		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-page.php' );
-
 		// Load configuration data.
-		$api_credentials = $this->option_handler->get_api_credentials();
+		$has_credentials = $this->option_handler->has_credentials();
 		$form_options    = $this->option_handler->get_form_options();
 
-		$has_credentials = ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
-
-		$template->assign(
-			array(
-				'form'            => $form_options['form'],
-				'has_credentials' => $has_credentials,
-			)
-		);
+		// Create admin template.
+		$template = $this->generate_admin_template( 'page.php', $has_credentials, $form_options['form'] );
 
 		// Add menu elements.
 		add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', SMLY4WP_PLUGIN_URL . '/gfx/icon.png' );
