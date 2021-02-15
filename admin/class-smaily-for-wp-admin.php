@@ -31,9 +31,9 @@ class Smaily_For_WP_Admin {
 	 *
 	 * @since  3.0.0
 	 * @access private
-	 * @var    Smaily_For_WP_Option_Handler Handler for Options API.
+	 * @var    Smaily_For_WP_Options Handler for WordPress Options API.
 	 */
-	private $option_handler;
+	private $options;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -45,7 +45,7 @@ class Smaily_For_WP_Admin {
 	public function __construct( $plugin_name, $version ) {
 		$this->plugin_name    = $plugin_name;
 		$this->version        = $version;
-		$this->option_handler = new Smaily_For_WP_Option_Handler();
+		$this->option_handler = new Smaily_For_WP_Options();
 	}
 
 	/**

@@ -6,7 +6,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */
-class Smaily_For_WP_Option_Handler {
+class Smaily_For_WP_Options {
 
 	/**
 	 * Get API credentials stored in database.

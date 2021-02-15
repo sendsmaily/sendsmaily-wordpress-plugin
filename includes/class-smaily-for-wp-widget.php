@@ -22,9 +22,9 @@ class Smaily_For_WP_Widget extends WP_Widget {
 	 *
 	 * @since  3.0.0
 	 * @access private
-	 * @var    Smaily_For_WP_Option_Handler $option_handler Handler for Options API.
+	 * @var    Smaily_For_WP_Options $options Handler for Options API.
 	 */
-	private $option_handler;
+	private $options;
 
 	/**
 	 * Sets up a new instance of the widget.
@@ -37,7 +37,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
 
 		$this->autoresponders = $admin_model->get_autoresponders();
-		$this->option_handler = new Smaily_For_WP_Option_Handler();
+		$this->option_handler = new Smaily_For_WP_Options();
 	}
 
 	/**
