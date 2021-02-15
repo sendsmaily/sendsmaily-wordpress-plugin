@@ -87,7 +87,7 @@ class Smaily_For_WP {
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-i18n.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-lifecycle.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-loader.php';
-		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-option-handler.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-options.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-request.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-template.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-widget.php';
