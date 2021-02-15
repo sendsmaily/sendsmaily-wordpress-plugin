@@ -69,6 +69,7 @@ class Smaily_For_WP_Option_Handler {
 	 *
 	 * @since  3.0.0
 	 * @access private
+	 * @param  array $credentials Smaily API credentials.
 	 * @return boolean User has saved credentials to DB.
 	 */
 	public function has_credentials( $credentials = null ) {
