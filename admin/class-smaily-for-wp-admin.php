@@ -231,7 +231,7 @@ class Smaily_For_WP_Admin {
 		// Insert item to database.
 		$this->options->update_api_credentials( $params );
 
-		// Return result.
+		// Return response.
 		return array(
 			'error'   => false,
 			'message' => __( 'Credentials validated.', 'smaily-for-wp' ),
@@ -249,7 +249,7 @@ class Smaily_For_WP_Admin {
 		// Delete contents of config.
 		$this->options->update_api_credentials( array() );
 
-		// Set result.
+		// Return response.
 		return array(
 			'error'   => false,
 			'message' => __( 'Credentials removed.', 'smaily-for-wp' ),
@@ -267,6 +267,7 @@ class Smaily_For_WP_Admin {
 		$subdomain = $this->options->get_api_credentials()['subdomain'];
 		$template  = $this->generate_signup_template( 'advanced.php', $subdomain );
 
+		// Return response.
 		return array(
 			'message' => __( 'Newsletter subscription form reset to default.', 'smaily-for-wp' ),
 			'error'   => false,
