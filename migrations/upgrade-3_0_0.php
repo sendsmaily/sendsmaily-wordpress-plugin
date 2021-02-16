@@ -19,7 +19,7 @@ $upgrade = function() {
 		// Get saved autoresponder ID.
 		$autoresponder_id = isset( $config['autoresponder'] ) ? $config['autoresponder'] : '';
 		// Get widgets' options.
-		$widget_options = get_option( 'widget_smaily_subscription_widget' );
+		$widget_options = get_option( 'widget_smaily_subscription_widget', array() );
 
 		foreach ( $widget_options as &$widget ) {
 			// Widgets created before 3.0.0 do not have autoresponder value, adding it here.
