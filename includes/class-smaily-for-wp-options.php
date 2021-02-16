@@ -68,7 +68,6 @@ class Smaily_For_WP_Options {
 	 * Has user saved valid Smaily API credentials to database.
 	 *
 	 * @since  3.0.0
-	 * @access private
 	 * @param  array $credentials Smaily API credentials.
 	 * @return boolean User has saved credentials to DB.
 	 */
