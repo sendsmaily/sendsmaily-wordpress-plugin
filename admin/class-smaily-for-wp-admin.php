@@ -85,10 +85,10 @@ class Smaily_For_WP_Admin {
 	public function smaily_admin_render() {
 		// Load configuration data.
 		$has_credentials = $this->options->has_credentials();
-		$form_options    = $this->options->get_form_options();
+		$signup_form     = $this->options->get_form_options()['form'];
 
 		// Create admin template.
-		$template = $this->generate_admin_template( 'page.php', $has_credentials, $form_options['form'] );
+		$template = $this->generate_admin_template( 'page.php', $has_credentials, $signup_form );
 
 		// Add menu elements.
 		add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', SMLY4WP_PLUGIN_URL . '/gfx/icon.png' );
