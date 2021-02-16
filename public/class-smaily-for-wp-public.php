@@ -39,13 +39,14 @@ class Smaily_For_WP_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 3.0.0
-	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
+	 * @param Smaily_For_WP_Options $options     Reference to options handler class.
+	 * @param string                $plugin_name The name of the plugin.
+	 * @param string                $version     The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name    = $plugin_name;
-		$this->version        = $version;
-		$this->options = new Smaily_For_WP_Options();
+	public function __construct( Smaily_For_WP_Options $options, $plugin_name, $version ) {
+		$this->options     = $options;
+		$this->plugin_name = $plugin_name;
+		$this->version     = $version;
 	}
 
 	/**

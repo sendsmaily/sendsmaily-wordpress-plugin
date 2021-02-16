@@ -1,6 +1,7 @@
 <?php
 /**
- * This class is used to work with options related to user input e.g API credentials, form settings.
+ * This class is used to work with the plugin's options
+ * that take user input e.g API credentials, form settings.
  *
  * @since      3.0.0
  * @package    Smaily_For_WP
@@ -9,12 +10,57 @@
 class Smaily_For_WP_Options {
 
 	/**
+	 * Smaily API credentials
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array   $api_credentials Smaily API credentials.
+	 */
+	private $api_credentials;
+
+	/**
+	 * Newsletter signup form settings.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array   $form_options Newsletter signup form settings.
+	 */
+	private $form_options;
+
+	/**
+	 * Get API credentials.
+	 *
+	 * @since  3.0.0
+	 * @return array   $api_credentials Smaily API credentials
+	 */
+	public function get_api_credentials() {
+		if ( is_null( $this->api_credentials ) ) {
+			$this->api_credentials = $this->get_api_credentials_from_db();
+		}
+		return $this->api_credentials;
+	}
+
+	/**
+	 * Get form options.
+	 *
+	 * @since  3.0.0
+	 * @return array   $form_options Newsletter signup form settings.
+	 */
+	public function get_form_options() {
+		if ( is_null( $this->form_options ) ) {
+			$this->form_options = $this->get_form_options_from_db();
+		}
+		return $this->form_options;
+	}
+
+	/**
 	 * Get API credentials stored in database.
 	 *
 	 * @since  3.0.0
-	 * @return array API credentials in proper format.
+	 * @access private
+	 * @return array   API credentials in proper format.
 	 */
-	public function get_api_credentials() {
+	private function get_api_credentials_from_db() {
 		$credentials = get_option( 'smailyforwp_api_option', array() );
 		return array_merge(
 			array(
@@ -30,9 +76,10 @@ class Smaily_For_WP_Options {
 	 * Get form options stored in database.
 	 *
 	 * @since  3.0.0
-	 * @return array Form options in proper format
+	 * @access private
+	 * @return array   Form options in proper format
 	 */
-	public function get_form_options() {
+	private function get_form_options_from_db() {
 		$form_options = get_option( 'smailyforwp_form_option', array() );
 		return array_merge(
 			array(
@@ -51,6 +98,11 @@ class Smaily_For_WP_Options {
 	 * @param array $api_credentials Smaily API credentials.
 	 */
 	public function update_api_credentials( $api_credentials ) {
+		// Update_option will sanitize input, before saving. We should sanitize aswell.
+		if ( is_array( $api_credentials ) ) {
+			$this->api_credentials = array_map( 'sanitize_text_field', $api_credentials );
+		}
+		$this->api_credentials = $api_credentials;
 		update_option( 'smailyforwp_api_option', $api_credentials, false );
 	}
 
@@ -61,6 +113,10 @@ class Smaily_For_WP_Options {
 	 * @param array $form_options Newsletter form options.
 	 */
 	public function update_form_options( $form_options ) {
+		// Update_option will sanitize input, before saving. We should sanitize aswell.
+		if ( is_array( $form_options ) ) {
+			$this->form_options = array_map( 'sanitize_text_field', $form_options );
+		}
 		update_option( 'smailyforwp_form_option', $form_options );
 	}
 
@@ -70,6 +126,7 @@ class Smaily_For_WP_Options {
 	 * @since 3.0.0
 	 */
 	public function remove_api_credentials() {
+		$this->api_credentials = null;
 		delete_option( 'smailyforwp_api_option' );
 	}
 
@@ -78,21 +135,19 @@ class Smaily_For_WP_Options {
 	 *
 	 * @since 3.0.0
 	 */
-	public function remove_form_credentials() {
+	public function remove_form_options() {
+		$this->form_options = null;
 		delete_option( 'smailyforwp_form_option' );
 	}
 
 	/**
-	 * Has user saved valid Smaily API credentials to database?
+	 * Has user saved Smaily API credentials to database?
 	 *
 	 * @since  3.0.0
-	 * @param  array $credentials Smaily API credentials.
-	 * @return boolean User has saved credentials to DB.
+	 * @return boolean True if API option exists, false if it doesn't exist.
 	 */
-	public function has_credentials( $credentials = null ) {
-		if ( ! isset( $credentials ) ) {
-			$credentials = $this->get_api_credentials();
-		}
-		return ! empty( $credentials['subdomain'] ) && ! empty( $credentials['username'] ) && ! empty( $credentials['password'] );
+	public function has_credentials() {
+		$api_credentials = $this->get_api_credentials();
+		return ! empty( $api_credentials['subdomain'] ) && ! empty( $api_credentials['username'] ) && ! empty( $api_credentials['password'] );
 	}
 }

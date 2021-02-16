@@ -39,13 +39,14 @@ class Smaily_For_WP_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 3.0.0
-	 * @param string $plugin_name The name of this plugin.
-	 * @param string $version     The version of this plugin.
+	 * @param Smaily_For_WP_Options $options     Reference to option handler class.
+	 * @param string                $plugin_name The name of this plugin.
+	 * @param string                $version     The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
-		$this->plugin_name    = $plugin_name;
-		$this->version        = $version;
-		$this->options = new Smaily_For_WP_Options();
+	public function __construct( Smaily_For_WP_Options $options, $plugin_name, $version ) {
+		$this->options     = $options;
+		$this->plugin_name = $plugin_name;
+		$this->version     = $version;
 	}
 
 	/**
@@ -101,7 +102,7 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function smaily_subscription_widget_init() {
-		$widget = new Smaily_For_WP_Widget( $this );
+		$widget = new Smaily_For_WP_Widget( $this->options, $this );
 		register_widget( $widget );
 	}
 
@@ -246,8 +247,7 @@ class Smaily_For_WP_Admin {
 	 * @return array Response of operation.
 	 */
 	private function remove_api_key() {
-		// Delete contents of config.
-		$this->options->update_api_credentials( array() );
+		$this->options->remove_api_credentials();
 
 		// Return response.
 		return array(
