@@ -40,6 +40,8 @@ class Smaily_For_WP_Lifecycle {
 	 * @since 3.0.0
 	 */
 	public static function uninstall() {
+		delete_option( 'smailyforwp_api_option' );
+		delete_option( 'smailyforwp_form_option' );
 		delete_option( 'widget_smaily_subscription_widget' );
 		delete_option( 'smailyforwp_db_version' );
 		delete_transient( 'smailyforwp_plugin_updated' );
