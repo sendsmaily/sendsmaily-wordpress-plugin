@@ -144,7 +144,7 @@ class Smaily_For_WP_Options {
 	 * Has user saved Smaily API credentials to database?
 	 *
 	 * @since  3.0.0
-	 * @return boolean True if API option exists, false if it doesn't exist.
+	 * @return boolean True if $api_credentials has correct key structure and no empty values.
 	 */
 	public function has_credentials() {
 		$api_credentials = $this->get_api_credentials();
