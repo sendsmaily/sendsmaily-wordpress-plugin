@@ -1,6 +1,6 @@
 <?php
 /**
- * Define the plugin's reading and writing functionality, from and to WordPress' options table.
+ * This class is used to work with options related to user input e.g API credentials, form settings.
  *
  * @since      3.0.0
  * @package    Smaily_For_WP
