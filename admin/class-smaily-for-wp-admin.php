@@ -395,7 +395,7 @@ class Smaily_For_WP_Admin {
 		// Load configuration data.
 		$api_credentials = $this->options->get_api_credentials();
 
-		if ( ! $this->options->has_credentials( $api_credentials ) ) {
+		if ( ! $this->options->has_credentials() ) {
 			return array();
 		}
 
