@@ -319,7 +319,7 @@ class Smaily_For_WP_Admin {
 	 *
 	 * @since  3.0.0
 	 * @access private
-	 * @param  string $template_name            Name of template file to use, without any prefixes (i.e form.php).
+	 * @param  string $template_name            Name of template file to use, without any prefixes (e.g form.php).
 	 * @param  bool   $has_credentials          User has saved valid credentials? Yes/No.
 	 * @param  string $newsletter_form          HTML of newsletter subscription form.
 	 * @return Smaily_For_WP_Template $template Template of admin form.
@@ -343,7 +343,7 @@ class Smaily_For_WP_Admin {
 	 *
 	 * @since  3.0.0
 	 * @access private
-	 * @param  string $template_name            Name of template file to use, without any prefixes (i.e advanced.php).
+	 * @param  string $template_name            Name of template file to use, without any prefixes (e.g advanced.php).
 	 * @param  string $subdomain                Smaily API subdomain.
 	 * @param  string $newsletter_form          HTML of newsletter subscription form.
 	 * @return Smaily_For_WP_Template $template Template of admin form.
