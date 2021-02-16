@@ -65,7 +65,25 @@ class Smaily_For_WP_Options {
 	}
 
 	/**
-	 * Has user saved valid Smaily API credentials to database.
+	 * Clear Smaily API credentials by deleting its option.
+	 *
+	 * @since 3.0.0
+	 */
+	public function remove_api_credentials() {
+		delete_option( 'smailyforwp_api_option' );
+	}
+
+	/**
+	 * Clear configurations for newsletter subscription from by deleting its option.
+	 *
+	 * @since 3.0.0
+	 */
+	public function remove_form_credentials() {
+		delete_option( 'smailyforwp_form_option' );
+	}
+
+	/**
+	 * Has user saved valid Smaily API credentials to database?
 	 *
 	 * @since  3.0.0
 	 * @param  array $credentials Smaily API credentials.
