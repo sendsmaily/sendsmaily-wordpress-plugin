@@ -84,7 +84,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$form_is_successful = false;
 		$response_message   = null;
 
-		if ( ! $this->options->has_credentials( $api_credentials ) ) {
+		if ( ! $this->options->has_credentials() ) {
 			$form_has_response = true;
 			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'smaily-for-wp' );
 		} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {
