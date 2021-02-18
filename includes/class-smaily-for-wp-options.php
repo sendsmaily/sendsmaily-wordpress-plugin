@@ -102,7 +102,6 @@ class Smaily_For_WP_Options {
 		if ( is_array( $api_credentials ) ) {
 			$this->api_credentials = array_map( 'sanitize_text_field', $api_credentials );
 		}
-		$this->api_credentials = $api_credentials;
 		update_option( 'smailyforwp_api_option', $api_credentials, false );
 	}
 
