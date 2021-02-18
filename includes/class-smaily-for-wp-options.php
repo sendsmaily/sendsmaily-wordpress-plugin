@@ -102,7 +102,7 @@ class Smaily_For_WP_Options {
 		if ( is_array( $api_credentials ) ) {
 			$this->api_credentials = array_map( 'sanitize_text_field', $api_credentials );
 		}
-		update_option( 'smailyforwp_api_option', $api_credentials, false );
+		update_option( 'smailyforwp_api_option', $this->api_credentials, false );
 	}
 
 	/**
@@ -116,7 +116,7 @@ class Smaily_For_WP_Options {
 		if ( is_array( $form_options ) ) {
 			$this->form_options = array_map( 'sanitize_text_field', $form_options );
 		}
-		update_option( 'smailyforwp_form_option', $form_options );
+		update_option( 'smailyforwp_form_option', $this->form_options );
 	}
 
 	/**
