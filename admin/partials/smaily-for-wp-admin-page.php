@@ -1,6 +1,6 @@
 <div class="wrap">
 	<h2>
-		<?php echo esc_html__( 'Smaily Wordpress plugin', 'smaily-for-wp' ); ?>
+		<?php echo esc_html__( 'Smaily WordPress plugin', 'smaily-for-wp' ); ?>
 		<sup id="h2-loader" style="display:none">(<?php echo esc_html__( 'Please wait, working...', 'smaily-for-wp' ); ?>)</sup>
 	</h2>
 
