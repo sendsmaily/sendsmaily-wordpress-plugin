@@ -98,7 +98,7 @@ class Smaily_For_WP_Options {
 	 * @param array $api_credentials Smaily API credentials.
 	 */
 	public function update_api_credentials( $api_credentials ) {
-		// Update_option will sanitize input, before saving. We should sanitize aswell.
+		// Update_option will sanitize input before saving. We should sanitize aswell.
 		if ( is_array( $api_credentials ) ) {
 			$this->api_credentials = array_map( 'sanitize_text_field', $api_credentials );
 		}
@@ -113,7 +113,7 @@ class Smaily_For_WP_Options {
 	 * @param array $form_options Newsletter form options.
 	 */
 	public function update_form_options( $form_options ) {
-		// Update_option will sanitize input, before saving. We should sanitize aswell.
+		// Update_option will sanitize input before saving. We should sanitize aswell.
 		if ( is_array( $form_options ) ) {
 			$this->form_options = array_map( 'sanitize_text_field', $form_options );
 		}
