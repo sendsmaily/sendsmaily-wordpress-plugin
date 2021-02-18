@@ -27,15 +27,26 @@ class Smaily_For_WP_Public {
 	private $version;
 
 	/**
+	 * Handler for storing/retrieving data via Options API.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    Smaily_For_WP_Options $options Handler for Options API.
+	 */
+	private $options;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 3.0.0
-	 * @param string $plugin_name The name of the plugin.
-	 * @param string $version     The version of this plugin.
+	 * @param Smaily_For_WP_Options $options     Reference to options handler class.
+	 * @param string                $plugin_name The name of the plugin.
+	 * @param string                $version     The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( Smaily_For_WP_Options $options, $plugin_name, $version ) {
+		$this->options     = $options;
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
@@ -54,11 +65,14 @@ class Smaily_For_WP_Public {
 	 * @return string
 	 */
 	public function smaily_shortcode_render( $atts ) {
-		global $wpdb;
-
 		// Load configuration data.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$config = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
+		$api_credentials = $this->options->get_api_credentials();
+		$form_options    = $this->options->get_form_options();
+		// Data to be assigned to template.
+		$config                = array();
+		$config['domain']      = $api_credentials['subdomain'];
+		$config['form']        = $form_options['form'];
+		$config['is_advanced'] = $form_options['is_advanced'];
 
 		// Parse attributes out of shortcode tag.
 		$shortcode_atts = shortcode_atts(
@@ -76,7 +90,7 @@ class Smaily_For_WP_Public {
 		$config['autoresponder_id'] = $shortcode_atts['autoresponder_id'];
 
 		// Create admin template.
-		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
+		$file     = $config['is_advanced'] === '1' ? 'advanced.php' : 'basic.php';
 		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $file );
 		$template->assign( $config );
 		// Display responses on Smaily subscription form.
@@ -84,7 +98,8 @@ class Smaily_For_WP_Public {
 		$form_is_successful = false;
 		$response_message   = null;
 
-		if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
+		$credentials_not_valid = empty( $api_credentials['subdomain'] ) || empty( $api_credentials['username'] ) || empty( $api_credentials['password'] );
+		if ( $credentials_not_valid ) {
 			$form_has_response = true;
 			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'smaily-for-wp' );
 		} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {

@@ -15,6 +15,15 @@
 class Smaily_For_WP {
 
 	/**
+	 * Handler for storing/retrieving data via Options API.
+	 *
+	 * @since  3.0.0
+	 * @access protected
+	 * @var    Smaily_For_WP_Options Handler for WordPress Options API.
+	 */
+	protected $options;
+
+	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
@@ -70,6 +79,7 @@ class Smaily_For_WP {
 	 * - Smaily_For_WP_i18n.      Defines internationalization functionality.
 	 * - Smaily_For_WP_Lifecycle. Defines the install, upgrade and uninstall functionality.
 	 * - Smaily_For_WP_Loader.    Orchestrates the hooks of the plugin.
+	 * - Smaily_For_WP_Option.    Defines the database related queries of Options API.
 	 * - Smaily_For_WP_Request.   Defines the request making functionality.
 	 * - Smaily_For_WP_Template.  Defines the templating making functionality.
 	 * - Smaily_For_WP_Widget.    Defines the widget functionality.
@@ -86,11 +96,13 @@ class Smaily_For_WP {
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-i18n.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-lifecycle.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-loader.php';
+		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-options.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-request.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-template.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'includes/class-smaily-for-wp-widget.php';
 		require_once SMLY4WP_PLUGIN_PATH . 'public/class-smaily-for-wp-public.php';
-		$this->loader = new Smaily_For_WP_Loader();
+		$this->loader  = new Smaily_For_WP_Loader();
+		$this->options = new Smaily_For_WP_Options();
 	}
 
 	/**
@@ -132,7 +144,7 @@ class Smaily_For_WP {
 	 * @access private
 	 */
 	private function define_admin_hooks() {
-		$plugin_admin = new Smaily_For_WP_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Smaily_For_WP_Admin( $this->options, $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_smaily_admin_save', $plugin_admin, 'smaily_admin_save' );
@@ -148,7 +160,7 @@ class Smaily_For_WP {
 	 * @access private
 	 */
 	private function define_public_hooks() {
-		$plugin_public = new Smaily_For_WP_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Smaily_For_WP_Public( $this->options, $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'init', $plugin_public, 'add_shortcodes' );
 	}
 

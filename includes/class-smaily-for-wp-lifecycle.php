@@ -15,21 +15,6 @@ class Smaily_For_WP_Lifecycle {
 	 */
 	public function activate() {
 		$this->run_migrations();
-
-		global $wpdb;
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-		$charset_collate = $wpdb->get_charset_collate();
-
-		// Create database table - settings.
-		$table_name = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$sql        = "CREATE TABLE $table_name (
-			api_credentials VARCHAR(128) NOT NULL,
-			domain VARCHAR(255) NOT NULL,
-			form TEXT NOT NULL,
-			is_advanced TINYINT(1) NOT NULL,
-			PRIMARY KEY  (api_credentials)
-		) $charset_collate;";
-		dbDelta( $sql );
 	}
 
 	/**
@@ -55,8 +40,8 @@ class Smaily_For_WP_Lifecycle {
 	 * @since 3.0.0
 	 */
 	public static function uninstall() {
-		global $wpdb;
-		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}smaily_config" );
+		delete_option( 'smailyforwp_api_option' );
+		delete_option( 'smailyforwp_form_option' );
 		delete_option( 'widget_smaily_subscription_widget' );
 		delete_option( 'smailyforwp_db_version' );
 		delete_transient( 'smailyforwp_plugin_updated' );
