@@ -286,7 +286,7 @@ class Smaily_For_WP_Admin {
 	private function save( $form_data ) {
 		// Get parameters.
 		$is_advanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? '1' : '0';
-		$form        = ( isset( $form_data['form'] ) && is_string( $form_data['form'] ) ) ? $form_data['form'] : '';
+		$form        = ( isset( $form_data['form'] ) && is_string( $form_data['form'] ) ) ? trim( $form_data['form'] ) : '';
 
 		// Generate new form (if empty).
 		if ( empty( $form ) ) {
@@ -296,7 +296,7 @@ class Smaily_For_WP_Admin {
 
 			$template = $this->generate_signup_template( 'advanced.php', $subdomain, $form );
 			// Render template.
-			$form = trim( $template->render() );
+			$form = $template->render();
 		}
 
 		$this->options->update_form_options(
