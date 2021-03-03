@@ -75,6 +75,11 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 
 == Changelog ==
 
+= 3.0.0 =
+- Autoresponders can be now be configured in widget settings and per widget.
+- Fix spelling of plugin's admin page title.
+- Plugin migrations are now automatically executed when plugin is updated.
+
 = 2.3.0 =
 - Restructured plugin localizations (see upgrade notice section)
 - Added support for WordPress 5.6
@@ -105,6 +110,10 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 * First public release.
 
 == Upgrade Notice ==
+
+= 3.0.0 =
+
+Since version 3.0.0, autoresponders can be configured in widget settings.
 
 = 2.3.0 =
 

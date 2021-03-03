@@ -1,39 +1,61 @@
 <?php
 /**
- * Widget that can be used to subscribe to newsletters
+ * Defines the widget functionality of the plugin.
  *
+ * @since      3.0.0
  * @package    Smaily
  * @subpackage Smaily/includes
  */
+class Smaily_For_WP_Widget extends WP_Widget {
 
-/**
- * Create a class for the widget.
- */
-class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
+	/**
+	 * Array of autoresponders.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    array    $autoresponders Used to populate the autoresponder <select> field.
+	 */
+	private $autoresponders;
+
+	/**
+	 * Handler for storing/retrieving data via Options API.
+	 *
+	 * @since  3.0.0
+	 * @access private
+	 * @var    Smaily_For_WP_Options $options Handler for Options API.
+	 */
+	private $options;
 
 	/**
 	 * Sets up a new instance of the widget.
+	 *
+	 * @since 3.0.0
+	 * @param Smaily_For_WP_Options $options     Reference to options handler class.
+	 * @param Smaily_For_WP_Admin   $admin_model Reference to admin class.
 	 */
-	public function __construct() {
+	public function __construct( Smaily_For_WP_Options $options, Smaily_For_WP_Admin $admin_model ) {
 		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'smaily-for-wp' ) );
 		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
+
+		$this->options        = $options;
+		$this->autoresponders = $admin_model->get_autoresponders();
 	}
 
 	/**
 	 * Outputs the content for the current widget instance.
 	 *
+	 * @since 3.0.0
 	 * @param array $args     Display arguments including 'before_title', 'after_title',
 	 *                        'before_widget', and 'after_widget'.
 	 * @param array $instance Settings for the current Search widget instance.
 	 */
 	public function widget( $args, $instance ) {
-		global $wpdb;
-
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
 
-		$show_name   = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
-		$success_url = isset( $instance['success_url'] ) ? $instance['success_url'] : '';
-		$failure_url = isset( $instance['failure_url'] ) ? $instance['failure_url'] : '';
+		$show_name     = isset( $instance['show_name'] ) ? $instance['show_name'] : false;
+		$success_url   = isset( $instance['success_url'] ) ? $instance['success_url'] : '';
+		$failure_url   = isset( $instance['failure_url'] ) ? $instance['failure_url'] : '';
+		$autoresponder = isset( $instance['autoresponder'] ) ? $instance['autoresponder'] : '';
 
 		echo $args['before_widget'];
 		if ( $title ) {
@@ -41,24 +63,28 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 		}
 
 		// Load configuration data.
-		$table_name                 = esc_sql( $wpdb->prefix . 'smaily_config' );
-		$config                     = (array) $wpdb->get_row( "SELECT * FROM `$table_name` LIMIT 1" );
-		$config['show_name']        = $show_name;
-		$config['success_url']      = $success_url;
-		$config['failure_url']      = $failure_url;
-		$config['autoresponder_id'] = !empty( $config['autoresponder'] ) ? (int) $config['autoresponder'] : '';
+		$api_credentials = $this->options->get_api_credentials();
+		$form_options    = $this->options->get_form_options();
 
 		// Create admin template.
-		require_once( SMLY4WP_PLUGIN_PATH . '/code/Template.php' );
-		$file     = ( isset( $config['is_advanced'] ) && '1' === $config['is_advanced'] ) ? 'advanced.php' : 'basic.php';
-		$template = new Smaily_Plugin_Template( 'html/form/' . $file );
-		$template->assign( $config );
-		// Display responses on Smaily subscription form.
-		$form_has_response = false;
-		$form_is_successful = false;
-		$response_message  = null;
+		$file     = $form_options['is_advanced'] === true ? 'advanced.php' : 'basic.php';
+		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $file );
+		$template->assign( array(
+			'domain'           => $api_credentials['subdomain'],
+			'form'             => $form_options['form'],
+			'is_advanced'      => $form_options['is_advanced'],
+			'show_name'        => $show_name,
+			'success_url'      => $success_url,
+			'failure_url'      => $failure_url,
+			'autoresponder_id' => $autoresponder,
+		) );
 
-		if ( ! isset( $config['api_credentials'] ) || empty( $config['api_credentials'] ) ) {
+		// Display responses on Smaily subscription form.
+		$form_has_response  = false;
+		$form_is_successful = false;
+		$response_message   = null;
+
+		if ( ! $this->options->has_credentials() ) {
 			$form_has_response = true;
 			$response_message  = __( 'Smaily credentials not validated. Subscription form will not work!', 'smaily-for-wp' );
 		} elseif ( isset( $_GET['code'] ) && (int) $_GET['code'] === 101 ) {
@@ -77,47 +103,56 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 					break;
 			}
 		}
-		$template->assign( array(
-			'form_has_response' => $form_has_response,
-			'response_message'  => $response_message,
-			'form_is_successful' => $form_is_successful,
-		) );
+		$template->assign(
+			array(
+				'form_has_response'  => $form_has_response,
+				'response_message'   => $response_message,
+				'form_is_successful' => $form_is_successful,
+			)
+		);
+
 		// Render template.
 		echo $template->render();
 
 		echo $args['after_widget'];
 	}
+
 	/**
 	 * This function should check that $new_instance is set correctly. The newly
 	 * calculated value of $instance should be returned. If "false" is returned,
 	 * the instance won't be saved/updated.
 	 *
-	 * @param array $new_instance New instance.
-	 * @param array $old_instance Old instance.
+	 * @since  3.0.0
+	 * @param  array $new_instance New instance.
+	 * @param  array $old_instance Old instance.
 	 * @return array
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance                = $old_instance;
-		$instance['title']       = esc_textarea( $new_instance['title'] );
+		$instance['title']       = sanitize_text_field( $new_instance['title'] );
 		$instance['show_name']   = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
-		$instance['success_url'] = esc_url( $new_instance['success_url'] );
-		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
+		$instance['success_url'] = esc_url_raw( $new_instance['success_url'] );
+		$instance['failure_url'] = esc_url_raw( $new_instance['failure_url'] );
+		$instance['autoresponder'] = sanitize_text_field( $new_instance['autoresponder'] );
+
 		return $instance;
 	}
+
 	/**
 	 * Widget form on widgets page in admin panel.
 	 *
-	 * @param array $instance Widget fields array.
-	 * @return void
+	 * @since  3.0.0
+	 * @param  array $instance Widget fields array.
 	 */
 	public function form( $instance ) {
 		$instance = wp_parse_args(
 			(array) $instance,
 			array(
-				'title'       => '',
-				'show_name'   => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
-				'success_url' => '',
-				'failure_url' => '',
+				'title'         => '',
+				'show_name'     => isset( $instance['show_name'] ) ? (bool) $instance['show_name'] : false,
+				'success_url'   => '',
+				'failure_url'   => '',
+				'autoresponder' => '',
 			)
 		);
 
@@ -154,5 +189,17 @@ class Smaily_Newsletter_Subscription_Widget extends WP_Widget {
 			<label for="' . $failure_url_id . '">' . __( 'Failure URL', 'smaily-for-wp' ) . ':</label>
 			<input id="' . $failure_url_id . '" name="' . $failure_url . '" type="text" value="' . $instance['failure_url'] . '" />
 		</p>';
+		// Display autoresponder select menu.
+		$autoresponder_id          = esc_attr( $this->get_field_id( 'autoresponder' ) );
+		$autoresponder             = esc_attr( $this->get_field_name( 'autoresponder' ) );
+		$instance['autoresponder'] = esc_attr( $instance['autoresponder'] );
+		echo '<p>
+			<label for="' . $autoresponder_id . '">' . esc_html__( 'Autoresponders', 'smaily-for-wp' ) . ':</label>
+			<select id="' . $autoresponder_id . '" name="' . $autoresponder . '">
+			<option value="">' . esc_html__( 'No autoresponder', 'smaily-for-wp' ) . '</option>';
+		foreach ( $this->autoresponders as $id => $title ) {
+			echo '<option value="' . esc_attr( $id ) . '"' . selected( $instance['autoresponder'], $id, false ) . '>' . esc_attr( $title ) . '</option>';
+		}
+		echo '</select></p>';
 	}
 }

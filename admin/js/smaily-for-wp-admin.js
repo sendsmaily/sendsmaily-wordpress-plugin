@@ -62,7 +62,7 @@ var Default = (function(){
 		// make the request
 		jQuery.post(
 
-			smaily.ajax_url,
+			smaily_for_wp.ajax_url,
 			{
 				'action' : 'smaily_admin_save',
 				'form_data' : jQuery.param(data)
@@ -135,25 +135,6 @@ var Default = (function(){
 				// set textarea content
 				var content = response.content;
 				jQuery('#advanced-form').val(content);
-			});
-		},
-
-		/**
-		 * refresh autoresponders
-		 * @return void
-		 */
-		refreshAutoresp: function(){
-			// build query
-			var query = {
-				'op': 'refreshAutoresp',
-				'refresh': 1
-			};
-
-			// make the request
-			_request(query, function(response){
-				if(response.content){
-					jQuery('#form-container').html(response.content);
-				}
 			});
 		},
 

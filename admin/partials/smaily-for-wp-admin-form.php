@@ -1,14 +1,9 @@
-<?php
-$api_credentials = $this->api_credentials;
-$autoresponders = $this->autoresponders;
-?>
-
 <div>
 	<input type="hidden" name="op" value="save" />
 	<input type="hidden" name="is_advanced" value="0" />
 </div>
 
-<?php if ( ! empty( $api_credentials ) ) : ?>
+<?php if ( $this->has_credentials ) : ?>
 <p>
 	<span><?php echo esc_html__( 'Your API credentials are valid', 'smaily-for-wp' ); ?></span>
 	<a href="#" onclick="javascript:Default.removeApiKey();return false;"><strong><?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?></strong><img src="<?php echo SMLY4WP_PLUGIN_URL; ?>/gfx/remove.png" alt="<?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?>" title="<?php echo esc_html__( 'Remove', 'smaily-for-wp' ); ?>" /></a>
@@ -48,35 +43,18 @@ $autoresponders = $this->autoresponders;
 </div>
 <?php endif; ?>
 
-<?php if ( ! empty( $api_credentials ) ) : ?>
+<?php if ( $this->has_credentials ) : ?>
 <ul class="tabs">
-	<li><a id="link-basic" href="#basic" class="selected"><?php echo esc_html__( 'Basic', 'smaily-for-wp' ); ?></a></li>
-	<li><a id="link-advanced" href="#advanced"><?php echo esc_html__( 'Advanced', 'smaily-for-wp' ); ?></a></li>
+	<li><a id="link-basic" href="#basic"<?php if ( $this->form_options['is_advanced'] === false): ?> class="selected"<?php endif; ?>><?php echo esc_html__( 'Basic', 'smaily-for-wp' ); ?></a></li>
+	<li><a id="link-advanced" href="#advanced"<?php if ( $this->form_options['is_advanced'] === true): ?> class="selected"<?php endif; ?>><?php echo esc_html__( 'Advanced', 'smaily-for-wp' ); ?></a></li>
 </ul>
 <div class="clear"></div>
 
-<div id="content-basic" class="tab-content">
-	<div class="wrap">
-		<label><?php echo esc_html__( 'Autoresponders', 'smaily-for-wp' ); ?> <a href="#" onclick="javascript:Default.refreshAutoresp();return false;">(<?php echo esc_html__( 'Refresh', 'smaily-for-wp' ); ?>)</a></label>
-		<em><?php echo esc_html__( 'Select autoresponder to change regular opt-in functionality', 'smaily-for-wp' ); ?></em>
-		<?php if ( ! empty( $autoresponders ) ) : ?>
-		<select name="basic[autoresponder]">
-			<option value=""><?php echo esc_html__( 'No autoresponder', 'smaily-for-wp' ); ?></option>
-			<?php foreach ( $this->autoresponders as $item ) : ?>
-			<option value="<?php echo $item->id; ?>"<?php if ( $this->autoresponder == $item->id ) : ?> selected="selected"<?php endif; ?>><?php echo $item->title; ?></option>
-			<?php endforeach; ?>
-		</select>
-		<?php else : ?>
-		<span><?php echo esc_html__( 'No autoresponders. Please click on refresh link to update.', 'smaily-for-wp' ); ?></span>
-		<?php endif; ?>
-	</div>
-</div>
-
-<div id="content-advanced" class="tab-content hidden">
+<div id="content-advanced" class="tab-content<?php if ( $this->form_options['is_advanced'] === false): ?> hidden<?php endif; ?>">
 	<div class="wrap">
 		<label><?php echo esc_html__( 'Newsletter subscription form', 'smaily-for-wp' ); ?> <a href="#" onclick="javascript:Default.resetForm();return false;" title="<?php echo esc_html__( 'Restore original subscription form', 'smaily-for-wp' ); ?>">(<?php echo esc_html__( 'Regenerate', 'smaily-for-wp' ); ?>)</a></label>
 		<em><?php echo esc_html__( 'HTML of subscription form', 'smaily-for-wp' ); ?></em>
-		<textarea id="advanced-form" name="advanced[form]" rows="15"><?php echo stripslashes( $this->form ); ?></textarea>
+		<textarea id="advanced-form" name="form" rows="15"><?php echo $this->form_options['form']; ?></textarea>
 	</div>
 </div>
 

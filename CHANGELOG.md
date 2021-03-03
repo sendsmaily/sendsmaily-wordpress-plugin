@@ -1,5 +1,11 @@
 # Changelog
 
+### 3.0.0
+
+- Autoresponders can be now be configured in widget settings and per widget - [[#84](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/84)]
+- Fix spelling of plugin's admin page title - [[#91](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/91)]
+- Plugin migrations are now automatically executed when plugin is updated - [[#88](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/88)]
+
 ### 2.3.0
 
 - Restructured plugin localizations - [[#72](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/issues/72)]

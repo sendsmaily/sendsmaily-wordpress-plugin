@@ -1,17 +1,28 @@
 <?php
+/**
+ * Defines the template generating and rendering functionality of the plugin.
+ *
+ * @since      3.0.0
+ * @package    Smaily_For_WP
+ * @subpackage Smaily_For_WP/includes
+ */
+class Smaily_For_WP_Template {
 
-class Smaily_Plugin_Template {
 	/**
 	 * Template name.
 	 *
-	 * @var string
+	 * @since    3.0.0
+	 * @access   protected
+	 * @var      string    $_template    Filename of template.
 	 */
 	protected $_template = '';
 
 	/**
 	 * Template variables.
 	 *
-	 * @var array
+	 * @since    3.0.0
+	 * @access   protected
+	 * @var      array    $_vars    Variables assigned to template.
 	 */
 	protected $_vars = array();
 
@@ -27,8 +38,9 @@ class Smaily_Plugin_Template {
 	/**
 	 * Render partial html.
 	 *
-	 * @param string $template Template.
-	 * @param array  $params Template params.
+	 * @since  3.0.0
+	 * @param  string $template Template.
+	 * @param  array  $params Template params.
 	 * @return string
 	 */
 	public function partial( $template, $params = array() ) {
@@ -40,11 +52,12 @@ class Smaily_Plugin_Template {
 	/**
 	 * Render template.
 	 *
+	 * @since  3.0.0
 	 * @return string|bool
 	 * @throws Exception Exeption.
 	 */
 	public function render() {
-		$file_name = SMLY4WP_PLUGIN_PATH . '/' . $this->_template;
+		$file_name = SMLY4WP_PLUGIN_PATH . $this->_template;
 		// Check for template file.
 		if ( empty( $this->_template ) || ! file_exists( $file_name ) || ! is_readable( $file_name ) ) {
 			throw new Exception( 'Could not find template "' . $file_name . '"! Please check for file existence.' );
@@ -62,7 +75,7 @@ class Smaily_Plugin_Template {
 	/**
 	 * Dispatch template.
 	 *
-	 * @return void
+	 * @since  3.0.0
 	 */
 	public function dispatch() {
 		echo $this->render();
@@ -71,9 +84,10 @@ class Smaily_Plugin_Template {
 	/**
 	 * Assign template variables.
 	 *
-	 * @param string|array $name Name.
-	 * @param object       $value [optional].
-	 * @return Smaily_Plugin_Template
+	 * @since  3.0.0
+	 * @param  string|array $name Name.
+	 * @param  object       $value [optional].
+	 * @return Smaily_For_WP_Template
 	 */
 	public function assign( $name, $value = null ) {
 		if ( is_array( $name ) && ! empty( $name ) && empty( $value ) ) {
@@ -90,6 +104,7 @@ class Smaily_Plugin_Template {
 	/**
 	 * Get language code currently in use.
 	 *
+	 * @since  3.0.0
 	 * @return string $lang Language code.
 	 */
 	private function getLanguageCode() {
@@ -113,6 +128,7 @@ class Smaily_Plugin_Template {
 	/**
 	 * Get all assigned variables.
 	 *
+	 * @since  3.0.0
 	 * @return array
 	 */
 	public function getVars() {
@@ -122,7 +138,8 @@ class Smaily_Plugin_Template {
 	/**
 	 * Return assigned var value.
 	 *
-	 * @param string $name Name.
+	 * @since  3.0.0
+	 * @param  string $name Name.
 	 * @return string|object|void
 	 */
 	public function __get( $name ) {
@@ -136,9 +153,9 @@ class Smaily_Plugin_Template {
 	/**
 	 * Assign single param.
 	 *
-	 * @param string $name Name.
-	 * @param object $value Value.
-	 * @return void
+	 * @since  3.0.0
+	 * @param  string $name Name.
+	 * @param  object $value Value.
 	 */
 	public function __set( $name, $value ) {
 		$this->_vars[ $name ] = $value;
