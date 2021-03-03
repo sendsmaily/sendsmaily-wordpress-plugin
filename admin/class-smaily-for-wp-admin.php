@@ -285,7 +285,7 @@ class Smaily_For_WP_Admin {
 	 */
 	private function save( $form_data ) {
 		// Get parameters.
-		$is_advanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? '1' : '0';
+		$is_advanced = ( isset( $form_data['is_advanced'] ) && ! empty( $form_data['is_advanced'] ) ) ? true : false;
 		$form        = ( isset( $form_data['form'] ) && is_string( $form_data['form'] ) ) ? trim( $form_data['form'] ) : '';
 
 		// Generate new form (if empty).
