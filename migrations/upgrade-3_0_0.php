@@ -48,7 +48,7 @@ $upgrade = function() {
 		// Copy advanced form configurations from smaily_config table to form option.
 		$form_options = array(
 			'form'        => ! empty( $config['form'] ) ? $config['form'] : '',
-			'is_advanced' => isset( $config['is_advanced'] ) ? $config['is_advanced'] : '0',
+			'is_advanced' => isset( $config['is_advanced'] ) ? (bool) $config['is_advanced'] : false,
 		);
 		update_option( 'smailyforwp_form_option', $form_options );
 
