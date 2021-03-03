@@ -86,10 +86,10 @@ class Smaily_For_WP_Admin {
 	public function smaily_admin_render() {
 		// Load configuration data.
 		$has_credentials = $this->options->has_credentials();
-		$signup_form     = $this->options->get_form_options()['form'];
+		$form_options     = $this->options->get_form_options();
 
 		// Create admin template.
-		$template = $this->generate_admin_template( 'page.php', $has_credentials, $signup_form );
+		$template = $this->generate_admin_template( 'page.php', $has_credentials, $form_options );
 
 		// Add menu elements.
 		add_menu_page( 'smaily', 'Smaily', 'manage_options', SMLY4WP_PLUGIN_PATH, '', SMLY4WP_PLUGIN_URL . '/gfx/icon.png' );
@@ -158,8 +158,8 @@ class Smaily_For_WP_Admin {
 
 		if ( $refresh && $result['error'] === false ) {
 			$has_credentials   = $this->options->has_credentials();
-			$signup_form       = $this->options->get_form_options()['form'];
-			$result['content'] = $this->generate_admin_template( 'form.php', $has_credentials, $signup_form )->render();
+			$form_options       = $this->options->get_form_options();
+			$result['content'] = $this->generate_admin_template( 'form.php', $has_credentials, $form_options )->render();
 		}
 
 		echo wp_json_encode( $result );
@@ -320,17 +320,17 @@ class Smaily_For_WP_Admin {
 	 * @access private
 	 * @param  string $template_name            Name of template file to use, without any prefixes (e.g form.php).
 	 * @param  bool   $has_credentials          User has saved valid credentials? Yes/No.
-	 * @param  string $newsletter_form          HTML of newsletter subscription form.
+	 * @param  string $form_options             Newsletter subscription form options.
 	 * @return Smaily_For_WP_Template $template Template of admin form.
 	 */
-	private function generate_admin_template( $template_name, $has_credentials, $newsletter_form ) {
+	private function generate_admin_template( $template_name, $has_credentials, $form_options ) {
 		// Generate form contents.
 		$template = new Smaily_For_WP_Template( 'admin/partials/smaily-for-wp-admin-' . $template_name );
 
 		$template->assign(
 			array(
 				'has_credentials' => $has_credentials,
-				'form'            => $newsletter_form,
+				'form_options'    => $form_options,
 			)
 		);
 
