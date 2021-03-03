@@ -132,11 +132,8 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$instance['show_name']   = isset( $new_instance['show_name'] ) ? (bool) $new_instance['show_name'] : false;
 		$instance['success_url'] = esc_url( $new_instance['success_url'] );
 		$instance['failure_url'] = esc_url( $new_instance['failure_url'] );
+		$instance['autoresponder'] = sanitize_text_field( $new_instance['autoresponder'] );
 
-		// Only update autoresponder ID if its one of existing autoresponder IDs.
-		if ( array_key_exists( $new_instance['autoresponder'], $this->autoresponders ) ) {
-			$instance['autoresponder'] = $new_instance['autoresponder'];
-		}
 		return $instance;
 	}
 
