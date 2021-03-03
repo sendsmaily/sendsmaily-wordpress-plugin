@@ -257,7 +257,7 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
-	 * Function is run when user regenerates signup form.
+	 * Function is run when user regenerates opt-in form.
 	 *
 	 * @since  3.0.0
 	 * @access private
@@ -265,7 +265,7 @@ class Smaily_For_WP_Admin {
 	 */
 	private function reset_form() {
 		$subdomain = $this->options->get_api_credentials()['subdomain'];
-		$template  = $this->generate_signup_template( 'advanced.php', $subdomain );
+		$template  = $this->generate_optin_template( 'basic.php', $subdomain );
 
 		// Return response.
 		return array(
@@ -292,10 +292,9 @@ class Smaily_For_WP_Admin {
 		if ( empty( $form ) ) {
 			// Load configuration data.
 			$subdomain = $this->options->get_api_credentials()['subdomain'];
-			$form      = $this->options->get_form_options()['form'];
 
-			$template = $this->generate_signup_template( 'advanced.php', $subdomain, $form );
 			// Render template.
+			$template = $this->generate_optin_template( 'basic.php', $subdomain );
 			$form = $template->render();
 		}
 
@@ -339,7 +338,7 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
-	 * Generate newsletter signup template and assign required variables via function parameters.
+	 * Generate newsletter opt-in form template and assign required variables via function parameters.
 	 *
 	 * @since  3.0.0
 	 * @access private
@@ -348,7 +347,7 @@ class Smaily_For_WP_Admin {
 	 * @param  string $newsletter_form          HTML of newsletter subscription form.
 	 * @return Smaily_For_WP_Template $template Template of admin form.
 	 */
-	private function generate_signup_template( $template_name, $subdomain, $newsletter_form = '' ) {
+	private function generate_optin_template( $template_name, $subdomain, $newsletter_form = '' ) {
 		// Generate form contents.
 		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $template_name );
 
