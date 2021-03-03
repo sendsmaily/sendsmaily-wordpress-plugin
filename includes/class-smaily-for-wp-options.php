@@ -84,7 +84,7 @@ class Smaily_For_WP_Options {
 		return array_merge(
 			array(
 				'form'        => '',
-				'is_advanced' => '',
+				'is_advanced' => false,
 			),
 			$form_options
 		);
@@ -112,9 +112,11 @@ class Smaily_For_WP_Options {
 	 * @param array $form_options Newsletter form options.
 	 */
 	public function update_form_options( $form_options ) {
-		// Update_option will sanitize input before saving. We should sanitize as well.
 		if ( is_array( $form_options ) ) {
-			$this->form_options = array_map( 'sanitize_text_field', $form_options );
+			$this->form_options = array(
+				'form' => isset( $form_options['form'] ) ? esc_textarea( $form_options['form'] ) : '',
+				'is_advanced' => isset( $form_options['form'] ) ? (bool) $form_options['is_advanced'] : false,
+			);
 		}
 		update_option( 'smailyforwp_form_option', $this->form_options );
 	}
