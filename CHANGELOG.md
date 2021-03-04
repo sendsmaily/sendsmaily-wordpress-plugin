@@ -1,5 +1,8 @@
 # Changelog
 
+### 3.0.1
+- Hardcoded development plugin name breaks production CSS and JS loading [[#99](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/99)]
+
 ### 3.0.0
 
 - Autoresponders can be now be configured in widget settings and per widget - [[#84](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/84)]
