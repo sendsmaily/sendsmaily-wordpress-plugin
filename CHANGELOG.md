@@ -1,6 +1,11 @@
 # Changelog
 
+### 3.0.2
+
+- Remove unnecessary static content limiting [[#102](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/102)]
+
 ### 3.0.1
+
 - Hardcoded development plugin name breaks production CSS and JS loading [[#99](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/99)]
 
 ### 3.0.0
