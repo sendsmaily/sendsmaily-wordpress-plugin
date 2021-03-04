@@ -62,7 +62,7 @@ class Smaily_For_WP {
 	 */
 	public function __construct() {
 		$this->version = SMLY4WP_PLUGIN_VERSION;
-		$this->plugin_name = 'smaily_for_wp';
+		$this->plugin_name = 'smaily-for-wp';
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_lifecycle_hooks();
