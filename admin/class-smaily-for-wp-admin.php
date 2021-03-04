@@ -56,11 +56,7 @@ class Smaily_For_WP_Admin {
 	 */
 	public function enqueue_styles() {
 		wp_register_style( $this->plugin_name, SMLY4WP_PLUGIN_URL . '/admin/css/smaily-for-wp-admin.css', array(), $this->version, 'all' );
-		// Only enqueue in module page.
-		$screen = get_current_screen();
-		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_' . $this->plugin_name ) {
-			wp_enqueue_style( $this->plugin_name );
-		}
+		wp_enqueue_style( $this->plugin_name );
 	}
 
 	/**
@@ -70,12 +66,8 @@ class Smaily_For_WP_Admin {
 	 */
 	public function enqueue_scripts() {
 		wp_register_script( $this->plugin_name, SMLY4WP_PLUGIN_URL . '/admin/js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
-		// Only enqueue in module page.
-		$screen = get_current_screen();
-		if ( isset( $screen->base ) && $screen->base === 'toplevel_page_' . $this->plugin_name ) {
-			wp_enqueue_script( $this->plugin_name );
-			wp_localize_script( $this->plugin_name, 'smaily_for_wp', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
-		}
+		wp_enqueue_script( $this->plugin_name );
+		wp_localize_script( $this->plugin_name, 'smaily_for_wp', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 	}
 
 	/**
