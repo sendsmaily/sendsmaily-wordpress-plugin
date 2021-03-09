@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.3
+
+- Test compatibility with WordPress 5.7 - [[#95](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/issues/95)]
+
 ### 3.0.2
 
 - Remove unnecessary static content limiting [[#102](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/102)]
