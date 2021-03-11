@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.4
+
+- Fix advanced form when using shortcode.
+
 ### 3.0.3
 
 - Test compatibility with WordPress 5.7 - [[#95](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/issues/95)]
