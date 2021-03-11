@@ -90,7 +90,7 @@ class Smaily_For_WP_Public {
 		$config['autoresponder_id'] = $shortcode_atts['autoresponder_id'];
 
 		// Create admin template.
-		$file     = $config['is_advanced'] === '1' ? 'advanced.php' : 'basic.php';
+		$file     = $config['is_advanced'] === true ? 'advanced.php' : 'basic.php';
 		$template = new Smaily_For_WP_Template( 'public/partials/smaily-for-wp-public-' . $file );
 		$template->assign( $config );
 		// Display responses on Smaily subscription form.
