@@ -2,7 +2,7 @@
 
 ### 3.0.4
 
-- Fix advanced form when using shortcode.
+- Fix advanced form when using shortcode - [[#108](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/108)]
 
 ### 3.0.3
 
