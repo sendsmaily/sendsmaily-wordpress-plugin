@@ -43,14 +43,14 @@ And run the environment:
 
 The repository is split into multiple parts:
 
+- `admin` - plugin administration views and assets;
 - `assets` - screenshots for Wordpress.org plugin page;
-- `code` - classes for providing core functionality to the plugin;
 - `gfx` - images used in the admin panel;
-- `html` - admin panel and public templates;
 - `includes` - additional content functionality;
-- `js` - Javascript for public page and admin panel;
-- `lang` - translation files,
-- `vendor` - Composer packages;
+- `lang` - translation files;
+- `migrations` - schema and data migrations;
+- `public` - plugin public-facing views and assets;
+- `vendor` - Composer packages.
 
 In addition there are system directories:
 
