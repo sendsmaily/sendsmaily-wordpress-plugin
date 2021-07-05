@@ -9,6 +9,8 @@ First off, thanks for taking the time to contribute!
     - [Starting the environment](#starting-the-environment)
     - [Stopping the environment](#stopping-the-environment)
     - [Resetting the environment](#resetting-the-environment)
+- [Migrations](#migrations)
+    - [Creating a migration file](#creating-a-migration-file)
 - [Releasing](#releasing)
 
 
@@ -34,6 +36,7 @@ And run the environment:
 
     $ docker-compose up
 
+
 # Internals
 
 ## Structure of the repository
@@ -53,6 +56,7 @@ In addition there are system directories:
 
 - `.github` - GitHub issue and pull request templates;
 - `.vscode` - Visual Studio Code settings.
+
 
 # Development
 
@@ -77,6 +81,28 @@ Environment can be stopped by executing:
 If you need to reset the Wordpress installation in the development environment, just simply delete environment's Docker volumes. Easiest way to achieve this is by running:
 
     $ docker-compose down -v
+
+
+# Migrations
+
+Plugin has built-in feature to run schema and data migrations when plugin version changes.
+
+## Creating a migration file
+
+All migrations must be placed inside `migrations` directory, and named by pattern `upgrade-[major]-[minor]-[patch].php`. Where `major`, `minor` and `patch` represent the to-be-released version of the plugin.
+
+```php
+<?php
+
+/**
+ * Migration to make changes to the database schema.
+ */
+
+$upgrade = function() {
+    // Your migration goes here...
+};
+```
+
 
 # Releasing
 
