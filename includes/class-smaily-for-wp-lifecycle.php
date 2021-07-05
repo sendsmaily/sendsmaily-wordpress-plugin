@@ -91,7 +91,7 @@ class Smaily_For_WP_Lifecycle {
 		}
 
 		$migrations = array(
-			'3.0.0' => 'upgrade-3_0_0.php',
+			'3.0.0' => 'upgrade-3-0-0.php',
 		);
 
 		foreach ( $migrations as $migration_version => $migration_file ) {
