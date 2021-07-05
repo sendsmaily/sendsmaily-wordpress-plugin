@@ -9,6 +9,8 @@ First off, thanks for taking the time to contribute!
     - [Starting the environment](#starting-the-environment)
     - [Stopping the environment](#stopping-the-environment)
     - [Resetting the environment](#resetting-the-environment)
+- [Migrations](#migrations)
+    - [Creating a migration file](#creating-a-migration-file)
 - [Releasing](#releasing)
 
 
@@ -34,25 +36,27 @@ And run the environment:
 
     $ docker-compose up
 
+
 # Internals
 
 ## Structure of the repository
 
 The repository is split into multiple parts:
 
+- `admin` - plugin administration views and assets;
 - `assets` - screenshots for Wordpress.org plugin page;
-- `code` - classes for providing core functionality to the plugin;
 - `gfx` - images used in the admin panel;
-- `html` - admin panel and public templates;
 - `includes` - additional content functionality;
-- `js` - Javascript for public page and admin panel;
-- `lang` - translation files,
-- `vendor` - Composer packages;
+- `lang` - translation files;
+- `migrations` - schema and data migrations;
+- `public` - plugin public-facing views and assets;
+- `vendor` - Composer packages.
 
 In addition there are system directories:
 
 - `.github` - GitHub issue and pull request templates;
 - `.vscode` - Visual Studio Code settings.
+
 
 # Development
 
@@ -77,6 +81,28 @@ Environment can be stopped by executing:
 If you need to reset the Wordpress installation in the development environment, just simply delete environment's Docker volumes. Easiest way to achieve this is by running:
 
     $ docker-compose down -v
+
+
+# Migrations
+
+Plugin has built-in feature to run schema and data migrations when plugin version changes.
+
+## Creating a migration file
+
+All migrations must be placed inside `migrations` directory, and named by pattern `upgrade-[major]-[minor]-[patch].php`. Where `major`, `minor` and `patch` represent the to-be-released version of the plugin.
+
+```php
+<?php
+
+/**
+ * Migration to make changes to the database schema.
+ */
+
+$upgrade = function() {
+    // Your migration goes here...
+};
+```
+
 
 # Releasing
 
