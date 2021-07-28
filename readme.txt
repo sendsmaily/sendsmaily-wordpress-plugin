@@ -5,7 +5,7 @@ Requires PHP: 5.6
 Requires at least: 4.0
 Stable tag: 3.0.4
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
-Tested up to: 5.7.0
+Tested up to: 5.8.0
 
 Smaily newsletter subscription plugin for WordPress
 
