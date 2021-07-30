@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Smaily for WP\n"
-"POT-Creation-Date: 2021-02-18 11:58+0200\n"
-"PO-Revision-Date: 2021-02-18 12:01+0200\n"
+"POT-Creation-Date: 2021-07-30 11:07+0300\n"
+"PO-Revision-Date: 2021-07-30 11:07+0300\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Smaily <info@smaily.com>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_x:1,2c;_nx:4c,1,2;"
@@ -17,43 +17,43 @@ msgstr ""
 "esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-smaily-for-wp-admin.php:190
+#: admin/class-smaily-for-wp-admin.php:182
 msgid "Please enter subdomain!"
 msgstr "Palun sisesta alamdomeen!"
 
-#: admin/class-smaily-for-wp-admin.php:194
+#: admin/class-smaily-for-wp-admin.php:186
 msgid "Please enter username!"
 msgstr "Palun sisesta kasutajatunnus!"
 
-#: admin/class-smaily-for-wp-admin.php:198
+#: admin/class-smaily-for-wp-admin.php:190
 msgid "Please enter password!"
 msgstr "Palun sisesta parool!"
 
-#: admin/class-smaily-for-wp-admin.php:214
+#: admin/class-smaily-for-wp-admin.php:206
 msgid "Wrong credentials"
 msgstr "Valed autentimise tunnused"
 
-#: admin/class-smaily-for-wp-admin.php:219
+#: admin/class-smaily-for-wp-admin.php:211
 msgid "Error in subdomain"
 msgstr "Viga alamdomeenis"
 
-#: admin/class-smaily-for-wp-admin.php:229
+#: admin/class-smaily-for-wp-admin.php:221
 msgid "Something went wrong with request to Smaily"
 msgstr "Ilmnes probleem Smaily-ga ühendamisel"
 
-#: admin/class-smaily-for-wp-admin.php:238
+#: admin/class-smaily-for-wp-admin.php:230
 msgid "Credentials validated."
 msgstr "Autentimise tunnused valideeritud."
 
-#: admin/class-smaily-for-wp-admin.php:255
+#: admin/class-smaily-for-wp-admin.php:247
 msgid "Credentials removed."
 msgstr "Autentimise tunnused eemaldatud."
 
-#: admin/class-smaily-for-wp-admin.php:272
+#: admin/class-smaily-for-wp-admin.php:264
 msgid "Newsletter subscription form reset to default."
 msgstr "Liitumisvormi kood taasloodud."
 
-#: admin/class-smaily-for-wp-admin.php:312
+#: admin/class-smaily-for-wp-admin.php:303
 msgid "Changes saved."
 msgstr "Salvestatud."
 
@@ -158,46 +158,42 @@ msgstr ""
 "Ei suutnud lisada uudiskirja nimekirja teadmata põhjusel. Tõenäoliselt "
 "probleem Smaily-s."
 
-#: includes/class-smaily-for-wp-widget.php:166
+#: includes/class-smaily-for-wp-widget.php:164
 msgid "Title"
 msgstr "Pealkiri"
 
-#: includes/class-smaily-for-wp-widget.php:176
+#: includes/class-smaily-for-wp-widget.php:174
 msgid "Display name field?"
 msgstr "Näita nime välja?"
 
-#: includes/class-smaily-for-wp-widget.php:183
+#: includes/class-smaily-for-wp-widget.php:181
 msgid "Success URL"
 msgstr "Õnnestumise URL"
 
-#: includes/class-smaily-for-wp-widget.php:191
+#: includes/class-smaily-for-wp-widget.php:189
 msgid "Failure URL"
 msgstr "Ebaõnnestumise URL"
 
-#: includes/class-smaily-for-wp-widget.php:199
+#: includes/class-smaily-for-wp-widget.php:197
 msgid "Autoresponders"
 msgstr "Automaatvastajad"
 
-#: includes/class-smaily-for-wp-widget.php:201
+#: includes/class-smaily-for-wp-widget.php:199
 msgid "No autoresponder"
 msgstr "Ilma automaatvastajata vorm"
 
-#: public/partials/smaily-for-wp-public-advanced.php:9
 #: public/partials/smaily-for-wp-public-basic.php:3
 msgid "Thank you for subscribing to our newsletter."
 msgstr "Täname, et liitusite meie uudiskirjaga."
 
-#: public/partials/smaily-for-wp-public-advanced.php:16
 #: public/partials/smaily-for-wp-public-basic.php:10
 msgid "Email"
 msgstr "E-post"
 
-#: public/partials/smaily-for-wp-public-advanced.php:18
 #: public/partials/smaily-for-wp-public-basic.php:12
 msgid "Name"
 msgstr "Nimi"
 
-#: public/partials/smaily-for-wp-public-advanced.php:20
 #: public/partials/smaily-for-wp-public-basic.php:14
 msgid "Subscribe"
 msgstr "Liitu"
