@@ -3,7 +3,7 @@ Contributors: sendsmaily, kaarel, tomabel, marispulk
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 5.8.0
 
@@ -75,6 +75,9 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 6. Smaily plugin shortcode from.
 
 == Changelog ==
+
+= 3.0.6 =
+- Update user manual links.
 
 = 3.0.5 =
 - Test compatibility with WordPress 5.8.

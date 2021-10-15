@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.6
+
+- Update user manual links - [[#118](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/118)]
+
 ### 3.0.5
 
 - Test compatibility with WordPress 5.8 - [[#115](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/115)]
