@@ -30,7 +30,7 @@ Automatically generate a simple sign-up form and add new subscribers to Smaily s
 
 = Documentation & Support =
 
-Online documentation with help is available at the [Knowledgebase](http://help.smaily.com/en/support/home).
+Online documentation with help is available at the [Knowledgebase](https://smaily.com/help/user-manuals/).
 
 = Contribute =
 

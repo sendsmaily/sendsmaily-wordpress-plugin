@@ -31,7 +31,7 @@
 		<td>
 			<input type="password" class="regular-text" name="password" style="max-width:50%;"/>
 			<small class="form-text text-muted" style="display:block;">
-				<a href="http://help.smaily.com/en/support/solutions/articles/16000062943-create-api-user">
+				<a href="https://smaily.com/help/api/general/create-api-user/">
 					<?php echo esc_html__( 'How to create API credentials?', 'smaily-for-wp' ); ?>
 				</a>
 			</small>
