@@ -3,7 +3,7 @@ Contributors: sendsmaily, kaarel, tomabel, marispulk
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 3.0.5
+Stable tag: 3.0.6
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 5.8.0
 
@@ -30,7 +30,7 @@ Automatically generate a simple sign-up form and add new subscribers to Smaily s
 
 = Documentation & Support =
 
-Online documentation with help is available at the [Knowledgebase](http://help.smaily.com/en/support/home).
+Online documentation with help is available at the [Knowledgebase](https://smaily.com/help/user-manuals/).
 
 = Contribute =
 
@@ -75,6 +75,9 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 6. Smaily plugin shortcode from.
 
 == Changelog ==
+
+= 3.0.6 =
+- Update user manual links.
 
 = 3.0.5 =
 - Test compatibility with WordPress 5.8.
