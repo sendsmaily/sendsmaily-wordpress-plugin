@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -6,6 +7,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/public
  */
+
 class Smaily_For_WP_Public {
 
 	/**
@@ -75,7 +77,7 @@ class Smaily_For_WP_Public {
 		$config['is_advanced'] = $form_options['is_advanced'];
 
 		// Parse attributes out of shortcode tag.
-		$shortcode_atts = shortcode_atts(
+		$shortcode_atts             = shortcode_atts(
 			array(
 				'success_url'      => get_site_url(),
 				'failure_url'      => get_site_url(),

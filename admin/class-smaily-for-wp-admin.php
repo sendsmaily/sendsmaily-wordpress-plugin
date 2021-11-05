@@ -78,7 +78,7 @@ class Smaily_For_WP_Admin {
 	public function smaily_admin_render() {
 		// Load configuration data.
 		$has_credentials = $this->options->has_credentials();
-		$form_options     = $this->options->get_form_options();
+		$form_options    = $this->options->get_form_options();
 
 		// Create admin template.
 		$template = $this->generate_admin_template( 'page.php', $has_credentials, $form_options );
@@ -150,7 +150,7 @@ class Smaily_For_WP_Admin {
 
 		if ( $refresh && $result['error'] === false ) {
 			$has_credentials   = $this->options->has_credentials();
-			$form_options       = $this->options->get_form_options();
+			$form_options      = $this->options->get_form_options();
 			$result['content'] = $this->generate_admin_template( 'form.php', $has_credentials, $form_options )->render();
 		}
 
@@ -194,7 +194,7 @@ class Smaily_For_WP_Admin {
 		// Validate credentials with get request.
 		$rqst = ( new Smaily_For_WP_Request() )
 			->auth( $params['username'], $params['password'] )
-			->setUrl( 'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
+			->set_url( 'https://' . $params['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
 			->get();
 
 		// Error handilng.
@@ -287,7 +287,7 @@ class Smaily_For_WP_Admin {
 
 			// Render template.
 			$template = $this->generate_optin_template( 'basic.php', $subdomain );
-			$form = $template->render();
+			$form     = $template->render();
 		}
 
 		$this->options->update_form_options(
@@ -391,7 +391,7 @@ class Smaily_For_WP_Admin {
 		}
 
 		$result = ( new Smaily_For_WP_Request() )
-			->setUrl( 'https://' . $api_credentials['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
+			->set_url( 'https://' . $api_credentials['subdomain'] . '.sendsmaily.net/api/workflows.php?trigger_type=form_submitted' )
 			->auth( $api_credentials['username'], $api_credentials['password'] )
 			->get();
 

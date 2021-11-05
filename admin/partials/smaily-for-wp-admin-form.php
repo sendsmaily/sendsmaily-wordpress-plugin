@@ -45,12 +45,28 @@
 
 <?php if ( $this->has_credentials ) : ?>
 <ul class="tabs">
-	<li><a id="link-basic" href="#basic"<?php if ( $this->form_options['is_advanced'] === false): ?> class="selected"<?php endif; ?>><?php echo esc_html__( 'Basic', 'smaily-for-wp' ); ?></a></li>
-	<li><a id="link-advanced" href="#advanced"<?php if ( $this->form_options['is_advanced'] === true): ?> class="selected"<?php endif; ?>><?php echo esc_html__( 'Advanced', 'smaily-for-wp' ); ?></a></li>
+	<li>
+		<?php if ( $this->form_options['is_advanced'] === false ) : ?>
+		<a id="link-basic" href="#basic" class="selected"><?php echo esc_html__( 'Basic', 'smaily-for-wp' ); ?></a>
+		<?php else : ?>
+		<a id="link-basic" href="#basic"><?php echo esc_html__( 'Basic', 'smaily-for-wp' ); ?></a>
+		<?php endif; ?>
+	</li>
+	<li>
+		<?php if ( $this->form_options['is_advanced'] === true ) : ?>
+		<a id="link-advanced" href="#advanced" class="selected"><?php echo esc_html__( 'Advanced', 'smaily-for-wp' ); ?></a>
+		<?php else : ?>
+		<a id="link-advanced" href="#advanced"><?php echo esc_html__( 'Advanced', 'smaily-for-wp' ); ?></a>
+		<?php endif; ?>
+	</li>
 </ul>
 <div class="clear"></div>
 
-<div id="content-advanced" class="tab-content<?php if ( $this->form_options['is_advanced'] === false): ?> hidden<?php endif; ?>">
+	<?php if ( $this->form_options['is_advanced'] === false ) : ?>
+<div id="content-advanced" class="tab-content hidden">
+<?php else : ?>
+<div id="content-advanced" class="tab-content">
+<?php endif; ?>">
 	<div class="wrap">
 		<label><?php echo esc_html__( 'Newsletter subscription form', 'smaily-for-wp' ); ?> <a href="#" onclick="javascript:Default.resetForm();return false;" title="<?php echo esc_html__( 'Restore original subscription form', 'smaily-for-wp' ); ?>">(<?php echo esc_html__( 'Regenerate', 'smaily-for-wp' ); ?>)</a></label>
 		<em><?php echo esc_html__( 'HTML of subscription form', 'smaily-for-wp' ); ?></em>
@@ -66,11 +82,11 @@
 <?php endif; ?>
 
 <script type="text/javascript">//<![CDATA[
-  new Tabs({'target':'ul.tabs'});
-  jQuery('#link-basic').click(function(){
-	  jQuery('input[name=is_advanced]').val('0');
-  });
-  jQuery('#link-advanced').click(function(){
-	  jQuery('input[name=is_advanced]').val('1');
-  });
+	new Tabs({'target':'ul.tabs'});
+	jQuery('#link-basic').click(function(){
+		jQuery('input[name=is_advanced]').val('0');
+	});
+	jQuery('#link-advanced').click(function(){
+		jQuery('input[name=is_advanced]').val('1');
+	});
 //]]></script>

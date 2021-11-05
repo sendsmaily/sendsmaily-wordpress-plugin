@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This class is used to work with the plugin's options
  * that take user input e.g API credentials, form settings.
@@ -7,6 +8,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */
+
 class Smaily_For_WP_Options {
 
 	/**
@@ -114,7 +116,7 @@ class Smaily_For_WP_Options {
 	public function update_form_options( $form_options ) {
 		if ( is_array( $form_options ) ) {
 			$this->form_options = array(
-				'form' => isset( $form_options['form'] ) ? esc_textarea( $form_options['form'] ) : '',
+				'form'        => isset( $form_options['form'] ) ? esc_textarea( $form_options['form'] ) : '',
 				'is_advanced' => isset( $form_options['form'] ) ? (bool) $form_options['is_advanced'] : false,
 			);
 		}

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Defines the request making functionality of the plugin.
  *
@@ -6,6 +7,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */
+
 class Smaily_For_WP_Request {
 
 	/**
@@ -65,7 +67,7 @@ class Smaily_For_WP_Request {
 	 * @param  string $url Request endpoint.
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
-	public function setUrl( $url ) {
+	public function set_url( $url ) {
 		$this->_url = $url;
 		return $this;
 	}
@@ -77,7 +79,7 @@ class Smaily_For_WP_Request {
 	 * @param  array $data Request data.
 	 * @return Smaily_For_WP_Request For method chaining.
 	 */
-	public function setData( array $data ) {
+	public function set_data( array $data ) {
 		$this->_data = $data;
 		return $this;
 	}
@@ -92,7 +94,7 @@ class Smaily_For_WP_Request {
 		$response  = array();
 		$useragent = 'smaily-for-wp/' . SMLY4WP_PLUGIN_VERSION . ' (WordPress/' . get_bloginfo( 'version' ) . '; +' . get_bloginfo( 'url' ) . ')';
 		$args      = array(
-			'headers' => array(
+			'headers'    => array(
 				'Authorization' => 'Basic ' . base64_encode( $this->_username . ':' . $this->_password ),
 			),
 			'user-agent' => $useragent,

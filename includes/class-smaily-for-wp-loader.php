@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Register all actions and filters for the plugin.
  *
@@ -10,6 +11,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */
+
 class Smaily_For_WP_Loader {
 
 	/**
@@ -88,7 +90,7 @@ class Smaily_For_WP_Loader {
 			'component'     => $component,
 			'callback'      => $callback,
 			'priority'      => $priority,
-			'accepted_args' => $accepted_args
+			'accepted_args' => $accepted_args,
 		);
 
 		return $hooks;

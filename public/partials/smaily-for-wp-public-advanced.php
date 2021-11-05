@@ -1,1 +1,1 @@
-<?php echo html_entity_decode( $this->form ); ?>
+<?php echo html_entity_decode( $this->form );

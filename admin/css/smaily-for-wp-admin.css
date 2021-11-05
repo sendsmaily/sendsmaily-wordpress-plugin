@@ -1,21 +1,60 @@
 /**
  * All of the CSS used for the admin view.
  */
-.hidden {display:none}
+.hidden {
+    display: none;
+}
 
-.wrap h2 sup {color:#090}
+.wrap h2 sup {
+    color: #009900;
+}
 
 /* form container styles */
-#form-container img, #form-container span {vertical-align:middle}
-	#form-container .wrap {padding:5px 0; margin:0}
-	#form-container .wrap label {font-weight:bold}
-	#form-container .wrap em {display:block; font-style:normal; color:#999; padding-bottom:5px}
-	#form-container .wrap input.input-text, #form-container .wrap select, #form-container .wrap textarea {width:100%}
+#form-container img,
+#form-container span {
+    vertical-align: middle;
+}
+
+#form-container .wrap {
+    margin: 0;
+    padding: 5px 0;
+}
+#form-container .wrap label {
+    font-weight: bold;
+}
+#form-container .wrap em {
+    color: #999999;
+    display: block;
+    font-style: normal;
+    padding-bottom: 5px;
+}
+#form-container .wrap input.input-text,
+#form-container .wrap select,
+#form-container .wrap textarea {
+    width: 100%;
+}
 
 /* content tabs */
-.tab-content {padding:5px 4px 10px}
+.tab-content {
+    padding: 5px 4px 10px;
+}
 
-.tabs {padding-top:10px}
-.tabs li {float:left; margin-right:2px}
-.tabs li a {background:#ccc; -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; padding:4px 6px; color:#999; text-decoration:none}
-.tabs li a.selected {background:#21759B; color:#fff}
+.tabs {
+    padding-top: 10px;
+}
+.tabs li {
+    float: left;
+    margin-right: 2px;
+}
+.tabs li a {
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    background: #cccccc;
+    color: #999999;
+    padding: 4px 6px;
+    text-decoration: none;
+}
+.tabs li a.selected {
+    background: #21759B;
+    color: #fff;
+}

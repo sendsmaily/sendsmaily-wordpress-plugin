@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The core plugin class.
  *
@@ -12,6 +13,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */
+
 class Smaily_For_WP {
 
 	/**
@@ -61,7 +63,7 @@ class Smaily_For_WP {
 	 * @since 3.0.0
 	 */
 	public function __construct() {
-		$this->version = SMLY4WP_PLUGIN_VERSION;
+		$this->version     = SMLY4WP_PLUGIN_VERSION;
 		$this->plugin_name = 'smaily-for-wp';
 		$this->load_dependencies();
 		$this->set_locale();
@@ -108,14 +110,14 @@ class Smaily_For_WP {
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Smaily_For_WP_i18n class in order to set the domain and to register the hook
+	 * Uses the Smaily_For_WP_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since  3.0.0
 	 * @access private
 	 */
 	private function set_locale() {
-		$plugin_i18n = new Smaily_For_WP_i18n();
+		$plugin_i18n = new Smaily_For_WP_I18n();
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
 

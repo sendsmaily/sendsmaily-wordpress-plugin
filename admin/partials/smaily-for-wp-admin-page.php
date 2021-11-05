@@ -5,6 +5,6 @@
 	</h2>
 
 	<form id="form-container" action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" method="post">
-		<?php echo $this->partial( 'admin/partials/smaily-for-wp-admin-form.php', $this->getVars() ); ?>
+		<?php echo $this->partial( 'admin/partials/smaily-for-wp-admin-form.php', $this->get_vars() ); ?>
 	</form>
 </div>
