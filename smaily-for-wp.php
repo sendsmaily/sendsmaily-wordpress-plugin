@@ -9,7 +9,7 @@
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin/
  * Text Domain:       smaily-for-wp
  * Description:       Smaily newsletter subscription form.
- * Version:           3.0.6
+ * Version:           3.0.7
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Current plugin version.
  */
-define( 'SMLY4WP_PLUGIN_VERSION', '3.0.6' );
+define( 'SMLY4WP_PLUGIN_VERSION', '3.0.7' );
 
 /**
  * Absolute URL to the Smaily for WP plugin directory.
