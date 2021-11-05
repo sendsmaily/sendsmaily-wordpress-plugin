@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Define all the logic related to plugin activation, upgrade and uninstall logic.
  *
@@ -6,6 +7,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */
+
 class Smaily_For_WP_Lifecycle {
 
 	/**

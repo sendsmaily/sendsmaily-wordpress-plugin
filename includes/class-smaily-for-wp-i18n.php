@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Define the internationalization functionality.
  *
@@ -6,7 +7,8 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */
-class Smaily_For_WP_i18n {
+
+class Smaily_For_WP_I18n {
 
 	/**
 	 * Load the plugin text domain for translation.

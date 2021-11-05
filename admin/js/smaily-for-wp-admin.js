@@ -1,11 +1,11 @@
-var Default = (function(){
+var Default = (function () {
 	var _form = null;
 
 	/**
 	 * Display response message.
 	 * @return void
 	 */
-	function _throwMessage(text, error){
+	function _throwMessage(text, error) {
 		// create message and insert to dom
 		var message = jQuery('<div></div>').attr({
 			'id': 'message',
@@ -21,10 +21,10 @@ var Default = (function(){
 	 * Handle response.
 	 * @return void|bool
 	 */
-	function _handleResponse(response){
-		if(!response){ return false; }
+	function _handleResponse(response) {
+		if (!response) { return false; }
 
-		if(response.message){
+		if (response.message) {
 			// remove previous messages
 			jQuery('#message').remove();
 
@@ -38,12 +38,12 @@ var Default = (function(){
 	 * based on form values
 	 * @return String
 	 */
-	function _buildQuery(){
+	function _buildQuery() {
 		var result = {};
 
 		// get serialized data and restructure
 		var data = jQuery('#form-container').serializeArray();
-		for(var i in data){
+		for (var i in data) {
 			var item = data[i];
 			result[item['name']] = item['value'];
 		}
@@ -55,7 +55,7 @@ var Default = (function(){
 	 * request helper
 	 * @return void
 	 */
-	function _request(data, callback){
+	function _request(data, callback) {
 		// show loader
 		jQuery('#h2-loader').show();
 
@@ -64,15 +64,15 @@ var Default = (function(){
 
 			smaily_for_wp.ajax_url,
 			{
-				'action' : 'smaily_admin_save',
-				'form_data' : jQuery.param(data)
+				'action': 'smaily_admin_save',
+				'form_data': jQuery.param(data)
 			},
-			function(response) {
+			function (response) {
 				// handle response
 				_handleResponse(response);
 
 				// execute callback function
-				if(typeof(callback) == 'function'){
+				if (typeof (callback) == 'function') {
 					callback(response);
 				}
 
@@ -86,15 +86,15 @@ var Default = (function(){
 		 * request api key validation
 		 * @return void
 		 */
-		validateApiKey: function(){
+		validateApiKey: function () {
 			// build query
 			var query = _buildQuery();
 			query['op'] = 'validateApiKey';
 			query['refresh'] = 1;
 
 			// make the request
-			_request(query, function(response){
-				if(response.content){
+			_request(query, function (response) {
+				if (response.content) {
 					jQuery('#form-container').html(response.content);
 				}
 			});
@@ -104,7 +104,7 @@ var Default = (function(){
 		 * remove api key request
 		 * @return void
 		 */
-		removeApiKey: function(){
+		removeApiKey: function () {
 			// build query
 			var query = {
 				'op': 'removeApiKey',
@@ -112,8 +112,8 @@ var Default = (function(){
 			};
 
 			// make the request
-			_request(query, function(response){
-				if(response.content){
+			_request(query, function (response) {
+				if (response.content) {
 					jQuery('#form-container').html(response.content);
 				}
 			});
@@ -124,14 +124,14 @@ var Default = (function(){
 		 * reset back to default form
 		 * @return void
 		 */
-		resetForm: function(){
+		resetForm: function () {
 			// build query
 			var query = {
 				'op': 'resetForm'
 			};
 
 			// make the request
-			_request(query, function(response){
+			_request(query, function (response) {
 				// set textarea content
 				var content = response.content;
 				jQuery('#advanced-form').val(content);
@@ -142,7 +142,7 @@ var Default = (function(){
 		 * save form contents
 		 * @return void
 		 */
-		save: function(){
+		save: function () {
 			// build query
 			var query = _buildQuery();
 			query['op'] = 'save';
@@ -157,7 +157,7 @@ var Default = (function(){
  * Tabs
  * @param {Object} args
  */
-var Tabs = (function(args){
+var Tabs = (function (args) {
 	// default options
 	var _options = {
 		'target': '',
@@ -168,17 +168,17 @@ var Tabs = (function(args){
 	_options = jQuery.extend(_options, args);
 
 	// check required target
-	if(!_options.target || _options.target.length < 1){ return false; }
+	if (!_options.target || _options.target.length < 1) { return false; }
 
 	// bind click event to target tabs
-	jQuery(_options.target+' a').click(function(){
+	jQuery(_options.target + ' a').click(function () {
 		_select(this);
 	});
 
 	// use location hash to select tab
 	var hash = location.hash.length > 0 ? location.hash : '';
-	if(hash.length > 0){
-		var target = jQuery(_options.target+' a[href='+hash+']');
+	if (hash.length > 0) {
+		var target = jQuery(_options.target + ' a[href=' + hash + ']');
 		_select(target);
 	}
 
@@ -186,22 +186,22 @@ var Tabs = (function(args){
 	 * select element
 	 * @param {Object} element
 	 */
-	function _select(element){
-		if(!element || element.length < 1){ return false; }
+	function _select(element) {
+		if (!element || element.length < 1) { return false; }
 		var href = jQuery(element).attr('href');
 		var hash = (href.length > 0 && /#/.test(href)) ? href.split('#')[1] : '';
 
 		// exit if does not have hash
-		if(hash.length < 1){ return false; }
+		if (hash.length < 1) { return false; }
 
 		// reset target tabs selected state
-		jQuery(_options.target+' a').removeClass('selected');
+		jQuery(_options.target + ' a').removeClass('selected');
 
 		// set this tab's state to selected
 		jQuery(element).addClass('selected');
 
 		// hide tabs and make clicked tab contents visible
 		jQuery('*[id^=content\-]').addClass('hidden');
-		jQuery('#content-'+hash).removeClass('hidden');
+		jQuery('#content-' + hash).removeClass('hidden');
 	}
 });

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Defines the template generating and rendering functionality of the plugin.
  *
@@ -6,6 +7,7 @@
  * @package    Smaily_For_WP
  * @subpackage Smaily_For_WP/includes
  */
+
 class Smaily_For_WP_Template {
 
 	/**
@@ -107,7 +109,7 @@ class Smaily_For_WP_Template {
 	 * @since  3.0.0
 	 * @return string $lang Language code.
 	 */
-	private function getLanguageCode() {
+	private function get_language_code() {
 		// Language code if using WPML.
 		$lang = '';
 		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
@@ -131,7 +133,7 @@ class Smaily_For_WP_Template {
 	 * @since  3.0.0
 	 * @return array
 	 */
-	public function getVars() {
+	public function get_vars() {
 		return $this->_vars;
 	}
 
