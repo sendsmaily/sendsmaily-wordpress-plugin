@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.0.7
+
+- Fix automation workflows are fetched on every operation in WordPress [[#121](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/121)]
+
 ### 3.0.6
 
 - Update user manual links - [[#118](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/118)]
