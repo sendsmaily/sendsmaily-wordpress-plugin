@@ -9,13 +9,13 @@
 class Smaily_For_WP_Widget extends WP_Widget {
 
 	/**
-	 * Array of autoresponders.
+	 * Admin model.
 	 *
-	 * @since  3.0.0
+	 * @since  3.0.7
 	 * @access private
-	 * @var    array    $autoresponders Used to populate the autoresponder <select> field.
+	 * @var    Smaily_For_WP_Admin
 	 */
-	private $autoresponders;
+	private $admin_model;
 
 	/**
 	 * Handler for storing/retrieving data via Options API.
@@ -37,8 +37,8 @@ class Smaily_For_WP_Widget extends WP_Widget {
 		$widget_ops = array( 'description' => __( 'Smaily newsletter subscription form', 'smaily-for-wp' ) );
 		parent::__construct( 'smaily_subscription_widget', __( 'Smaily Newsletter Subscription', 'smaily-for-wp' ), $widget_ops );
 
-		$this->options        = $options;
-		$this->autoresponders = $admin_model->get_autoresponders();
+		$this->options     = $options;
+		$this->admin_model = $admin_model;
 	}
 
 	/**
@@ -197,7 +197,7 @@ class Smaily_For_WP_Widget extends WP_Widget {
 			<label for="' . $autoresponder_id . '">' . esc_html__( 'Autoresponders', 'smaily-for-wp' ) . ':</label>
 			<select id="' . $autoresponder_id . '" name="' . $autoresponder . '">
 			<option value="">' . esc_html__( 'No autoresponder', 'smaily-for-wp' ) . '</option>';
-		foreach ( $this->autoresponders as $id => $title ) {
+		foreach ( $this->admin_model->get_autoresponders() as $id => $title ) {
 			echo '<option value="' . esc_attr( $id ) . '"' . selected( $instance['autoresponder'], $id, false ) . '>' . esc_attr( $title ) . '</option>';
 		}
 		echo '</select></p>';
