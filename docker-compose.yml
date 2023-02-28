@@ -21,6 +21,11 @@ services:
       MYSQL_ROOT_PASSWORD: smailydev1
     volumes:
       - db:/var/lib/mysql
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 26677
+        hard: 46677
 
   phpmyadmin:
     depends_on:
@@ -34,6 +39,7 @@ services:
       PMA_USER: root
       PMA_PASSWORD: smailydev1
       MYSQL_ROOT_PASSWORD: smailydev1
+
 volumes:
   wordpress:
   db:
