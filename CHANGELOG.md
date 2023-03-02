@@ -2,7 +2,7 @@
 
 ### 3.1.0
 
-- Adds basic support for Gutenber blocks [[#129](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/129)]
+- Adds basic support for Gutenberg blocks [[#129](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/129)]
 
 ### 3.0.7
 
