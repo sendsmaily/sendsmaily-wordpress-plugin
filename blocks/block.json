@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "smaily-for-wp/newsletter-subscription-block",
+  "version": "0.1.0",
+  "title": "Smaily for WP",
+  "category": "widgets",
+  "icon": "smaily",
+  "description": "Smaily newsletter subscription form",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "smaily-for-wp",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
