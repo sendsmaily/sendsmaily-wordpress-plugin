@@ -3,9 +3,9 @@ Contributors: sendsmaily, kaarel, tomabel, marispulk
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 3.0.7
+Stable tag: 3.1.0
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
-Tested up to: 5.8.0
+Tested up to: 6.1.1
 
 Smaily newsletter subscription plugin for WordPress
 
@@ -75,6 +75,9 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 6. Smaily plugin shortcode from.
 
 == Changelog ==
+
+= 3.1.0 =
+- Basic Gutenberg blocks support
 
 = 3.0.7 =
 - Fix automation workflows being fetched on every operation in WordPress.

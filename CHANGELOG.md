@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.0
+
+- Adds basic support for Gutenber blocks [[#129](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/129)]
+
 ### 3.0.7
 
 - Fix automation workflows are fetched on every operation in WordPress [[#121](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/121)]

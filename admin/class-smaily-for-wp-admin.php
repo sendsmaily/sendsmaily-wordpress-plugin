@@ -89,6 +89,45 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
+	 * Load newsletter subscription block.
+	 *
+	 * @since 3.1.0
+	 */
+	public function smaily_subscription_block_init( $screen ) {
+		if ( ! in_array( $screen, array( 'site-editor.php', 'post.php', 'page.php' ), true ) ) {
+			return;
+		}
+
+		$autoresponders = array(
+			array(
+				'label' => __( 'No autoresponder', 'smaily-for-wp' ),
+				'value' => '',
+			),
+		);
+
+		foreach ( $this->get_autoresponders() as $autoresponder_id => $title ) {
+			$autoresponders[] = array(
+				'label' => $title,
+				'value' => (string) $autoresponder_id,
+			);
+		}
+
+		wp_enqueue_script(
+			$this->plugin_name,
+			SMLY4WP_PLUGIN_URL . '/blocks/index.js',
+			array(),
+			false,
+			true
+		);
+
+		wp_localize_script(
+			$this->plugin_name,
+			'autoresponders',
+			json_encode( $autoresponders )
+		);
+	}
+
+	/**
 	 * Load subscribe widget.
 	 *
 	 * @since 3.0.0
