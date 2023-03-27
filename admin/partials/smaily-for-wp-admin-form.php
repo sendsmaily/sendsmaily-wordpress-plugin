@@ -66,7 +66,7 @@
 <div id="content-advanced" class="tab-content hidden">
 <?php else : ?>
 <div id="content-advanced" class="tab-content">
-<?php endif; ?>">
+<?php endif; ?>
 	<div class="wrap">
 		<label><?php echo esc_html__( 'Newsletter subscription form', 'smaily-for-wp' ); ?> <a href="#" onclick="javascript:Default.resetForm();return false;" title="<?php echo esc_html__( 'Restore original subscription form', 'smaily-for-wp' ); ?>">(<?php echo esc_html__( 'Regenerate', 'smaily-for-wp' ); ?>)</a></label>
 		<em><?php echo esc_html__( 'HTML of subscription form', 'smaily-for-wp' ); ?></em>
