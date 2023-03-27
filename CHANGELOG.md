@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.1
+
+- WordPress 6.2 compatibility
+
 ### 3.1.0
 
 - Adds basic support for Gutenberg blocks [[#129](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/129)]
