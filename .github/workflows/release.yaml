@@ -34,6 +34,7 @@ jobs:
         path: ${{ env.WP_PLUGIN_NAME }}
         exclusions: >
           /${{ env.WP_PLUGIN_NAME }}/.git*
+          /${{ env.WP_PLUGIN_NAME }}/.sandbox*
           /${{ env.WP_PLUGIN_NAME }}/.vscode*
           /${{ env.WP_PLUGIN_NAME }}/assets*
           /${{ env.WP_PLUGIN_NAME }}/CHANGELOG.md
