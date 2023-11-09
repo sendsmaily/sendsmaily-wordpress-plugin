@@ -65,10 +65,11 @@ class Smaily_For_WP {
 	public function __construct() {
 		$this->version     = SMLY4WP_PLUGIN_VERSION;
 		$this->plugin_name = 'smaily-for-wp';
+
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_lifecycle_hooks();
-		$this->init_blocks();
+		$this->register_blocks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 	}
@@ -129,15 +130,9 @@ class Smaily_For_WP {
 	 * @since 3.1.0
 	 * @access private
 	 */
-	private function init_blocks() {
+	private function register_blocks() {
 		$plugin_block = new Smaily_For_WP_Block( $this->options, $this->get_plugin_name(), $this->get_version() );
-
-		register_block_type(
-			SMLY4WP_PLUGIN_PATH . '/blocks',
-			array(
-				'render_callback' => array( $plugin_block, 'render' ),
-			)
-		);
+		$this->loader->add_action( 'init', $plugin_block, 'init' );
 	}
 
 	/**

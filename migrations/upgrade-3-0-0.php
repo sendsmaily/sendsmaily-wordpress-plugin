@@ -15,7 +15,7 @@
 $upgrade = function() {
 	global $wpdb;
 
-	if ( $wpdb->get_var( "SHOW TABLES LIKE {$wpdb->prefix}smaily_config" ) === $wpdb->prefix . 'smaily_config' ) {
+	if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->prefix . 'smaily_config' ) ) === $wpdb->prefix . 'smaily_config' ) {
 		$config = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}smaily_config LIMIT 1", ARRAY_A );
 		// Get saved autoresponder ID.
 		$autoresponder_id = isset( $config['autoresponder'] ) ? $config['autoresponder'] : '';
