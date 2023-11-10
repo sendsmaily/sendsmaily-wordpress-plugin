@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.2
+
+- Resolve plugin notices on plugin activation and page editing [[#139](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/139)]
+
 ### 3.1.1
 
 - WordPress 6.2 compatibility
