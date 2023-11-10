@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Smaily for WP\n"
-"POT-Creation-Date: 2023-03-27 10:00+0300\n"
-"PO-Revision-Date: 2023-03-27 10:00+0300\n"
+"POT-Creation-Date: 2023-11-10 09:31+0200\n"
+"PO-Revision-Date: 2023-11-10 09:31+0200\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Smaily <info@smaily.com>\n"
 "Language: et\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_x:1,2c;_nx:4c,1,2;"
 "_nx_noop:4c,1,2;_ex:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;"
@@ -22,43 +22,43 @@ msgstr ""
 msgid "No autoresponder"
 msgstr "Ilma automaatvastajata vorm"
 
-#: admin/class-smaily-for-wp-admin.php:221
+#: admin/class-smaily-for-wp-admin.php:217
 msgid "Please enter subdomain!"
 msgstr "Palun sisesta alamdomeen!"
 
-#: admin/class-smaily-for-wp-admin.php:225
+#: admin/class-smaily-for-wp-admin.php:221
 msgid "Please enter username!"
 msgstr "Palun sisesta kasutajatunnus!"
 
-#: admin/class-smaily-for-wp-admin.php:229
+#: admin/class-smaily-for-wp-admin.php:225
 msgid "Please enter password!"
 msgstr "Palun sisesta parool!"
 
-#: admin/class-smaily-for-wp-admin.php:245
+#: admin/class-smaily-for-wp-admin.php:241
 msgid "Wrong credentials"
 msgstr "Valed autentimise tunnused"
 
-#: admin/class-smaily-for-wp-admin.php:250
+#: admin/class-smaily-for-wp-admin.php:246
 msgid "Error in subdomain"
 msgstr "Viga alamdomeenis"
 
-#: admin/class-smaily-for-wp-admin.php:260
+#: admin/class-smaily-for-wp-admin.php:256
 msgid "Something went wrong with request to Smaily"
 msgstr "Ilmnes probleem Smaily-ga ühendamisel"
 
-#: admin/class-smaily-for-wp-admin.php:269
+#: admin/class-smaily-for-wp-admin.php:265
 msgid "Credentials validated."
 msgstr "Autentimise tunnused valideeritud."
 
-#: admin/class-smaily-for-wp-admin.php:286
+#: admin/class-smaily-for-wp-admin.php:282
 msgid "Credentials removed."
 msgstr "Autentimise tunnused eemaldatud."
 
-#: admin/class-smaily-for-wp-admin.php:303
+#: admin/class-smaily-for-wp-admin.php:299
 msgid "Newsletter subscription form reset to default."
 msgstr "Liitumisvormi kood taasloodud."
 
-#: admin/class-smaily-for-wp-admin.php:342
+#: admin/class-smaily-for-wp-admin.php:338
 msgid "Changes saved."
 msgstr "Salvestatud."
 

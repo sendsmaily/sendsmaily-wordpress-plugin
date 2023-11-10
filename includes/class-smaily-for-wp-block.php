@@ -52,6 +52,21 @@ class Smaily_For_WP_Block {
 	}
 
 	/**
+	 * Register block.
+	 *
+	 * @since  3.1.2
+	 * @access public
+	 */
+	public function init() {
+		register_block_type(
+			SMLY4WP_PLUGIN_PATH . '/blocks',
+			array(
+				'render_callback' => array( $this, 'render' ),
+			)
+		);
+	}
+
+	/**
 	 * Render Gutenberg block using the widget shortcode renderer.
 	 *
 	 * @param array $attributes
