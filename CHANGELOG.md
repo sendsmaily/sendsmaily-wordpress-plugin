@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.3
+
+- Fix an issue where blocks section is not rendering due to autoresponders JSON response bad formatting.
+
 ### 3.1.2
 
 - Resolve plugin notices on plugin activation and page editing [[#139](https://github.com/sendsmaily/sendsmaily-wordpress-plugin/pull/139)]
