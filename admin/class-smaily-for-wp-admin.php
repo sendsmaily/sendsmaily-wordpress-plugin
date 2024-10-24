@@ -120,7 +120,7 @@ class Smaily_For_WP_Admin {
 			true
 		);
 
-		wp_add_inline_script( $this->plugin_name, 'var autoresponders = ' . json_encode( $autoresponders ) . ';' );
+		wp_add_inline_script($this->plugin_name , "var autoresponders = '" . wp_json_encode( $autoresponders ) . "';", 'before' );
 	}
 
 	/**
