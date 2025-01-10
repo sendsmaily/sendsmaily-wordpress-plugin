@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.4
+
+- Fix a security issue where users who didn't have correct privileges to edit the plugin settings were allowed to do so through console in administrators interface. https://www.cve.org/CVERecord?id=CVE-2024-54286
+
 ### 3.1.3
 
 - Fix an issue where blocks section is not rendering due to autoresponders JSON response bad formatting.
