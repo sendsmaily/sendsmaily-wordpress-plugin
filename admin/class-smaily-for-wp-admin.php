@@ -65,9 +65,12 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function enqueue_scripts() {
-		wp_register_script( $this->plugin_name, SMLY4WP_PLUGIN_URL . '/admin/js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name );
-		wp_add_inline_script( $this->plugin_name, 'var smaily_for_wp = ' . json_encode( array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) ) . ';' );
+		$user = wp_get_current_user();
+		if ( $user->has_cap( 'edit_plugins' ) ) {
+			wp_register_script( $this->plugin_name, SMLY4WP_PLUGIN_URL . '/admin/js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( $this->plugin_name );
+			wp_add_inline_script( $this->plugin_name, 'var smaily_for_wp = ' . json_encode( array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) ) . ';' );
+		}
 	}
 
 	/**
@@ -139,6 +142,11 @@ class Smaily_For_WP_Admin {
 	 * @since 3.0.0
 	 */
 	public function smaily_admin_save() {
+		$user = wp_get_current_user();
+		if ( ! $user->has_cap( 'edit_plugins' ) ) {
+			return;
+		}
+
 		// Allow only posted data.
 		if ( empty( $_POST ) ) {
 			wp_die( 'Must be post method.' );
