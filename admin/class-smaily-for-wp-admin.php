@@ -63,10 +63,13 @@ class Smaily_For_WP_Admin {
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since 3.0.0
+	 * @since 3.1.4 Added a conditional check to load scripts only if user has 'edit_plugins' capability.
+	 * @since 3.1.5 Changed capability check to check administrator role instead of 'edit_plugins' capability.
 	 */
 	public function enqueue_scripts() {
 		$user = wp_get_current_user();
-		if ( $user->has_cap( 'edit_plugins' ) ) {
+		$allowed_roles = array( 'administrator' );
+		if ( array_intersect( $allowed_roles, $user->roles ) ) {
 			wp_register_script( $this->plugin_name, SMLY4WP_PLUGIN_URL . '/admin/js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( $this->plugin_name );
 			wp_add_inline_script( $this->plugin_name, 'var smaily_for_wp = ' . json_encode( array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) ) . ';' );
