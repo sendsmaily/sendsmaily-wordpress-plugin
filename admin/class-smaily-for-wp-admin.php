@@ -63,8 +63,6 @@ class Smaily_For_WP_Admin {
 	 * Register the JavaScript for the admin area.
 	 *
 	 * @since 3.0.0
-	 * @since 3.1.4 Added a conditional check to load scripts only if user has 'edit_plugins' capability.
-	 * @since 3.1.5 Changed capability check to check administrator role instead of 'edit_plugins' capability.
 	 */
 	public function enqueue_scripts() {
 		$user = wp_get_current_user();
@@ -146,7 +144,8 @@ class Smaily_For_WP_Admin {
 	 */
 	public function smaily_admin_save() {
 		$user = wp_get_current_user();
-		if ( ! $user->has_cap( 'edit_plugins' ) ) {
+		$allowed_roles = array( 'administrator' );
+		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
 			return;
 		}
 
