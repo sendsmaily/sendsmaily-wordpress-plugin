@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.5
+
+- Fix an issue where administrator scripts are not loaded when DISALLOW_FILE_EDIT configuration option is enabled.
+
 ### 3.1.4
 
 - Fix a security issue where users who didn't have correct privileges to edit the plugin settings were allowed to do so through console in administrators interface. https://www.cve.org/CVERecord?id=CVE-2024-54286

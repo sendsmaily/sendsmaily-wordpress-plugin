@@ -66,7 +66,8 @@ class Smaily_For_WP_Admin {
 	 */
 	public function enqueue_scripts() {
 		$user = wp_get_current_user();
-		if ( $user->has_cap( 'edit_plugins' ) ) {
+		$allowed_roles = array( 'administrator' );
+		if ( array_intersect( $allowed_roles, $user->roles ) ) {
 			wp_register_script( $this->plugin_name, SMLY4WP_PLUGIN_URL . '/admin/js/smaily-for-wp-admin.js', array( 'jquery' ), $this->version, false );
 			wp_enqueue_script( $this->plugin_name );
 			wp_add_inline_script( $this->plugin_name, 'var smaily_for_wp = ' . json_encode( array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) ) . ';' );
@@ -143,7 +144,8 @@ class Smaily_For_WP_Admin {
 	 */
 	public function smaily_admin_save() {
 		$user = wp_get_current_user();
-		if ( ! $user->has_cap( 'edit_plugins' ) ) {
+		$allowed_roles = array( 'administrator' );
+		if ( !array_intersect( $allowed_roles, $user->roles ) ) {
 			return;
 		}
 
