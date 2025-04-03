@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.6
+
+- Improve module security by escaping all of the basic newsletter form display fields.
+
 ### 3.1.5
 
 - Fix an issue where administrator scripts are not loaded when DISALLOW_FILE_EDIT configuration option is enabled.
