@@ -1,6 +1,17 @@
 Smaily email marketing and automation plugin for Wordpress.
 Automatically generate a simple sign-up form and add new subscribers to Smaily subscribers list.
 
+
+## Deprecation notice!
+
+Smaily for WordPress is officially deprecated!
+
+Smaily for WordPress is no longer maintained, and no further updates or security patches will be provided.
+We have released a new plugin that combines WordPress, WooCommerce, Contact Form 7 and Elementor support into a single plugin.
+
+Please uninstall the current plugin and install the new one:
+[Smaily Connect](https://wordpress.org/plugins/smaily-connect/)
+
 ## Features
 
 ### Wordpress Newsletter Subscription

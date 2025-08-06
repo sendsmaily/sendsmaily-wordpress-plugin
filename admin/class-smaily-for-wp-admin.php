@@ -50,6 +50,104 @@ class Smaily_For_WP_Admin {
 	}
 
 	/**
+	 * Show admin notices.
+	 *
+	 * @since 3.1.7
+	 */
+	public function smaily_deprecation_notice() {
+		if ( current_user_can( 'manage_options' ) ) {
+			if ( get_user_meta( get_current_user_id(), 'smaily_for_wp_deprecation_notice_dismissed', true ) ) {
+				return;
+			}
+			?>
+			<div id="smaily-for-wp-admin-deprecation-notice" class="notice notice-warning is-dismissible">
+				<p>
+					<strong>
+						<?php esc_html_e( 'Smaily for WordPress is officially deprecated!', 'smaily-for-wp' ); ?>
+					</strong>
+				</p>
+				<p>
+					<?php esc_html_e( 'Smaily for WordPress is no longer maintained, and no further updates or security patches will be provided. We have released a new plugin that combines WordPress, WooCommerce, Contact Form 7 and Elementor support into a single plugin.', 'smaily-for-wp' ); ?>
+				</p>
+				<p>
+					<?php esc_html_e( 'Please remove the current Smaily for WordPress plugin and install the new Smaily Connect plugin!', 'smaily-for-wp' ); ?>
+				</p>
+				<p>
+					<a href="https://wordpress.org/plugins/smaily-connect/" target="_blank" rel="noopener noreferrer">
+						<?php esc_html_e( 'Get Smaily Connect', 'smaily-for-wp' ); ?>
+					</a>
+				</p>
+			</div>
+			<script>
+				jQuery(document).ready(function($){
+					$('#smaily-for-wp-admin-deprecation-notice').on('click', '.notice-dismiss', function() {
+						// Dismiss the notice via AJAX.
+						$.post(
+							smaily_for_wp.ajax_url,
+							{
+								action: 'smaily_for_wp_dismiss_deprecation_notice',
+								nonce: '<?php echo wp_create_nonce( 'smaily_for_wp_dismiss_deprecation_notice' ); ?>'
+							},
+							function(response) {
+								if (response.success) {
+									$('#smaily-for-wp-admin-deprecation-notice').fadeOut();
+								}
+							}
+						);
+					});
+				});
+			</script>
+			<?php
+		}
+	}
+
+	/**
+	 * Handle the dismissal of the deprecation notice.
+	 *
+	 * @since 3.1.7
+	 */
+	public function smaily_dismiss_deprecation_notice() {
+		if ( ! wp_verify_nonce( $_POST['nonce'], 'smaily_for_wp_dismiss_deprecation_notice' ) ) {
+			wp_die( 'Invalid nonce.' );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( 'Unauthorized user.' );
+		}
+
+		update_user_meta( get_current_user_id(), 'smaily_for_wp_deprecation_notice_dismissed', true );
+		wp_send_json_success();
+	}
+
+	/**
+	 * Add deprecation notice to plugins list.
+	 *
+	 * @param array  $plugin_meta An array of the plugin's metadata.
+	 * @param string $plugin_file Path to the plugin file relative to the plugins directory.
+	 * @param array  $plugin_data An array of plugin data.
+	 * @param string $status      Status filter currently applied to the plugin list.
+	 * @return array Modified plugin metadata.
+	 */
+	public function add_plugin_row_deprecation_notice( $plugin_meta, $plugin_file, $plugin_data, $status ) {
+		$smaily_wp_basename = plugin_basename( SMLY4WP_PLUGIN_FILE );
+
+		if ( $plugin_file !== $smaily_wp_basename || ! current_user_can( 'activate_plugins' ) ) {
+			return $plugin_meta;
+		}
+
+		$notice = sprintf(
+			'<p style="margin-top: 10px;"><span style="color: #d63638; font-weight: bold; font-size: 1.2em;">%s</span><br/><a href="%s" target="_blank">%s</a></p>',
+			esc_html__( 'This plugin is deprecated!', 'smaily-for-wp' ),
+			'https://wordpress.org/plugins/smaily-connect/',
+			esc_html__( 'Switch to Smaily Connect', 'smaily-for-wp' )
+		);
+
+		$plugin_meta[] = $notice;
+
+		return $plugin_meta;
+	}
+
+	/**
 	 * Register the stylesheets for the admin area.
 	 *
 	 * @since 3.0.0
@@ -201,76 +299,6 @@ class Smaily_For_WP_Admin {
 
 		echo wp_json_encode( $result );
 		wp_die();
-	}
-
-	/**
-	 * Show admin notices.
-	 *
-	 * @since 3.1.7
-	 */
-	public function smaily_admin_notices() {
-		if ( current_user_can( 'manage_options' ) ) {
-			if ( get_user_meta( get_current_user_id(), 'smaily_for_wp_deprecation_notice_dismissed', true ) ) {
-				return;
-			}
-			?>
-			<div id="smaily-for-wp-admin-deprecation-notice" class="notice notice-warning is-dismissible">
-				<p>
-					<strong>
-						<?php esc_html_e( 'Smaily for WordPress is officially deprecated!', 'smaily-for-wp' ); ?>
-					</strong>
-				</p>
-				<p>
-					<?php esc_html_e( 'Smaily for WordPress is no longer maintained, and no further updates or security patches will be provided. We have released a new plugin that combines WordPress, WooCommerce, Contact Form 7 and Elementor support into a single plugin.', 'smaily-for-wp' ); ?>
-				</p>
-				<p>
-					<?php esc_html_e( 'Please remove the current Smaily for WordPress plugin and install the new Smaily Connect plugin!', 'smaily-for-wp' ); ?>
-				</p>
-				<p>
-					<a href="https://wordpress.org/plugins/smaily-connect/" target="_blank" rel="noopener noreferrer">
-						<?php esc_html_e( 'Get Smaily Connect', 'smaily-for-wp' ); ?>
-					</a>
-				</p>
-			</div>
-			<script>
-				jQuery(document).ready(function($){
-					$('#smaily-for-wp-admin-deprecation-notice').on('click', '.notice-dismiss', function() {
-						// Dismiss the notice via AJAX.
-						$.post(
-							smaily_for_wp.ajax_url,
-							{
-								action: 'smaily_for_wp_dismiss_deprecation_notice',
-								nonce: '<?php echo wp_create_nonce( 'smaily_for_wp_dismiss_deprecation_notice' ); ?>'
-							},
-							function(response) {
-								if (response.success) {
-									$('#smaily-for-wp-admin-deprecation-notice').fadeOut();
-								}
-							}
-						);
-					});
-				});
-			</script>
-			<?php
-		}
-	}
-
-	/**
-	 * Handle the dismissal of the deprecation notice.
-	 *
-	 * @since 3.1.7
-	 */
-	public function smaily_dismiss_deprecation_notice() {
-		if ( ! wp_verify_nonce( $_POST['nonce'], 'smaily_for_wp_dismiss_deprecation_notice' ) ) {
-			wp_die( 'Invalid nonce.' );
-		}
-
-		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( 'Unauthorized user.' );
-		}
-
-		update_user_meta( get_current_user_id(), 'smaily_for_wp_deprecation_notice_dismissed', true );
-		wp_send_json_success();
 	}
 
 	/**
