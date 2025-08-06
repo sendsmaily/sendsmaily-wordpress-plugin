@@ -8,8 +8,8 @@
  * Plugin Name:       Smaily for WP
  * Plugin URI:        https://github.com/sendsmaily/sendsmaily-wordpress-plugin/
  * Text Domain:       smaily-for-wp
- * Description:       Smaily newsletter subscription form.
- * Version:           3.1.6
+ * Description:       [DEPRECATED] Smaily for WordPress is deprecated. Please use the new Smaily Connect plugin instead.
+ * Version:           3.1.7
  * Author:            Sendsmaily LLC
  * Author URI:        https://smaily.com
  * License:           GPL-2.0+
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Current plugin version.
  */
-define( 'SMLY4WP_PLUGIN_VERSION', '3.1.6' );
+define( 'SMLY4WP_PLUGIN_VERSION', '3.1.7' );
 
 /**
  * Absolute URL to the Smaily for WP plugin directory.

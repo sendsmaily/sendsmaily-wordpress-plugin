@@ -20,6 +20,16 @@ class Smaily_For_WP_Lifecycle {
 	}
 
 	/**
+	 * Callback for plugin deactivation hook.
+	 *
+	 * @since 3.1.7
+	 */
+	public function deactivate() {
+		// Remove deprecation notice for all users.
+		delete_metadata( 'user', 0, 'smaily_for_wp_deprecation_notice_dismissed', '', true );
+	}
+
+	/**
 	 * Callback for plugins_loaded hook.
 	 *
 	 * Start migrations if plugin was updated.
@@ -116,5 +126,34 @@ class Smaily_For_WP_Lifecycle {
 
 		// Migrations finished.
 		update_option( 'smailyforwp_db_version', $plugin_version );
+	}
+
+
+	/**
+	 * Add deprecation notice to plugins list.
+	 *
+	 * @param array  $plugin_meta An array of the plugin's metadata.
+	 * @param string $plugin_file Path to the plugin file relative to the plugins directory.
+	 * @param array  $plugin_data An array of plugin data.
+	 * @param string $status      Status filter currently applied to the plugin list.
+	 * @return array Modified plugin metadata.
+	 */
+	public function add_deprecation_notice( $plugin_meta, $plugin_file, $plugin_data, $status ) {
+		$smaily_wp_basename = plugin_basename( SMLY4WP_PLUGIN_FILE );
+
+		if ( $plugin_file !== $smaily_wp_basename || ! current_user_can( 'activate_plugins' ) ) {
+			return $plugin_meta;
+		}
+
+		$notice = sprintf(
+			'<p style="margin-top: 10px;"><span style="color: #d63638; font-weight: bold; font-size: 1.2em;">%s</span><br/><a href="%s" target="_blank">%s</a></p>',
+			esc_html__( 'This plugin is deprecated!', 'smaily-for-wp' ),
+			'https://wordpress.org/plugins/smaily-connect/',
+			esc_html__( 'Switch to Smaily Connect', 'smaily-for-wp' )
+		);
+
+		$plugin_meta[] = $notice;
+
+		return $plugin_meta;
 	}
 }

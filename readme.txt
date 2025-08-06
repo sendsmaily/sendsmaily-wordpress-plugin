@@ -3,11 +3,22 @@ Contributors: sendsmaily, kaarel, tomabel, marispulk
 License: GPLv2 or later
 Requires PHP: 5.6
 Requires at least: 4.0
-Stable tag: 3.1.6
+Stable tag: 3.1.7
 Tags: widget, plugin, sidebar, api, mail, email, marketing, smaily
 Tested up to: 6.4
 
 Smaily newsletter subscription plugin for WordPress
+
+=== Deprecation Notice ===
+
+Smaily for WordPress is officially deprecated!
+
+Smaily for WordPress is no longer maintained, and no further updates or security patches will be provided.
+We have released a new plugin that combines Wordpress, WooCommerce, Contact Form 7 and Elementor support into a single plugin.
+
+Please uninstall the current plugin and install the new one:
+[Smaily Connect](https://wordpress.org/plugins/smaily-connect/)
+
 
 == Description ==
 
@@ -74,7 +85,16 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 5. Smaily basic newsletter form.
 6. Smaily plugin shortcode from.
 
+
+
+
 == Changelog ==
+
+= 3.1.7 =
+- Deprecation notice!
+
+This plugin is no longer maintained. Please switch to the new Smaily Connect plugin.
+https://wordpress.org/plugins/smaily-connect/
 
 = 3.1.6 =
 - Improve module security by escaping all of the basic newsletter form display fields.
