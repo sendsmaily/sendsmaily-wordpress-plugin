@@ -2,174 +2,73 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Smaily for WP\n"
 "POT-Creation-Date: 2023-11-10 09:31+0200\n"
-"PO-Revision-Date: 2023-11-10 09:31+0200\n"
-"Last-Translator: Smaily <info@smaily.com>\n"
-"Language-Team: Smaily <info@smaily.com>\n"
+"PO-Revision-Date: 2025-08-07 04:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: Eesti\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_x:1,2c;_nx:4c,1,2;"
-"_nx_noop:4c,1,2;_ex:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;"
-"esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:"
+"4c,1,2;_ex:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
+"Report-Msgid-Bugs-To: \n"
+"X-Loco-Version: 2.8.0; wp-6.7.1; php-8.2.17"
 
-#: admin/class-smaily-for-wp-admin.php:103
-#: includes/class-smaily-for-wp-widget.php:205
-msgid "No autoresponder"
-msgstr "Ilma automaatvastajata vorm"
-
-#: admin/class-smaily-for-wp-admin.php:217
-msgid "Please enter subdomain!"
-msgstr "Palun sisesta alamdomeen!"
-
-#: admin/class-smaily-for-wp-admin.php:221
-msgid "Please enter username!"
-msgstr "Palun sisesta kasutajatunnus!"
-
-#: admin/class-smaily-for-wp-admin.php:225
-msgid "Please enter password!"
-msgstr "Palun sisesta parool!"
-
-#: admin/class-smaily-for-wp-admin.php:241
-msgid "Wrong credentials"
-msgstr "Valed autentimise tunnused"
-
-#: admin/class-smaily-for-wp-admin.php:246
-msgid "Error in subdomain"
-msgstr "Viga alamdomeenis"
-
-#: admin/class-smaily-for-wp-admin.php:256
-msgid "Something went wrong with request to Smaily"
-msgstr "Ilmnes probleem Smaily-ga ühendamisel"
-
-#: admin/class-smaily-for-wp-admin.php:265
-msgid "Credentials validated."
-msgstr "Autentimise tunnused valideeritud."
-
-#: admin/class-smaily-for-wp-admin.php:282
-msgid "Credentials removed."
-msgstr "Autentimise tunnused eemaldatud."
-
-#: admin/class-smaily-for-wp-admin.php:299
-msgid "Newsletter subscription form reset to default."
-msgstr "Liitumisvormi kood taasloodud."
-
-#: admin/class-smaily-for-wp-admin.php:338
-msgid "Changes saved."
-msgstr "Salvestatud."
-
-#: admin/partials/smaily-for-wp-admin-form.php:8
-msgid "Your API credentials are valid"
-msgstr "Kasutajatunnused valideeritud"
-
-#: admin/partials/smaily-for-wp-admin-form.php:9
-msgid "Remove"
-msgstr "Eemalda"
-
-#: admin/partials/smaily-for-wp-admin-form.php:16
-msgid "Subdomain"
-msgstr "Alamdomeen"
-
-#: admin/partials/smaily-for-wp-admin-form.php:26
-msgid "API username"
-msgstr "API kasutajatunnus"
-
-#: admin/partials/smaily-for-wp-admin-form.php:30
-msgid "API password"
-msgstr "API salasõna"
-
-#: admin/partials/smaily-for-wp-admin-form.php:35
-msgid "How to create API credentials?"
-msgstr "Kuidas luua API kasutaja?"
-
-#: admin/partials/smaily-for-wp-admin-form.php:42
-msgid "Check"
-msgstr "Kontrolli"
-
-#: admin/partials/smaily-for-wp-admin-form.php:50
-#: admin/partials/smaily-for-wp-admin-form.php:52
-msgid "Basic"
-msgstr "Tavaseaded"
+#. Description of the plugin
+msgid ""
+"[DEPRECATED] Smaily for WordPress is deprecated. Please use the new Smaily "
+"Connect plugin instead."
+msgstr ""
+"[AEGUNUD] Smaily WordPressi plugin on ametlikult aegunud.  Palun kasutage "
+"selle asemel uut Smaily Connect pluginat."
 
 #: admin/partials/smaily-for-wp-admin-form.php:57
 #: admin/partials/smaily-for-wp-admin-form.php:59
 msgid "Advanced"
 msgstr "Spetsialisti seaded"
 
-#: admin/partials/smaily-for-wp-admin-form.php:71
-msgid "Newsletter subscription form"
-msgstr "Uudiskirja liitumisvorm"
+#: admin/partials/smaily-for-wp-admin-form.php:30
+msgid "API password"
+msgstr "API salasõna"
 
-#: admin/partials/smaily-for-wp-admin-form.php:71
-msgid "Restore original subscription form"
-msgstr "Taasta algne liitumisvorm"
+#: admin/partials/smaily-for-wp-admin-form.php:26
+msgid "API username"
+msgstr "API kasutajatunnus"
 
-#: admin/partials/smaily-for-wp-admin-form.php:71
-msgid "Regenerate"
-msgstr "Taastekita"
+#: includes/class-smaily-for-wp-widget.php:203
+msgid "Autoresponders"
+msgstr "Automaatvastajad"
 
-#: admin/partials/smaily-for-wp-admin-form.php:72
-msgid "HTML of subscription form"
-msgstr "Liitumisvormi HTML"
+#: admin/partials/smaily-for-wp-admin-form.php:50
+#: admin/partials/smaily-for-wp-admin-form.php:52
+msgid "Basic"
+msgstr "Tavaseaded"
 
-#: admin/partials/smaily-for-wp-admin-form.php:77
-msgid "Note: When you save under Basic tab, default form will be used."
-msgstr ""
-"Hoiatus: Kui salvestad Tavaseadete vaates, kasutatakse lehel vaikimisi vormi."
-
-#: admin/partials/smaily-for-wp-admin-form.php:80
-msgid "Save changes"
-msgstr "Salvesta muudatused"
-
-#: admin/partials/smaily-for-wp-admin-page.php:3
-msgid "Smaily WordPress plugin"
-msgstr "Smaily WordPressi pistikmoodul"
-
-#: admin/partials/smaily-for-wp-admin-page.php:4
-msgid "Please wait, working..."
-msgstr "Palun oota..."
-
-#: blocks/index.js:221
-#, fuzzy
-#| msgid "Email"
-msgid "E-mail"
-msgstr "E-post"
-
-#: blocks/index.js:221
-#, fuzzy
-#| msgid "Email"
-msgid "Smaily"
-msgstr "E-post"
-
-#: blocks/index.js:225 includes/class-smaily-for-wp-widget.php:40
-msgid "Smaily Newsletter Subscription"
-msgstr "Smaily uudiskirjaga liitumine"
-
-#: includes/class-smaily-for-wp-widget.php:39
+#: blocks/block.json:1
+msgctxt "block description"
 msgid "Smaily newsletter subscription form"
 msgstr "Smaily uudiskirjaga liitumise vorm"
 
-#: includes/class-smaily-for-wp-widget.php:93
-#: public/class-smaily-for-wp-public.php:106
-msgid "Smaily credentials not validated. Subscription form will not work!"
-msgstr "Smaily kasutajatunnused on valideerimata.  Uudiskirja vorm ei tööta!"
+#: blocks/block.json:1
+msgctxt "block title"
+msgid "Smaily for WP"
+msgstr "Smaily for WP"
 
-#: includes/class-smaily-for-wp-widget.php:100
-#: public/class-smaily-for-wp-public.php:113
-msgid "Form was not submitted using POST method."
-msgstr "Andmeid peab saatma POST tegevusviisiga."
+#: admin/class-smaily-for-wp-admin.php:449
+msgid "Changes saved."
+msgstr "Salvestatud."
 
-#: includes/class-smaily-for-wp-widget.php:103
-#: public/class-smaily-for-wp-public.php:116
-msgid "Input does not contain a recognizable email address."
-msgstr "Sisend ei sisalda tuntavat emaili aadressi."
+#: admin/partials/smaily-for-wp-admin-form.php:42
+msgid "Check"
+msgstr "Kontrolli"
 
-#: includes/class-smaily-for-wp-widget.php:106
 #: public/class-smaily-for-wp-public.php:119
+#: includes/class-smaily-for-wp-widget.php:106
 msgid ""
 "Could not add to subscriber list for an unknown reason. Probably something "
 "in Smaily."
@@ -177,38 +76,205 @@ msgstr ""
 "Ei suutnud lisada uudiskirja nimekirja teadmata põhjusel. Tõenäoliselt "
 "probleem Smaily-s."
 
-#: includes/class-smaily-for-wp-widget.php:168
-msgid "Title"
-msgstr "Pealkiri"
+#: admin/class-smaily-for-wp-admin.php:393
+msgid "Credentials removed."
+msgstr "Autentimise tunnused eemaldatud."
+
+#: admin/class-smaily-for-wp-admin.php:376
+msgid "Credentials validated."
+msgstr "Autentimise tunnused valideeritud."
+
+#: admin/class-smaily-for-wp-admin.php:66
+msgid "DEPRECATION NOTICE!"
+msgstr "TOETUSE LÕPETAMISE TEADE"
 
 #: includes/class-smaily-for-wp-widget.php:178
 msgid "Display name field?"
 msgstr "Näita nime välja?"
 
-#: includes/class-smaily-for-wp-widget.php:186
-msgid "Success URL"
-msgstr "Õnnestumise URL"
+#: public/partials/smaily-for-wp-public-basic.php:10
+msgid "Email"
+msgstr "E-post"
+
+#: admin/class-smaily-for-wp-admin.php:357
+msgid "Error in subdomain"
+msgstr "Viga alamdomeenis"
 
 #: includes/class-smaily-for-wp-widget.php:194
 msgid "Failure URL"
 msgstr "Ebaõnnestumise URL"
 
-#: includes/class-smaily-for-wp-widget.php:203
-msgid "Autoresponders"
-msgstr "Automaatvastajad"
+#: public/class-smaily-for-wp-public.php:113
+#: includes/class-smaily-for-wp-widget.php:100
+msgid "Form was not submitted using POST method."
+msgstr "Andmeid peab saatma POST tegevusviisiga."
 
-#: public/partials/smaily-for-wp-public-basic.php:3
-msgid "Thank you for subscribing to our newsletter."
-msgstr "Täname, et liitusite meie uudiskirjaga."
+#: admin/class-smaily-for-wp-admin.php:80
+msgid "Get Smaily Connect"
+msgstr "Proovi Smaily Connect-i"
 
-#: public/partials/smaily-for-wp-public-basic.php:10
-msgid "Email"
-msgstr "E-post"
+#: admin/partials/smaily-for-wp-admin-form.php:35
+msgid "How to create API credentials?"
+msgstr "Kuidas luua API kasutaja?"
+
+#: admin/partials/smaily-for-wp-admin-form.php:72
+msgid "HTML of subscription form"
+msgstr "Liitumisvormi HTML"
+
+#. URI of the plugin
+msgid "https://github.com/sendsmaily/sendsmaily-wordpress-plugin/"
+msgstr "https://github.com/sendsmaily/sendsmaily-wordpress-plugin/"
+
+#. Author URI of the plugin
+msgid "https://smaily.com"
+msgstr "https://smaily.com"
+
+#: public/class-smaily-for-wp-public.php:116
+#: includes/class-smaily-for-wp-widget.php:103
+msgid "Input does not contain a recognizable email address."
+msgstr "Sisend ei sisalda tuntavat emaili aadressi."
 
 #: public/partials/smaily-for-wp-public-basic.php:12
 msgid "Name"
 msgstr "Nimi"
 
+#: admin/partials/smaily-for-wp-admin-form.php:71
+msgid "Newsletter subscription form"
+msgstr "Uudiskirja liitumisvorm"
+
+#: admin/class-smaily-for-wp-admin.php:410
+msgid "Newsletter subscription form reset to default."
+msgstr "Liitumisvormi kood taasloodud."
+
+#: admin/class-smaily-for-wp-admin.php:76
+msgid ""
+"Next steps: Deactivate and delete Smaily for WordPress → install Smaily "
+"Connect → reconnect your Smaily account."
+msgstr ""
+"Järgmised sammud: Deaktiveeri ja kustuta Smaily WordPressi plugin → paigalda "
+"Smaily Connect → ühenda Smaily kontoga."
+
+#: includes/class-smaily-for-wp-widget.php:205
+#: admin/class-smaily-for-wp-admin.php:208
+msgid "No autoresponder"
+msgstr "Ilma automaatvastajata vorm"
+
+#: admin/partials/smaily-for-wp-admin-form.php:77
+msgid "Note: When you save under Basic tab, default form will be used."
+msgstr ""
+"Hoiatus: Kui salvestad Tavaseadete vaates, kasutatakse lehel vaikimisi vormi."
+
+#: admin/class-smaily-for-wp-admin.php:336
+msgid "Please enter password!"
+msgstr "Palun sisesta parool!"
+
+#: admin/class-smaily-for-wp-admin.php:328
+msgid "Please enter subdomain!"
+msgstr "Palun sisesta alamdomeen!"
+
+#: admin/class-smaily-for-wp-admin.php:332
+msgid "Please enter username!"
+msgstr "Palun sisesta kasutajatunnus!"
+
+#: admin/class-smaily-for-wp-admin.php:73
+msgid ""
+"Please uninstall this plugin and switch to Smaily Connect — our new, "
+"combined plugin with support for WordPress, WooCommerce, Contact Form 7 and "
+"Elementor."
+msgstr ""
+"Palun deaktiveeri ja kustuta see plugin ning paigalda Smaily Connect – meie "
+"uus ühend-plugin, mis toetab WordPressi, WooCommerce’i, Contact Form 7 ja "
+"Elementorit."
+
+#: admin/partials/smaily-for-wp-admin-page.php:4
+msgid "Please wait, working..."
+msgstr "Palun oota..."
+
+#: admin/partials/smaily-for-wp-admin-form.php:71
+msgid "Regenerate"
+msgstr "Taastekita"
+
+#: admin/partials/smaily-for-wp-admin-form.php:9
+msgid "Remove"
+msgstr "Eemalda"
+
+#: admin/partials/smaily-for-wp-admin-form.php:71
+msgid "Restore original subscription form"
+msgstr "Taasta algne liitumisvorm"
+
+#: admin/partials/smaily-for-wp-admin-form.php:80
+msgid "Save changes"
+msgstr "Salvesta muudatused"
+
+#. Author of the plugin
+msgid "Sendsmaily LLC"
+msgstr "Sendsmaily LLC"
+
+#: public/class-smaily-for-wp-public.php:106
+#: includes/class-smaily-for-wp-widget.php:93
+msgid "Smaily credentials not validated. Subscription form will not work!"
+msgstr "Smaily kasutajatunnused on valideerimata.  Uudiskirja vorm ei tööta!"
+
+#: admin/class-smaily-for-wp-admin.php:70
+msgid ""
+"Smaily for WordPress is officially deprecated and will no longer receive "
+"updates or security patches."
+msgstr ""
+"Smaily WordPressi plugin on ametlikult aegunud. Seda ei hooldata enam ning "
+"uuendusi ega turvaparandusi ei pakuta."
+
+#. Name of the plugin
+msgid "Smaily for WP"
+msgstr "Smaily Wordpressile"
+
+#: includes/class-smaily-for-wp-widget.php:40
+msgid "Smaily Newsletter Subscription"
+msgstr "Smaily uudiskirjaga liitumine"
+
+#: includes/class-smaily-for-wp-widget.php:39
+msgid "Smaily newsletter subscription form"
+msgstr "Smaily uudiskirjaga liitumise vorm"
+
+#: admin/partials/smaily-for-wp-admin-page.php:3
+msgid "Smaily WordPress plugin"
+msgstr "Smaily WordPressi pistikmoodul"
+
+#: admin/class-smaily-for-wp-admin.php:367
+msgid "Something went wrong with request to Smaily"
+msgstr "Ilmnes probleem Smaily-ga ühendamisel"
+
+#: admin/partials/smaily-for-wp-admin-form.php:16
+msgid "Subdomain"
+msgstr "Alamdomeen"
+
 #: public/partials/smaily-for-wp-public-basic.php:14
 msgid "Subscribe"
 msgstr "Liitu"
+
+#: includes/class-smaily-for-wp-widget.php:186
+msgid "Success URL"
+msgstr "Õnnestumise URL"
+
+#: admin/class-smaily-for-wp-admin.php:145
+msgid "Switch to Smaily Connect"
+msgstr "Uuenda Smaily Connect-ile"
+
+#: public/partials/smaily-for-wp-public-basic.php:3
+msgid "Thank you for subscribing to our newsletter."
+msgstr "Täname, et liitusite meie uudiskirjaga."
+
+#: admin/class-smaily-for-wp-admin.php:143
+msgid "This plugin is deprecated!"
+msgstr "See plugin on aegunud!"
+
+#: includes/class-smaily-for-wp-widget.php:168
+msgid "Title"
+msgstr "Pealkiri"
+
+#: admin/class-smaily-for-wp-admin.php:352
+msgid "Wrong credentials"
+msgstr "Valed autentimise tunnused"
+
+#: admin/partials/smaily-for-wp-admin-form.php:8
+msgid "Your API credentials are valid"
+msgstr "Kasutajatunnused valideeritud"

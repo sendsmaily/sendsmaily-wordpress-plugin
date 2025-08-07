@@ -2,99 +2,27 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Smaily for WP\n"
-"POT-Creation-Date: 2023-11-10 09:31+0200\n"
-"PO-Revision-Date: 2021-01-05 20:12+0200\n"
+"POT-Creation-Date: 2025-08-07 04:16+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Smaily <info@smaily.com>\n"
 "Language-Team: Smaily <info@smaily.com>\n"
-"Language: et\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_x:1,2c;_nx:4c,1,2;"
-"_nx_noop:4c,1,2;_ex:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;"
-"esc_html_e;esc_html_x:1,2c\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_n_noop:1,2;_x:1,2c;_nx:4c,1,2;_nx_noop:"
+"4c,1,2;_ex:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;"
+"esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 
-#: admin/class-smaily-for-wp-admin.php:103
-#: includes/class-smaily-for-wp-widget.php:205
-msgid "No autoresponder"
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:217
-msgid "Please enter subdomain!"
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:221
-msgid "Please enter username!"
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:225
-msgid "Please enter password!"
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:241
-msgid "Wrong credentials"
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:246
-msgid "Error in subdomain"
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:256
-msgid "Something went wrong with request to Smaily"
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:265
-msgid "Credentials validated."
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:282
-msgid "Credentials removed."
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:299
-msgid "Newsletter subscription form reset to default."
-msgstr ""
-
-#: admin/class-smaily-for-wp-admin.php:338
-msgid "Changes saved."
-msgstr ""
-
-#: admin/partials/smaily-for-wp-admin-form.php:8
-msgid "Your API credentials are valid"
-msgstr ""
-
-#: admin/partials/smaily-for-wp-admin-form.php:9
-msgid "Remove"
-msgstr ""
-
-#: admin/partials/smaily-for-wp-admin-form.php:16
-msgid "Subdomain"
-msgstr ""
-
-#: admin/partials/smaily-for-wp-admin-form.php:26
-msgid "API username"
-msgstr ""
-
-#: admin/partials/smaily-for-wp-admin-form.php:30
-msgid "API password"
-msgstr ""
-
-#: admin/partials/smaily-for-wp-admin-form.php:35
-msgid "How to create API credentials?"
-msgstr ""
-
-#: admin/partials/smaily-for-wp-admin-form.php:42
-msgid "Check"
-msgstr ""
-
-#: admin/partials/smaily-for-wp-admin-form.php:50
-#: admin/partials/smaily-for-wp-admin-form.php:52
-msgid "Basic"
+#. Description of the plugin
+msgid ""
+"[DEPRECATED] Smaily for WordPress is deprecated. Please use the new Smaily "
+"Connect plugin instead."
 msgstr ""
 
 #: admin/partials/smaily-for-wp-admin-form.php:57
@@ -102,47 +30,192 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: admin/partials/smaily-for-wp-admin-form.php:71
-msgid "Newsletter subscription form"
+#: admin/partials/smaily-for-wp-admin-form.php:30
+msgid "API password"
 msgstr ""
 
-#: admin/partials/smaily-for-wp-admin-form.php:71
-msgid "Restore original subscription form"
+#: admin/partials/smaily-for-wp-admin-form.php:26
+msgid "API username"
 msgstr ""
 
-#: admin/partials/smaily-for-wp-admin-form.php:71
-msgid "Regenerate"
+#: includes/class-smaily-for-wp-widget.php:203
+msgid "Autoresponders"
+msgstr ""
+
+#: admin/partials/smaily-for-wp-admin-form.php:50
+#: admin/partials/smaily-for-wp-admin-form.php:52
+msgid "Basic"
+msgstr ""
+
+#: blocks/block.json:1
+msgctxt "block description"
+msgid "Smaily newsletter subscription form"
+msgstr ""
+
+#: blocks/block.json:1
+msgctxt "block title"
+msgid "Smaily for WP"
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:449
+msgid "Changes saved."
+msgstr ""
+
+#: admin/partials/smaily-for-wp-admin-form.php:42
+msgid "Check"
+msgstr ""
+
+#: public/class-smaily-for-wp-public.php:119
+#: includes/class-smaily-for-wp-widget.php:106
+msgid ""
+"Could not add to subscriber list for an unknown reason. Probably something "
+"in Smaily."
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:393
+msgid "Credentials removed."
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:376
+msgid "Credentials validated."
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:66
+msgid "DEPRECATION NOTICE!"
+msgstr ""
+
+#: includes/class-smaily-for-wp-widget.php:178
+msgid "Display name field?"
+msgstr ""
+
+#: public/partials/smaily-for-wp-public-basic.php:10
+msgid "Email"
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:357
+msgid "Error in subdomain"
+msgstr ""
+
+#: includes/class-smaily-for-wp-widget.php:194
+msgid "Failure URL"
+msgstr ""
+
+#: public/class-smaily-for-wp-public.php:113
+#: includes/class-smaily-for-wp-widget.php:100
+msgid "Form was not submitted using POST method."
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:80
+msgid "Get Smaily Connect"
+msgstr ""
+
+#: admin/partials/smaily-for-wp-admin-form.php:35
+msgid "How to create API credentials?"
 msgstr ""
 
 #: admin/partials/smaily-for-wp-admin-form.php:72
 msgid "HTML of subscription form"
 msgstr ""
 
+#. URI of the plugin
+msgid "https://github.com/sendsmaily/sendsmaily-wordpress-plugin/"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://smaily.com"
+msgstr ""
+
+#: public/class-smaily-for-wp-public.php:116
+#: includes/class-smaily-for-wp-widget.php:103
+msgid "Input does not contain a recognizable email address."
+msgstr ""
+
+#: public/partials/smaily-for-wp-public-basic.php:12
+msgid "Name"
+msgstr ""
+
+#: admin/partials/smaily-for-wp-admin-form.php:71
+msgid "Newsletter subscription form"
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:410
+msgid "Newsletter subscription form reset to default."
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:76
+msgid ""
+"Next steps: Deactivate and delete Smaily for WordPress → install Smaily "
+"Connect → reconnect your Smaily account."
+msgstr ""
+
+#: includes/class-smaily-for-wp-widget.php:205
+#: admin/class-smaily-for-wp-admin.php:208
+msgid "No autoresponder"
+msgstr ""
+
 #: admin/partials/smaily-for-wp-admin-form.php:77
 msgid "Note: When you save under Basic tab, default form will be used."
 msgstr ""
 
-#: admin/partials/smaily-for-wp-admin-form.php:80
-msgid "Save changes"
+#: admin/class-smaily-for-wp-admin.php:336
+msgid "Please enter password!"
 msgstr ""
 
-#: admin/partials/smaily-for-wp-admin-page.php:3
-msgid "Smaily WordPress plugin"
+#: admin/class-smaily-for-wp-admin.php:328
+msgid "Please enter subdomain!"
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:332
+msgid "Please enter username!"
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:73
+msgid ""
+"Please uninstall this plugin and switch to Smaily Connect — our new, "
+"combined plugin with support for WordPress, WooCommerce, Contact Form 7 and "
+"Elementor."
 msgstr ""
 
 #: admin/partials/smaily-for-wp-admin-page.php:4
 msgid "Please wait, working..."
 msgstr ""
 
-#: blocks/index.js:221
-msgid "E-mail"
+#: admin/partials/smaily-for-wp-admin-form.php:71
+msgid "Regenerate"
 msgstr ""
 
-#: blocks/index.js:221
-msgid "Smaily"
+#: admin/partials/smaily-for-wp-admin-form.php:9
+msgid "Remove"
 msgstr ""
 
-#: blocks/index.js:225 includes/class-smaily-for-wp-widget.php:40
+#: admin/partials/smaily-for-wp-admin-form.php:71
+msgid "Restore original subscription form"
+msgstr ""
+
+#: admin/partials/smaily-for-wp-admin-form.php:80
+msgid "Save changes"
+msgstr ""
+
+#. Author of the plugin
+msgid "Sendsmaily LLC"
+msgstr ""
+
+#: public/class-smaily-for-wp-public.php:106
+#: includes/class-smaily-for-wp-widget.php:93
+msgid "Smaily credentials not validated. Subscription form will not work!"
+msgstr ""
+
+#: admin/class-smaily-for-wp-admin.php:70
+msgid ""
+"Smaily for WordPress is officially deprecated and will no longer receive "
+"updates or security patches."
+msgstr ""
+
+#. Name of the plugin
+msgid "Smaily for WP"
+msgstr ""
+
+#: includes/class-smaily-for-wp-widget.php:40
 msgid "Smaily Newsletter Subscription"
 msgstr ""
 
@@ -150,60 +223,46 @@ msgstr ""
 msgid "Smaily newsletter subscription form"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:93
-#: public/class-smaily-for-wp-public.php:106
-msgid "Smaily credentials not validated. Subscription form will not work!"
+#: admin/partials/smaily-for-wp-admin-page.php:3
+msgid "Smaily WordPress plugin"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:100
-#: public/class-smaily-for-wp-public.php:113
-msgid "Form was not submitted using POST method."
+#: admin/class-smaily-for-wp-admin.php:367
+msgid "Something went wrong with request to Smaily"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:103
-#: public/class-smaily-for-wp-public.php:116
-msgid "Input does not contain a recognizable email address."
+#: admin/partials/smaily-for-wp-admin-form.php:16
+msgid "Subdomain"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:106
-#: public/class-smaily-for-wp-public.php:119
-msgid ""
-"Could not add to subscriber list for an unknown reason. Probably something "
-"in Smaily."
-msgstr ""
-
-#: includes/class-smaily-for-wp-widget.php:168
-msgid "Title"
-msgstr ""
-
-#: includes/class-smaily-for-wp-widget.php:178
-msgid "Display name field?"
+#: public/partials/smaily-for-wp-public-basic.php:14
+msgid "Subscribe"
 msgstr ""
 
 #: includes/class-smaily-for-wp-widget.php:186
 msgid "Success URL"
 msgstr ""
 
-#: includes/class-smaily-for-wp-widget.php:194
-msgid "Failure URL"
-msgstr ""
-
-#: includes/class-smaily-for-wp-widget.php:203
-msgid "Autoresponders"
+#: admin/class-smaily-for-wp-admin.php:145
+msgid "Switch to Smaily Connect"
 msgstr ""
 
 #: public/partials/smaily-for-wp-public-basic.php:3
 msgid "Thank you for subscribing to our newsletter."
 msgstr ""
 
-#: public/partials/smaily-for-wp-public-basic.php:10
-msgid "Email"
+#: admin/class-smaily-for-wp-admin.php:143
+msgid "This plugin is deprecated!"
 msgstr ""
 
-#: public/partials/smaily-for-wp-public-basic.php:12
-msgid "Name"
+#: includes/class-smaily-for-wp-widget.php:168
+msgid "Title"
 msgstr ""
 
-#: public/partials/smaily-for-wp-public-basic.php:14
-msgid "Subscribe"
+#: admin/class-smaily-for-wp-admin.php:352
+msgid "Wrong credentials"
+msgstr ""
+
+#: admin/partials/smaily-for-wp-admin-form.php:8
+msgid "Your API credentials are valid"
 msgstr ""
