@@ -25,7 +25,6 @@ For assistance, contact support@smaily.com.
 
 [Smaily Connect](https://wordpress.org/plugins/smaily-connect/)
 
-
 == Description ==
 
 Smaily email marketing and automation extension plugin for Wordpress.
@@ -90,9 +89,6 @@ When no autoresponder selected regular opt-in workflow will run. You can add del
 4. Smaily plugin in widgets view when clicked open.
 5. Smaily basic newsletter form.
 6. Smaily plugin shortcode from.
-
-
-
 
 == Changelog ==
 
