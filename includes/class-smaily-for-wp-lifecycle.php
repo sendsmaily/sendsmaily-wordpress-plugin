@@ -20,6 +20,16 @@ class Smaily_For_WP_Lifecycle {
 	}
 
 	/**
+	 * Callback for plugin deactivation hook.
+	 *
+	 * @since 3.1.7
+	 */
+	public function deactivate() {
+		// Remove deprecation notice for all users.
+		delete_metadata( 'user', 0, 'smaily_for_wp_deprecation_notice_dismissed', '', true );
+	}
+
+	/**
 	 * Callback for plugins_loaded hook.
 	 *
 	 * Start migrations if plugin was updated.

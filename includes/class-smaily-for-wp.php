@@ -147,6 +147,7 @@ class Smaily_For_WP {
 	private function define_lifecycle_hooks() {
 		$plugin_lifecycle = new Smaily_For_WP_Lifecycle();
 		register_activation_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'activate' ) );
+		register_deactivation_hook( SMLY4WP_PLUGIN_FILE, array( $plugin_lifecycle, 'deactivate' ) );
 		register_uninstall_hook( SMLY4WP_PLUGIN_FILE, array( 'Smaily_For_WP_Lifecycle', 'uninstall' ) );
 		$this->loader->add_action( 'plugins_loaded', $plugin_lifecycle, 'update' );
 		$this->loader->add_action( 'upgrader_process_complete', $plugin_lifecycle, 'check_for_update', 10, 2 );
@@ -165,8 +166,12 @@ class Smaily_For_WP {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'smaily_subscription_block_init' );
 		$this->loader->add_action( 'wp_ajax_smaily_admin_save', $plugin_admin, 'smaily_admin_save' );
+		$this->loader->add_action( 'wp_ajax_smaily_for_wp_dismiss_deprecation_notice', $plugin_admin, 'smaily_dismiss_deprecation_notice' );
 		$this->loader->add_action( 'widgets_init', $plugin_admin, 'smaily_subscription_widget_init' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'smaily_admin_render' );
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'smaily_deprecation_notice' );
+
+		$this->loader->add_filter( 'plugin_row_meta', $plugin_admin, 'add_plugin_row_deprecation_notice', 10, 4 );
 	}
 
 	/**

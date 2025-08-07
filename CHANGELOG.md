@@ -1,5 +1,9 @@
 # Changelog
 
+### 3.1.7
+
+- Deprecate the plugin and add a notice to use the new Smaily Connect plugin instead.
+
 ### 3.1.6
 
 - Improve module security by escaping all of the basic newsletter form display fields.
